@@ -35,12 +35,14 @@ export default function Footer() {
       </div>
 
       {/* Main Footer Links */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
 
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
-            <LocalIndustriesLogo className="h-12 sm:h-14" isDark={isDark} />
+            <Link to="/" className="inline-block group" title="Local Industries">
+              <LocalIndustriesLogo className="h-12 sm:h-14" isDark={isDark} />
+            </Link>
             <p className="text-xs text-slate-600 dark:text-slate-400 max-w-sm leading-relaxed">
               No-Tech HVAC is redefining climate infrastructure with hot-swappable 4-bay modular systems, zero-loss refrigerant disconnects, and continuous RFID validation.
             </p>
