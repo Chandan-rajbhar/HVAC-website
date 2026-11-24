@@ -573,34 +573,34 @@ export default function HomePage() {
       </section>
 
       {/* ===================== OUR PORTALS & LOCAL MECHANICAL ===================== */}
-      {/* Light ivory/cream background with portals and technician card */}
-      <section className="bg-[#FAF7F2] dark:bg-[#121315] py-12 text-slate-900 dark:text-slate-100 transition-colors">
+      <section className="bg-[#FAF7F2] dark:bg-[#121315] py-12 sm:py-14 text-slate-900 dark:text-slate-100 transition-colors border-y border-slate-200/60 dark:border-white/5">
         <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
 
             {/* Left Header */}
-            <div className="lg:col-span-3 space-y-2">
+            <div className="lg:col-span-3 flex flex-col justify-center space-y-2">
+              <span className="text-[11px] font-bold uppercase tracking-widest text-[#7E8056] dark:text-[#C2B59B]">Quick Access</span>
               <h3 className="text-2xl sm:text-3xl font-bold font-serif text-slate-900 dark:text-white tracking-tight">Our Portals</h3>
-              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Find everything you need in one place.</p>
-              <div className="h-0.5 w-14 bg-[#7E8056] dark:bg-[#C2B59B] mt-1" />
+              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Find everything you need in one place.</p>
+              <div className="h-0.5 w-14 bg-[#7E8056] dark:bg-[#C2B59B] mt-1 rounded-full" />
             </div>
 
             {/* Center: 4 Portals Cards */}
-            <div className="lg:col-span-5 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-3">
+            <div className="lg:col-span-5 grid grid-cols-2 sm:grid-cols-4 gap-3">
 
               {/* Portal 1: Buyers Portal */}
               <Link
                 to="/buyers"
-                className="group p-3.5 rounded-2xl bg-white dark:bg-[#1E2125] border border-[#E6E0D6] dark:border-white/10 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between text-center items-center hover:-translate-y-0.5"
+                className="group p-4 rounded-2xl bg-white dark:bg-[#1A1D21] border border-slate-200/90 dark:border-white/10 hover:border-[#7E8056]/60 dark:hover:border-[#7E8056]/60 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between text-center items-center hover:-translate-y-1 min-h-[155px]"
               >
-                <div className="w-9 h-9 rounded-xl bg-[#F0EDE6] dark:bg-white/10 text-[#555845] dark:text-[#A4A77E] flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-                  <ShoppingCart className="w-5 h-5 text-[#7E8056] dark:text-[#A4A77E]" />
+                <div className="w-10 h-10 rounded-xl bg-[#F0EDE6] dark:bg-white/[0.07] text-[#555845] dark:text-[#C2B59B] flex items-center justify-center mb-2.5 group-hover:scale-110 group-hover:bg-[#7E8056] group-hover:text-white dark:group-hover:bg-[#7E8056] dark:group-hover:text-white transition-all duration-300 shadow-sm">
+                  <ShoppingCart className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-slate-900 dark:text-white">Buyers Portal</h4>
-                  <div className="mt-2 inline-flex items-center gap-1 text-[11px] font-semibold text-slate-600 dark:text-slate-300 group-hover:text-black dark:group-hover:text-white">
+                  <h4 className="text-xs sm:text-[13px] font-bold text-slate-900 dark:text-white tracking-tight">Buyers Portal</h4>
+                  <div className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-semibold text-slate-500 dark:text-slate-400 group-hover:text-[#7E8056] dark:group-hover:text-[#C2B59B] transition-colors">
                     <span>Select & Purchase</span>
-                    <span className="w-4 h-4 rounded-full border border-slate-400 dark:border-slate-500 flex items-center justify-center text-[9px] group-hover:border-black dark:group-hover:border-white">→</span>
+                    <span className="w-4 h-4 rounded-full border border-slate-300 dark:border-white/20 flex items-center justify-center text-[9px] group-hover:border-[#7E8056] group-hover:bg-[#7E8056] group-hover:text-white transition-all">→</span>
                   </div>
                 </div>
               </Link>
@@ -608,16 +608,16 @@ export default function HomePage() {
               {/* Portal 2: Investor Hub */}
               <Link
                 to="/investor"
-                className="group p-3.5 rounded-2xl bg-white dark:bg-[#1E2125] border border-[#E6E0D6] dark:border-white/10 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between text-center items-center hover:-translate-y-0.5"
+                className="group p-4 rounded-2xl bg-white dark:bg-[#1A1D21] border border-slate-200/90 dark:border-white/10 hover:border-[#7E8056]/60 dark:hover:border-[#7E8056]/60 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between text-center items-center hover:-translate-y-1 min-h-[155px]"
               >
-                <div className="w-9 h-9 rounded-xl bg-[#F0EDE6] dark:bg-white/10 text-[#555845] dark:text-[#A4A77E] flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-                  <TrendingUp className="w-5 h-5 text-[#7E8056] dark:text-[#A4A77E]" />
+                <div className="w-10 h-10 rounded-xl bg-[#F0EDE6] dark:bg-white/[0.07] text-[#555845] dark:text-[#C2B59B] flex items-center justify-center mb-2.5 group-hover:scale-110 group-hover:bg-[#7E8056] group-hover:text-white dark:group-hover:bg-[#7E8056] dark:group-hover:text-white transition-all duration-300 shadow-sm">
+                  <TrendingUp className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-slate-900 dark:text-white">Investor Hub</h4>
-                  <div className="mt-2 inline-flex items-center gap-1 text-[11px] font-semibold text-slate-600 dark:text-slate-300 group-hover:text-black dark:group-hover:text-white">
+                  <h4 className="text-xs sm:text-[13px] font-bold text-slate-900 dark:text-white tracking-tight">Investor Hub</h4>
+                  <div className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-semibold text-slate-500 dark:text-slate-400 group-hover:text-[#7E8056] dark:group-hover:text-[#C2B59B] transition-colors">
                     <span>Learn More</span>
-                    <span className="w-4 h-4 rounded-full border border-slate-400 dark:border-slate-500 flex items-center justify-center text-[9px] group-hover:border-black dark:group-hover:border-white">→</span>
+                    <span className="w-4 h-4 rounded-full border border-slate-300 dark:border-white/20 flex items-center justify-center text-[9px] group-hover:border-[#7E8056] group-hover:bg-[#7E8056] group-hover:text-white transition-all">→</span>
                   </div>
                 </div>
               </Link>
@@ -625,16 +625,16 @@ export default function HomePage() {
               {/* Portal 3: Reservations */}
               <Link
                 to="/reservations"
-                className="group p-3.5 rounded-2xl bg-white dark:bg-[#1E2125] border border-[#E6E0D6] dark:border-white/10 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between text-center items-center hover:-translate-y-0.5"
+                className="group p-4 rounded-2xl bg-white dark:bg-[#1A1D21] border border-slate-200/90 dark:border-white/10 hover:border-[#7E8056]/60 dark:hover:border-[#7E8056]/60 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between text-center items-center hover:-translate-y-1 min-h-[155px]"
               >
-                <div className="w-9 h-9 rounded-xl bg-[#F0EDE6] dark:bg-white/10 text-[#555845] dark:text-[#A4A77E] flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-                  <Calendar className="w-5 h-5 text-[#7E8056] dark:text-[#A4A77E]" />
+                <div className="w-10 h-10 rounded-xl bg-[#F0EDE6] dark:bg-white/[0.07] text-[#555845] dark:text-[#C2B59B] flex items-center justify-center mb-2.5 group-hover:scale-110 group-hover:bg-[#7E8056] group-hover:text-white dark:group-hover:bg-[#7E8056] dark:group-hover:text-white transition-all duration-300 shadow-sm">
+                  <Calendar className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-slate-900 dark:text-white">Reservations</h4>
-                  <div className="mt-2 inline-flex items-center gap-1 text-[11px] font-semibold text-slate-600 dark:text-slate-300 group-hover:text-black dark:group-hover:text-white">
+                  <h4 className="text-xs sm:text-[13px] font-bold text-slate-900 dark:text-white tracking-tight">Reservations</h4>
+                  <div className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-semibold text-slate-500 dark:text-slate-400 group-hover:text-[#7E8056] dark:group-hover:text-[#C2B59B] transition-colors">
                     <span>Book Your Install</span>
-                    <span className="w-4 h-4 rounded-full border border-slate-400 dark:border-slate-500 flex items-center justify-center text-[9px] group-hover:border-black dark:group-hover:border-white">→</span>
+                    <span className="w-4 h-4 rounded-full border border-slate-300 dark:border-white/20 flex items-center justify-center text-[9px] group-hover:border-[#7E8056] group-hover:bg-[#7E8056] group-hover:text-white transition-all">→</span>
                   </div>
                 </div>
               </Link>
@@ -642,16 +642,16 @@ export default function HomePage() {
               {/* Portal 4: Contractor Onboarding */}
               <Link
                 to="/contractor"
-                className="group p-3.5 rounded-2xl bg-white dark:bg-[#1E2125] border border-[#E6E0D6] dark:border-white/10 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between text-center items-center hover:-translate-y-0.5"
+                className="group p-4 rounded-2xl bg-white dark:bg-[#1A1D21] border border-slate-200/90 dark:border-white/10 hover:border-[#7E8056]/60 dark:hover:border-[#7E8056]/60 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between text-center items-center hover:-translate-y-1 min-h-[155px]"
               >
-                <div className="w-9 h-9 rounded-xl bg-[#F0EDE6] dark:bg-white/10 text-[#555845] dark:text-[#A4A77E] flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-                  <HardHat className="w-5 h-5 text-[#7E8056] dark:text-[#A4A77E]" />
+                <div className="w-10 h-10 rounded-xl bg-[#F0EDE6] dark:bg-white/[0.07] text-[#555845] dark:text-[#C2B59B] flex items-center justify-center mb-2.5 group-hover:scale-110 group-hover:bg-[#7E8056] group-hover:text-white dark:group-hover:bg-[#7E8056] dark:group-hover:text-white transition-all duration-300 shadow-sm">
+                  <HardHat className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-slate-900 dark:text-white">Contractor Onboarding</h4>
-                  <div className="mt-2 inline-flex items-center gap-1 text-[11px] font-semibold text-slate-600 dark:text-slate-300 group-hover:text-black dark:group-hover:text-white">
+                  <h4 className="text-xs sm:text-[13px] font-bold text-slate-900 dark:text-white tracking-tight">Contractor Onboarding</h4>
+                  <div className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-semibold text-slate-500 dark:text-slate-400 group-hover:text-[#7E8056] dark:group-hover:text-[#C2B59B] transition-colors">
                     <span>Join Our Network</span>
-                    <span className="w-4 h-4 rounded-full border border-slate-400 dark:border-slate-500 flex items-center justify-center text-[9px] group-hover:border-black dark:group-hover:border-white">→</span>
+                    <span className="w-4 h-4 rounded-full border border-slate-300 dark:border-white/20 flex items-center justify-center text-[9px] group-hover:border-[#7E8056] group-hover:bg-[#7E8056] group-hover:text-white transition-all">→</span>
                   </div>
                 </div>
               </Link>
@@ -659,41 +659,48 @@ export default function HomePage() {
             </div>
 
             {/* Right: Wide Technician & Local Mechanical Card */}
-            <div className="lg:col-span-4">
-              <div className="relative rounded-2xl overflow-hidden shadow-lg border border-slate-300 dark:border-[#3E4249] bg-[#1E2024] text-white p-4 sm:p-5 flex items-center justify-between min-h-[120px]">
-
-                {/* Background Technician Photo from Image */}
-                <div className="absolute inset-0">
+            <div className="lg:col-span-4 flex">
+              <Link
+                to="/local-mechanical"
+                className="group relative w-full rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl border border-slate-300/80 dark:border-white/15 hover:border-[#7E8056]/80 dark:hover:border-[#C2B59B]/60 bg-[#16181B] text-white p-5 sm:p-6 flex flex-col justify-between min-h-[155px] transition-all duration-300 hover:-translate-y-0.5"
+              >
+                {/* Background Technician Photo */}
+                <div className="absolute inset-0 overflow-hidden">
                   <img
-                    src="/images/slices/technician-portals-card.jpg"
-                    alt="Technician inspecting No-Tech unit"
-                    className="w-full h-full object-cover object-center brightness-90"
+                    src="/images/technician-mechanical-room.jpg"
+                    alt="HVAC Technician inspecting mechanical cabinet"
+                    className="w-full h-full object-cover object-[center_28%] group-hover:scale-105 transition-transform duration-700 ease-out brightness-95"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-transparent" />
+                  {/* High contrast gradient overlay for crisp text readability */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/65 to-black/25" />
+                  <div className="absolute inset-0 bg-black/15" />
                 </div>
 
-                {/* Overlaid Content */}
-                <div className="relative z-10 space-y-2 max-w-[280px]">
-                  <div>
-                    <h4 className="text-xs sm:text-sm font-bold text-white leading-tight">
-                      Trusted by Professionals.
-                    </h4>
-                    <p className="text-[11px] sm:text-xs text-slate-200 font-medium">
-                      Approved by Local Mechanical.
-                    </p>
+                {/* Top Badge */}
+                <div className="relative z-10 flex items-center justify-between gap-2">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-[10px] font-semibold text-white/95 uppercase tracking-wider">
+                    <ShieldCheck className="w-3.5 h-3.5 text-[#C2B59B]" />
+                    <span>Field Validated • Local Mechanical</span>
                   </div>
                 </div>
 
-                <div className="relative z-10 self-end">
-                  <Link
-                    to="/local-mechanical"
-                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#7E8056] hover:bg-[#6c6e49] text-white font-semibold text-[11px] transition-all shadow-md"
-                  >
-                    <span>Learn More →</span>
-                  </Link>
-                </div>
+                {/* Main Content & CTA */}
+                <div className="relative z-10 mt-3 sm:mt-4 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+                  <div className="space-y-1 max-w-[280px]">
+                    <h4 className="text-sm sm:text-base font-bold text-white leading-snug tracking-tight drop-shadow-sm">
+                      Trusted by Professionals.
+                    </h4>
+                    <p className="text-xs text-white/85 font-medium drop-shadow-sm">
+                      Approved by Local Mechanical.
+                    </p>
+                  </div>
 
-              </div>
+                  <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#7E8056] group-hover:bg-[#6c6e49] text-white font-semibold text-xs transition-all shadow-md group-hover:shadow-lg whitespace-nowrap self-start sm:self-auto group-hover:translate-x-0.5">
+                    <span>Learn More</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </span>
+                </div>
+              </Link>
             </div>
 
           </div>
