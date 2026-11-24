@@ -14,7 +14,7 @@ import {
   ShieldCheck,
   Headphones
 } from 'lucide-react';
-import NoTechLogo from './NoTechLogo';
+import LocalIndustriesLogo from './LocalIndustriesLogo';
 import { useTheme } from '../../context/ThemeContext';
 
 export default function Navbar() {
@@ -37,9 +37,9 @@ export default function Navbar() {
       <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
 
-          {/* Left: Brand Logo emblem */}
-          <Link to="/" className="flex items-center group transition-transform hover:scale-[1.01] flex-shrink-0">
-            <NoTechLogo className="h-11 sm:h-12" variant="logo" light={!isDark} />
+          {/* Left: Brand Logo emblem - Local Industries */}
+          <Link to="/" className="flex items-center group transition-transform hover:scale-[1.01] flex-shrink-0" title="Local Industries">
+            <LocalIndustriesLogo className="h-12 sm:h-14" isDark={isDark} />
           </Link>
 
           {/* Center: Desktop Clean Text-Only Navigation Links */}
