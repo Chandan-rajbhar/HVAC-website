@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ShieldCheck, Phone, Mail, MapPin, ExternalLink, ArrowRight, CheckCircle2 } from 'lucide-react';
-import NoTechLogo from './NoTechLogo';
+import LocalIndustriesLogo from './LocalIndustriesLogo';
 import LocalMechanicalLogo from './LocalMechanicalLogo';
 import { useTheme } from '../../context/ThemeContext';
 
@@ -11,7 +11,7 @@ export default function Footer() {
     <footer className="w-full bg-[#EDE7DD] dark:bg-[#0F1012] border-t border-slate-300 dark:border-white/10 text-slate-700 dark:text-slate-300 transition-colors duration-200">
       {/* Top Banner with Local Mechanical Endorsement */}
       <div className="border-b border-slate-300 dark:border-white/10 bg-[#E4DDCF] dark:bg-[#16181B] py-6 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="max-w-[1480px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <LocalMechanicalLogo className="h-10" />
             <div>
@@ -35,12 +35,14 @@ export default function Footer() {
       </div>
 
       {/* Main Footer Links */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
 
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
-            <NoTechLogo className="h-12" variant="logo" light={!isDark} />
+            <Link to="/" className="inline-block group" title="Local Industries">
+              <LocalIndustriesLogo className="h-14 sm:h-16" isDark={isDark} />
+            </Link>
             <p className="text-xs text-slate-600 dark:text-slate-400 max-w-sm leading-relaxed">
               No-Tech HVAC is redefining climate infrastructure with hot-swappable 4-bay modular systems, zero-loss refrigerant disconnects, and continuous RFID validation.
             </p>
