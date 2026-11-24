@@ -106,28 +106,36 @@ export default function BuyersPortalPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#121315] text-slate-100 py-8 lg:py-12">
+    <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#121315] text-slate-900 dark:text-slate-100 py-8 lg:py-12 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* ===================== HERO / HEADER BANNER ===================== */}
-        <div className="rounded-2xl bg-gradient-to-r from-[#1B1D20] via-[#22252A] to-[#1B1D20] border border-white/10 p-6 sm:p-8 mb-8 shadow-xl relative overflow-hidden">
+        <div className="rounded-2xl bg-gradient-to-r from-[#F0ECE1] via-[#F7F4EC] to-[#F0ECE1] dark:from-[#1B1D20] dark:via-[#22252A] dark:to-[#1B1D20] border border-slate-300 dark:border-white/10 p-6 sm:p-8 mb-8 shadow-md relative overflow-hidden">
           <div className="max-w-2xl relative z-10 space-y-2">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-[#A4A77E]">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-[#7E8056] dark:text-[#A4A77E]">
               no-techhvac/buyers.com
             </span>
-            <h1 className="text-2xl sm:text-4xl font-bold font-serif text-white">
+            <h1 className="text-2xl sm:text-4xl font-bold font-serif text-slate-900 dark:text-white">
               Buyers Portal
             </h1>
-            <p className="text-base sm:text-lg text-[#C2B59B] font-semibold">
+            <p className="text-base sm:text-lg text-[#8C7A58] dark:text-[#C2B59B] font-semibold">
               Select. Customize. Reserve.
             </p>
-            <p className="text-xs sm:text-sm text-slate-300">
-              Configure your No-Tech HVAC system with real-time compatibility checks, transparent pricing breakdown, and a $200 refundable deposit to lock in your production queue.
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+              Configure your No-Tech HVAC system with real-time compatibility and pricing.
             </p>
+            <div className="pt-2">
+              <button
+                onClick={() => setCurrentStep(1)}
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#7E8056] hover:bg-[#6e7049] text-white font-semibold text-xs transition-all shadow-md"
+              >
+                <span>Start Selection →</span>
+              </button>
+            </div>
           </div>
 
           {/* Stepper Progress Badges */}
-          <div className="mt-6 pt-6 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+          <div className="mt-6 pt-6 border-t border-slate-200 dark:border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
             {[
               { num: 1, title: '1. Customize System' },
               { num: 2, title: '2. Check Compatibility' },
@@ -139,14 +147,14 @@ export default function BuyersPortalPage() {
                 onClick={() => currentStep > s.num && setCurrentStep(s.num)}
                 className={`flex items-center gap-2 p-2.5 rounded-xl border transition-all cursor-pointer ${
                   currentStep === s.num
-                    ? 'bg-[#A4A77E] text-black font-bold border-[#A4A77E] shadow-md'
+                    ? 'bg-[#7E8056] text-white font-bold border-[#7E8056] shadow-md'
                     : currentStep > s.num
-                    ? 'bg-[#A4A77E]/20 text-[#A4A77E] border-[#A4A77E]/40 font-semibold'
-                    : 'bg-white/5 text-slate-400 border-white/5'
+                    ? 'bg-[#7E8056]/15 text-[#7E8056] dark:text-[#A4A77E] border-[#7E8056]/30 font-semibold'
+                    : 'bg-white/80 dark:bg-white/5 text-slate-500 dark:text-slate-400 border-slate-200 dark:border-white/5'
                 }`}
               >
                 <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold ${
-                  currentStep === s.num ? 'bg-black text-white' : currentStep > s.num ? 'bg-[#A4A77E] text-black' : 'bg-white/10 text-white'
+                  currentStep === s.num ? 'bg-white text-slate-900' : currentStep > s.num ? 'bg-[#7E8056] text-white' : 'bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-white'
                 }`}>
                   {currentStep > s.num ? '✓' : s.num}
                 </span>
@@ -158,212 +166,207 @@ export default function BuyersPortalPage() {
 
         {/* ===================== STEP 1: SYSTEM SELECTION & CUSTOMIZATION ===================== */}
         {currentStep === 1 && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            
-            {/* Left Selection Controls Column */}
-            <div className="lg:col-span-7 space-y-6">
-              
-              {/* Tonnage & Air Handler Card */}
-              <div className="p-6 rounded-2xl bg-[#181A1D] border border-white/10 space-y-6 shadow-xl">
-                <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                  <div className="flex items-center gap-2">
-                    <Sliders className="w-5 h-5 text-[#A4A77E]" />
-                    <h2 className="text-base font-bold text-white">System Selection Tool</h2>
-                  </div>
-                  <span className="text-xs text-[#C2B59B]">Real-Time Sizing</span>
-                </div>
+          <div className="space-y-6">
 
-                {/* HVAC Tonnage Selection */}
-                <div className="space-y-2">
-                  <label className="text-xs font-semibold uppercase tracking-wider text-slate-300">
-                    HVAC Tonnage Rating:
-                  </label>
-                  <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
-                    {['2.0 Ton', '2.5 Ton', '3.0 Ton', '3.5 Ton', '4.0 Ton', '5.0 Ton'].map((t) => (
-                      <button
-                        key={t}
-                        onClick={() => setTonnage(t)}
-                        className={`py-2 px-1 rounded-xl text-xs font-bold transition-all border ${
-                          tonnage === t
-                            ? 'bg-[#A4A77E] text-black border-[#A4A77E] shadow-md ring-1 ring-[#A4A77E]'
-                            : 'bg-black/30 border-white/10 text-slate-300 hover:bg-white/10'
-                        }`}
-                      >
-                        {t}
-                      </button>
-                    ))}
-                  </div>
-                  <p className="text-[11px] text-slate-400">
-                    Recommended for homes between 1,400 sq.ft to 3,600 sq.ft depending on regional cooling load.
-                  </p>
+            {/* Top Wide Card: System Selection Tool */}
+            <div className="p-6 rounded-2xl bg-white dark:bg-[#181A1D] border border-slate-200 dark:border-white/10 shadow-md">
+              <div className="flex items-center justify-between pb-4 mb-5 border-b border-slate-200 dark:border-white/10">
+                <div className="flex items-center gap-2">
+                  <Sliders className="w-5 h-5 text-[#7E8056] dark:text-[#A4A77E]" />
+                  <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">System Selection Tool</h2>
                 </div>
+                <span className="text-xs text-[#8C7A58] dark:text-[#C2B59B] font-mono">Live Configuration</span>
+              </div>
 
-                {/* Air Handler Configuration: Upflow, Downflow, Horizontal */}
-                <div className="space-y-2">
-                  <label className="text-xs font-semibold uppercase tracking-wider text-slate-300">
-                    Air Handler Configuration:
-                  </label>
-                  <div className="grid grid-cols-3 gap-3">
-                    {['Upflow', 'Downflow', 'Horizontal'].map((cfg) => (
-                      <button
-                        key={cfg}
-                        onClick={() => setConfiguration(cfg)}
-                        className={`p-3 rounded-xl text-xs font-bold transition-all border text-center ${
-                          configuration === cfg
-                            ? 'bg-[#C2B59B] text-black border-[#C2B59B] shadow-md'
-                            : 'bg-black/30 border-white/10 text-slate-300 hover:bg-white/10'
-                        }`}
-                      >
-                        <span className="block text-sm mb-0.5">{cfg}</span>
-                        <span className="text-[10px] font-normal opacity-75">
-                          {cfg === 'Upflow' ? 'Basement / Closet' : cfg === 'Downflow' ? 'Attic / Rooftop' : 'Crawlspace / Ceiling'}
-                        </span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                
+                {/* Left Controls */}
+                <div className="lg:col-span-6 space-y-5">
 
-                {/* Front-Panel Color Selection */}
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <label className="text-xs font-semibold uppercase tracking-wider text-slate-300">
-                      Front-Panel Powder-Coat Color:
+                  {/* HVAC Tonnage */}
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                      HVAC Tonnage:
                     </label>
-                    <span className="text-xs text-[#A4A77E] font-medium">
-                      {COLOR_SWATCHES.find(c => c.hex === selectedColor)?.name}
-                    </span>
+                    <select
+                      value={tonnage}
+                      onChange={(e) => setTonnage(e.target.value)}
+                      className="w-full bg-slate-50 dark:bg-black/60 border border-slate-300 dark:border-white/15 focus:border-[#7E8056] rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white font-medium outline-none"
+                    >
+                      {['2.0 Ton', '2.5 Ton', '3.0 Ton', '3.5 Ton', '4.0 Ton', '5.0 Ton'].map((t) => (
+                        <option key={t} value={t}>{t} Capacity</option>
+                      ))}
+                    </select>
                   </div>
-                  <div className="flex flex-wrap items-center gap-3 py-2">
-                    {COLOR_SWATCHES.map((swatch) => (
-                      <button
-                        key={swatch.id}
-                        onClick={() => setSelectedColor(swatch.hex)}
-                        className={`w-9 h-9 rounded-full transition-transform hover:scale-110 shadow-md ${
-                          selectedColor === swatch.hex
-                            ? 'ring-4 ring-[#A4A77E] ring-offset-2 ring-offset-[#181A1D] scale-105'
-                            : 'hover:ring-2 hover:ring-white/30'
-                        }`}
-                        style={{ backgroundColor: swatch.hex }}
-                        title={swatch.name}
-                      />
-                    ))}
+
+                  {/* Configuration */}
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                      Configuration:
+                    </label>
+                    <select
+                      value={configuration}
+                      onChange={(e) => setConfiguration(e.target.value)}
+                      className="w-full bg-slate-50 dark:bg-black/60 border border-slate-300 dark:border-white/15 focus:border-[#7E8056] rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white font-medium outline-none"
+                    >
+                      <option value="Upflow">Upflow (Basement / Closet)</option>
+                      <option value="Downflow">Downflow (Attic / Rooftop)</option>
+                      <option value="Horizontal">Horizontal (Crawlspace / Ceiling)</option>
+                    </select>
                   </div>
+
+                  {/* Front Panel Color */}
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <label className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                        Front Panel Color:
+                      </label>
+                      <span className="text-xs text-[#7E8056] dark:text-[#A4A77E] font-medium">
+                        {COLOR_SWATCHES.find(c => c.hex === selectedColor)?.name}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      {COLOR_SWATCHES.map((swatch) => (
+                        <button
+                          key={swatch.id}
+                          onClick={() => setSelectedColor(swatch.hex)}
+                          className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full transition-transform hover:scale-110 shadow-md ${
+                            selectedColor === swatch.hex
+                              ? 'ring-2 ring-slate-900 dark:ring-white ring-offset-2 ring-offset-white dark:ring-offset-[#181A1D] scale-110'
+                              : 'hover:ring-1 hover:ring-slate-400'
+                          }`}
+                          style={{ backgroundColor: swatch.hex }}
+                          title={swatch.name}
+                        />
+                      ))}
+                    </div>
+                  </div>
+
                 </div>
 
-                {/* Modular Compartments Customization Breakdown */}
-                <div className="space-y-3 pt-4 border-t border-white/10">
-                  <label className="text-xs font-semibold uppercase tracking-wider text-slate-300">
-                    Modular Compartment Specifications (4 Bays):
-                  </label>
-                  <div className="space-y-2 text-xs">
-                    {COMPARTMENTS.map((c) => (
-                      <div key={c.id} className="p-3 rounded-xl bg-black/40 border border-white/5 flex items-center justify-between">
-                        <div>
-                          <span className="font-bold text-white block">Bay 0{c.id}: {c.shortName}</span>
-                          <span className="text-[11px] text-slate-400">{c.category} • {c.rfidTag}</span>
-                        </div>
-                        <span className="px-2.5 py-1 rounded-full bg-[#A4A77E]/20 text-[#A4A77E] text-[10px] font-semibold">
-                          Included
-                        </span>
-                      </div>
-                    ))}
-                  </div>
+                {/* Right Visual: HVAC Unit Preview matching Reference Mockup */}
+                <div className="lg:col-span-6 relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-200 dark:border-white/10 aspect-[16/10] max-h-[260px] flex items-center justify-center shadow-inner">
+                  <img
+                    src="/images/slices/buyers-selection-unit.jpg"
+                    alt="No-Tech HVAC System Unit Preview"
+                    className="w-full h-full object-cover object-center"
+                  />
+                  <div
+                    className="absolute inset-0 pointer-events-none mix-blend-color opacity-30 transition-colors duration-300"
+                    style={{ backgroundColor: selectedColor }}
+                  />
+                  <span className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded bg-black/70 text-[10px] text-[#C2B59B] border border-white/10 font-mono">
+                    {tonnage} • {configuration}
+                  </span>
                 </div>
 
               </div>
+            </div>
 
-              {/* Pricing Breakdown Card */}
-              <div className="p-6 rounded-2xl bg-[#181A1D] border border-white/10 space-y-4 shadow-xl">
-                <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                  <div className="flex items-center gap-2">
-                    <DollarSign className="w-5 h-5 text-[#C2B59B]" />
-                    <h3 className="text-base font-bold text-white">Pricing Breakdown</h3>
-                  </div>
-                  <span className="text-[11px] px-2 py-0.5 rounded bg-white/10 text-slate-400">
-                    Demo Transparent Values
-                  </span>
+            {/* Bottom 2 Side-by-Side Cards: Pricing Breakdown & Reservation Process */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+              {/* Card 1: Pricing Breakdown */}
+              <div className="p-6 rounded-2xl bg-white dark:bg-[#181A1D] border border-slate-200 dark:border-white/10 shadow-md space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-white/10">
+                  <h3 className="text-base font-bold text-slate-900 dark:text-white">Pricing Breakdown</h3>
+                  <span className="text-[11px] px-2 py-0.5 rounded bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-400 font-mono">Est. USD</span>
                 </div>
 
-                <div className="space-y-2.5 text-xs text-slate-300">
-                  <div className="flex justify-between py-1">
-                    <span>Base Modular Chassis ({tonnage}):</span>
-                    <span className="font-mono text-white font-semibold">${currentBasePrice.toLocaleString()}</span>
+                <div className="space-y-3 text-xs text-slate-600 dark:text-slate-300">
+                  <div className="flex justify-between py-1 border-b border-slate-100 dark:border-white/5">
+                    <span>Base Unit</span>
+                    <span className="font-mono text-slate-900 dark:text-white font-semibold">${currentBasePrice.toLocaleString()}</span>
                   </div>
-                  <div className="flex justify-between py-1">
-                    <span>4 Modular Compartments (Compressor, ECM Blower, Coil, RFID Hub):</span>
-                    <span className="font-mono text-white font-semibold">${modularCompPrice.toLocaleString()}</span>
+                  <div className="flex justify-between py-1 border-b border-slate-100 dark:border-white/5">
+                    <span>Modular Components</span>
+                    <span className="font-mono text-slate-900 dark:text-white font-semibold">${modularCompPrice.toLocaleString()}</span>
                   </div>
-                  <div className="flex justify-between py-1">
-                    <span>Certified Local Mechanical Installation (Demo Estimate):</span>
-                    <span className="font-mono text-white font-semibold">${installationDemoEstimate.toLocaleString()}</span>
+                  <div className="flex justify-between py-1 border-b border-slate-100 dark:border-white/5">
+                    <span>Installation</span>
+                    <span className="font-mono text-slate-900 dark:text-white font-semibold">${installationDemoEstimate.toLocaleString()}</span>
                   </div>
-                  <div className="pt-2 border-t border-white/10 flex justify-between text-sm font-bold text-white">
-                    <span>Total Estimated Package (Demo):</span>
-                    <span className="font-mono text-[#A4A77E] text-base">${totalDemoPrice.toLocaleString()}</span>
+                  <div className="pt-2 flex justify-between text-sm font-bold text-slate-900 dark:text-white">
+                    <span>Total (Demo)</span>
+                    <span className="font-mono text-[#7E8056] dark:text-[#A4A77E] text-base font-bold">${totalDemoPrice.toLocaleString()}</span>
                   </div>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-[#A4A77E]/10 border border-[#A4A77E]/30 flex items-center justify-between text-xs">
-                  <div>
-                    <span className="text-[#A4A77E] font-bold block">Demo Financing Available</span>
-                    <span className="text-slate-300 text-[11px]">As low as ${monthlyDemo}/mo for 48 months at 0% APR</span>
-                  </div>
-                  <span className="px-2 py-1 rounded bg-[#A4A77E] text-black font-bold text-[10px]">
-                    Pre-Qualify
-                  </span>
-                </div>
-
-                <div className="pt-2 flex justify-end">
+                <div className="pt-3">
                   <button
                     onClick={() => setCurrentStep(2)}
-                    className="flex items-center gap-2 px-6 py-3 rounded-xl bg-[#A4A77E] hover:bg-[#8e9167] text-black font-bold text-sm shadow-lg transition-all"
+                    className="w-full py-3 rounded-xl bg-[#7E8056] hover:bg-[#6e7049] text-white font-bold text-xs shadow-md transition-all flex items-center justify-center gap-1.5"
                   >
-                    <span>Proceed to Compatibility Check →</span>
+                    <span>Check Compatibility →</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Card 2: Reservation Process */}
+              <div className="p-6 rounded-2xl bg-white dark:bg-[#181A1D] border border-slate-200 dark:border-white/10 shadow-md space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-white/10">
+                  <h3 className="text-base font-bold text-slate-900 dark:text-white">Reservation Process</h3>
+                  <span className="text-[11px] text-[#7E8056] dark:text-[#A4A77E] font-medium">Simple 4-Step</span>
+                </div>
+
+                <div className="space-y-3 text-xs">
+                  <div className="flex items-center gap-3 p-2.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-200/80 dark:border-white/5">
+                    <span className="w-5 h-5 rounded-full bg-[#7E8056] text-white font-bold text-[11px] flex items-center justify-center flex-shrink-0">1</span>
+                    <span className="text-slate-800 dark:text-white font-medium">Customize Your System</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-2.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-200/80 dark:border-white/5">
+                    <span className="w-5 h-5 rounded-full bg-[#7E8056] text-white font-bold text-[11px] flex items-center justify-center flex-shrink-0">2</span>
+                    <span className="text-slate-800 dark:text-white font-medium">Check Compatibility</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-2.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-200/80 dark:border-white/5">
+                    <span className="w-5 h-5 rounded-full bg-[#7E8056] text-white font-bold text-[11px] flex items-center justify-center flex-shrink-0">3</span>
+                    <span className="text-slate-800 dark:text-white font-medium">Pay $200 Reservation Fee</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-2.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-200/80 dark:border-white/5">
+                    <span className="w-5 h-5 rounded-full bg-[#7E8056] text-white font-bold text-[11px] flex items-center justify-center flex-shrink-0">4</span>
+                    <span className="text-slate-800 dark:text-white font-medium">Get Confirmation</span>
+                  </div>
+                </div>
+
+                <div className="pt-3">
+                  <button
+                    onClick={() => setCurrentStep(2)}
+                    className="w-full py-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-800 dark:text-slate-200 font-semibold text-xs border border-slate-300 dark:border-white/15 transition-all flex items-center justify-center gap-1.5"
+                  >
+                    <span>Start Process →</span>
                   </button>
                 </div>
               </div>
 
             </div>
 
-            {/* Right Live Visualizer & Summary Column */}
-            <div className="lg:col-span-5 space-y-6 sticky top-28">
-              <HvacModularVisualizer
-                activeColor={selectedColor}
-                showLabels={true}
-              />
+            {/* Bottom Banner: Reserve Your No-Tech HVAC System Today */}
+            <div className="relative rounded-2xl overflow-hidden shadow-lg border border-slate-300 dark:border-white/10 p-6 flex flex-col sm:flex-row items-center justify-between gap-4 bg-[#1E2024]">
+              <div className="absolute inset-0">
+                <img
+                  src="/images/slices/buyers-bottom-banner.jpg"
+                  alt="Modern residence with modular HVAC"
+                  className="w-full h-full object-cover object-center brightness-75"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-transparent" />
+              </div>
 
-              {/* Live Configuration Summary Badge */}
-              <div className="p-5 rounded-2xl bg-gradient-to-br from-[#1C1E22] to-[#151719] border border-white/10 space-y-3">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-[#C2B59B]">
-                  Selected Configuration Summary
+              <div className="relative z-10 space-y-1">
+                <h4 className="text-base sm:text-lg font-bold text-white font-serif">
+                  Reserve Your No-Tech HVAC System Today
                 </h4>
-                <div className="grid grid-cols-2 gap-2 text-xs">
-                  <div className="p-2.5 rounded-xl bg-black/40 border border-white/5">
-                    <span className="text-slate-400 block text-[10px]">Tonnage</span>
-                    <span className="font-bold text-white">{tonnage}</span>
-                  </div>
-                  <div className="p-2.5 rounded-xl bg-black/40 border border-white/5">
-                    <span className="text-slate-400 block text-[10px]">Airflow Layout</span>
-                    <span className="font-bold text-white">{configuration}</span>
-                  </div>
-                  <div className="p-2.5 rounded-xl bg-black/40 border border-white/5">
-                    <span className="text-slate-400 block text-[10px]">Finish Color</span>
-                    <span className="font-bold text-[#A4A77E] truncate block">
-                      {COLOR_SWATCHES.find(c => c.hex === selectedColor)?.name}
-                    </span>
-                  </div>
-                  <div className="p-2.5 rounded-xl bg-black/40 border border-white/5">
-                    <span className="text-slate-400 block text-[10px]">Reservation Deposit</span>
-                    <span className="font-bold text-emerald-400 font-mono">$200 Refundable</span>
-                  </div>
-                </div>
+                <p className="text-xs text-slate-300">
+                  Secure your system with a $200 reservation fee.
+                </p>
+              </div>
 
-                <div className="p-3 rounded-xl bg-black/50 border border-white/10 flex items-center gap-3">
-                  <LocalMechanicalLogo className="h-8" showText={false} />
-                  <p className="text-[11px] text-slate-300">
-                    Pre-certified for Local Mechanical fast-track residential permitting.
-                  </p>
-                </div>
+              <div className="relative z-10 flex-shrink-0">
+                <button
+                  onClick={() => setCurrentStep(3)}
+                  className="px-5 py-2.5 rounded-full bg-[#7E8056] hover:bg-[#6e7049] text-white font-semibold text-xs shadow-lg transition-all"
+                >
+                  Reserve Now →
+                </button>
               </div>
             </div>
 

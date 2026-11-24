@@ -53,59 +53,63 @@ export default function ReservationsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#121315] text-slate-100 py-8 lg:py-12">
+    <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#121315] text-slate-900 dark:text-slate-100 py-8 lg:py-12 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         {/* ===================== HERO BANNER ===================== */}
-        <div className="rounded-2xl bg-gradient-to-r from-[#1B1D20] via-[#22252A] to-[#1B1D20] border border-white/10 p-6 sm:p-8 shadow-xl relative overflow-hidden">
+        <div className="rounded-2xl bg-gradient-to-r from-[#F0ECE1] via-[#F7F4EC] to-[#F0ECE1] dark:from-[#1B1D20] dark:via-[#22252A] dark:to-[#1B1D20] border border-slate-300 dark:border-white/10 p-6 sm:p-8 shadow-md relative overflow-hidden flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="max-w-2xl relative z-10 space-y-2">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-[#A4A77E]">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-[#7E8056] dark:text-[#A4A77E]">
               no-techhvac/reservations.com
             </span>
-            <h1 className="text-2xl sm:text-4xl font-bold font-serif text-white">
+            <h1 className="text-2xl sm:text-4xl font-bold font-serif text-slate-900 dark:text-white">
               Reservations & Scheduling
             </h1>
-            <p className="text-base sm:text-lg text-[#C2B59B] font-semibold">
+            <p className="text-base sm:text-lg text-[#8C7A58] dark:text-[#C2B59B] font-semibold">
               Choose Your Date. We'll Handle the Rest.
             </p>
-            <p className="text-xs sm:text-sm text-slate-300">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
               Schedule your installation with ease and track your reservation status across our certified Local Mechanical contractor network.
             </p>
+            <div className="pt-2">
+              <a
+                href="#schedule-form"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#7E8056] hover:bg-[#6e7049] text-white font-semibold text-xs transition-all shadow-md"
+              >
+                <span>Schedule Now →</span>
+              </a>
+            </div>
           </div>
 
-          <div className="mt-6 flex flex-wrap gap-4 text-xs">
-            <span className="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-white flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-              Reservation Fee: <strong className="text-[#A4A77E]">$200 Refundable</strong>
-            </span>
-            <span className="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-white flex items-center gap-2">
-              <Clock className="w-3.5 h-3.5 text-[#C2B59B]" />
-              8 Specific 3-Hour Time Slots
-            </span>
-            <span className="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-white flex items-center gap-2">
-              <Radio className="w-3.5 h-3.5 text-[#A4A77E]" />
-              RFID Inventory Tracking Synced
-            </span>
+          {/* Desk Calendar Graphic from Reference Image */}
+          <div className="relative z-10 flex-shrink-0">
+            <div className="w-24 sm:w-28 h-24 sm:h-28 rounded-2xl overflow-hidden border border-slate-200 dark:border-white/10 shadow-md bg-white dark:bg-black/40 p-1 flex items-center justify-center">
+              <img
+                src="/images/slices/reservations-calendar.jpg"
+                alt="Installation Calendar"
+                className="w-full h-full object-cover object-center rounded-xl"
+              />
+            </div>
           </div>
         </div>
 
         {/* Confirmation Banner if confirmed */}
         {reservationConfirmed && (
-          <div className="p-5 rounded-2xl bg-gradient-to-r from-emerald-950/60 to-[#18201A] border border-emerald-500/50 flex flex-col sm:flex-row items-center justify-between gap-4 animate-in fade-in">
+          <div className="p-5 rounded-2xl bg-emerald-50 dark:bg-gradient-to-r dark:from-emerald-950/60 dark:to-[#18201A] border border-emerald-500/50 flex flex-col sm:flex-row items-center justify-between gap-4 animate-in fade-in">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
+              <div className="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold">
                 <CheckCircle2 className="w-6 h-6" />
               </div>
               <div>
-                <h4 className="text-sm font-bold text-white">Installation Appointment Locked!</h4>
-                <p className="text-xs text-slate-300">
-                  Scheduled for <strong className="text-emerald-400">{selectedDate}</strong> during <strong className="text-white">{selectedSlot}</strong> in {selectedRegion}.
+                <h4 className="text-sm font-bold text-slate-900 dark:text-white">Installation Appointment Locked!</h4>
+                <p className="text-xs text-slate-600 dark:text-slate-300">
+                  Scheduled for <strong className="text-emerald-600 dark:text-emerald-400">{selectedDate}</strong> during <strong className="text-slate-900 dark:text-white">{selectedSlot}</strong> in {selectedRegion}.
                 </p>
               </div>
             </div>
             <Link
               to="/manage-contractor"
-              className="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-black font-bold text-xs"
+              className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs"
             >
               Manage My Contractor →
             </Link>
@@ -113,22 +117,22 @@ export default function ReservationsPage() {
         )}
 
         {/* ===================== MAIN SCHEDULING & DASHBOARD GRID ===================== */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div id="schedule-form" className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Left Column: Date & Exact 8 PDF Time Slots */}
           <div className="lg:col-span-7 space-y-6">
             
-            <div className="p-6 rounded-2xl bg-[#181A1D] border border-white/10 space-y-6 shadow-xl">
+            <div className="p-6 rounded-2xl bg-white dark:bg-[#181A1D] border border-slate-200 dark:border-white/10 space-y-6 shadow-md">
               
               {/* Region Selector */}
               <div className="space-y-2">
-                <label className="text-xs font-semibold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
-                  <MapPin className="w-4 h-4 text-[#A4A77E]" /> Select Service Territory:
+                <label className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                  <MapPin className="w-4 h-4 text-[#7E8056] dark:text-[#A4A77E]" /> Select Service Territory:
                 </label>
                 <select
                   value={selectedRegion}
                   onChange={(e) => setSelectedRegion(e.target.value)}
-                  className="w-full bg-black/60 border border-white/15 focus:border-[#A4A77E] rounded-xl px-3.5 py-2.5 text-xs text-white outline-none"
+                  className="w-full bg-slate-50 dark:bg-black/60 border border-slate-300 dark:border-white/15 focus:border-[#7E8056] rounded-xl px-3.5 py-2.5 text-xs text-slate-900 dark:text-white outline-none"
                 >
                   <option value="Dallas-Fort Worth Metro">Dallas-Fort Worth Metro (High Availability)</option>
                   <option value="Austin / Round Rock Metro">Austin / Round Rock Metro (Filling Fast)</option>
@@ -139,8 +143,8 @@ export default function ReservationsPage() {
 
               {/* Date Selector */}
               <div className="space-y-2">
-                <label className="text-xs font-semibold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
-                  <CalendarIcon className="w-4 h-4 text-[#C2B59B]" /> Select Installation Date:
+                <label className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                  <CalendarIcon className="w-4 h-4 text-[#7E8056] dark:text-[#C2B59B]" /> Select Installation Date:
                 </label>
                 <div className="relative">
                   <input
@@ -149,10 +153,10 @@ export default function ReservationsPage() {
                     min="2026-11-25"
                     max="2027-04-30"
                     onChange={(e) => setSelectedDate(e.target.value)}
-                    className="w-full bg-black/60 border border-white/15 focus:border-[#A4A77E] rounded-xl px-4 py-3 text-sm text-white font-mono outline-none"
+                    className="w-full bg-slate-50 dark:bg-black/60 border border-slate-300 dark:border-white/15 focus:border-[#7E8056] rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white font-mono outline-none"
                   />
                 </div>
-                <p className="text-[11px] text-slate-400">
+                <p className="text-[11px] text-slate-500 dark:text-slate-400">
                   Typical lead time for {selectedRegion} is {currentRegionData.leadDays} business days.
                 </p>
               </div>
@@ -160,10 +164,10 @@ export default function ReservationsPage() {
               {/* Exact 8 Time Slots from PDF Page 5 */}
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <label className="text-xs font-semibold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
-                    <Clock className="w-4 h-4 text-[#A4A77E]" /> Available Time Slots (8 Official PDF Windows):
+                  <label className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                    <Clock className="w-4 h-4 text-[#7E8056] dark:text-[#A4A77E]" /> Available Time Slots (8 Official Windows):
                   </label>
-                  <span className="text-[11px] text-[#A4A77E] font-medium">3-Hour Arrival Windows</span>
+                  <span className="text-[11px] text-[#7E8056] dark:text-[#A4A77E] font-medium">3-Hour Arrival Windows</span>
                 </div>
 
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
@@ -175,8 +179,8 @@ export default function ReservationsPage() {
                         onClick={() => setSelectedSlot(slot)}
                         className={`p-3 rounded-xl text-xs font-bold transition-all border text-center ${
                           isSelected
-                            ? 'bg-[#A4A77E] text-black border-[#A4A77E] shadow-lg ring-2 ring-[#A4A77E]/50 scale-[1.02]'
-                            : 'bg-black/40 border-white/10 text-slate-300 hover:bg-white/5 hover:text-white'
+                            ? 'bg-[#7E8056] text-white border-[#7E8056] shadow-md scale-[1.02]'
+                            : 'bg-slate-50 dark:bg-black/40 border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5'
                         }`}
                       >
                         <span className="block text-xs">{slot}</span>
@@ -190,26 +194,26 @@ export default function ReservationsPage() {
               </div>
 
               {/* Automated Alerts Preferences */}
-              <div className="p-4 rounded-xl bg-black/40 border border-white/5 space-y-3">
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#C2B59B]">
-                  <Bell className="w-4 h-4" /> Automated Reminders & Alerts (PDF Feature)
+              <div className="p-4 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-white/5 space-y-3">
+                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#7E8056] dark:text-[#C2B59B]">
+                  <Bell className="w-4 h-4" /> Automated Reminders & Alerts
                 </div>
                 <div className="space-y-2 text-xs">
-                  <label className="flex items-center gap-2 cursor-pointer text-slate-300">
+                  <label className="flex items-center gap-2 cursor-pointer text-slate-700 dark:text-slate-300">
                     <input
                       type="checkbox"
                       checked={smsAlerts}
                       onChange={(e) => setSmsAlerts(e.target.checked)}
-                      className="rounded accent-[#A4A77E] w-4 h-4"
+                      className="rounded accent-[#7E8056] w-4 h-4"
                     />
                     <span>Receive real-time technician GPS arrival & dispatch SMS updates</span>
                   </label>
-                  <label className="flex items-center gap-2 cursor-pointer text-slate-300">
+                  <label className="flex items-center gap-2 cursor-pointer text-slate-700 dark:text-slate-300">
                     <input
                       type="checkbox"
                       checked={emailAlerts}
                       onChange={(e) => setEmailAlerts(e.target.checked)}
-                      className="rounded accent-[#A4A77E] w-4 h-4"
+                      className="rounded accent-[#7E8056] w-4 h-4"
                     />
                     <span>Receive production milestone alerts & Local Mechanical inspection logs</span>
                   </label>
@@ -220,7 +224,7 @@ export default function ReservationsPage() {
               <div className="pt-2 flex justify-end">
                 <button
                   onClick={handleConfirmReservation}
-                  className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#A4A77E] hover:bg-[#8e9167] text-black font-bold text-sm shadow-xl transition-all"
+                  className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#7E8056] hover:bg-[#6e7049] text-white font-bold text-sm shadow-md transition-all"
                 >
                   Confirm Reservation →
                 </button>
@@ -229,23 +233,23 @@ export default function ReservationsPage() {
             </div>
 
             {/* Upcoming Appointments List */}
-            <div className="p-6 rounded-2xl bg-[#181A1D] border border-white/10 space-y-4 shadow-xl">
-              <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
-                <CalendarIcon className="w-4 h-4 text-[#C2B59B]" /> Upcoming Scheduled Installations
+            <div className="p-6 rounded-2xl bg-white dark:bg-[#181A1D] border border-slate-200 dark:border-white/10 space-y-4 shadow-md">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
+                <CalendarIcon className="w-4 h-4 text-[#7E8056] dark:text-[#C2B59B]" /> Upcoming Scheduled Installations
               </h3>
               <div className="space-y-2.5">
                 {upcomingAppointments.map((apt) => (
-                  <div key={apt.id} className="p-3.5 rounded-xl bg-black/40 border border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+                  <div key={apt.id} className="p-3.5 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
                     <div>
-                      <span className="font-bold text-white block">{apt.customer}</span>
-                      <span className="text-slate-400 text-[11px]">{apt.bay}</span>
+                      <span className="font-bold text-slate-900 dark:text-white block">{apt.customer}</span>
+                      <span className="text-slate-500 dark:text-slate-400 text-[11px]">{apt.bay}</span>
                     </div>
                     <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
                       <div className="text-right">
-                        <span className="font-semibold text-slate-200 block">{apt.date}</span>
-                        <span className="text-[11px] text-[#A4A77E]">{apt.time}</span>
+                        <span className="font-semibold text-slate-800 dark:text-slate-200 block">{apt.date}</span>
+                        <span className="text-[11px] text-[#7E8056] dark:text-[#A4A77E]">{apt.time}</span>
                       </div>
-                      <span className="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-semibold">
+                      <span className="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 text-[10px] font-semibold">
                         {apt.status}
                       </span>
                     </div>
@@ -259,13 +263,13 @@ export default function ReservationsPage() {
           {/* Right Column: Reservation Capacity Dashboard & RFID Tracking Demo */}
           <div className="lg:col-span-5 space-y-6">
             
-            {/* Circular Gauge / Capacity Dashboard as shown in reference screenshot! */}
-            <div className="p-6 rounded-2xl bg-[#181A1D] border border-white/10 space-y-5 shadow-xl text-center">
-              <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-white">
+            {/* Circular Gauge / Capacity Dashboard matching reference screenshot */}
+            <div className="p-6 rounded-2xl bg-white dark:bg-[#181A1D] border border-slate-200 dark:border-white/10 space-y-5 shadow-md text-center">
+              <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-white/10">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">
                   Reservation Dashboard
                 </h3>
-                <span className="text-xs text-[#A4A77E] font-medium">{selectedRegion}</span>
+                <span className="text-xs text-[#7E8056] dark:text-[#A4A77E] font-medium">{selectedRegion}</span>
               </div>
 
               {/* Gauge Graphic */}
@@ -275,7 +279,8 @@ export default function ReservationsPage() {
                     cx="50"
                     cy="50"
                     r="40"
-                    stroke="#26292E"
+                    stroke="#E2E8F0"
+                    className="dark:stroke-[#26292E]"
                     strokeWidth="10"
                     fill="none"
                   />
@@ -283,60 +288,56 @@ export default function ReservationsPage() {
                     cx="50"
                     cy="50"
                     r="40"
-                    stroke="#A4A77E"
+                    stroke="#7E8056"
+                    className="dark:stroke-[#A4A77E] transition-all duration-1000 ease-out"
                     strokeWidth="10"
                     strokeDasharray="251.2"
                     strokeDashoffset={251.2 * (1 - currentRegionData.capacity / 100)}
                     strokeLinecap="round"
                     fill="none"
-                    className="transition-all duration-1000 ease-out"
                   />
                 </svg>
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <span className="text-3xl font-bold font-serif text-white">
+                  <span className="text-3xl font-bold font-serif text-slate-900 dark:text-white">
                     {currentRegionData.capacity}%
                   </span>
-                  <span className="text-[11px] text-slate-400 uppercase tracking-wider">
+                  <span className="text-[11px] text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                     Capacity
                   </span>
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3 text-xs pt-2">
-                <div className="p-3 rounded-xl bg-black/40 border border-white/5">
-                  <span className="text-slate-400 block text-[10px]">Open Time Slots</span>
-                  <span className="text-base font-bold text-[#A4A77E]">{currentRegionData.slotsLeft} Slots</span>
+                <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-white/5">
+                  <span className="text-slate-500 dark:text-slate-400 block text-[10px]">Open Slots</span>
+                  <span className="text-lg font-bold text-emerald-600 dark:text-emerald-400 font-mono">
+                    {currentRegionData.slotsLeft} remaining
+                  </span>
                 </div>
-                <div className="p-3 rounded-xl bg-black/40 border border-white/5">
-                  <span className="text-slate-400 block text-[10px]">Avg Turnaround</span>
-                  <span className="text-base font-bold text-[#C2B59B]">48 Hours</span>
+                <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-white/5">
+                  <span className="text-slate-500 dark:text-slate-400 block text-[10px]">Avg Turnaround</span>
+                  <span className="text-lg font-bold text-slate-900 dark:text-white font-mono">
+                    {currentRegionData.leadDays} Days
+                  </span>
                 </div>
               </div>
 
-              <p className="text-[11px] text-slate-400">
-                Dynamic availability automatically balances regional certified technician loads.
-              </p>
             </div>
 
-            {/* RFID Tracking Integration Demo (PDF Page 3) */}
-            <div className="p-6 rounded-2xl bg-[#181A1D] border border-white/10 space-y-4 shadow-xl">
-              <div className="flex items-center justify-between pb-3 border-b border-white/10">
+            {/* RFID Inventory Status Component */}
+            <div className="p-6 rounded-2xl bg-white dark:bg-[#181A1D] border border-slate-200 dark:border-white/10 space-y-4 shadow-md">
+              <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-white/10">
                 <div className="flex items-center gap-2">
-                  <Radio className="w-4 h-4 text-[#A4A77E] animate-pulse" />
-                  <h3 className="text-xs font-bold uppercase tracking-wider text-white">
-                    RFID Tracking Integration
+                  <Radio className="w-5 h-5 text-[#7E8056] dark:text-[#A4A77E]" />
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">
+                    Live RFID Parts Warehouse Sync
                   </h3>
                 </div>
-                <span className="px-2 py-0.5 rounded bg-white/10 text-[10px] text-[#C2B59B] font-mono">
-                  Live Telemetry
+                <span className="text-xs px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 font-mono">
+                  Online
                 </span>
               </div>
 
-              <p className="text-xs text-slate-300">
-                Seamless inventory management tracking available units, modular components, and scheduled swaps before technician dispatch.
-              </p>
-
-              {/* 4 RFID Compartments Status */}
               <div className="space-y-2 text-xs">
                 {COMPARTMENTS.map((c) => (
                   <div
@@ -344,28 +345,28 @@ export default function ReservationsPage() {
                     onClick={() => setActiveRFIDBay(c.id)}
                     className={`p-3 rounded-xl border transition-all cursor-pointer flex items-center justify-between ${
                       activeRFIDBay === c.id
-                        ? 'bg-[#A4A77E]/20 border-[#A4A77E] text-white shadow-md'
-                        : 'bg-black/40 border-white/5 text-slate-400 hover:bg-white/5'
+                        ? 'bg-[#7E8056]/10 border-[#7E8056] text-slate-900 dark:text-white shadow-sm'
+                        : 'bg-slate-50 dark:bg-black/40 border-slate-200 dark:border-white/5 text-slate-600 dark:text-slate-400 hover:bg-slate-100'
                     }`}
                   >
                     <div>
                       <div className="font-bold flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                        <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
                         <span>Bay 0{c.id}: {c.shortName}</span>
                       </div>
                       <span className="text-[10px] font-mono opacity-75">{c.rfidTag}</span>
                     </div>
                     <div className="text-right">
-                      <span className="text-[10px] font-semibold text-emerald-400 block">Inventory: In-Stock</span>
-                      <span className="text-[9px] text-slate-400">Swap Cycle: {c.estimatedSwapCycle}</span>
+                      <span className="text-[10px] font-semibold text-emerald-600 dark:text-emerald-400 block">Inventory: In-Stock</span>
+                      <span className="text-[9px] text-slate-500 dark:text-slate-400">Swap Cycle: {c.estimatedSwapCycle}</span>
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div className="p-3 rounded-xl bg-black/50 border border-white/10 flex items-center gap-3">
+              <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/50 border border-slate-200 dark:border-white/10 flex items-center gap-3">
                 <LocalMechanicalLogo className="h-8" showText={false} />
-                <p className="text-[11px] text-slate-300">
+                <p className="text-[11px] text-slate-600 dark:text-slate-300">
                   Every RFID scan is cryptographically signed and logged with Local Mechanical quality enforcement.
                 </p>
               </div>
@@ -376,35 +377,34 @@ export default function ReservationsPage() {
         </div>
 
         {/* ===================== BOTTOM 3 FEATURE BADGES ===================== */}
-        {/* Exact 3 badges shown at bottom of screenshot */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
-          <div className="p-5 rounded-2xl bg-[#181A1D] border border-white/10 flex items-center gap-4 shadow-lg">
-            <div className="w-12 h-12 rounded-xl bg-[#A4A77E]/20 text-[#A4A77E] flex items-center justify-center flex-shrink-0">
+          <div className="p-5 rounded-2xl bg-white dark:bg-[#181A1D] border border-slate-200 dark:border-white/10 flex items-center gap-4 shadow-sm">
+            <div className="w-12 h-12 rounded-xl bg-[#7E8056]/20 text-[#7E8056] flex items-center justify-center flex-shrink-0">
               <CalendarIcon className="w-6 h-6" />
             </div>
             <div>
-              <h4 className="text-sm font-bold text-white">$200 Reservation Fee</h4>
-              <p className="text-xs text-slate-400 mt-0.5">Locks in your batch number and priority schedule.</p>
+              <h4 className="text-sm font-bold text-slate-900 dark:text-white">$200 Reservation Fee</h4>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Locks in your batch number and priority schedule.</p>
             </div>
           </div>
 
-          <div className="p-5 rounded-2xl bg-[#181A1D] border border-white/10 flex items-center gap-4 shadow-lg">
-            <div className="w-12 h-12 rounded-xl bg-[#C2B59B]/20 text-[#C2B59B] flex items-center justify-center flex-shrink-0">
+          <div className="p-5 rounded-2xl bg-white dark:bg-[#181A1D] border border-slate-200 dark:border-white/10 flex items-center gap-4 shadow-sm">
+            <div className="w-12 h-12 rounded-xl bg-[#8C7A58]/20 text-[#8C7A58] dark:text-[#C2B59B] flex items-center justify-center flex-shrink-0">
               <Clock className="w-6 h-6" />
             </div>
             <div>
-              <h4 className="text-sm font-bold text-white">Real-Time Availability</h4>
-              <p className="text-xs text-slate-400 mt-0.5">8 certified 3-hour slots with contractor dispatch.</p>
+              <h4 className="text-sm font-bold text-slate-900 dark:text-white">Real-Time Availability</h4>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">8 certified 3-hour slots with contractor dispatch.</p>
             </div>
           </div>
 
-          <div className="p-5 rounded-2xl bg-[#181A1D] border border-white/10 flex items-center gap-4 shadow-lg">
-            <div className="w-12 h-12 rounded-xl bg-[#A4A77E]/20 text-[#A4A77E] flex items-center justify-center flex-shrink-0">
+          <div className="p-5 rounded-2xl bg-white dark:bg-[#181A1D] border border-slate-200 dark:border-white/10 flex items-center gap-4 shadow-sm">
+            <div className="w-12 h-12 rounded-xl bg-[#7E8056]/20 text-[#7E8056] flex items-center justify-center flex-shrink-0">
               <Bell className="w-6 h-6" />
             </div>
             <div>
-              <h4 className="text-sm font-bold text-white">Automated Reminders</h4>
-              <p className="text-xs text-slate-400 mt-0.5">Real-time alerts on production and dispatch.</p>
+              <h4 className="text-sm font-bold text-slate-900 dark:text-white">Automated Reminders</h4>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Real-time alerts on production and dispatch.</p>
             </div>
           </div>
         </div>

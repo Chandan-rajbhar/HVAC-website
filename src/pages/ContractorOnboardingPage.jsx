@@ -80,39 +80,43 @@ export default function ContractorOnboardingPage() {
   const isApproved = formSubmitted && videoWatched && quizSubmitted && quizScore >= 8;
 
   return (
-    <div className="min-h-screen bg-[#121315] text-slate-100 py-8 lg:py-12">
+    <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#121315] text-slate-900 dark:text-slate-100 py-8 lg:py-12 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         {/* ===================== HERO BANNER ===================== */}
-        <div className="rounded-2xl bg-gradient-to-r from-[#1B1D20] via-[#22252A] to-[#1B1D20] border border-white/10 p-6 sm:p-8 shadow-xl relative overflow-hidden">
+        <div className="rounded-2xl bg-gradient-to-r from-[#F0ECE1] via-[#F7F4EC] to-[#F0ECE1] dark:from-[#1B1D20] dark:via-[#22252A] dark:to-[#1B1D20] border border-slate-300 dark:border-white/10 p-6 sm:p-8 shadow-md relative overflow-hidden flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="max-w-2xl relative z-10 space-y-2">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-[#A4A77E]">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-[#7E8056] dark:text-[#A4A77E]">
               no-techhvac/contractor.com
             </span>
-            <h1 className="text-2xl sm:text-4xl font-bold font-serif text-white">
+            <h1 className="text-2xl sm:text-4xl font-bold font-serif text-slate-900 dark:text-white">
               Contractor Onboarding
             </h1>
-            <p className="text-base sm:text-lg text-[#C2B59B] font-semibold">
+            <p className="text-base sm:text-lg text-[#8C7A58] dark:text-[#C2B59B] font-semibold">
               Join Our Trusted Network.
             </p>
-            <p className="text-xs sm:text-sm text-slate-300">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
               Complete your certification and training to become an approved contractor certified by Local Mechanical.
             </p>
+            <div className="pt-2">
+              <a
+                href="#registration-form"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#7E8056] hover:bg-[#6e7049] text-white font-semibold text-xs transition-all shadow-md"
+              >
+                <span>Start Application →</span>
+              </a>
+            </div>
           </div>
 
-          <div className="mt-6 flex flex-wrap gap-4 text-xs">
-            <span className="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-white flex items-center gap-2">
-              <Upload className="w-3.5 h-3.5 text-[#A4A77E]" />
-              EPA, License & Insurance Uploads
-            </span>
-            <span className="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-white flex items-center gap-2">
-              <Play className="w-3.5 h-3.5 text-[#C2B59B]" />
-              Required Video Training
-            </span>
-            <span className="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-white flex items-center gap-2">
-              <Award className="w-3.5 h-3.5 text-[#A4A77E]" />
-              10-Question Technical Questionnaire
-            </span>
+          {/* Contractor Photo from Reference Mockup */}
+          <div className="relative z-10 flex-shrink-0">
+            <div className="w-24 sm:w-28 h-24 sm:h-28 rounded-2xl overflow-hidden border border-slate-200 dark:border-white/10 shadow-md bg-white dark:bg-black/40">
+              <img
+                src="/images/slices/contractor-hero-tech.jpg"
+                alt="Contractor Technician"
+                className="w-full h-full object-cover object-center"
+              />
+            </div>
           </div>
         </div>
 
@@ -355,20 +359,17 @@ export default function ContractorOnboardingPage() {
                 onClick={() => setVideoModalOpen(true)}
                 className="relative aspect-video rounded-xl bg-black border border-white/15 overflow-hidden flex flex-col items-center justify-center p-6 text-center cursor-pointer group"
               >
-                <div 
-                  className="absolute inset-0 opacity-40 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                  style={{
-                    backgroundImage: `url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&auto=format&fit=crop&q=80')`
-                  }}
+                <img
+                  src="/images/slices/contractor-video-thumb.jpg"
+                  alt="Training Video Preview"
+                  className="absolute inset-0 w-full h-full object-cover object-center brightness-90 group-hover:scale-105 transition-transform duration-300"
                 />
-                <div className="relative z-10 w-14 h-14 rounded-full bg-[#A4A77E] text-black flex items-center justify-center shadow-2xl transition-transform group-hover:scale-110">
-                  <Play className="w-6 h-6 fill-black ml-1" />
+                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors" />
+                <div className="relative z-10 w-12 h-12 rounded-full bg-[#A4A77E] text-black flex items-center justify-center shadow-2xl transition-transform group-hover:scale-110">
+                  <Play className="w-5 h-5 fill-black ml-0.5" />
                 </div>
-                <span className="relative z-10 text-xs font-bold text-white mt-3">
-                  Installation & Servicing Video Protocol
-                </span>
-                <span className="relative z-10 text-[10px] text-slate-300">
-                  12 mins • Covers conductor pins & zero-loss valving
+                <span className="relative z-10 text-xs font-bold text-white mt-2 drop-shadow">
+                  Installation & Servicing Protocol
                 </span>
               </div>
 

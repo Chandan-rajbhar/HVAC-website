@@ -8,7 +8,7 @@ export function ThemeProvider({ children }) {
     if (saved !== null) {
       return saved === 'dark';
     }
-    return true; // Dark mode is primary appearance per PDF
+    return false; // Default to Light Mode
   });
 
   useEffect(() => {

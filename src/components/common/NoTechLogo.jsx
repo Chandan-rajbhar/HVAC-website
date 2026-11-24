@@ -67,7 +67,7 @@ export default function NoTechLogo({ className = 'h-11', variant = 'full', light
           fontWeight="500"
           letterSpacing="1.5"
         >
-          EST. 2022
+          EST. 2023
         </text>
       </svg>
 

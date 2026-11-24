@@ -3,20 +3,22 @@ import { Link } from 'react-router-dom';
 import { ShieldCheck, Phone, Mail, MapPin, ExternalLink, ArrowRight, CheckCircle2 } from 'lucide-react';
 import NoTechLogo from './NoTechLogo';
 import LocalMechanicalLogo from './LocalMechanicalLogo';
+import { useTheme } from '../../context/ThemeContext';
 
 export default function Footer() {
+  const { isDark } = useTheme();
   return (
-    <footer className="w-full bg-[#0F1012] border-t border-white/10 text-slate-300">
+    <footer className="w-full bg-[#EDE7DD] dark:bg-[#0F1012] border-t border-slate-300 dark:border-white/10 text-slate-700 dark:text-slate-300 transition-colors duration-200">
       {/* Top Banner with Local Mechanical Endorsement */}
-      <div className="border-b border-white/10 bg-[#16181B] py-6 px-4 sm:px-6 lg:px-8">
+      <div className="border-b border-slate-300 dark:border-white/10 bg-[#E4DDCF] dark:bg-[#16181B] py-6 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <LocalMechanicalLogo className="h-10" />
             <div>
-              <h4 className="text-sm font-bold text-white uppercase tracking-wider">
+              <h4 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">
                 Approved by Local Mechanical
               </h4>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-600 dark:text-slate-400">
                 Official regulatory and compliance enforcement body for all No-Tech modular installations worldwide.
               </p>
             </div>
@@ -24,7 +26,7 @@ export default function Footer() {
 
           <Link
             to="/local-mechanical"
-            className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-white/10 hover:bg-[#A4A77E] hover:text-black text-slate-200 transition-all border border-white/10"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-white/80 dark:bg-white/10 hover:bg-[#7E8056] hover:text-white text-slate-800 dark:text-slate-200 transition-all border border-slate-300 dark:border-white/10"
           >
             <span>View Quality Dashboard</span>
             <ArrowRight className="w-4 h-4" />
@@ -35,24 +37,24 @@ export default function Footer() {
       {/* Main Footer Links */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-          
+
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
-            <NoTechLogo className="h-12" />
-            <p className="text-xs text-slate-400 max-w-sm leading-relaxed">
+            <NoTechLogo className="h-12" variant="logo" light={!isDark} />
+            <p className="text-xs text-slate-600 dark:text-slate-400 max-w-sm leading-relaxed">
               No-Tech HVAC is redefining climate infrastructure with hot-swappable 4-bay modular systems, zero-loss refrigerant disconnects, and continuous RFID validation.
             </p>
-            <div className="flex items-center gap-3 pt-2 text-xs text-slate-400">
+            <div className="flex items-center gap-3 pt-2 text-xs text-slate-500 dark:text-slate-400">
               <span className="flex items-center gap-1">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#A4A77E]" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#7E8056] dark:text-[#A4A77E]" />
                 Patent Pending
               </span>
               <span className="flex items-center gap-1">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#A4A77E]" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#7E8056] dark:text-[#A4A77E]" />
                 ISO-Compliant
               </span>
               <span className="flex items-center gap-1">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#A4A77E]" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#7E8056] dark:text-[#A4A77E]" />
                 EPA 608 Certified
               </span>
             </div>
@@ -60,60 +62,60 @@ export default function Footer() {
 
           {/* Customer Portals */}
           <div className="space-y-3">
-            <h5 className="text-xs font-bold uppercase tracking-widest text-[#C2B59B]">
+            <h5 className="text-xs font-bold uppercase tracking-widest text-[#7E8056] dark:text-[#C2B59B]">
               Buyers & Homeowners
             </h5>
             <ul className="space-y-2 text-xs">
               <li>
-                <Link to="/buyers" className="hover:text-[#A4A77E] transition-colors">Buyers Portal</Link>
+                <Link to="/buyers" className="hover:text-black dark:hover:text-[#A4A77E] transition-colors">Buyers Portal</Link>
               </li>
               <li>
-                <Link to="/buyers#customizer" className="hover:text-[#A4A77E] transition-colors">System Customizer</Link>
+                <Link to="/buyers#customizer" className="hover:text-black dark:hover:text-[#A4A77E] transition-colors">System Customizer</Link>
               </li>
               <li>
-                <Link to="/reservations" className="hover:text-[#A4A77E] transition-colors">Reservations & Scheduling</Link>
+                <Link to="/reservations" className="hover:text-black dark:hover:text-[#A4A77E] transition-colors">Reservations & Scheduling</Link>
               </li>
               <li>
-                <Link to="/manage-contractor" className="hover:text-[#A4A77E] transition-colors">Manage My Contractor</Link>
+                <Link to="/manage-contractor" className="hover:text-black dark:hover:text-[#A4A77E] transition-colors">Manage My Contractor</Link>
               </li>
               <li>
-                <Link to="/help" className="hover:text-[#A4A77E] transition-colors">AI Support & FAQs</Link>
+                <Link to="/help" className="hover:text-black dark:hover:text-[#A4A77E] transition-colors">AI Support & FAQs</Link>
               </li>
             </ul>
           </div>
 
           {/* Contractors & Compliance */}
           <div className="space-y-3">
-            <h5 className="text-xs font-bold uppercase tracking-widest text-[#A4A77E]">
+            <h5 className="text-xs font-bold uppercase tracking-widest text-[#7E8056] dark:text-[#A4A77E]">
               Contractor Hub
             </h5>
             <ul className="space-y-2 text-xs">
               <li>
-                <Link to="/contractor" className="hover:text-[#A4A77E] transition-colors">Contractor Onboarding</Link>
+                <Link to="/contractor" className="hover:text-black dark:hover:text-[#A4A77E] transition-colors">Contractor Onboarding</Link>
               </li>
               <li>
-                <Link to="/contractor#questionnaire" className="hover:text-[#A4A77E] transition-colors">10-Question Certification</Link>
+                <Link to="/contractor#questionnaire" className="hover:text-black dark:hover:text-[#A4A77E] transition-colors">10-Question Certification</Link>
               </li>
               <li>
-                <Link to="/contractor/schedule" className="hover:text-[#A4A77E] transition-colors">Scheduling Controls</Link>
+                <Link to="/contractor/schedule" className="hover:text-black dark:hover:text-[#A4A77E] transition-colors">Scheduling Controls</Link>
               </li>
               <li>
-                <Link to="/contractor/rfid" className="hover:text-[#A4A77E] transition-colors">RFID Scanning Demo</Link>
+                <Link to="/contractor/rfid" className="hover:text-black dark:hover:text-[#A4A77E] transition-colors">RFID Scanning Demo</Link>
               </li>
               <li>
-                <Link to="/local-mechanical" className="hover:text-[#A4A77E] transition-colors">Local Mechanical Audits</Link>
+                <Link to="/local-mechanical" className="hover:text-black dark:hover:text-[#A4A77E] transition-colors">Local Mechanical Audits</Link>
               </li>
             </ul>
           </div>
 
           {/* Corporate & Investors */}
           <div className="space-y-3">
-            <h5 className="text-xs font-bold uppercase tracking-widest text-[#C2B59B]">
+            <h5 className="text-xs font-bold uppercase tracking-widest text-[#7E8056] dark:text-[#C2B59B]">
               Corporate
             </h5>
             <ul className="space-y-2 text-xs">
               <li>
-                <Link to="/investor" className="hover:text-[#A4A77E] transition-colors">Investor Hub</Link>
+                <Link to="/investor" className="hover:text-black dark:hover:text-[#A4A77E] transition-colors">Investor Hub</Link>
               </li>
               <li>
                 <span className="text-slate-500">no-techhvac/buyers.com</span>
@@ -133,8 +135,8 @@ export default function Footer() {
         </div>
 
         {/* Bottom copyright */}
-        <div className="mt-12 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">
-          <p>© 2022–2026 No-Tech Systems Inc. All rights reserved. Built strictly in accordance with PDF guidelines.</p>
+        <div className="mt-12 pt-6 border-t border-slate-300 dark:border-white/5 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">
+          <p>© 2023–2026 No-Tech Systems Inc. All rights reserved. Built strictly in accordance with PDF guidelines.</p>
           <div className="flex items-center space-x-6">
             <span>Primary Steel Gray (#6D6E71)</span>
             <span>Accent Military Green (#A4A77E)</span>

@@ -6,7 +6,7 @@ import AIChatbotModal from './AIChatbotModal';
 
 export default function Layout() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#121315] text-slate-100 selection:bg-[#A4A77E] selection:text-black">
+    <div className="min-h-screen flex flex-col bg-[#FAF7F2] dark:bg-[#121315] text-slate-900 dark:text-slate-100 selection:bg-[#A4A77E] selection:text-black transition-colors duration-200">
       <Navbar />
       <main className="flex-1">
         <Outlet />

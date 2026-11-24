@@ -104,41 +104,40 @@ export default function LocalMechanicalPage() {
     : applications.filter(a => a.status === statusFilter);
 
   return (
-    <div className="min-h-screen bg-[#121315] text-slate-100 py-8 lg:py-12">
+    <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#121315] text-slate-900 dark:text-slate-100 py-8 lg:py-12 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         {/* ===================== HERO BANNER ===================== */}
-        <div className="rounded-2xl bg-gradient-to-r from-[#1B1D20] via-[#22252A] to-[#1B1D20] border border-[#A4A77E]/30 p-6 sm:p-8 shadow-xl relative overflow-hidden">
+        <div className="rounded-2xl bg-gradient-to-r from-[#F0ECE1] via-[#F7F4EC] to-[#F0ECE1] dark:from-[#1B1D20] dark:via-[#22252A] dark:to-[#1B1D20] border border-slate-300 dark:border-[#A4A77E]/30 p-6 sm:p-8 shadow-md relative overflow-hidden">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative z-10">
             <div className="space-y-2 max-w-2xl">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#A4A77E]">
-                Official Quality & Code Enforcement Authority (PDF Section 11)
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#7E8056] dark:text-[#A4A77E]">
+                Official Quality & Code Enforcement Authority
               </span>
-              <h1 className="text-2xl sm:text-4xl font-bold font-serif text-white">
+              <h1 className="text-2xl sm:text-4xl font-bold font-serif text-slate-900 dark:text-white">
                 Local Mechanical
               </h1>
-              <p className="text-base sm:text-lg text-[#C2B59B] font-semibold">
+              <p className="text-base sm:text-lg text-[#8C7A58] dark:text-[#C2B59B] font-semibold">
                 Approval. Compliance. Quality.
               </p>
-              <p className="text-xs sm:text-sm text-slate-300">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
                 Local Mechanical functions as the certification and quality enforcement hub for all mechanical contractors working with No-Tech HVAC, ensuring standardized service and regulatory compliance worldwide.
               </p>
             </div>
 
-            <div className="p-4 rounded-2xl bg-black/60 border border-[#C2B59B]/40 flex items-center gap-4 flex-shrink-0">
-              <LocalMechanicalLogo className="h-14" />
-              <div>
-                <span className="text-[10px] text-slate-400 uppercase tracking-widest block">Audit Status</span>
-                <span className="text-xs font-bold text-emerald-400 flex items-center gap-1">
-                  <CheckCircle2 className="w-4 h-4" /> 100% Validated
-                </span>
-                <span className="text-[10px] text-slate-400 block mt-0.5">ISO 9001 & EPA 608</span>
+            <div className="flex-shrink-0">
+              <div className="w-24 sm:w-28 h-24 sm:h-28 rounded-2xl overflow-hidden border border-slate-200 dark:border-white/10 shadow-md bg-white dark:bg-black/40 flex items-center justify-center p-2">
+                <img
+                  src="/images/slices/localmech-shield.jpg"
+                  alt="Local Mechanical Quality Shield"
+                  className="w-full h-full object-contain"
+                />
               </div>
             </div>
           </div>
 
           {/* Navigation Sub-Tabs */}
-          <div className="mt-8 pt-6 border-t border-white/10 flex flex-wrap gap-2 text-xs">
+          <div className="mt-8 pt-6 border-t border-slate-200 dark:border-white/10 flex flex-wrap gap-2 text-xs">
             {[
               { id: 'dashboard', label: 'Approval Dashboard' },
               { id: 'compliance', label: 'Installation Compliance & RFID Logs' },
@@ -149,8 +148,8 @@ export default function LocalMechanicalPage() {
                 onClick={() => setActiveTab(tab.id)}
                 className={`px-4 py-2 rounded-xl font-bold transition-all ${
                   activeTab === tab.id
-                    ? 'bg-[#A4A77E] text-black shadow-md'
-                    : 'bg-white/5 hover:bg-white/10 text-slate-300'
+                    ? 'bg-[#7E8056] text-white shadow-md'
+                    : 'bg-white/80 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-transparent'
                 }`}
               >
                 {tab.label}
@@ -169,31 +168,31 @@ export default function LocalMechanicalPage() {
                 onClick={() => setStatusFilter('pending')}
                 className={`p-4 rounded-2xl border transition-all cursor-pointer ${
                   statusFilter === 'pending'
-                    ? 'bg-amber-500/20 border-amber-500 text-amber-300 ring-1 ring-amber-500'
-                    : 'bg-[#181A1D] border-white/10 text-slate-300 hover:border-white/20'
+                    ? 'bg-amber-100/70 border-amber-500 text-amber-950 dark:bg-amber-500/20 dark:border-amber-500 dark:text-amber-300 ring-1 ring-amber-500'
+                    : 'bg-white dark:bg-[#181A1D] border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-300 hover:border-slate-300'
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase tracking-wider text-amber-400">Pending</span>
-                  <Clock className="w-4 h-4 text-amber-400" />
+                  <span className="text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400">Pending</span>
+                  <Clock className="w-4 h-4 text-amber-600 dark:text-amber-400" />
                 </div>
-                <div className="text-2xl sm:text-3xl font-bold font-serif text-white mt-2">12</div>
-                <span className="text-[11px] text-slate-400">Applications awaiting audit</span>
+                <div className="text-2xl sm:text-3xl font-bold font-serif text-slate-900 dark:text-white mt-2">12</div>
+                <span className="text-[11px] text-slate-500 dark:text-slate-400">Applications awaiting audit</span>
               </div>
 
               <div
                 onClick={() => setStatusFilter('approved')}
                 className={`p-4 rounded-2xl border transition-all cursor-pointer ${
                   statusFilter === 'approved'
-                    ? 'bg-emerald-500/20 border-emerald-500 text-emerald-300 ring-1 ring-emerald-500'
-                    : 'bg-[#181A1D] border-white/10 text-slate-300 hover:border-white/20'
+                    ? 'bg-emerald-100/70 border-emerald-500 text-emerald-950 dark:bg-emerald-500/20 dark:border-emerald-500 dark:text-emerald-300 ring-1 ring-emerald-500'
+                    : 'bg-white dark:bg-[#181A1D] border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-300 hover:border-slate-300'
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">Approved</span>
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  <span className="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">Approved</span>
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                 </div>
-                <div className="text-2xl sm:text-3xl font-bold font-serif text-white mt-2">128</div>
+                <div className="text-2xl sm:text-3xl font-bold font-serif text-slate-900 dark:text-white mt-2">128</div>
                 <span className="text-[11px] text-slate-400">Certified active contractors</span>
               </div>
 

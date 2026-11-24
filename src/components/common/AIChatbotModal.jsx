@@ -7,6 +7,7 @@ import {
   Send,
   Sparkles,
   ArrowRight,
+  ArrowUp,
   HelpCircle,
   Wrench,
   CheckCircle2,
@@ -99,31 +100,35 @@ export default function AIChatbotModal() {
 
   return (
     <>
-      {/* Floating Launcher Pill Button (Bottom Right) */}
+      {/* Floating Launcher Pill & Scroll to Top Buttons matching reference image */}
       {!isOpen && (
-        <button
-          onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-4 py-3 rounded-full bg-[#181A1D] hover:bg-[#22252A] text-white border-2 border-[#A4A77E] shadow-2xl transition-all duration-300 hover:scale-105 group"
-          aria-label="Open AI Assistant"
-        >
-          <div className="relative">
-            <div className="w-8 h-8 rounded-full bg-[#A4A77E] text-black flex items-center justify-center font-bold shadow-md">
-              <Bot className="w-5 h-5 text-black animate-pulse" />
+        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3">
+          {/* White Need Help Pill Button */}
+          <button
+            onClick={() => setIsOpen(true)}
+            className="flex items-center gap-3 px-4 py-2.5 rounded-full bg-white text-slate-900 border border-slate-200/80 shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-black/30 group"
+            aria-label="Open AI Assistant"
+          >
+            <div className="text-left hidden sm:block">
+              <div className="text-xs font-bold text-slate-900">Need Help?</div>
+              <div className="text-[10px] text-slate-500 font-medium">Chat with our AI Assistant</div>
             </div>
-            <span className="absolute -top-1 -right-1 flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C2B59B] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-[#C2B59B]"></span>
-            </span>
-          </div>
+            <div className="relative w-7 h-7 rounded-full bg-[#FAF7F2] border border-slate-300 flex items-center justify-center flex-shrink-0">
+              <Bot className="w-4 h-4 text-[#7E8056]" />
+              <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-500"></span>
+            </div>
+          </button>
 
-          <div className="text-left hidden sm:block">
-            <div className="text-xs font-bold text-white flex items-center gap-1.5">
-              <span>Need Help?</span>
-              <span className="px-1.5 py-0.2 rounded bg-[#A4A77E]/20 text-[#A4A77E] text-[10px]">AI</span>
-            </div>
-            <p className="text-[11px] text-[#C2B59B]">Chat with our AI Assistant</p>
-          </div>
-        </button>
+          {/* Scroll to Top Circle Button matching reference image */}
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#7E8056] hover:bg-[#6e7049] text-white flex items-center justify-center shadow-xl transition-transform hover:scale-110 flex-shrink-0"
+            aria-label="Scroll to top"
+            title="Scroll to top"
+          >
+            <ArrowUp className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+          </button>
+        </div>
       )}
 
       {/* Chat Window Dialog */}
