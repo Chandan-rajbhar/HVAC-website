@@ -1,19 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ShieldCheck, Phone, Mail, MapPin, ExternalLink, ArrowRight, CheckCircle2 } from 'lucide-react';
-import NoTechLogo from './NoTechLogo';
+import LocalIndustriesLogo from './LocalIndustriesLogo';
 import LocalMechanicalLogo from './LocalMechanicalLogo';
 import { useTheme } from '../../context/ThemeContext';
 
 export default function Footer() {
   const { isDark } = useTheme();
   return (
-    <footer className="w-full bg-[#EDE7DD] dark:bg-[#0F1012] border-t border-slate-300 dark:border-white/10 text-slate-700 dark:text-slate-300 transition-colors duration-200">
+    <footer className="w-full bg-gradient-to-r from-[#F4F1EA] via-[#F8F6F0] to-[#F4F1EA] dark:from-[#1B1D20] dark:via-[#22252A] dark:to-[#1B1D20] border-t border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 transition-colors duration-200">
       {/* Top Banner with Local Mechanical Endorsement */}
-      <div className="border-b border-slate-300 dark:border-white/10 bg-[#E4DDCF] dark:bg-[#16181B] py-6 px-4 sm:px-6 lg:px-8">
+      <div className="border-b border-slate-200 dark:border-white/10 bg-black/[0.02] dark:bg-black/30 py-6 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-4">
-            <LocalMechanicalLogo className="h-10" />
+            <LocalMechanicalLogo className="h-10" light={!isDark} />
             <div>
               <h4 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">
                 Approved by Local Mechanical
@@ -40,7 +40,7 @@ export default function Footer() {
 
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
-            <NoTechLogo className="h-12" variant="logo" light={!isDark} />
+            <LocalIndustriesLogo className="h-12 sm:h-14" isDark={isDark} />
             <p className="text-xs text-slate-600 dark:text-slate-400 max-w-sm leading-relaxed">
               No-Tech HVAC is redefining climate infrastructure with hot-swappable 4-bay modular systems, zero-loss refrigerant disconnects, and continuous RFID validation.
             </p>
@@ -135,7 +135,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom copyright */}
-        <div className="mt-12 pt-6 border-t border-slate-300 dark:border-white/5 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">
+        <div className="mt-12 pt-6 border-t border-slate-200 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">
           <p>© 2023–2026 No-Tech Systems Inc. All rights reserved. Built strictly in accordance with PDF guidelines.</p>
           <div className="flex items-center space-x-6">
             <span>Primary Steel Gray (#6D6E71)</span>

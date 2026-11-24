@@ -4,7 +4,7 @@ import { Home, ArrowLeft } from 'lucide-react';
 
 export default function NotFoundPage() {
   return (
-    <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#16181B] text-slate-900 dark:text-slate-100 flex flex-col items-center justify-center p-6 text-center font-sans transition-colors duration-200">
+    <div className="min-h-screen bg-white dark:bg-[#16181B] text-slate-900 dark:text-slate-100 flex flex-col items-center justify-center p-6 text-center font-sans transition-colors duration-200">
       <div className="max-w-md w-full space-y-6">
         
         {/* Exact 404 Headline from Reference Screenshot */}

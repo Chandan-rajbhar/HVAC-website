@@ -16,8 +16,7 @@ import {
   ShieldCheck,
   Check,
   Eye,
-  Radio,
-  ArrowRight
+  Radio
 } from 'lucide-react';
 import LocalMechanicalLogo from '../components/common/LocalMechanicalLogo';
 import { CONTRACTOR_QUESTIONNAIRE } from '../data/mockData';
@@ -81,61 +80,33 @@ export default function ContractorOnboardingPage() {
   const isApproved = formSubmitted && videoWatched && quizSubmitted && quizScore >= 8;
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#121315] text-slate-900 dark:text-slate-100 transition-colors duration-200">
-      
-      {/* ===================== HERO SECTION ===================== */}
-      <section className="relative w-full bg-[#0B0C0E] text-white border-b border-white/10 overflow-hidden">
-        <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            
-            {/* Left Column: Text & CTA */}
-            <div className="lg:col-span-6 space-y-4 sm:space-y-5">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[11px] font-semibold text-slate-300 tracking-wider">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#7E8056]" />
-                <span>Contractor Onboarding</span>
-              </div>
-
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold font-serif text-white tracking-tight leading-tight drop-shadow-sm">
+    <div className="min-h-screen bg-white dark:bg-[#121315] text-slate-900 dark:text-slate-100 py-8 lg:py-12 transition-colors duration-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        
+        {/* ===================== HERO BANNER ===================== */}
+        <div className="rounded-2xl bg-gradient-to-r from-[#F4F1EA] via-[#F8F6F0] to-[#F4F1EA] dark:from-[#1B1D20] dark:via-[#22252A] dark:to-[#1B1D20] border border-slate-200 dark:border-[#A4A77E]/30 p-6 sm:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.02)] dark:shadow-xl relative overflow-hidden">
+          <div className="relative z-10">
+            <div className="max-w-2xl space-y-2.5">
+              <h1 className="text-2xl sm:text-4xl font-bold font-serif text-slate-900 dark:text-white tracking-tight">
                 Contractor Onboarding
               </h1>
-
-              <p className="text-lg sm:text-xl font-bold text-[#E8DEC8] dark:text-[#C2B59B] tracking-tight">
-                Join Our Trusted Network
+              <p className="text-base sm:text-lg text-[#8C7A58] dark:text-[#C2B59B] font-semibold">
+                Join Our Trusted Network.
               </p>
-
-              <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-xl">
-                Complete your certification and training to become an approved contractor.
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                Complete your certification and training to become an approved contractor certified by Local Mechanical.
               </p>
-
-              <div className="pt-2 flex flex-wrap items-center gap-3">
+              <div className="pt-2">
                 <a
                   href="#registration-form"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#7E8056] hover:bg-[#6e7049] active:scale-95 text-white font-semibold text-sm transition-all shadow-lg hover:shadow-xl hover:gap-3 cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#7E8056] hover:bg-[#6e7049] text-white font-semibold text-xs transition-all shadow-md"
                 >
-                  <span>Start Application</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <span>Start Application →</span>
                 </a>
               </div>
             </div>
-
-            {/* Right Column: Visual Showcase (Framed with equal right margin aligned to Header) */}
-            <div className="lg:col-span-6">
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/15 bg-black/60 aspect-[16/10] sm:aspect-[16/9] group">
-                <img
-                  src="/images/contractor-hero-tech.jpg"
-                  alt="Contractor Technician with No-Tech Systems uniform"
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-              </div>
-            </div>
-
           </div>
         </div>
-      </section>
-
-      {/* Main Page Content Body with matching max-w-[1480px] container */}
-      <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8">
 
         {/* Global Onboarding Approval Status Banner */}
         {isApproved ? (
@@ -176,14 +147,14 @@ export default function ContractorOnboardingPage() {
             </div>
           </div>
         ) : (
-          <div className="p-4 rounded-xl bg-[#1C1E22] border border-white/10 flex items-center justify-between text-xs text-slate-300">
+          <div className="p-4 rounded-xl bg-white dark:bg-[#1C1E22] border border-slate-200/90 dark:border-white/10 shadow-[0_2px_8px_rgba(0,0,0,0.03)] flex items-center justify-between text-xs text-slate-700 dark:text-slate-300">
             <div className="flex items-center gap-2.5">
               <LocalMechanicalLogo className="h-7" showText={false} />
               <span>
-                <strong>Approval Requirement:</strong> Complete documentation upload, view required video training, and score 80%+ on the 10-question technical questionnaire.
+                <strong className="text-slate-900 dark:text-white">Approval Requirement:</strong> Complete documentation upload, view required video training, and score 80%+ on the 10-question technical questionnaire.
               </span>
             </div>
-            <span className="text-[#C2B59B] font-semibold">
+            <span className="text-[#8C7A58] dark:text-[#C2B59B] font-semibold">
               Step {(!formSubmitted ? '1' : !videoWatched ? '2' : '3')} of 3
             </span>
           </div>
@@ -195,14 +166,14 @@ export default function ContractorOnboardingPage() {
           {/* Left Column: Registration Form & Uploads */}
           <div className="lg:col-span-7 space-y-6">
             
-            <div className="p-6 rounded-2xl bg-[#181A1D] border border-white/10 space-y-6 shadow-xl">
+            <div className="p-6 rounded-2xl bg-white dark:bg-[#181A1D] border border-slate-200/90 dark:border-white/[0.08] space-y-6 shadow-[0_2px_12px_rgba(0,0,0,0.03)] dark:shadow-xl">
               
-              <div className="flex items-center justify-between pb-3 border-b border-white/10">
+              <div className="flex items-center justify-between pb-3 border-b border-slate-200/80 dark:border-white/10">
                 <div className="flex items-center gap-2">
-                  <HardHat className="w-5 h-5 text-[#A4A77E]" />
-                  <h2 className="text-base font-bold text-white">Contractor Registration</h2>
+                  <HardHat className="w-5 h-5 text-[#7E8056] dark:text-[#A4A77E]" />
+                  <h2 className="text-base font-bold text-slate-900 dark:text-white">Contractor Registration</h2>
                 </div>
-                <span className="text-xs text-[#C2B59B]">Verification Form</span>
+                <span className="text-xs text-[#8C7A58] dark:text-[#C2B59B] font-medium">Verification Form</span>
               </div>
 
               <form onSubmit={handleFormSubmit} className="space-y-4">
@@ -210,115 +181,115 @@ export default function ContractorOnboardingPage() {
                 {/* Contact Details */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                   <div className="space-y-1">
-                    <label className="text-slate-300 font-semibold">Full Name *</label>
+                    <label className="text-slate-700 dark:text-slate-300 font-semibold">Full Name *</label>
                     <input
                       type="text"
                       required
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
-                      className="w-full bg-black/50 border border-white/15 focus:border-[#A4A77E] rounded-xl px-3.5 py-2.5 text-white outline-none"
+                      className="w-full bg-slate-50 dark:bg-black/50 border border-slate-300 dark:border-white/15 focus:border-[#7E8056] dark:focus:border-[#A4A77E] rounded-xl px-3.5 py-2.5 text-slate-900 dark:text-white outline-none transition-colors"
                     />
                   </div>
                   <div className="space-y-1">
-                    <label className="text-slate-300 font-semibold">Email Address *</label>
+                    <label className="text-slate-700 dark:text-slate-300 font-semibold">Email Address *</label>
                     <input
                       type="email"
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full bg-black/50 border border-white/15 focus:border-[#A4A77E] rounded-xl px-3.5 py-2.5 text-white outline-none"
+                      className="w-full bg-slate-50 dark:bg-black/50 border border-slate-300 dark:border-white/15 focus:border-[#7E8056] dark:focus:border-[#A4A77E] rounded-xl px-3.5 py-2.5 text-slate-900 dark:text-white outline-none transition-colors"
                     />
                   </div>
                   <div className="space-y-1">
-                    <label className="text-slate-300 font-semibold">Phone Number *</label>
+                    <label className="text-slate-700 dark:text-slate-300 font-semibold">Phone Number *</label>
                     <input
                       type="tel"
                       required
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      className="w-full bg-black/50 border border-white/15 focus:border-[#A4A77E] rounded-xl px-3.5 py-2.5 text-white outline-none"
+                      className="w-full bg-slate-50 dark:bg-black/50 border border-slate-300 dark:border-white/15 focus:border-[#7E8056] dark:focus:border-[#A4A77E] rounded-xl px-3.5 py-2.5 text-slate-900 dark:text-white outline-none transition-colors"
                     />
                   </div>
                   <div className="space-y-1">
-                    <label className="text-slate-300 font-semibold">Business Address *</label>
+                    <label className="text-slate-700 dark:text-slate-300 font-semibold">Business Address *</label>
                     <input
                       type="text"
                       required
                       value={businessAddress}
                       onChange={(e) => setBusinessAddress(e.target.value)}
-                      className="w-full bg-black/50 border border-white/15 focus:border-[#A4A77E] rounded-xl px-3.5 py-2.5 text-white outline-none"
+                      className="w-full bg-slate-50 dark:bg-black/50 border border-slate-300 dark:border-white/15 focus:border-[#7E8056] dark:focus:border-[#A4A77E] rounded-xl px-3.5 py-2.5 text-slate-900 dark:text-white outline-none transition-colors"
                     />
                   </div>
                   <div className="sm:col-span-2 space-y-1">
-                    <label className="text-slate-300 font-semibold">Shipping Address (for modular bay deliveries) *</label>
+                    <label className="text-slate-700 dark:text-slate-300 font-semibold">Shipping Address (for modular bay deliveries) *</label>
                     <input
                       type="text"
                       required
                       value={shippingAddress}
                       onChange={(e) => setShippingAddress(e.target.value)}
-                      className="w-full bg-black/50 border border-white/15 focus:border-[#A4A77E] rounded-xl px-3.5 py-2.5 text-white outline-none"
+                      className="w-full bg-slate-50 dark:bg-black/50 border border-slate-300 dark:border-white/15 focus:border-[#7E8056] dark:focus:border-[#A4A77E] rounded-xl px-3.5 py-2.5 text-slate-900 dark:text-white outline-none transition-colors"
                     />
                   </div>
                 </div>
 
                 {/* Upload Required Documents Section */}
-                <div className="space-y-3 pt-3 border-t border-white/10">
+                <div className="space-y-3 pt-3 border-t border-slate-200/80 dark:border-white/10">
                   <div className="flex items-center justify-between">
-                    <label className="text-xs font-semibold uppercase tracking-wider text-slate-300">
+                    <label className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300">
                       Upload Required Documents (PDF Specification):
                     </label>
                   </div>
 
                   {/* 1. EPA Certification Upload */}
-                  <div className="p-3.5 rounded-xl bg-black/40 border border-white/5 flex items-center justify-between text-xs">
+                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200/80 dark:border-white/5 flex items-center justify-between text-xs">
                     <div className="flex items-center gap-2.5">
-                      <FileCheck className="w-4 h-4 text-[#A4A77E]" />
+                      <FileCheck className="w-4 h-4 text-[#7E8056] dark:text-[#A4A77E]" />
                       <div>
-                        <span className="font-bold text-white block">EPA Certification</span>
-                        <span className="text-[10px] text-slate-400 font-mono">{epaDoc}</span>
+                        <span className="font-bold text-slate-900 dark:text-white block">EPA Certification</span>
+                        <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{epaDoc}</span>
                       </div>
                     </div>
                     <button
                       type="button"
                       onClick={() => handleDocUpload('epa')}
-                      className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-slate-200 text-xs font-medium"
+                      className="px-3 py-1.5 rounded-lg bg-slate-200/80 dark:bg-white/10 hover:bg-slate-300 dark:hover:bg-white/20 text-slate-800 dark:text-slate-200 text-xs font-medium transition-colors"
                     >
                       {epaDoc ? 'Replace File' : 'Upload EPA'}
                     </button>
                   </div>
 
                   {/* 2. State Contractor License Upload */}
-                  <div className="p-3.5 rounded-xl bg-black/40 border border-white/5 flex items-center justify-between text-xs">
+                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200/80 dark:border-white/5 flex items-center justify-between text-xs">
                     <div className="flex items-center gap-2.5">
-                      <FileCheck className="w-4 h-4 text-[#C2B59B]" />
+                      <FileCheck className="w-4 h-4 text-[#8C7A58] dark:text-[#C2B59B]" />
                       <div>
-                        <span className="font-bold text-white block">State Contractor License</span>
-                        <span className="text-[10px] text-slate-400 font-mono">{licenseDoc}</span>
+                        <span className="font-bold text-slate-900 dark:text-white block">State Contractor License</span>
+                        <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{licenseDoc}</span>
                       </div>
                     </div>
                     <button
                       type="button"
                       onClick={() => handleDocUpload('license')}
-                      className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-slate-200 text-xs font-medium"
+                      className="px-3 py-1.5 rounded-lg bg-slate-200/80 dark:bg-white/10 hover:bg-slate-300 dark:hover:bg-white/20 text-slate-800 dark:text-slate-200 text-xs font-medium transition-colors"
                     >
                       {licenseDoc ? 'Replace File' : 'Upload License'}
                     </button>
                   </div>
 
                   {/* 3. Certificate of Insurance Upload (Local Mechanical must be listed) */}
-                  <div className="p-3.5 rounded-xl bg-black/40 border border-white/5 flex items-center justify-between text-xs">
+                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200/80 dark:border-white/5 flex items-center justify-between text-xs">
                     <div className="flex items-center gap-2.5">
-                      <FileCheck className="w-4 h-4 text-[#A4A77E]" />
+                      <FileCheck className="w-4 h-4 text-[#7E8056] dark:text-[#A4A77E]" />
                       <div>
-                        <span className="font-bold text-white block">Certificate of Insurance (COI)</span>
-                        <span className="text-[10px] text-[#A4A77E]">Local Mechanical listed as certificate holder *</span>
-                        <span className="text-[10px] text-slate-400 block font-mono">{insuranceDoc}</span>
+                        <span className="font-bold text-slate-900 dark:text-white block">Certificate of Insurance (COI)</span>
+                        <span className="text-[10px] text-[#7E8056] dark:text-[#A4A77E] font-medium">Local Mechanical listed as certificate holder *</span>
+                        <span className="text-[10px] text-slate-500 dark:text-slate-400 block font-mono">{insuranceDoc}</span>
                       </div>
                     </div>
                     <button
                       type="button"
                       onClick={() => handleDocUpload('insurance')}
-                      className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-slate-200 text-xs font-medium"
+                      className="px-3 py-1.5 rounded-lg bg-slate-200/80 dark:bg-white/10 hover:bg-slate-300 dark:hover:bg-white/20 text-slate-800 dark:text-slate-200 text-xs font-medium transition-colors"
                     >
                       {insuranceDoc ? 'Replace File' : 'Upload COI'}
                     </button>
@@ -327,12 +298,12 @@ export default function ContractorOnboardingPage() {
                   {/* Exact message and logo required by PDF Page 5 & Page 7:
                       "Submitting documentation to Local Mechanical for approval…"
                       Position Local Mechanical logo and name near upload boxes */}
-                  <div className="p-4 rounded-xl bg-black/60 border border-[#A4A77E]/40 flex items-center justify-between gap-4">
+                  <div className="p-4 rounded-xl bg-[#FAF7F2] dark:bg-black/60 border border-[#7E8056]/40 dark:border-[#A4A77E]/40 flex items-center justify-between gap-4">
                     <div className="space-y-1">
-                      <p className="text-xs text-slate-200 font-semibold italic">
+                      <p className="text-xs text-slate-900 dark:text-slate-200 font-semibold italic">
                         "Submitting documentation to Local Mechanical for approval…"
                       </p>
-                      <p className="text-[10px] text-slate-400">
+                      <p className="text-[10px] text-slate-600 dark:text-slate-400">
                         Uploaded credentials undergo automated verification against state licensing boards and EPA Section 608 universal databases.
                       </p>
                     </div>
@@ -343,7 +314,7 @@ export default function ContractorOnboardingPage() {
                 <div className="pt-2 flex justify-end">
                   <button
                     type="submit"
-                    className="flex items-center gap-2 px-6 py-3 rounded-xl bg-[#A4A77E] hover:bg-[#8e9167] text-black font-bold text-xs shadow-lg transition-all"
+                    className="flex items-center gap-2 px-6 py-3 rounded-xl bg-[#7E8056] hover:bg-[#6c6e49] dark:bg-[#A4A77E] dark:hover:bg-[#8e9167] text-white dark:text-black font-bold text-xs shadow-lg transition-all"
                   >
                     <span>{formSubmitted ? 'Documentation Submitted ✓' : 'Submit Application →'}</span>
                   </button>
@@ -358,15 +329,15 @@ export default function ContractorOnboardingPage() {
           <div className="lg:col-span-5 space-y-6">
             
             {/* Required Video Training Card */}
-            <div className="p-6 rounded-2xl bg-[#181A1D] border border-white/10 space-y-4 shadow-xl">
-              <div className="flex items-center justify-between pb-3 border-b border-white/10">
+            <div className="p-6 rounded-2xl bg-white dark:bg-[#181A1D] border border-slate-200/90 dark:border-white/[0.08] space-y-4 shadow-[0_2px_12px_rgba(0,0,0,0.03)] dark:shadow-xl">
+              <div className="flex items-center justify-between pb-3 border-b border-slate-200/80 dark:border-white/10">
                 <div className="flex items-center gap-2">
-                  <Play className="w-5 h-5 text-[#C2B59B]" />
-                  <h3 className="text-sm font-bold text-white uppercase tracking-wider">
+                  <Play className="w-5 h-5 text-[#8C7A58] dark:text-[#C2B59B]" />
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">
                     Video Training
                   </h3>
                 </div>
-                <span className="text-xs px-2 py-0.5 rounded bg-white/10 text-slate-300">
+                <span className="text-xs px-2 py-0.5 rounded bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 font-medium">
                   Required
                 </span>
               </div>
@@ -374,7 +345,7 @@ export default function ContractorOnboardingPage() {
               {/* Video Player Preview matching reference screenshot */}
               <div
                 onClick={() => setVideoModalOpen(true)}
-                className="relative aspect-video rounded-xl bg-black border border-white/15 overflow-hidden flex flex-col items-center justify-center p-6 text-center cursor-pointer group"
+                className="relative aspect-video rounded-xl bg-black border border-slate-200 dark:border-white/15 overflow-hidden flex flex-col items-center justify-center p-6 text-center cursor-pointer group"
               >
                 <img
                   src="/images/slices/contractor-video-thumb.jpg"
@@ -382,24 +353,24 @@ export default function ContractorOnboardingPage() {
                   className="absolute inset-0 w-full h-full object-cover object-center brightness-90 group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors" />
-                <div className="relative z-10 w-12 h-12 rounded-full bg-[#A4A77E] text-black flex items-center justify-center shadow-2xl transition-transform group-hover:scale-110">
-                  <Play className="w-5 h-5 fill-black ml-0.5" />
+                <div className="relative z-10 w-12 h-12 rounded-full bg-[#7E8056] dark:bg-[#A4A77E] text-white dark:text-black flex items-center justify-center shadow-2xl transition-transform group-hover:scale-110">
+                  <Play className="w-5 h-5 fill-white dark:fill-black ml-0.5" />
                 </div>
                 <span className="relative z-10 text-xs font-bold text-white mt-2 drop-shadow">
                   Installation & Servicing Protocol
                 </span>
               </div>
 
-              <div className="p-3 rounded-xl bg-black/40 border border-white/5 flex items-center justify-between text-xs">
-                <span className="text-slate-400">
+              <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200/80 dark:border-white/5 flex items-center justify-between text-xs">
+                <span className="text-slate-600 dark:text-slate-400">
                   Complete training before proceeding to questionnaire.
                 </span>
                 <button
                   onClick={() => setVideoWatched(true)}
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all ${
                     videoWatched
-                      ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
-                      : 'bg-[#A4A77E] text-black hover:bg-[#8e9167]'
+                      ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/40'
+                      : 'bg-[#7E8056] hover:bg-[#6c6e49] dark:bg-[#A4A77E] text-white dark:text-black dark:hover:bg-[#8e9167]'
                   }`}
                 >
                   <Check className="w-3.5 h-3.5" />
@@ -409,30 +380,30 @@ export default function ContractorOnboardingPage() {
             </div>
 
             {/* Installation Questionnaire Starter Card */}
-            <div className="p-6 rounded-2xl bg-[#181A1D] border border-white/10 space-y-4 shadow-xl">
-              <div className="flex items-center justify-between pb-3 border-b border-white/10">
+            <div className="p-6 rounded-2xl bg-white dark:bg-[#181A1D] border border-slate-200/90 dark:border-white/[0.08] space-y-4 shadow-[0_2px_12px_rgba(0,0,0,0.03)] dark:shadow-xl">
+              <div className="flex items-center justify-between pb-3 border-b border-slate-200/80 dark:border-white/10">
                 <div className="flex items-center gap-2">
-                  <Award className="w-5 h-5 text-[#A4A77E]" />
-                  <h3 className="text-sm font-bold text-white uppercase tracking-wider">
+                  <Award className="w-5 h-5 text-[#7E8056] dark:text-[#A4A77E]" />
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">
                     Installation Questionnaire
                   </h3>
                 </div>
-                <span className="text-xs px-2 py-0.5 rounded bg-[#A4A77E]/20 text-[#A4A77E] font-bold">
+                <span className="text-xs px-2 py-0.5 rounded bg-[#7E8056]/15 dark:bg-[#A4A77E]/20 text-[#6C6F4D] dark:text-[#A4A77E] font-bold">
                   10 Technical Questions
                 </span>
               </div>
 
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                 Covers structural sub-base requirements, 80ft line sizing, gas detector leak checks, male/female conductor inspection, and RFID app logging per the PDF.
               </p>
 
               {quizSubmitted ? (
                 <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 space-y-2 text-xs">
                   <div className="flex items-center justify-between">
-                    <span className="font-bold text-white">Your Score:</span>
-                    <span className="font-mono text-base font-bold text-emerald-400">{quizScore} / 10 ({quizScore * 10}%)</span>
+                    <span className="font-bold text-slate-900 dark:text-white">Your Score:</span>
+                    <span className="font-mono text-base font-bold text-emerald-600 dark:text-emerald-400">{quizScore} / 10 ({quizScore * 10}%)</span>
                   </div>
-                  <p className="text-slate-300">
+                  <p className="text-slate-600 dark:text-slate-300">
                     {quizScore >= 8 ? 'Congratulations! You passed the Local Mechanical technical exam.' : 'Score below 80%. Review PDF materials and retake.'}
                   </p>
                   <button
@@ -440,13 +411,13 @@ export default function ContractorOnboardingPage() {
                       setQuizSubmitted(false);
                       setQuizModalOpen(true);
                     }}
-                    className="mt-2 text-xs text-[#A4A77E] underline font-semibold block"
+                    className="mt-2 text-xs text-[#7E8056] dark:text-[#A4A77E] underline font-semibold block"
                   >
                     Review Answers & Explanations
                   </button>
                 </div>
               ) : (
-                <div className="p-3.5 rounded-xl bg-black/40 border border-white/5 text-xs text-slate-400">
+                <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200/80 dark:border-white/5 text-xs text-slate-600 dark:text-slate-400">
                   Passing score: 8/10 (80%). Unlimited practice attempts.
                 </div>
               )}
@@ -454,7 +425,7 @@ export default function ContractorOnboardingPage() {
               <div className="pt-2">
                 <button
                   onClick={() => setQuizModalOpen(true)}
-                  className="w-full py-3 rounded-xl bg-[#A4A77E] hover:bg-[#8e9167] text-black font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2"
+                  className="w-full py-3 rounded-xl bg-[#7E8056] hover:bg-[#6c6e49] dark:bg-[#A4A77E] dark:hover:bg-[#8e9167] text-white dark:text-black font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2"
                 >
                   <Award className="w-4 h-4" />
                   <span>{quizSubmitted ? 'Retake Quiz' : 'Start Quiz →'}</span>
@@ -463,17 +434,17 @@ export default function ContractorOnboardingPage() {
             </div>
 
             {/* Approved by Local Mechanical Badge Bar */}
-            <div className="p-4 rounded-2xl bg-[#141518] border border-white/10 flex items-center justify-between">
+            <div className="p-4 rounded-2xl bg-white dark:bg-[#141518] border border-slate-200/90 dark:border-white/10 shadow-[0_2px_8px_rgba(0,0,0,0.03)] flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <LocalMechanicalLogo className="h-9" showText={false} />
                 <div>
-                  <span className="text-xs font-bold text-white block">Approved by Local Mechanical</span>
-                  <span className="text-[10px] text-[#A4A77E]">Direct Regulatory Oversight</span>
+                  <span className="text-xs font-bold text-slate-900 dark:text-white block">Approved by Local Mechanical</span>
+                  <span className="text-[10px] text-[#7E8056] dark:text-[#A4A77E] font-medium">Direct Regulatory Oversight</span>
                 </div>
               </div>
               <Link
                 to="/local-mechanical"
-                className="text-[11px] text-[#C2B59B] hover:text-white underline"
+                className="text-[11px] text-[#8C7A58] dark:text-[#C2B59B] hover:text-[#6C6F4D] dark:hover:text-white underline font-medium"
               >
                 Learn More
               </Link>

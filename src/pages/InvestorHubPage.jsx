@@ -17,67 +17,40 @@ import LocalMechanicalLogo from '../components/common/LocalMechanicalLogo';
 
 export default function InvestorHubPage() {
   return (
-    <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#16181B] text-slate-800 dark:text-slate-100 transition-colors duration-200">
-
-      {/* ===================== HERO SECTION ===================== */}
-      <section className="relative w-full bg-[#0B0C0E] text-white border-b border-white/10 overflow-hidden">
-        <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            
-            {/* Left Column: Text & CTA */}
-            <div className="lg:col-span-6 space-y-4 sm:space-y-5">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[11px] font-semibold text-slate-300 tracking-wider">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#7E8056]" />
-                <span>Investor Hub</span>
-              </div>
-
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold font-serif text-white tracking-tight leading-tight drop-shadow-sm">
+    <div className="min-h-screen bg-white dark:bg-[#16181B] text-slate-800 dark:text-slate-100 py-8 lg:py-12 transition-colors duration-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+        
+        {/* ===================== HERO BANNER ===================== */}
+        <div className="rounded-2xl bg-gradient-to-r from-[#F4F1EA] via-[#F8F6F0] to-[#F4F1EA] dark:from-[#1B1D20] dark:via-[#22252A] dark:to-[#1B1D20] border border-slate-200 dark:border-[#A4A77E]/30 p-6 sm:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.02)] dark:shadow-xl relative overflow-hidden">
+          <div className="relative z-10">
+            <div className="max-w-2xl space-y-2.5">
+              <h1 className="text-2xl sm:text-4xl font-bold font-serif text-slate-900 dark:text-white tracking-tight">
                 Investor Hub
               </h1>
-
-              <p className="text-lg sm:text-xl font-bold text-[#E8DEC8] dark:text-[#C2B59B] tracking-tight">
-                Invest in Innovation
+              <p className="text-base sm:text-lg text-[#8C7A58] dark:text-[#C2B59B] font-semibold">
+                Invest in Innovation.
               </p>
-
-              <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-xl">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                 Discover the opportunity behind No-Tech HVAC's modular solution. We are redefining the global heating, ventilation, and air-conditioning industry through hot-swappable compartmental engineering.
               </p>
 
               <div className="pt-2 flex flex-wrap gap-3">
                 <a
                   href="#why-invest"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#7E8056] hover:bg-[#6e7049] active:scale-95 text-white font-semibold text-sm transition-all shadow-lg hover:shadow-xl hover:gap-3 cursor-pointer"
+                  className="px-5 py-2.5 rounded-full bg-[#7E8056] hover:bg-[#6e7049] text-white font-bold text-xs shadow-lg transition-all"
                 >
-                  <span>Learn More</span>
-                  <ArrowRight className="w-4 h-4" />
+                  Learn More →
                 </a>
                 <Link
                   to="/buyers"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm font-semibold border border-white/20 transition-all cursor-pointer"
+                  className="px-5 py-2.5 rounded-full bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/15 text-slate-800 dark:text-slate-200 text-xs font-semibold border border-slate-300 dark:border-white/15"
                 >
-                  <span>View Consumer Demand</span>
+                  View Consumer Demand
                 </Link>
               </div>
             </div>
-
-            {/* Right Column: Visual Showcase (Framed with equal right margin aligned to Header) */}
-            <div className="lg:col-span-6">
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/15 bg-black/60 aspect-[16/10] sm:aspect-[16/9] group">
-                <img
-                  src="/images/investor-hero-building.jpg"
-                  alt="Corporate Innovation Center at Sunset"
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-              </div>
-            </div>
-
           </div>
         </div>
-      </section>
-
-      {/* Main Page Content Body with matching max-w-[1480px] container */}
-      <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-10">
 
         {/* ===================== WHY INVEST? CARDS ===================== */}
         {/* Exactly matches "Why Invest?" section in reference screenshot */}
@@ -92,7 +65,7 @@ export default function InvestorHubPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-
+            
             {/* Pillar 1: Innovative Technology */}
             <div className="p-6 rounded-2xl bg-white dark:bg-[#1E2024] border border-slate-200 dark:border-white/10 space-y-3 shadow-md hover:border-[#7E8056]/50 transition-all">
               <div className="w-12 h-12 rounded-xl bg-[#7E8056]/20 text-[#7E8056] flex items-center justify-center">

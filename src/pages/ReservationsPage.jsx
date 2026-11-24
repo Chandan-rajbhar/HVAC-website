@@ -53,61 +53,33 @@ export default function ReservationsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#121315] text-slate-900 dark:text-slate-100 transition-colors duration-200">
-      
-      {/* ===================== HERO SECTION ===================== */}
-      <section className="relative w-full bg-[#0B0C0E] text-white border-b border-white/10 overflow-hidden">
-        <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            
-            {/* Left Column: Text & CTA */}
-            <div className="lg:col-span-6 space-y-4 sm:space-y-5">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[11px] font-semibold text-slate-300 tracking-wider">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#7E8056]" />
-                <span>Reservations</span>
-              </div>
-
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold font-serif text-white tracking-tight leading-tight drop-shadow-sm">
+    <div className="min-h-screen bg-white dark:bg-[#121315] text-slate-900 dark:text-slate-100 py-8 lg:py-12 transition-colors duration-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        
+        {/* ===================== HERO BANNER ===================== */}
+        <div className="rounded-2xl bg-gradient-to-r from-[#F4F1EA] via-[#F8F6F0] to-[#F4F1EA] dark:from-[#1B1D20] dark:via-[#22252A] dark:to-[#1B1D20] border border-slate-200 dark:border-[#A4A77E]/30 p-6 sm:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.02)] dark:shadow-xl relative overflow-hidden">
+          <div className="relative z-10">
+            <div className="max-w-2xl space-y-2.5">
+              <h1 className="text-2xl sm:text-4xl font-bold font-serif text-slate-900 dark:text-white tracking-tight">
                 Reservations & Scheduling
               </h1>
-
-              <p className="text-lg sm:text-xl font-bold text-[#E8DEC8] dark:text-[#C2B59B] tracking-tight">
+              <p className="text-base sm:text-lg text-[#8C7A58] dark:text-[#C2B59B] font-semibold">
                 Choose Your Date. We'll Handle the Rest.
               </p>
-
-              <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-xl">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                 Schedule your installation with ease and track your reservation status across our certified Local Mechanical contractor network.
               </p>
-
-              <div className="pt-2 flex flex-wrap items-center gap-3">
+              <div className="pt-2">
                 <a
                   href="#schedule-form"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#7E8056] hover:bg-[#6e7049] active:scale-95 text-white font-semibold text-sm transition-all shadow-lg hover:shadow-xl hover:gap-3 cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#7E8056] hover:bg-[#6e7049] text-white font-semibold text-xs transition-all shadow-md"
                 >
-                  <span>Schedule Now</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <span>Schedule Now →</span>
                 </a>
               </div>
             </div>
-
-            {/* Right Column: Visual Showcase (Framed with equal right margin aligned to Header) */}
-            <div className="lg:col-span-6">
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/15 bg-black/60 aspect-[16/10] sm:aspect-[16/9] group">
-                <img
-                  src="/images/reservations-hero-calendar.jpg"
-                  alt="Installation Calendar with Date Circled"
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-              </div>
-            </div>
-
           </div>
         </div>
-      </section>
-
-      {/* Main Page Content Body with matching max-w-[1480px] container */}
-      <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8">
 
         {/* Confirmation Banner if confirmed */}
         {reservationConfirmed && (

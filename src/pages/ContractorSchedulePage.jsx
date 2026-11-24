@@ -84,26 +84,27 @@ export default function ContractorSchedulePage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         {/* Header */}
-        <div className="rounded-2xl bg-gradient-to-r from-[#1B1D20] via-[#22252A] to-[#1B1D20] border border-white/10 p-6 sm:p-8 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          <div className="space-y-1">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-[#A4A77E]">
-              Contractor Scheduling Controls (PDF Section 8)
-            </span>
-            <h1 className="text-2xl sm:text-3xl font-bold font-serif text-white">
+        <div className="rounded-2xl bg-gradient-to-r from-[#F4F1EA] via-[#F8F6F0] to-[#F4F1EA] dark:from-[#1B1D20] dark:via-[#22252A] dark:to-[#1B1D20] border border-slate-200 dark:border-[#A4A77E]/30 p-6 sm:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.02)] dark:shadow-xl relative overflow-hidden">
+          <div className="max-w-2xl relative z-10 space-y-2.5">
+            <h1 className="text-2xl sm:text-4xl font-bold font-serif text-slate-900 dark:text-white tracking-tight">
               Installation & Dispatch Management
             </h1>
-            <p className="text-xs sm:text-sm text-slate-300">
+            <p className="text-base sm:text-lg text-[#8C7A58] dark:text-[#C2B59B] font-semibold">
+              Dispatch. Scheduling. Verification.
+            </p>
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
               Manage assigned installations, view upcoming slots, and handle in-app rescheduling workflows.
             </p>
+            <div className="pt-2">
+              <Link
+                to="/contractor/rfid"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7E8056] hover:bg-[#6e7049] text-white font-semibold text-xs shadow-md transition-colors"
+              >
+                <Radio className="w-4 h-4 text-white" />
+                <span>Open RFID Scanner Demo →</span>
+              </Link>
+            </div>
           </div>
-
-          <Link
-            to="/contractor/rfid"
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#A4A77E] hover:bg-[#8e9167] text-black font-bold text-xs shadow-md"
-          >
-            <Radio className="w-4 h-4 text-black" />
-            <span>Open RFID Scanner Demo →</span>
-          </Link>
         </div>
 
         {/* Rescheduling Risk Warning Banner per PDF Page 5:

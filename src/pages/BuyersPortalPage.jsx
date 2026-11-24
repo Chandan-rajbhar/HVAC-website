@@ -106,107 +106,64 @@ export default function BuyersPortalPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#121315] text-slate-900 dark:text-slate-100 transition-colors duration-200">
-      
-      {/* ===================== HERO SECTION ===================== */}
-      <section className="relative w-full bg-[#0B0C0E] text-white border-b border-white/10 overflow-hidden">
-        <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            
-            {/* Left Column: Text & CTA */}
-            <div className="lg:col-span-6 space-y-4 sm:space-y-5">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[11px] font-semibold text-slate-300 tracking-wider">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#7E8056]" />
-                <span>no-techhvac/buyers.com</span>
-              </div>
+    <div className="min-h-screen bg-white dark:bg-[#121315] text-slate-900 dark:text-slate-100 py-8 lg:py-12 transition-colors duration-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold font-serif text-white tracking-tight leading-tight drop-shadow-sm">
+        {/* ===================== HERO / HEADER BANNER ===================== */}
+        <div className="rounded-2xl bg-gradient-to-r from-[#F4F1EA] via-[#F8F6F0] to-[#F4F1EA] dark:from-[#1B1D20] dark:via-[#22252A] dark:to-[#1B1D20] border border-slate-200 dark:border-[#A4A77E]/30 p-6 sm:p-8 mb-8 shadow-[0_2px_12px_rgba(0,0,0,0.02)] dark:shadow-xl relative overflow-hidden">
+          <div className="relative z-10">
+            <div className="max-w-2xl space-y-2.5">
+              <h1 className="text-2xl sm:text-4xl font-bold font-serif text-slate-900 dark:text-white tracking-tight">
                 Buyers Portal
               </h1>
-
-              <p className="text-lg sm:text-xl font-bold text-[#E8DEC8] dark:text-[#C2B59B] tracking-tight">
+              <p className="text-base sm:text-lg text-[#8C7A58] dark:text-[#C2B59B] font-semibold">
                 Select. Customize. Reserve.
               </p>
-
-              <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-xl">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                 Configure your No-Tech HVAC system with real-time compatibility and pricing.
               </p>
-
               <div className="pt-2">
                 <button
-                  onClick={() => {
-                    setCurrentStep(1);
-                    const el = document.getElementById('buyers-selection-area');
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#7E8056] hover:bg-[#6e7049] active:scale-95 text-white font-semibold text-sm transition-all shadow-lg hover:shadow-xl hover:gap-3 cursor-pointer"
+                  onClick={() => setCurrentStep(1)}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#7E8056] hover:bg-[#6e7049] text-white font-semibold text-xs transition-all shadow-md"
                 >
-                  <span>Start Selection</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <span>Start Selection →</span>
                 </button>
               </div>
             </div>
-
-            {/* Right Column: Visual Showcase (Framed with equal right margin aligned to Header) */}
-            <div className="lg:col-span-6">
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/15 bg-black/60 aspect-[16/10] sm:aspect-[16/9] group">
-                <img
-                  src="/images/buyers-hero-unit.jpg"
-                  alt="No-Tech Modular HVAC Outdoor Unit"
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-              </div>
-            </div>
-
           </div>
-        </div>
 
-        {/* Stepper Progress Badges with Glassmorphism Footer Bar */}
-        <div className="border-t border-white/10 bg-black/55 backdrop-blur-md">
-          <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 text-xs">
-              {[
-                { num: 1, title: '1. Customize System' },
-                { num: 2, title: '2. Check Compatibility' },
-                { num: 3, title: '3. Pay $200 Fee' },
-                { num: 4, title: '4. Get Confirmation' }
-              ].map((s) => (
-                <button
-                  key={s.num}
-                  onClick={() => currentStep > s.num && setCurrentStep(s.num)}
-                  disabled={currentStep < s.num}
-                  className={`flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl border transition-all text-left ${
-                    currentStep === s.num
-                      ? 'bg-[#7E8056] text-white font-bold border-[#7E8056] shadow-lg shadow-[#7E8056]/30'
-                      : currentStep > s.num
-                      ? 'bg-white/10 text-white border-white/20 hover:bg-white/15 cursor-pointer font-medium'
-                      : 'bg-white/5 text-slate-400 border-white/5 cursor-not-allowed opacity-75'
+          {/* Stepper Progress Badges */}
+          <div className="mt-6 pt-6 border-t border-slate-200 dark:border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+            {[
+              { num: 1, title: '1. Customize System' },
+              { num: 2, title: '2. Check Compatibility' },
+              { num: 3, title: '3. Pay $200 Fee' },
+              { num: 4, title: '4. Get Confirmation' }
+            ].map((s) => (
+              <div
+                key={s.num}
+                onClick={() => currentStep > s.num && setCurrentStep(s.num)}
+                className={`flex items-center gap-2 p-2.5 rounded-xl border transition-all cursor-pointer ${currentStep === s.num
+                  ? 'bg-[#7E8056] text-white font-bold border-[#7E8056] shadow-md'
+                  : currentStep > s.num
+                    ? 'bg-[#7E8056]/15 text-[#7E8056] dark:text-[#A4A77E] border-[#7E8056]/30 font-semibold'
+                    : 'bg-white/80 dark:bg-white/5 text-slate-500 dark:text-slate-400 border-slate-200 dark:border-white/5'
                   }`}
-                >
-                  <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold flex-shrink-0 ${
-                    currentStep === s.num
-                      ? 'bg-white text-slate-900'
-                      : currentStep > s.num
-                      ? 'bg-[#7E8056] text-white'
-                      : 'bg-white/10 text-slate-400'
+              >
+                <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold ${currentStep === s.num ? 'bg-white text-slate-900' : currentStep > s.num ? 'bg-[#7E8056] text-white' : 'bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-white'
                   }`}>
-                    {currentStep > s.num ? '✓' : s.num}
-                  </span>
-                  <span className="truncate">{s.title}</span>
-                </button>
-              ))}
-            </div>
+                  {currentStep > s.num ? '✓' : s.num}
+                </span>
+                <span className="truncate">{s.title}</span>
+              </div>
+            ))}
           </div>
         </div>
-      </section>
-
-      {/* Main Page Content Body with matching max-w-[1480px] container */}
-      <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
 
         {/* ===================== STEP 1: SYSTEM SELECTION & CUSTOMIZATION ===================== */}
         {currentStep === 1 && (
-          <div id="buyers-selection-area" className="space-y-6">
+          <div className="space-y-6">
 
             {/* Top Wide Card: System Selection Tool */}
             <div className="p-6 rounded-2xl bg-white dark:bg-[#181A1D] border border-slate-200 dark:border-white/10 shadow-md">
@@ -219,7 +176,7 @@ export default function BuyersPortalPage() {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                
+
                 {/* Left Controls */}
                 <div className="lg:col-span-6 space-y-5">
 
@@ -270,11 +227,10 @@ export default function BuyersPortalPage() {
                         <button
                           key={swatch.id}
                           onClick={() => setSelectedColor(swatch.hex)}
-                          className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full transition-transform hover:scale-110 shadow-md ${
-                            selectedColor === swatch.hex
-                              ? 'ring-2 ring-slate-900 dark:ring-white ring-offset-2 ring-offset-white dark:ring-offset-[#181A1D] scale-110'
-                              : 'hover:ring-1 hover:ring-slate-400'
-                          }`}
+                          className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full transition-transform hover:scale-110 shadow-md ${selectedColor === swatch.hex
+                            ? 'ring-2 ring-slate-900 dark:ring-white ring-offset-2 ring-offset-white dark:ring-offset-[#181A1D] scale-110'
+                            : 'hover:ring-1 hover:ring-slate-400'
+                            }`}
                           style={{ backgroundColor: swatch.hex }}
                           title={swatch.name}
                         />
@@ -429,7 +385,7 @@ export default function BuyersPortalPage() {
 
               {/* PDF Compatibility Rules Form */}
               <div className="space-y-4">
-                
+
                 {/* 1. Confined Space Code Clearance */}
                 <div className="p-4 rounded-xl bg-black/40 border border-white/5 space-y-2">
                   <div className="flex items-center justify-between">
@@ -446,17 +402,15 @@ export default function BuyersPortalPage() {
                   <div className="flex gap-3 pt-1">
                     <button
                       onClick={() => setClearanceConfirmed(true)}
-                      className={`px-4 py-2 rounded-xl text-xs font-semibold border ${
-                        clearanceConfirmed ? 'bg-[#A4A77E] text-black border-[#A4A77E]' : 'bg-white/5 border-white/10 text-slate-400'
-                      }`}
+                      className={`px-4 py-2 rounded-xl text-xs font-semibold border ${clearanceConfirmed ? 'bg-[#A4A77E] text-black border-[#A4A77E]' : 'bg-white/5 border-white/10 text-slate-400'
+                        }`}
                     >
                       Yes, Cleared for Code
                     </button>
                     <button
                       onClick={() => setClearanceConfirmed(false)}
-                      className={`px-4 py-2 rounded-xl text-xs font-semibold border ${
-                        !clearanceConfirmed ? 'bg-amber-600 text-white border-amber-600' : 'bg-white/5 border-white/10 text-slate-400'
-                      }`}
+                      className={`px-4 py-2 rounded-xl text-xs font-semibold border ${!clearanceConfirmed ? 'bg-amber-600 text-white border-amber-600' : 'bg-white/5 border-white/10 text-slate-400'
+                        }`}
                     >
                       Requires Site Survey
                     </button>
@@ -473,9 +427,8 @@ export default function BuyersPortalPage() {
                       <button
                         key={fuel}
                         onClick={() => setFuelSource(fuel)}
-                        className={`p-2.5 rounded-xl text-xs font-semibold border text-center ${
-                          fuelSource === fuel ? 'bg-[#C2B59B] text-black border-[#C2B59B]' : 'bg-white/5 border-white/10 text-slate-300'
-                        }`}
+                        className={`p-2.5 rounded-xl text-xs font-semibold border text-center ${fuelSource === fuel ? 'bg-[#C2B59B] text-black border-[#C2B59B]' : 'bg-white/5 border-white/10 text-slate-300'
+                          }`}
                       >
                         {fuel}
                       </button>
@@ -493,9 +446,8 @@ export default function BuyersPortalPage() {
                       <button
                         key={v}
                         onClick={() => setVoltage(v)}
-                        className={`p-2.5 rounded-xl text-xs font-semibold border text-center ${
-                          voltage === v ? 'bg-[#A4A77E] text-black border-[#A4A77E]' : 'bg-white/5 border-white/10 text-slate-300'
-                        }`}
+                        className={`p-2.5 rounded-xl text-xs font-semibold border text-center ${voltage === v ? 'bg-[#A4A77E] text-black border-[#A4A77E]' : 'bg-white/5 border-white/10 text-slate-300'
+                          }`}
                       >
                         {v}
                       </button>
@@ -513,9 +465,8 @@ export default function BuyersPortalPage() {
                       <button
                         key={len}
                         onClick={() => setLineLength(len)}
-                        className={`p-2.5 rounded-xl text-xs font-semibold border text-center ${
-                          lineLength === len ? 'bg-[#C2B59B] text-black border-[#C2B59B]' : 'bg-white/5 border-white/10 text-slate-300'
-                        }`}
+                        className={`p-2.5 rounded-xl text-xs font-semibold border text-center ${lineLength === len ? 'bg-[#C2B59B] text-black border-[#C2B59B]' : 'bg-white/5 border-white/10 text-slate-300'
+                          }`}
                       >
                         {len}
                       </button>
@@ -544,17 +495,15 @@ export default function BuyersPortalPage() {
                   <div className="flex gap-3 pt-1">
                     <button
                       onClick={() => setStructuralCheck(true)}
-                      className={`px-4 py-2 rounded-xl text-xs font-semibold border ${
-                        structuralCheck ? 'bg-[#A4A77E] text-black border-[#A4A77E]' : 'bg-white/5 border-white/10 text-slate-400'
-                      }`}
+                      className={`px-4 py-2 rounded-xl text-xs font-semibold border ${structuralCheck ? 'bg-[#A4A77E] text-black border-[#A4A77E]' : 'bg-white/5 border-white/10 text-slate-400'
+                        }`}
                     >
                       Yes (2'x6' wood or steel)
                     </button>
                     <button
                       onClick={() => setStructuralCheck(false)}
-                      className={`px-4 py-2 rounded-xl text-xs font-semibold border ${
-                        !structuralCheck ? 'bg-amber-600 text-white border-amber-600' : 'bg-white/5 border-white/10 text-slate-400'
-                      }`}
+                      className={`px-4 py-2 rounded-xl text-xs font-semibold border ${!structuralCheck ? 'bg-amber-600 text-white border-amber-600' : 'bg-white/5 border-white/10 text-slate-400'
+                        }`}
                     >
                       Sub-Base Needs Reinforcement
                     </button>
@@ -604,7 +553,7 @@ export default function BuyersPortalPage() {
         {currentStep === 3 && (
           <div className="max-w-2xl mx-auto space-y-6">
             <div className="p-6 sm:p-8 rounded-2xl bg-[#181A1D] border border-white/10 space-y-6 shadow-2xl">
-              
+
               <div className="flex items-center justify-between pb-4 border-b border-white/10">
                 <div>
                   <h2 className="text-xl font-bold font-serif text-white">Deposit Processing</h2>
@@ -733,7 +682,7 @@ export default function BuyersPortalPage() {
         {/* ===================== STEP 4: FINALIZATION & CONFIRMATION ===================== */}
         {currentStep === 4 && (
           <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in zoom-in-95">
-            
+
             {/* Top Success Banner */}
             <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-[#18201A] via-[#1C251F] to-[#18201A] border border-emerald-500/40 shadow-2xl text-center space-y-3">
               <div className="w-14 h-14 rounded-full bg-emerald-500/20 text-emerald-400 border-2 border-emerald-500/40 flex items-center justify-center mx-auto">
@@ -779,13 +728,12 @@ export default function BuyersPortalPage() {
                 ].map((m, idx) => (
                   <div
                     key={idx}
-                    className={`p-3 rounded-xl border ${
-                      m.done
-                        ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300'
-                        : m.active
+                    className={`p-3 rounded-xl border ${m.done
+                      ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300'
+                      : m.active
                         ? 'bg-[#A4A77E]/10 border-[#A4A77E]/40 text-[#A4A77E]'
                         : 'bg-white/5 border-white/5 text-slate-500'
-                    }`}
+                      }`}
                   >
                     <div className="font-bold">{m.step}</div>
                     <div className="text-[10px] mt-0.5 opacity-80">{m.desc}</div>

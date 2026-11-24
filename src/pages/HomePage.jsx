@@ -17,8 +17,6 @@ import {
   Box,
   Palette,
   CheckCircle2,
-  RotateCw,
-  Sparkles,
   X,
   ExternalLink,
   Settings,
@@ -75,7 +73,7 @@ export default function HomePage() {
   const activeColorPreview = hoveredColor || selectedColor;
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#16181B] text-slate-800 dark:text-slate-100 overflow-hidden font-sans transition-colors duration-200">
+    <div className="min-h-screen bg-white dark:bg-[#16181B] text-slate-800 dark:text-slate-100 overflow-hidden font-sans transition-colors duration-200">
 
       {/* ===================== HERO SECTION ===================== */}
       {/* Dark dusk left section with high-definition modular HVAC video on the right */}
@@ -108,47 +106,41 @@ export default function HomePage() {
             />
           </video>
 
-          {/* Subtle clean ambient tint for crystal-clear text readability across the video without any left-side blur */}
-          <div className="absolute inset-0 bg-black/35 pointer-events-none" />
+          {/* Directional Scrim: Dark on the left behind text for 100% readability, completely transparent on the right so video is 100% clear and bright */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-transparent pointer-events-none" />
         </div>
 
-        {/* Left Side: Dark Dusk Content Area */}
-        <div className="relative z-10 w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-          <div className="max-w-xl lg:max-w-2xl space-y-5 sm:space-y-6">
+        {/* Left Side: Content Area shifted to left */}
+        <div className="relative z-10 w-full px-6 sm:px-10 lg:px-14 xl:px-16 py-10 lg:py-12">
+          <div className="max-w-xl lg:max-w-2xl space-y-4 sm:space-y-5">
 
-            {/* Top Pill Tag */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 backdrop-blur-md shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-[#A4A77E] animate-pulse" />
-              <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-[#C2B59B]">
-                MODULAR • EFFICIENT • FUTURE READY
-              </span>
-            </div>
 
-            {/* Headline */}
+
+            {/* Headline - Larger & Impactful */}
             <div className="space-y-1">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-[52px] font-bold font-serif text-white tracking-tight leading-[1.12] drop-shadow-lg">
+              <h1 className="text-3xl sm:text-4xl lg:text-[44px] xl:text-[48px] font-bold font-serif text-white tracking-tight leading-[1.12] drop-shadow-md">
                 The Next Generation
               </h1>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-[52px] font-bold font-serif text-[#C2B59B] tracking-tight leading-[1.12] drop-shadow-lg">
+              <h2 className="text-3xl sm:text-4xl lg:text-[44px] xl:text-[48px] font-bold font-serif text-[#C2B59B] tracking-tight leading-[1.12] drop-shadow-md">
                 Modular HVAC System
               </h2>
             </div>
 
             {/* Tagline & Description */}
             <div className="space-y-2">
-              <p className="text-base sm:text-lg font-bold text-white tracking-wide drop-shadow-md">
+              <p className="text-base sm:text-lg font-bold text-white tracking-wide drop-shadow-sm">
                 Plug-and-play. Efficient. Built for You.
               </p>
-              <p className="text-xs sm:text-sm text-slate-200 max-w-lg leading-relaxed drop-shadow-sm">
+              <p className="text-xs sm:text-sm text-slate-200 max-w-lg leading-relaxed">
                 No-Tech HVAC delivers a revolutionary modular system with unmatched flexibility, easy installation, and modern design.
               </p>
             </div>
 
             {/* Hero Call-To-Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3.5 pt-2">
+            <div className="flex flex-wrap items-center gap-3.5 pt-1.5">
               <button
                 onClick={() => setIsReserveModalOpen(true)}
-                className="inline-flex items-center gap-2.5 px-5 sm:px-6 py-3 rounded-full bg-[#7E8056] hover:bg-[#6c6e49] text-white font-semibold text-xs sm:text-sm tracking-wide shadow-xl shadow-[#7E8056]/30 transition-all duration-200 hover:scale-[1.02] active:scale-95 group cursor-pointer"
+                className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-[#7E8056] hover:bg-[#6c6e49] text-white font-semibold text-xs sm:text-sm tracking-wide shadow-lg shadow-[#7E8056]/30 transition-all duration-200 hover:scale-[1.02] active:scale-95 group cursor-pointer"
               >
                 <Calendar className="w-4 h-4 text-white" />
                 <span>Reserve Your No-Tech HVAC</span>
@@ -164,75 +156,46 @@ export default function HomePage() {
               </button>
             </div>
 
-            {/* Micro-Content & Key Highlights directly in Hero under buttons */}
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-slate-300 pt-1">
-              <div className="flex items-center gap-1.5 text-[#C2B59B] font-semibold">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#A4A77E] animate-pulse" />
-                <span>$200 Refundable Deposit</span>
+            {/* Micro-Content & Trust Badges */}
+            <div className="space-y-2.5 pt-1 text-xs text-slate-300">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5">
+                <div className="flex items-center gap-1.5 text-[#C2B59B] font-semibold">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#A4A77E] animate-pulse" />
+                  <span>$200 Refundable Deposit</span>
+                </div>
+                <span className="text-white/25 hidden sm:inline">•</span>
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#A4A77E]" />
+                  <span>Priority 2026 Batch Allocation</span>
+                </div>
+                <span className="text-white/25 hidden sm:inline">•</span>
+                <div className="flex items-center gap-1.5">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#A4A77E]" />
+                  <span>10-Year Local Mechanical Guarantee</span>
+                </div>
               </div>
-              <span className="text-white/25 hidden sm:inline">•</span>
-              <div className="flex items-center gap-1.5 text-slate-300">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#A4A77E]" />
-                <span>Priority 2026 Batch Allocation</span>
-              </div>
-              <span className="text-white/25 hidden sm:inline">•</span>
-              <div className="flex items-center gap-1.5 text-slate-300">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#A4A77E]" />
-                <span>10-Year Local Mechanical Guarantee</span>
-              </div>
-            </div>
 
-            {/* Feature Highlights Mini Strip */}
-            <div className="pt-3 border-t border-white/10 flex flex-wrap items-center gap-4 sm:gap-6 text-xs text-slate-300">
-              <div className="flex items-center gap-1.5 font-medium">
-                <CheckCircle2 className="w-4 h-4 text-[#A4A77E]" />
-                <span>4-Bay Hot-Swappable</span>
-              </div>
-              <div className="flex items-center gap-1.5 font-medium">
-                <CheckCircle2 className="w-4 h-4 text-[#A4A77E]" />
-                <span>Zero-Loss Disconnects</span>
-              </div>
-              <div className="flex items-center gap-1.5 font-medium">
-                <CheckCircle2 className="w-4 h-4 text-[#A4A77E]" />
-                <span>Local Mechanical Approved</span>
+              {/* Feature Highlights Mini Strip */}
+              <div className="pt-2 border-t border-white/10 flex flex-wrap items-center gap-4 sm:gap-6 text-xs text-slate-300">
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-[#A4A77E]" />
+                  <span>4-Bay Hot-Swappable</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-[#A4A77E]" />
+                  <span>Zero-Loss Disconnects</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-[#A4A77E]" />
+                  <span>Local Mechanical Approved</span>
+                </div>
               </div>
             </div>
 
           </div>
         </div>
 
-        {/* Floating Controls on bottom right of the hero */}
-        <div className="absolute bottom-5 right-5 z-20 hidden sm:flex items-center gap-2.5">
-          {/* Video Play/Pause & Audio Mute Toggles */}
-          <div className="flex items-center bg-black/80 rounded-full border border-white/20 backdrop-blur-md px-1.5 py-1 shadow-2xl">
-            <button
-              onClick={togglePlay}
-              className="p-1.5 rounded-full hover:bg-white/15 text-white transition-colors"
-              title={isPlaying ? "Pause Background Video" : "Play Background Video"}
-            >
-              {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-current" />}
-            </button>
-            <button
-              onClick={toggleMute}
-              className="p-1.5 rounded-full hover:bg-white/15 text-white transition-colors"
-              title={isMuted ? "Unmute Background Video" : "Mute Background Video"}
-            >
-              {isMuted ? <VolumeX className="w-3.5 h-3.5 text-slate-300" /> : <Volume2 className="w-3.5 h-3.5 text-[#C2B59B]" />}
-            </button>
-            <span className="text-[10px] font-bold text-[#A4A77E] px-2 uppercase tracking-widest hidden md:inline border-l border-white/15 ml-1">
-              HD Video
-            </span>
-          </div>
 
-          <button
-            onClick={() => setShowInteractiveModel(!showInteractiveModel)}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/80 hover:bg-black text-white text-xs font-medium border border-white/20 backdrop-blur-md transition-all shadow-xl hover:scale-105"
-            title="Toggle 3D Diagram or Architectural Video"
-          >
-            <Box className="w-4 h-4 text-[#C2B59B]" />
-            <span>{showInteractiveModel ? 'Show Video View' : 'Switch to 3D Diagram View'}</span>
-          </button>
-        </div>
 
         {/* Interactive 3D Diagram Overlay (when toggled on) */}
         {showInteractiveModel && (
@@ -265,124 +228,58 @@ export default function HomePage() {
 
       {/* ===================== INTERACTIVE DEMO & COLOR CUSTOMIZER CARDS ===================== */}
       {/* 2 Side-by-side cards with clean light/dark styling */}
-      <section id="interactive-demo" className="py-8 bg-[#FAF7F2] dark:bg-[#16181B] transition-colors">
+      <section id="interactive-demo" className="py-8 bg-white dark:bg-[#16181B] transition-colors">
         <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
 
             {/* Card 1: Interactive System Demo */}
-            <div className="group rounded-2xl sm:rounded-3xl bg-white dark:bg-[#1C1E22] border border-slate-200/90 dark:border-white/10 p-5 sm:p-7 flex flex-col justify-between shadow-md hover:shadow-xl dark:shadow-none transition-all duration-300">
+            <div className="rounded-2xl bg-white dark:bg-[#23262A] border border-slate-200/90 dark:border-white/10 p-5 sm:p-6 flex flex-col justify-between shadow-md">
               <div>
-                {/* Header */}
-                <div className="flex items-center justify-between mb-4 sm:mb-5">
-                  <div className="flex items-center gap-2.5">
-                    <div className="p-2 rounded-xl bg-[#7E8056]/15 text-[#7E8056] dark:text-[#A4A77E]">
-                      <Box className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h3 className="text-base sm:text-lg font-bold font-serif text-slate-900 dark:text-white tracking-tight">
-                        Interactive System Demo
-                      </h3>
-                      <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">
-                        Patented 4-bay modular slide-out drawer architecture
-                      </p>
-                    </div>
-                  </div>
-                  <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[11px] font-medium text-slate-600 dark:text-slate-300">
-                    <span className="w-2 h-2 rounded-full bg-[#7E8056] animate-pulse" />
-                    Bay {selectedCompartment} / 4
-                  </span>
+                <div className="flex items-center gap-2.5 mb-4">
+                  <Box className="w-5 h-5 text-[#7E8056] dark:text-white" />
+                  <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-tight">Interactive System Demo</h3>
                 </div>
 
-                {/* Content Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
+                <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
 
-                  {/* Left: Interactive pulled-out compartment drawer image */}
-                  <div className="sm:col-span-7 relative rounded-xl sm:rounded-2xl overflow-hidden bg-slate-950 border border-slate-200 dark:border-white/10 aspect-[16/10] shadow-inner group/img">
+                  {/* Left: Unit image with glowing highlighted compartment and hand cursor */}
+                  <div className="sm:col-span-7 relative rounded-xl overflow-hidden bg-slate-900 border border-slate-200 dark:border-white/10 aspect-[16/10] max-h-[190px]">
                     <img
-                      src="/images/demo-compartment-drawer-swap.jpg"
-                      alt="Modular Unit Interactive Compartment Slide-Out Drawer"
-                      className="w-full h-full object-cover object-center cursor-pointer group-hover/img:scale-105 transition-transform duration-500"
+                      src="/images/slices/demo-compartment-glow.jpg"
+                      alt="Modular Unit Interactive Compartment Demo"
+                      className="w-full h-full object-cover object-center cursor-pointer hover:scale-105 transition-transform duration-300"
                       onClick={() => setSelectedCompartment(prev => prev === 4 ? 1 : prev + 1)}
-                      title="Click to simulate compartment slide-out & swap"
+                      title="Click compartment to simulate swap"
                     />
-                    {/* Live overlay badge */}
-                    <div className="absolute top-2.5 left-2.5 px-2 py-1 rounded-lg bg-black/75 border border-white/20 backdrop-blur-md text-[10px] font-semibold text-white flex items-center gap-1.5 pointer-events-none">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#A4A77E]" />
-                      <span>Slide-Out Drawer Bay #{selectedCompartment}</span>
-                    </div>
-
-                    {/* Bottom click hint */}
-                    <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-lg bg-black/75 border border-white/20 backdrop-blur-md text-[10px] font-medium text-[#C2B59B] pointer-events-none flex items-center gap-1">
-                      <span>Click to cycle bays</span>
-                      <RotateCw className="w-3 h-3 text-[#A4A77E]" />
-                    </div>
                   </div>
 
                   {/* Right: 3 Steps & Watch Demo Button */}
-                  <div className="sm:col-span-5 flex flex-col justify-between space-y-3 sm:space-y-3.5">
-                    <div className="space-y-2 sm:space-y-2.5">
-                      <div
-                        onClick={() => setSelectedCompartment(1)}
-                        className={`flex items-center gap-2.5 p-2 rounded-xl border transition-all cursor-pointer ${
-                          selectedCompartment === 1
-                            ? 'bg-[#7E8056]/15 border-[#7E8056] text-slate-900 dark:text-white shadow-sm'
-                            : 'bg-slate-50 dark:bg-black/30 border-slate-200/60 dark:border-white/5 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5'
-                        }`}
-                      >
-                        <span className={`w-5 h-5 rounded-full font-bold text-[11px] flex items-center justify-center flex-shrink-0 ${
-                          selectedCompartment === 1 ? 'bg-[#7E8056] text-white' : 'bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-slate-300'
-                        }`}>
+                  <div className="sm:col-span-5 flex flex-col justify-between space-y-3">
+                    <div className="space-y-2.5">
+                      <div className="flex items-center gap-2.5 p-1.5 rounded-lg bg-[#FAF7F2] dark:bg-black/30 border border-slate-200/60 dark:border-white/5">
+                        <span className="w-5 h-5 rounded-full bg-[#7E8056] text-white font-bold text-[11px] flex items-center justify-center flex-shrink-0">
                           1
                         </span>
-                        <div className="leading-tight">
-                          <span className="text-xs font-semibold block">Click a compartment</span>
-                          <span className="text-[10px] text-slate-500 dark:text-slate-400">Pull out slide-in module</span>
-                        </div>
+                        <span className="text-xs font-medium text-slate-700 dark:text-slate-200">Click a compartment</span>
                       </div>
-
-                      <div
-                        onClick={() => setSelectedCompartment(2)}
-                        className={`flex items-center gap-2.5 p-2 rounded-xl border transition-all cursor-pointer ${
-                          selectedCompartment === 2
-                            ? 'bg-[#7E8056]/15 border-[#7E8056] text-slate-900 dark:text-white shadow-sm'
-                            : 'bg-slate-50 dark:bg-black/30 border-slate-200/60 dark:border-white/5 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5'
-                        }`}
-                      >
-                        <span className={`w-5 h-5 rounded-full font-bold text-[11px] flex items-center justify-center flex-shrink-0 ${
-                          selectedCompartment === 2 ? 'bg-[#7E8056] text-white' : 'bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-slate-300'
-                        }`}>
+                      <div className="flex items-center gap-2.5 p-1.5 rounded-lg bg-[#FAF7F2] dark:bg-black/30 border border-slate-200/60 dark:border-white/5">
+                        <span className="w-5 h-5 rounded-full bg-[#7E8056] text-white font-bold text-[11px] flex items-center justify-center flex-shrink-0">
                           2
                         </span>
-                        <div className="leading-tight">
-                          <span className="text-xs font-semibold block">See the swap process</span>
-                          <span className="text-[10px] text-slate-500 dark:text-slate-400">Zero refrigerant venting</span>
-                        </div>
+                        <span className="text-xs font-medium text-slate-700 dark:text-slate-200">See the swap process</span>
                       </div>
-
-                      <div
-                        onClick={() => setSelectedCompartment(3)}
-                        className={`flex items-center gap-2.5 p-2 rounded-xl border transition-all cursor-pointer ${
-                          selectedCompartment === 3
-                            ? 'bg-[#7E8056]/15 border-[#7E8056] text-slate-900 dark:text-white shadow-sm'
-                            : 'bg-slate-50 dark:bg-black/30 border-slate-200/60 dark:border-white/5 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5'
-                        }`}
-                      >
-                        <span className={`w-5 h-5 rounded-full font-bold text-[11px] flex items-center justify-center flex-shrink-0 ${
-                          selectedCompartment === 3 ? 'bg-[#7E8056] text-white' : 'bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-slate-300'
-                        }`}>
+                      <div className="flex items-center gap-2.5 p-1.5 rounded-lg bg-[#FAF7F2] dark:bg-black/30 border border-slate-200/60 dark:border-white/5">
+                        <span className="w-5 h-5 rounded-full bg-[#7E8056] text-white font-bold text-[11px] flex items-center justify-center flex-shrink-0">
                           3
                         </span>
-                        <div className="leading-tight">
-                          <span className="text-xs font-semibold block">Reinstall with ease</span>
-                          <span className="text-[10px] text-slate-500 dark:text-slate-400">Self-aligning pin lock</span>
-                        </div>
+                        <span className="text-xs font-medium text-slate-700 dark:text-slate-200">Reinstall with ease</span>
                       </div>
                     </div>
 
-                    <div className="pt-1">
+                    <div className="pt-2">
                       <button
                         onClick={() => setIsVideoModalOpen(true)}
-                        className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-full bg-[#7E8056] hover:bg-[#6c6e49] text-white font-semibold text-xs transition-all shadow-md hover:shadow-lg shadow-[#7E8056]/20 active:scale-95 cursor-pointer"
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#7E8056] hover:bg-[#6c6e49] text-white font-semibold text-xs transition-all shadow-md active:scale-95"
                       >
                         <span>Watch Demo</span>
                         <Play className="w-3 h-3 fill-white ml-0.5" />
@@ -395,105 +292,64 @@ export default function HomePage() {
             </div>
 
             {/* Card 2: Customize Your HVAC System */}
-            <div className="group rounded-2xl sm:rounded-3xl bg-white dark:bg-[#1C1E22] border border-slate-200/90 dark:border-white/10 p-5 sm:p-7 flex flex-col justify-between shadow-md hover:shadow-xl dark:shadow-none transition-all duration-300">
+            <div className="rounded-2xl bg-white dark:bg-[#23262A] border border-slate-200/90 dark:border-white/10 p-5 sm:p-6 flex flex-col justify-between shadow-md">
               <div>
-                {/* Header */}
-                <div className="flex items-center justify-between mb-4 sm:mb-5">
-                  <div className="flex items-center gap-2.5">
-                    <div className="p-2 rounded-xl bg-[#7E8056]/15 text-[#7E8056] dark:text-[#A4A77E]">
-                      <Palette className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h3 className="text-base sm:text-lg font-bold font-serif text-slate-900 dark:text-white tracking-tight">
-                        Customize Your HVAC System
-                      </h3>
-                      <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">
-                        Architectural powder-coated exterior panels
-                      </p>
-                    </div>
-                  </div>
-                  <span className="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#7E8056] dark:text-[#C2B59B] capitalize">
-                    {HOMEPAGE_SWATCHES.find(s => s.hex === activeColorPreview)?.name || 'Custom Color'}
-                  </span>
+                <div className="flex items-center gap-2.5 mb-4">
+                  <Palette className="w-5 h-5 text-[#7E8056] dark:text-white" />
+                  <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-tight">Customize Your HVAC System</h3>
                 </div>
 
-                {/* Content Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
+                <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
 
                   {/* Left: Swatches, Description, and Choose Color Button */}
-                  <div className="sm:col-span-6 space-y-3.5 sm:space-y-4">
-                    {/* Swatch Selection Area */}
+                  <div className="sm:col-span-6 space-y-4">
+                    {/* Color Swatch Circles */}
+                    <div className="flex items-center gap-2.5 flex-wrap">
+                      {HOMEPAGE_SWATCHES.map((swatch) => {
+                        const isSelected = selectedColor === swatch.hex;
+                        return (
+                          <button
+                            key={swatch.id}
+                            onClick={() => setSelectedColor(swatch.hex)}
+                            onMouseEnter={() => setHoveredColor(swatch.hex)}
+                            onMouseLeave={() => setHoveredColor(null)}
+                            className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full transition-all duration-200 shadow-md ${isSelected
+                              ? 'ring-2 ring-slate-900 dark:ring-white ring-offset-2 ring-offset-white dark:ring-offset-[#23262A] scale-110'
+                              : 'hover:scale-105 opacity-85 hover:opacity-100'
+                              }`}
+                            style={{ backgroundColor: swatch.hex }}
+                            aria-label={`Select ${swatch.name}`}
+                            title={swatch.name}
+                          />
+                        );
+                      })}
+                    </div>
+
+                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                      Real-time preview with your preferred color.
+                    </p>
+
                     <div>
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block mb-2">
-                        Select Panel Color:
-                      </span>
-                      <div className="flex items-center gap-2.5 flex-wrap">
-                        {HOMEPAGE_SWATCHES.map((swatch) => {
-                          const isSelected = selectedColor === swatch.hex;
-                          return (
-                            <button
-                              key={swatch.id}
-                              onClick={() => setSelectedColor(swatch.hex)}
-                              onMouseEnter={() => setHoveredColor(swatch.hex)}
-                              onMouseLeave={() => setHoveredColor(null)}
-                              className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full transition-all duration-200 shadow-md cursor-pointer relative ${isSelected
-                                ? 'ring-2 ring-[#7E8056] dark:ring-white ring-offset-2 ring-offset-white dark:ring-offset-[#1C1E22] scale-110'
-                                : 'hover:scale-105 opacity-85 hover:opacity-100'
-                                }`}
-                              style={{ backgroundColor: swatch.hex }}
-                              aria-label={`Select ${swatch.name}`}
-                              title={swatch.name}
-                            >
-                              {isSelected && (
-                                <span className="absolute inset-0 flex items-center justify-center">
-                                  <CheckCircle2 className="w-4 h-4 text-white drop-shadow" />
-                                </span>
-                              )}
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
-
-                    <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-200/60 dark:border-white/5 space-y-0.5">
-                      <span className="text-xs font-semibold text-slate-800 dark:text-slate-200 block">
-                        Real-time Architectural Preview
-                      </span>
-                      <p className="text-[11px] text-slate-500 dark:text-slate-400">
-                        Matches luxury exterior facade, stucco, brick, and modern siding.
-                      </p>
-                    </div>
-
-                    <div className="pt-1">
                       <Link
                         to={`/buyers?color=${encodeURIComponent(selectedColor)}`}
-                        className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#7E8056] hover:bg-[#6c6e49] text-white font-semibold text-xs transition-all shadow-md hover:shadow-lg shadow-[#7E8056]/20 active:scale-95 cursor-pointer"
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#7E8056] hover:bg-[#6c6e49] text-white font-semibold text-xs transition-all shadow-md active:scale-95"
                       >
                         <span>Choose Color →</span>
                       </Link>
                     </div>
                   </div>
 
-                  {/* Right: Architectural Luxury Villa HVAC Render with Dynamic Color Tint */}
-                  <div className="sm:col-span-6 relative rounded-xl sm:rounded-2xl overflow-hidden bg-slate-950 border border-slate-200 dark:border-white/10 aspect-[16/10] shadow-inner group/img">
+                  {/* Right: Customized HVAC Unit Visual from Reference Image */}
+                  <div className="sm:col-span-6 relative rounded-xl overflow-hidden bg-slate-900 border border-slate-200 dark:border-white/10 aspect-[16/10] max-h-[190px]">
                     <img
-                      src="/images/customize-architectural-unit.jpg"
-                      alt="Customized Architectural HVAC Modular System at Modern Luxury Home"
-                      className="w-full h-full object-cover object-center group-hover/img:scale-105 transition-transform duration-500"
+                      src="/images/slices/customize-colored-unit.jpg"
+                      alt="Customized HVAC Modular System"
+                      className="w-full h-full object-cover object-center transition-all duration-300"
                     />
-                    {/* Dynamic color tint overlay that responds in real-time to selected/hovered swatch */}
                     <div
-                      className="absolute inset-0 pointer-events-none mix-blend-color opacity-35 transition-colors duration-300"
+                      className="absolute inset-0 pointer-events-none mix-blend-color opacity-30 transition-colors duration-300"
                       style={{ backgroundColor: activeColorPreview }}
                     />
-                    {/* Architectural tag pill */}
-                    <div className="absolute bottom-2.5 left-2.5 px-2.5 py-1 rounded-lg bg-black/75 border border-white/20 backdrop-blur-md text-[10px] font-medium text-white flex items-center gap-1.5 pointer-events-none">
-                      <span
-                        className="w-2 h-2 rounded-full border border-white/50"
-                        style={{ backgroundColor: activeColorPreview }}
-                      />
-                      <span className="capitalize">{HOMEPAGE_SWATCHES.find(s => s.hex === activeColorPreview)?.name}</span>
-                    </div>
                   </div>
 
                 </div>
@@ -573,34 +429,34 @@ export default function HomePage() {
       </section>
 
       {/* ===================== OUR PORTALS & LOCAL MECHANICAL ===================== */}
-      <section className="bg-[#FAF7F2] dark:bg-[#121315] py-12 sm:py-14 text-slate-900 dark:text-slate-100 transition-colors border-y border-slate-200/60 dark:border-white/5">
+      {/* Light ivory/cream background with portals and technician card */}
+      <section className="bg-white dark:bg-[#121315] py-12 text-slate-900 dark:text-slate-100 transition-colors">
         <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
 
             {/* Left Header */}
-            <div className="lg:col-span-3 flex flex-col justify-center space-y-2">
-              <span className="text-[11px] font-bold uppercase tracking-widest text-[#7E8056] dark:text-[#C2B59B]">Quick Access</span>
+            <div className="lg:col-span-3 space-y-2">
               <h3 className="text-2xl sm:text-3xl font-bold font-serif text-slate-900 dark:text-white tracking-tight">Our Portals</h3>
-              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Find everything you need in one place.</p>
-              <div className="h-0.5 w-14 bg-[#7E8056] dark:bg-[#C2B59B] mt-1 rounded-full" />
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">Find everything you need in one place.</p>
+              <div className="h-0.5 w-14 bg-[#7E8056] dark:bg-[#C2B59B] mt-1" />
             </div>
 
             {/* Center: 4 Portals Cards */}
-            <div className="lg:col-span-5 grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className="lg:col-span-5 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-3">
 
               {/* Portal 1: Buyers Portal */}
               <Link
                 to="/buyers"
-                className="group p-4 rounded-2xl bg-white dark:bg-[#1A1D21] border border-slate-200/90 dark:border-white/10 hover:border-[#7E8056]/60 dark:hover:border-[#7E8056]/60 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between text-center items-center hover:-translate-y-1 min-h-[155px]"
+                className="group p-3.5 rounded-2xl bg-white dark:bg-[#1E2125] border border-[#E6E0D6] dark:border-white/10 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between text-center items-center hover:-translate-y-0.5"
               >
-                <div className="w-10 h-10 rounded-xl bg-[#F0EDE6] dark:bg-white/[0.07] text-[#555845] dark:text-[#C2B59B] flex items-center justify-center mb-2.5 group-hover:scale-110 group-hover:bg-[#7E8056] group-hover:text-white dark:group-hover:bg-[#7E8056] dark:group-hover:text-white transition-all duration-300 shadow-sm">
-                  <ShoppingCart className="w-5 h-5" />
+                <div className="w-9 h-9 rounded-xl bg-[#F0EDE6] dark:bg-white/10 text-[#555845] dark:text-[#A4A77E] flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                  <ShoppingCart className="w-5 h-5 text-[#7E8056] dark:text-[#A4A77E]" />
                 </div>
                 <div>
-                  <h4 className="text-xs sm:text-[13px] font-bold text-slate-900 dark:text-white tracking-tight">Buyers Portal</h4>
-                  <div className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-semibold text-slate-500 dark:text-slate-400 group-hover:text-[#7E8056] dark:group-hover:text-[#C2B59B] transition-colors">
+                  <h4 className="text-xs font-bold text-slate-900 dark:text-white">Buyers Portal</h4>
+                  <div className="mt-2 inline-flex items-center gap-1 text-[11px] font-semibold text-slate-600 dark:text-slate-300 group-hover:text-black dark:group-hover:text-white">
                     <span>Select & Purchase</span>
-                    <span className="w-4 h-4 rounded-full border border-slate-300 dark:border-white/20 flex items-center justify-center text-[9px] group-hover:border-[#7E8056] group-hover:bg-[#7E8056] group-hover:text-white transition-all">→</span>
+                    <span className="w-4 h-4 rounded-full border border-slate-400 dark:border-slate-500 flex items-center justify-center text-[9px] group-hover:border-black dark:group-hover:border-white">→</span>
                   </div>
                 </div>
               </Link>
@@ -608,16 +464,16 @@ export default function HomePage() {
               {/* Portal 2: Investor Hub */}
               <Link
                 to="/investor"
-                className="group p-4 rounded-2xl bg-white dark:bg-[#1A1D21] border border-slate-200/90 dark:border-white/10 hover:border-[#7E8056]/60 dark:hover:border-[#7E8056]/60 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between text-center items-center hover:-translate-y-1 min-h-[155px]"
+                className="group p-3.5 rounded-2xl bg-white dark:bg-[#1E2125] border border-[#E6E0D6] dark:border-white/10 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between text-center items-center hover:-translate-y-0.5"
               >
-                <div className="w-10 h-10 rounded-xl bg-[#F0EDE6] dark:bg-white/[0.07] text-[#555845] dark:text-[#C2B59B] flex items-center justify-center mb-2.5 group-hover:scale-110 group-hover:bg-[#7E8056] group-hover:text-white dark:group-hover:bg-[#7E8056] dark:group-hover:text-white transition-all duration-300 shadow-sm">
-                  <TrendingUp className="w-5 h-5" />
+                <div className="w-9 h-9 rounded-xl bg-[#F0EDE6] dark:bg-white/10 text-[#555845] dark:text-[#A4A77E] flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                  <TrendingUp className="w-5 h-5 text-[#7E8056] dark:text-[#A4A77E]" />
                 </div>
                 <div>
-                  <h4 className="text-xs sm:text-[13px] font-bold text-slate-900 dark:text-white tracking-tight">Investor Hub</h4>
-                  <div className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-semibold text-slate-500 dark:text-slate-400 group-hover:text-[#7E8056] dark:group-hover:text-[#C2B59B] transition-colors">
+                  <h4 className="text-xs font-bold text-slate-900 dark:text-white">Investor Hub</h4>
+                  <div className="mt-2 inline-flex items-center gap-1 text-[11px] font-semibold text-slate-600 dark:text-slate-300 group-hover:text-black dark:group-hover:text-white">
                     <span>Learn More</span>
-                    <span className="w-4 h-4 rounded-full border border-slate-300 dark:border-white/20 flex items-center justify-center text-[9px] group-hover:border-[#7E8056] group-hover:bg-[#7E8056] group-hover:text-white transition-all">→</span>
+                    <span className="w-4 h-4 rounded-full border border-slate-400 dark:border-slate-500 flex items-center justify-center text-[9px] group-hover:border-black dark:group-hover:border-white">→</span>
                   </div>
                 </div>
               </Link>
@@ -625,16 +481,16 @@ export default function HomePage() {
               {/* Portal 3: Reservations */}
               <Link
                 to="/reservations"
-                className="group p-4 rounded-2xl bg-white dark:bg-[#1A1D21] border border-slate-200/90 dark:border-white/10 hover:border-[#7E8056]/60 dark:hover:border-[#7E8056]/60 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between text-center items-center hover:-translate-y-1 min-h-[155px]"
+                className="group p-3.5 rounded-2xl bg-white dark:bg-[#1E2125] border border-[#E6E0D6] dark:border-white/10 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between text-center items-center hover:-translate-y-0.5"
               >
-                <div className="w-10 h-10 rounded-xl bg-[#F0EDE6] dark:bg-white/[0.07] text-[#555845] dark:text-[#C2B59B] flex items-center justify-center mb-2.5 group-hover:scale-110 group-hover:bg-[#7E8056] group-hover:text-white dark:group-hover:bg-[#7E8056] dark:group-hover:text-white transition-all duration-300 shadow-sm">
-                  <Calendar className="w-5 h-5" />
+                <div className="w-9 h-9 rounded-xl bg-[#F0EDE6] dark:bg-white/10 text-[#555845] dark:text-[#A4A77E] flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                  <Calendar className="w-5 h-5 text-[#7E8056] dark:text-[#A4A77E]" />
                 </div>
                 <div>
-                  <h4 className="text-xs sm:text-[13px] font-bold text-slate-900 dark:text-white tracking-tight">Reservations</h4>
-                  <div className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-semibold text-slate-500 dark:text-slate-400 group-hover:text-[#7E8056] dark:group-hover:text-[#C2B59B] transition-colors">
+                  <h4 className="text-xs font-bold text-slate-900 dark:text-white">Reservations</h4>
+                  <div className="mt-2 inline-flex items-center gap-1 text-[11px] font-semibold text-slate-600 dark:text-slate-300 group-hover:text-black dark:group-hover:text-white">
                     <span>Book Your Install</span>
-                    <span className="w-4 h-4 rounded-full border border-slate-300 dark:border-white/20 flex items-center justify-center text-[9px] group-hover:border-[#7E8056] group-hover:bg-[#7E8056] group-hover:text-white transition-all">→</span>
+                    <span className="w-4 h-4 rounded-full border border-slate-400 dark:border-slate-500 flex items-center justify-center text-[9px] group-hover:border-black dark:group-hover:border-white">→</span>
                   </div>
                 </div>
               </Link>
@@ -642,16 +498,16 @@ export default function HomePage() {
               {/* Portal 4: Contractor Onboarding */}
               <Link
                 to="/contractor"
-                className="group p-4 rounded-2xl bg-white dark:bg-[#1A1D21] border border-slate-200/90 dark:border-white/10 hover:border-[#7E8056]/60 dark:hover:border-[#7E8056]/60 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between text-center items-center hover:-translate-y-1 min-h-[155px]"
+                className="group p-3.5 rounded-2xl bg-white dark:bg-[#1E2125] border border-[#E6E0D6] dark:border-white/10 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between text-center items-center hover:-translate-y-0.5"
               >
-                <div className="w-10 h-10 rounded-xl bg-[#F0EDE6] dark:bg-white/[0.07] text-[#555845] dark:text-[#C2B59B] flex items-center justify-center mb-2.5 group-hover:scale-110 group-hover:bg-[#7E8056] group-hover:text-white dark:group-hover:bg-[#7E8056] dark:group-hover:text-white transition-all duration-300 shadow-sm">
-                  <HardHat className="w-5 h-5" />
+                <div className="w-9 h-9 rounded-xl bg-[#F0EDE6] dark:bg-white/10 text-[#555845] dark:text-[#A4A77E] flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                  <HardHat className="w-5 h-5 text-[#7E8056] dark:text-[#A4A77E]" />
                 </div>
                 <div>
-                  <h4 className="text-xs sm:text-[13px] font-bold text-slate-900 dark:text-white tracking-tight">Contractor Onboarding</h4>
-                  <div className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-semibold text-slate-500 dark:text-slate-400 group-hover:text-[#7E8056] dark:group-hover:text-[#C2B59B] transition-colors">
+                  <h4 className="text-xs font-bold text-slate-900 dark:text-white">Contractor Onboarding</h4>
+                  <div className="mt-2 inline-flex items-center gap-1 text-[11px] font-semibold text-slate-600 dark:text-slate-300 group-hover:text-black dark:group-hover:text-white">
                     <span>Join Our Network</span>
-                    <span className="w-4 h-4 rounded-full border border-slate-300 dark:border-white/20 flex items-center justify-center text-[9px] group-hover:border-[#7E8056] group-hover:bg-[#7E8056] group-hover:text-white transition-all">→</span>
+                    <span className="w-4 h-4 rounded-full border border-slate-400 dark:border-slate-500 flex items-center justify-center text-[9px] group-hover:border-black dark:group-hover:border-white">→</span>
                   </div>
                 </div>
               </Link>
@@ -659,48 +515,41 @@ export default function HomePage() {
             </div>
 
             {/* Right: Wide Technician & Local Mechanical Card */}
-            <div className="lg:col-span-4 flex">
-              <Link
-                to="/local-mechanical"
-                className="group relative w-full rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl border border-slate-300/80 dark:border-white/15 hover:border-[#7E8056]/80 dark:hover:border-[#C2B59B]/60 bg-[#16181B] text-white p-5 sm:p-6 flex flex-col justify-between min-h-[155px] transition-all duration-300 hover:-translate-y-0.5"
-              >
-                {/* Background Technician Photo */}
-                <div className="absolute inset-0 overflow-hidden">
+            <div className="lg:col-span-4">
+              <div className="relative rounded-2xl overflow-hidden shadow-lg border border-slate-300 dark:border-[#3E4249] bg-[#1E2024] text-white p-4 sm:p-5 flex items-center justify-between min-h-[120px]">
+
+                {/* Background Technician Photo from Image */}
+                <div className="absolute inset-0">
                   <img
-                    src="/images/technician-mechanical-room.jpg"
-                    alt="HVAC Technician inspecting mechanical cabinet"
-                    className="w-full h-full object-cover object-[center_28%] group-hover:scale-105 transition-transform duration-700 ease-out brightness-95"
+                    src="/images/slices/technician-portals-card.jpg"
+                    alt="Technician inspecting No-Tech unit"
+                    className="w-full h-full object-cover object-center brightness-90"
                   />
-                  {/* High contrast gradient overlay for crisp text readability */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/65 to-black/25" />
-                  <div className="absolute inset-0 bg-black/15" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-transparent" />
                 </div>
 
-                {/* Top Badge */}
-                <div className="relative z-10 flex items-center justify-between gap-2">
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-[10px] font-semibold text-white/95 uppercase tracking-wider">
-                    <ShieldCheck className="w-3.5 h-3.5 text-[#C2B59B]" />
-                    <span>Field Validated • Local Mechanical</span>
-                  </div>
-                </div>
-
-                {/* Main Content & CTA */}
-                <div className="relative z-10 mt-3 sm:mt-4 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
-                  <div className="space-y-1 max-w-[280px]">
-                    <h4 className="text-sm sm:text-base font-bold text-white leading-snug tracking-tight drop-shadow-sm">
+                {/* Overlaid Content */}
+                <div className="relative z-10 space-y-2 max-w-[280px]">
+                  <div>
+                    <h4 className="text-xs sm:text-sm font-bold text-white leading-tight">
                       Trusted by Professionals.
                     </h4>
-                    <p className="text-xs text-white/85 font-medium drop-shadow-sm">
+                    <p className="text-[11px] sm:text-xs text-slate-200 font-medium">
                       Approved by Local Mechanical.
                     </p>
                   </div>
-
-                  <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#7E8056] group-hover:bg-[#6c6e49] text-white font-semibold text-xs transition-all shadow-md group-hover:shadow-lg whitespace-nowrap self-start sm:self-auto group-hover:translate-x-0.5">
-                    <span>Learn More</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </span>
                 </div>
-              </Link>
+
+                <div className="relative z-10 self-end">
+                  <Link
+                    to="/local-mechanical"
+                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#7E8056] hover:bg-[#6c6e49] text-white font-semibold text-[11px] transition-all shadow-md"
+                  >
+                    <span>Learn More →</span>
+                  </Link>
+                </div>
+
+              </div>
             </div>
 
           </div>
@@ -725,13 +574,13 @@ export default function HomePage() {
                 <Calendar className="w-6 h-6 text-white" />
               </div>
               <div>
-                <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#7E8056]/15 text-[#7E8056] dark:text-[#C2B59B] text-[10px] font-bold uppercase tracking-wider mb-1">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#A4A77E]/15 border border-[#A4A77E]/30 text-[#6C6F4D] dark:text-[#A4A77E] text-[10px] font-bold uppercase tracking-widest mb-1.5">
                   Production Batch 2026 Reservation
                 </div>
                 <h3 className="text-xl font-bold font-serif text-slate-900 dark:text-white">
                   Reserve Your No-Tech Modular HVAC System
                 </h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400">
+                <p className="text-xs text-slate-600 dark:text-slate-400">
                   Lock in your production batch number and pricing with a $200 fully refundable deposit.
                 </p>
               </div>

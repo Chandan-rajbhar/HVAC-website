@@ -16,8 +16,7 @@ import {
   Search,
   Check,
   X,
-  FileText,
-  ArrowRight
+  FileText
 } from 'lucide-react';
 import LocalMechanicalLogo from '../components/common/LocalMechanicalLogo';
 import { DEMO_CONTRACTORS } from '../data/mockData';
@@ -105,74 +104,27 @@ export default function LocalMechanicalPage() {
     : applications.filter(a => a.status === statusFilter);
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#121315] text-slate-900 dark:text-slate-100 transition-colors duration-200">
-
-      {/* ===================== HERO SECTION ===================== */}
-      <section className="relative w-full bg-[#0B0C0E] text-white border-b border-white/10 overflow-hidden">
-        <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            
-            {/* Left Column: Text & CTA */}
-            <div className="lg:col-span-6 space-y-4 sm:space-y-5">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[11px] font-semibold text-slate-300 tracking-wider">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#C2B59B]" />
-                <span>Official Code Authority • Local Mechanical</span>
-              </div>
-
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold font-serif text-white tracking-tight leading-tight drop-shadow-sm">
+    <div className="min-h-screen bg-white dark:bg-[#121315] text-slate-900 dark:text-slate-100 py-8 lg:py-12 transition-colors duration-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        
+        {/* ===================== HERO BANNER ===================== */}
+        <div className="rounded-2xl bg-gradient-to-r from-[#F4F1EA] via-[#F8F6F0] to-[#F4F1EA] dark:from-[#1B1D20] dark:via-[#22252A] dark:to-[#1B1D20] border border-slate-200 dark:border-[#A4A77E]/30 p-6 sm:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.02)] dark:shadow-xl relative overflow-hidden">
+          <div className="relative z-10">
+            <div className="space-y-2.5 max-w-2xl">
+              <h1 className="text-2xl sm:text-4xl font-bold font-serif text-slate-900 dark:text-white tracking-tight">
                 Local Mechanical
               </h1>
-
-              <p className="text-lg sm:text-xl font-bold text-[#E8DEC8] dark:text-[#C2B59B] tracking-tight">
+              <p className="text-base sm:text-lg text-[#8C7A58] dark:text-[#C2B59B] font-semibold">
                 Approval. Compliance. Quality.
               </p>
-
-              <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-xl">
-                Ensuring every installation meets our highest standards across certified contractors and modular systems worldwide.
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                Local Mechanical functions as the certification and quality enforcement hub for all mechanical contractors working with No-Tech HVAC, ensuring standardized service and regulatory compliance worldwide.
               </p>
-
-              <div className="pt-2 flex flex-wrap items-center gap-3">
-                <button
-                  onClick={() => {
-                    setActiveTab('dashboard');
-                    const el = document.getElementById('local-mech-tabs');
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#7E8056] hover:bg-[#6e7049] active:scale-95 text-white font-semibold text-sm transition-all shadow-lg hover:shadow-xl hover:gap-3 cursor-pointer"
-                >
-                  <span>View Dashboard</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              </div>
             </div>
-
-            {/* Right Column: Visual Showcase (Framed with equal right margin aligned to Header) */}
-            <div className="lg:col-span-6">
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/15 bg-black/60 aspect-[16/10] sm:aspect-[16/9] group">
-                <img
-                  src="/images/local-mechanical-hero-tech.jpg"
-                  alt="HVAC Technician in Mechanical Room with Testing Cabinet"
-                  className="w-full h-full object-cover object-[center_25%] group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
-                
-                {/* Local Mechanical Brand Emblem overlay in bottom right */}
-                <div className="absolute bottom-4 right-4 p-3.5 rounded-2xl bg-black/70 backdrop-blur-md border border-white/15 shadow-xl flex items-center gap-3">
-                  <LocalMechanicalLogo className="h-10" showText={false} />
-                  <div>
-                    <span className="block text-xs font-bold tracking-widest font-serif uppercase text-white">LOCAL MECHANICAL</span>
-                    <span className="text-[9px] text-[#A4A77E] tracking-wider uppercase font-medium">Quality & Code Enforcement</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
           </div>
-        </div>
 
-        {/* Navigation Sub-Tabs Bar inside Hero Bottom */}
-        <div id="local-mech-tabs" className="border-t border-white/10 bg-black/55 backdrop-blur-md">
-          <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap gap-2 text-xs">
+          {/* Navigation Sub-Tabs */}
+          <div className="mt-6 pt-6 border-t border-slate-200/80 dark:border-white/10 flex flex-wrap gap-2 text-xs">
             {[
               { id: 'dashboard', label: 'Approval Dashboard' },
               { id: 'compliance', label: 'Installation Compliance & RFID Logs' },
@@ -181,33 +133,31 @@ export default function LocalMechanicalPage() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-4 py-2 rounded-xl font-bold transition-all cursor-pointer ${activeTab === tab.id
+                className={`px-4 py-2 rounded-xl font-bold transition-all ${
+                  activeTab === tab.id
                     ? 'bg-[#7E8056] text-white shadow-md'
-                    : 'bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white'
-                  }`}
+                    : 'bg-white/80 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-transparent'
+                }`}
               >
                 {tab.label}
               </button>
             ))}
           </div>
         </div>
-      </section>
-
-      {/* Main Page Content Body with matching max-w-[1480px] container */}
-      <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8">
 
         {/* ===================== TAB 1: APPROVAL DASHBOARD ===================== */}
         {activeTab === 'dashboard' && (
           <div className="space-y-6">
-
+            
             {/* 4 Stats Cards matching reference screenshot */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               <div
                 onClick={() => setStatusFilter('pending')}
-                className={`p-4 rounded-2xl border transition-all cursor-pointer ${statusFilter === 'pending'
+                className={`p-4 rounded-2xl border transition-all cursor-pointer ${
+                  statusFilter === 'pending'
                     ? 'bg-amber-100/70 border-amber-500 text-amber-950 dark:bg-amber-500/20 dark:border-amber-500 dark:text-amber-300 ring-1 ring-amber-500'
                     : 'bg-white dark:bg-[#181A1D] border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-300 hover:border-slate-300'
-                  }`}
+                }`}
               >
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400">Pending</span>
@@ -219,10 +169,11 @@ export default function LocalMechanicalPage() {
 
               <div
                 onClick={() => setStatusFilter('approved')}
-                className={`p-4 rounded-2xl border transition-all cursor-pointer ${statusFilter === 'approved'
+                className={`p-4 rounded-2xl border transition-all cursor-pointer ${
+                  statusFilter === 'approved'
                     ? 'bg-emerald-100/70 border-emerald-500 text-emerald-950 dark:bg-emerald-500/20 dark:border-emerald-500 dark:text-emerald-300 ring-1 ring-emerald-500'
                     : 'bg-white dark:bg-[#181A1D] border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-300 hover:border-slate-300'
-                  }`}
+                }`}
               >
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">Approved</span>
@@ -234,10 +185,11 @@ export default function LocalMechanicalPage() {
 
               <div
                 onClick={() => setStatusFilter('rejected')}
-                className={`p-4 rounded-2xl border transition-all cursor-pointer ${statusFilter === 'rejected'
+                className={`p-4 rounded-2xl border transition-all cursor-pointer ${
+                  statusFilter === 'rejected'
                     ? 'bg-red-500/20 border-red-500 text-red-300 ring-1 ring-red-500'
                     : 'bg-[#181A1D] border-white/10 text-slate-300 hover:border-white/20'
-                  }`}
+                }`}
               >
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold uppercase tracking-wider text-red-400">Rejected</span>
@@ -249,10 +201,11 @@ export default function LocalMechanicalPage() {
 
               <div
                 onClick={() => setStatusFilter('under_review')}
-                className={`p-4 rounded-2xl border transition-all cursor-pointer ${statusFilter === 'under_review'
+                className={`p-4 rounded-2xl border transition-all cursor-pointer ${
+                  statusFilter === 'under_review'
                     ? 'bg-[#C2B59B]/20 border-[#C2B59B] text-[#C2B59B] ring-1 ring-[#C2B59B]'
                     : 'bg-[#181A1D] border-white/10 text-slate-300 hover:border-white/20'
-                  }`}
+                }`}
               >
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold uppercase tracking-wider text-[#C2B59B]">Under Review</span>
@@ -310,14 +263,15 @@ export default function LocalMechanicalPage() {
                         <td className="py-3 px-3 font-sans text-xs">{app.insurance}</td>
                         <td className="py-3 px-3 text-[#A4A77E] font-bold">{app.score}</td>
                         <td className="py-3 px-3">
-                          <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase font-sans ${app.status === 'approved'
+                          <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase font-sans ${
+                            app.status === 'approved'
                               ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
                               : app.status === 'pending'
-                                ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
-                                : app.status === 'under_review'
-                                  ? 'bg-[#C2B59B]/20 text-[#C2B59B] border border-[#C2B59B]/30'
-                                  : 'bg-red-500/20 text-red-400 border border-red-500/30'
-                            }`}>
+                              ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
+                              : app.status === 'under_review'
+                              ? 'bg-[#C2B59B]/20 text-[#C2B59B] border border-[#C2B59B]/30'
+                              : 'bg-red-500/20 text-red-400 border border-red-500/30'
+                          }`}>
                             {app.status.replace('_', ' ')}
                           </span>
                         </td>
@@ -342,7 +296,7 @@ export default function LocalMechanicalPage() {
         {/* ===================== TAB 2: COMPLIANCE & RFID LOGS ===================== */}
         {activeTab === 'compliance' && (
           <div className="space-y-6">
-
+            
             <div className="p-6 rounded-2xl bg-[#181A1D] border border-white/10 space-y-5 shadow-xl">
               <div className="flex items-center justify-between pb-3 border-b border-white/10">
                 <div className="flex items-center gap-2">
@@ -447,7 +401,7 @@ export default function LocalMechanicalPage() {
         {/* ===================== TAB 3: PERFORMANCE & REVIEWS ===================== */}
         {activeTab === 'performance' && (
           <div className="space-y-6">
-
+            
             <div className="p-6 rounded-2xl bg-[#181A1D] border border-white/10 space-y-5 shadow-xl">
               <div className="flex items-center justify-between pb-3 border-b border-white/10">
                 <div className="flex items-center gap-2">

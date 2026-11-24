@@ -24,7 +24,7 @@ export default function Navbar() {
 
   const navItems = [
     { name: 'Home', path: '/', icon: Home },
-    { name: 'Buyers Portal', path: '/buyers', icon: ShoppingCart },
+    { name: 'Buyer', path: '/buyers', icon: ShoppingCart },
     { name: 'Investor Hub', path: '/investor', icon: TrendingUp },
     { name: 'Reservations', path: '/reservations', icon: Calendar },
     { name: 'Contractor Onboarding', path: '/contractor', icon: HardHat },
@@ -33,7 +33,7 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/95 dark:bg-[#16181B]/95 backdrop-blur-md border-b border-slate-200 dark:border-white/10 shadow-sm transition-colors">
+    <header className="sticky top-0 z-50 w-full bg-gradient-to-r from-[#F4F1EA] via-[#F8F6F0] to-[#F4F1EA] dark:from-[#1B1D20] dark:via-[#22252A] dark:to-[#1B1D20] border-b border-slate-200 dark:border-[#A4A77E]/20 shadow-[0_2px_12px_rgba(0,0,0,0.02)] dark:shadow-xl transition-colors">
       <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
 
@@ -42,7 +42,7 @@ export default function Navbar() {
             <LocalIndustriesLogo className="h-12 sm:h-14" isDark={isDark} />
           </Link>
 
-          {/* Center: Desktop Clean Text-Only Navigation Links */}
+          {/* Center: Desktop Clean Text-Only Navigation Links with Underline Indicator */}
           <nav className="hidden xl:flex items-center space-x-1 lg:space-x-2">
             {navItems.map((item) => {
               const isActive = location.pathname === item.path;
@@ -51,12 +51,15 @@ export default function Navbar() {
                 <NavLink
                   key={item.name}
                   to={item.path}
-                  className={`px-3.5 py-2 rounded-xl text-xs sm:text-[13px] font-medium tracking-wide transition-all duration-200 whitespace-nowrap ${isActive
-                    ? 'bg-[#7E8056] text-white font-bold shadow-sm'
-                    : 'text-slate-600 hover:text-slate-950 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-white dark:hover:bg-white/5'
+                  className={`relative px-3 py-2 text-xs sm:text-[13px] tracking-wide transition-colors duration-150 whitespace-nowrap group ${isActive
+                    ? 'text-[#7E8056] dark:text-[#A4A77E] font-bold'
+                    : 'text-slate-600 hover:text-slate-950 dark:text-slate-400 dark:hover:text-white font-medium'
                     }`}
                 >
-                  {item.name}
+                  <span>{item.name}</span>
+                  {isActive && (
+                    <span className="absolute bottom-0 left-3 right-3 h-[2.5px] rounded-full bg-[#7E8056] dark:bg-[#A4A77E] dark:shadow-[0_0_8px_rgba(164,167,126,0.5)] transition-all" />
+                  )}
                 </NavLink>
               );
             })}
@@ -105,7 +108,7 @@ export default function Navbar() {
 
       {/* Mobile Drawer Navigation */}
       {mobileMenuOpen && (
-        <div className="xl:hidden bg-white dark:bg-[#16181B] border-b border-slate-200 dark:border-white/10 px-4 pt-3 pb-6 space-y-2 animate-in slide-in-from-top-4 duration-200 shadow-xl">
+        <div className="xl:hidden bg-gradient-to-r from-[#F4F1EA] via-[#F8F6F0] to-[#F4F1EA] dark:from-[#1B1D20] dark:via-[#22252A] dark:to-[#1B1D20] border-b border-slate-200 dark:border-[#A4A77E]/20 px-4 pt-3 pb-6 space-y-2 animate-in slide-in-from-top-4 duration-200 shadow-xl">
           <div className="text-[11px] font-bold uppercase tracking-wider text-[#7E8056] dark:text-[#A4A77E] px-3 py-1">
             Navigation Portals
           </div>
@@ -120,11 +123,11 @@ export default function Navbar() {
                   to={item.path}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all ${isActive
-                    ? 'bg-[#7E8056] text-white font-semibold'
+                    ? 'bg-[#7E8056]/15 text-[#7E8056] dark:text-[#A4A77E] font-bold border-l-2 border-[#7E8056] dark:border-[#A4A77E]'
                     : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 hover:text-black dark:hover:text-white'
                     }`}
                 >
-                  <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-[#7E8056] dark:text-[#A4A77E]'}`} />
+                  <Icon className={`w-4 h-4 ${isActive ? 'text-[#7E8056] dark:text-[#A4A77E]' : 'text-slate-400'}`} />
                   <span>{item.name}</span>
                 </Link>
               );

@@ -13,7 +13,7 @@ export default function LocalMechanicalLogo({ className = 'h-10', showText = tru
         {/* Outer Hexagonal Shield */}
         <path
           d="M50 4 L88 22 V54 C88 76 50 96 50 96 C50 96 12 76 12 54 V22 Z"
-          fill={light ? '#F3F4F6' : '#1C1E22'}
+          className="fill-slate-100 dark:fill-[#1C1E22]"
           stroke="#C2B59B"
           strokeWidth="3"
         />
@@ -41,10 +41,10 @@ export default function LocalMechanicalLogo({ className = 'h-10', showText = tru
 
       {showText && (
         <div className="flex flex-col justify-center">
-          <span className={`text-xs md:text-sm font-bold tracking-wider font-serif uppercase ${light ? 'text-gray-900' : 'text-slate-100'}`}>
+          <span className="text-xs md:text-sm font-bold tracking-wider font-serif uppercase text-slate-900 dark:text-slate-100">
             LOCAL MECHANICAL
           </span>
-          <span className="text-[9px] text-[#A4A77E] tracking-widest uppercase font-medium">
+          <span className="text-[9px] text-[#6C6F4D] dark:text-[#A4A77E] tracking-widest uppercase font-semibold">
             Certification & Quality Enforcement
           </span>
         </div>
