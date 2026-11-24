@@ -16,7 +16,8 @@ import {
   Search,
   Check,
   X,
-  FileText
+  FileText,
+  ArrowRight
 } from 'lucide-react';
 import LocalMechanicalLogo from '../components/common/LocalMechanicalLogo';
 import { DEMO_CONTRACTORS } from '../data/mockData';
@@ -104,40 +105,68 @@ export default function LocalMechanicalPage() {
     : applications.filter(a => a.status === statusFilter);
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#121315] text-slate-900 dark:text-slate-100 py-8 lg:py-12 transition-colors duration-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-        
-        {/* ===================== HERO BANNER ===================== */}
-        <div className="rounded-2xl bg-gradient-to-r from-[#F0ECE1] via-[#F7F4EC] to-[#F0ECE1] dark:from-[#1B1D20] dark:via-[#22252A] dark:to-[#1B1D20] border border-slate-300 dark:border-[#A4A77E]/30 p-6 sm:p-8 shadow-md relative overflow-hidden">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative z-10">
-            <div className="space-y-2 max-w-2xl">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#7E8056] dark:text-[#A4A77E]">
-                Official Quality & Code Enforcement Authority
-              </span>
-              <h1 className="text-2xl sm:text-4xl font-bold font-serif text-slate-900 dark:text-white">
-                Local Mechanical
-              </h1>
-              <p className="text-base sm:text-lg text-[#8C7A58] dark:text-[#C2B59B] font-semibold">
-                Approval. Compliance. Quality.
-              </p>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
-                Local Mechanical functions as the certification and quality enforcement hub for all mechanical contractors working with No-Tech HVAC, ensuring standardized service and regulatory compliance worldwide.
-              </p>
+    <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#121315] text-slate-900 dark:text-slate-100 transition-colors duration-200">
+
+      {/* ===================== FULL-WIDTH HERO SECTION (NOT IN A CARD) ===================== */}
+      <section className="relative w-full bg-[#0B0C0E] text-white overflow-hidden border-b border-white/10 min-h-[380px] sm:min-h-[420px] lg:min-h-[460px] flex flex-col justify-between">
+        {/* Properly Contained Right Visual Image */}
+        <div className="absolute right-0 top-0 bottom-0 w-full sm:w-[58%] lg:w-[50%] xl:w-[46%] pointer-events-none overflow-hidden">
+          <img
+            src="/images/local-mechanical-hero-tech.jpg"
+            alt="HVAC Technician in Mechanical Room with Testing Cabinet"
+            className="w-full h-full object-cover object-[center_25%] filter brightness-[0.88] contrast-[1.05]"
+          />
+          {/* Feathered dark gradient on the left edge */}
+          <div className="absolute inset-y-0 left-0 w-28 sm:w-44 lg:w-64 bg-gradient-to-r from-[#0B0C0E] via-[#0B0C0E]/80 to-transparent" />
+          {/* Mobile vertical gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0B0C0E] via-[#0B0C0E]/80 to-[#0B0C0E]/30 sm:hidden" />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16 relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 w-full">
+          <div className="max-w-xl space-y-3.5">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[11px] font-semibold text-slate-300 tracking-wider">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#C2B59B]" />
+              <span>Official Code Authority • Local Mechanical</span>
             </div>
 
-            <div className="flex-shrink-0">
-              <div className="w-24 sm:w-28 h-24 sm:h-28 rounded-2xl overflow-hidden border border-slate-200 dark:border-white/10 shadow-md bg-white dark:bg-black/40 flex items-center justify-center p-2">
-                <img
-                  src="/images/slices/localmech-shield.jpg"
-                  alt="Local Mechanical Quality Shield"
-                  className="w-full h-full object-contain"
-                />
-              </div>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-serif text-white tracking-tight drop-shadow-sm">
+              Local Mechanical
+            </h1>
+
+            <p className="text-base sm:text-xl font-bold text-[#E8DEC8] dark:text-[#C2B59B] tracking-tight">
+              Approval. Compliance. Quality.
+            </p>
+
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-md">
+              Ensuring every installation meets our highest standards across certified contractors and modular systems worldwide.
+            </p>
+
+            <div className="pt-2 flex flex-wrap items-center gap-3">
+              <button
+                onClick={() => {
+                  setActiveTab('dashboard');
+                  const el = document.getElementById('local-mech-tabs');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#7E8056] hover:bg-[#6e7049] active:scale-95 text-white font-semibold text-xs sm:text-sm transition-all shadow-lg hover:shadow-xl hover:gap-3 cursor-pointer"
+              >
+                <span>View Dashboard</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
             </div>
           </div>
 
-          {/* Navigation Sub-Tabs */}
-          <div className="mt-8 pt-6 border-t border-slate-200 dark:border-white/10 flex flex-wrap gap-2 text-xs">
+          {/* Local Mechanical Brand Emblem matching reference */}
+          <div className="hidden sm:flex flex-col items-center justify-center p-6 rounded-2xl bg-black/50 backdrop-blur-md border border-white/15 shadow-2xl">
+            <LocalMechanicalLogo className="h-16" showText={false} />
+            <span className="mt-2 text-xs font-bold tracking-widest font-serif uppercase text-white">LOCAL MECHANICAL</span>
+            <span className="text-[9px] text-[#A4A77E] tracking-wider uppercase font-medium">Quality & Code Enforcement</span>
+          </div>
+        </div>
+
+        {/* Navigation Sub-Tabs Bar inside Hero Bottom */}
+        <div id="local-mech-tabs" className="relative z-10 border-t border-white/10 bg-black/55 backdrop-blur-md">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap gap-2 text-xs">
             {[
               { id: 'dashboard', label: 'Approval Dashboard' },
               { id: 'compliance', label: 'Installation Compliance & RFID Logs' },
@@ -146,31 +175,33 @@ export default function LocalMechanicalPage() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-4 py-2 rounded-xl font-bold transition-all ${
-                  activeTab === tab.id
+                className={`px-4 py-2 rounded-xl font-bold transition-all cursor-pointer ${activeTab === tab.id
                     ? 'bg-[#7E8056] text-white shadow-md'
-                    : 'bg-white/80 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-transparent'
-                }`}
+                    : 'bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white'
+                  }`}
               >
                 {tab.label}
               </button>
             ))}
           </div>
         </div>
+      </section>
+
+      {/* Main Page Content Body */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8">
 
         {/* ===================== TAB 1: APPROVAL DASHBOARD ===================== */}
         {activeTab === 'dashboard' && (
           <div className="space-y-6">
-            
+
             {/* 4 Stats Cards matching reference screenshot */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               <div
                 onClick={() => setStatusFilter('pending')}
-                className={`p-4 rounded-2xl border transition-all cursor-pointer ${
-                  statusFilter === 'pending'
+                className={`p-4 rounded-2xl border transition-all cursor-pointer ${statusFilter === 'pending'
                     ? 'bg-amber-100/70 border-amber-500 text-amber-950 dark:bg-amber-500/20 dark:border-amber-500 dark:text-amber-300 ring-1 ring-amber-500'
                     : 'bg-white dark:bg-[#181A1D] border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-300 hover:border-slate-300'
-                }`}
+                  }`}
               >
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400">Pending</span>
@@ -182,11 +213,10 @@ export default function LocalMechanicalPage() {
 
               <div
                 onClick={() => setStatusFilter('approved')}
-                className={`p-4 rounded-2xl border transition-all cursor-pointer ${
-                  statusFilter === 'approved'
+                className={`p-4 rounded-2xl border transition-all cursor-pointer ${statusFilter === 'approved'
                     ? 'bg-emerald-100/70 border-emerald-500 text-emerald-950 dark:bg-emerald-500/20 dark:border-emerald-500 dark:text-emerald-300 ring-1 ring-emerald-500'
                     : 'bg-white dark:bg-[#181A1D] border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-300 hover:border-slate-300'
-                }`}
+                  }`}
               >
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">Approved</span>
@@ -198,11 +228,10 @@ export default function LocalMechanicalPage() {
 
               <div
                 onClick={() => setStatusFilter('rejected')}
-                className={`p-4 rounded-2xl border transition-all cursor-pointer ${
-                  statusFilter === 'rejected'
+                className={`p-4 rounded-2xl border transition-all cursor-pointer ${statusFilter === 'rejected'
                     ? 'bg-red-500/20 border-red-500 text-red-300 ring-1 ring-red-500'
                     : 'bg-[#181A1D] border-white/10 text-slate-300 hover:border-white/20'
-                }`}
+                  }`}
               >
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold uppercase tracking-wider text-red-400">Rejected</span>
@@ -214,11 +243,10 @@ export default function LocalMechanicalPage() {
 
               <div
                 onClick={() => setStatusFilter('under_review')}
-                className={`p-4 rounded-2xl border transition-all cursor-pointer ${
-                  statusFilter === 'under_review'
+                className={`p-4 rounded-2xl border transition-all cursor-pointer ${statusFilter === 'under_review'
                     ? 'bg-[#C2B59B]/20 border-[#C2B59B] text-[#C2B59B] ring-1 ring-[#C2B59B]'
                     : 'bg-[#181A1D] border-white/10 text-slate-300 hover:border-white/20'
-                }`}
+                  }`}
               >
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold uppercase tracking-wider text-[#C2B59B]">Under Review</span>
@@ -276,15 +304,14 @@ export default function LocalMechanicalPage() {
                         <td className="py-3 px-3 font-sans text-xs">{app.insurance}</td>
                         <td className="py-3 px-3 text-[#A4A77E] font-bold">{app.score}</td>
                         <td className="py-3 px-3">
-                          <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase font-sans ${
-                            app.status === 'approved'
+                          <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase font-sans ${app.status === 'approved'
                               ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
                               : app.status === 'pending'
-                              ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
-                              : app.status === 'under_review'
-                              ? 'bg-[#C2B59B]/20 text-[#C2B59B] border border-[#C2B59B]/30'
-                              : 'bg-red-500/20 text-red-400 border border-red-500/30'
-                          }`}>
+                                ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
+                                : app.status === 'under_review'
+                                  ? 'bg-[#C2B59B]/20 text-[#C2B59B] border border-[#C2B59B]/30'
+                                  : 'bg-red-500/20 text-red-400 border border-red-500/30'
+                            }`}>
                             {app.status.replace('_', ' ')}
                           </span>
                         </td>
@@ -309,7 +336,7 @@ export default function LocalMechanicalPage() {
         {/* ===================== TAB 2: COMPLIANCE & RFID LOGS ===================== */}
         {activeTab === 'compliance' && (
           <div className="space-y-6">
-            
+
             <div className="p-6 rounded-2xl bg-[#181A1D] border border-white/10 space-y-5 shadow-xl">
               <div className="flex items-center justify-between pb-3 border-b border-white/10">
                 <div className="flex items-center gap-2">
@@ -414,7 +441,7 @@ export default function LocalMechanicalPage() {
         {/* ===================== TAB 3: PERFORMANCE & REVIEWS ===================== */}
         {activeTab === 'performance' && (
           <div className="space-y-6">
-            
+
             <div className="p-6 rounded-2xl bg-[#181A1D] border border-white/10 space-y-5 shadow-xl">
               <div className="flex items-center justify-between pb-3 border-b border-white/10">
                 <div className="flex items-center gap-2">

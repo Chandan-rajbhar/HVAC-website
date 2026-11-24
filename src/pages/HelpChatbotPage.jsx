@@ -77,37 +77,71 @@ export default function HelpChatbotPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#121315] text-slate-900 dark:text-slate-100 py-8 lg:py-12 transition-colors duration-200">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-        
-        {/* ===================== HERO / BANNER ===================== */}
-        <div className="rounded-2xl bg-gradient-to-r from-[#F0ECE1] via-[#F7F4EC] to-[#F0ECE1] dark:from-[#1B1D20] dark:via-[#22252A] dark:to-[#1B1D20] border border-slate-300 dark:border-white/10 p-6 sm:p-8 shadow-md flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-2 max-w-xl">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-[#7E8056] dark:text-[#A4A77E]">
-              AI Support & Knowledge Base
-            </span>
-            <h1 className="text-2xl sm:text-4xl font-bold font-serif text-slate-900 dark:text-white">
+    <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#121315] text-slate-900 dark:text-slate-100 transition-colors duration-200">
+      
+      {/* ===================== FULL-WIDTH HERO SECTION (NOT IN A CARD) ===================== */}
+      <section className="relative w-full bg-[#0B0C0E] text-white overflow-hidden border-b border-white/10 min-h-[380px] sm:min-h-[420px] lg:min-h-[450px] flex items-center">
+        {/* Properly Contained Right Visual Image with Newly Provided 3D Robot Mascot */}
+        <div className="absolute right-0 top-0 bottom-0 w-full sm:w-[58%] lg:w-[50%] xl:w-[48%] pointer-events-none overflow-hidden">
+          <img
+            src="/images/help-robot-hero.jpg"
+            alt="3D AI Assistant Robot"
+            className="w-full h-full object-cover object-center filter brightness-[0.95] contrast-[1.05]"
+          />
+          {/* Feathered dark gradient on the left edge for seamless blend */}
+          <div className="absolute inset-y-0 left-0 w-28 sm:w-44 lg:w-64 bg-gradient-to-r from-[#0B0C0E] via-[#0B0C0E]/80 to-transparent" />
+          {/* Mobile vertical gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0B0C0E] via-[#0B0C0E]/80 to-[#0B0C0E]/30 sm:hidden" />
+        </div>
+
+        {/* Speech Bubble Matching Mockup */}
+        <div className="hidden sm:flex absolute top-8 sm:top-12 lg:top-14 right-6 sm:right-10 lg:right-16 z-20 pointer-events-none">
+          <div className="relative bg-white text-slate-900 px-5 sm:px-6 py-3 sm:py-4 rounded-3xl shadow-2xl border border-slate-100">
+            <p className="font-extrabold text-sm sm:text-base lg:text-lg text-slate-900 leading-tight tracking-tight text-center">
+              How can<br />I help you?
+            </p>
+            {/* Bubble tail pointing toward the robot */}
+            <div className="absolute -bottom-2 left-6 w-0 h-0 border-x-[8px] border-x-transparent border-t-[10px] border-t-white" />
+          </div>
+        </div>
+
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16 relative z-10 w-full">
+          <div className="max-w-xl space-y-3.5">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[11px] font-semibold text-slate-300 tracking-wider">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#7E8056]" />
+              <span>Help & AI Chatbot</span>
+            </div>
+
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-serif text-white tracking-tight drop-shadow-sm">
               Help & AI Chatbot
             </h1>
-            <p className="text-base sm:text-lg text-[#8C7A58] dark:text-[#C2B59B] font-semibold">
-              Get Instant Assistance.
-            </p>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
-              Find answers, get step-by-step guidance, and resolve inquiries quickly across customer selection, contractor training, and Local Mechanical compliance.
-            </p>
-          </div>
 
-          {/* 3D Robot Mascot Graphic matching reference screenshot */}
-          <div className="relative flex-shrink-0">
-            <div className="w-28 sm:w-32 h-24 sm:h-28 rounded-2xl overflow-hidden border border-slate-200 dark:border-white/10 shadow-md bg-white dark:bg-black/40">
-              <img
-                src="/images/slices/help-robot-3d.jpg"
-                alt="3D AI Assistant Robot"
-                className="w-full h-full object-cover object-center"
-              />
+            <p className="text-base sm:text-xl font-bold text-[#E8DEC8] dark:text-[#C2B59B] tracking-tight">
+              Get Instant Assistance
+            </p>
+
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-md">
+              Find answers, get guidance, and resolve issues quickly.
+            </p>
+
+            <div className="pt-2 flex flex-wrap items-center gap-3">
+              <button
+                onClick={() => {
+                  const el = document.getElementById('chat-interface-area');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#7E8056] hover:bg-[#6e7049] active:scale-95 text-white font-semibold text-xs sm:text-sm transition-all shadow-lg hover:shadow-xl hover:gap-3 cursor-pointer"
+              >
+                <span>Chat Now</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Main Page Content Body */}
+      <div id="chat-interface-area" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8">
 
         {/* ===================== POPULAR TOPICS & INTERACTIVE CHAT ===================== */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">

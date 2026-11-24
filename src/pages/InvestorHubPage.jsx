@@ -17,52 +17,63 @@ import LocalMechanicalLogo from '../components/common/LocalMechanicalLogo';
 
 export default function InvestorHubPage() {
   return (
-    <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#16181B] text-slate-800 dark:text-slate-100 py-8 lg:py-12 transition-colors duration-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-        
-        {/* ===================== HERO BANNER ===================== */}
-        <div className="rounded-2xl bg-gradient-to-r from-[#F0ECE1] via-[#F7F4EC] to-[#F0ECE1] dark:from-[#1B1D20] dark:via-[#22252A] dark:to-[#1B1D20] border border-slate-300 dark:border-white/10 p-6 sm:p-10 shadow-md relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="relative z-10 max-w-2xl space-y-3">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-[#7E8056] dark:text-[#A4A77E]">
-              no-techhvac/investors.com
-            </span>
-            <h1 className="text-3xl sm:text-5xl font-bold font-serif text-slate-900 dark:text-white">
+    <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#16181B] text-slate-800 dark:text-slate-100 transition-colors duration-200">
+      
+      {/* ===================== FULL-WIDTH HERO SECTION (NOT IN A CARD) ===================== */}
+      <section className="relative w-full bg-[#0B0C0E] text-white overflow-hidden border-b border-white/10 min-h-[380px] sm:min-h-[430px] lg:min-h-[460px] flex items-center">
+        {/* Properly Contained Right Visual Image */}
+        <div className="absolute right-0 top-0 bottom-0 w-full sm:w-[58%] lg:w-[50%] xl:w-[48%] pointer-events-none overflow-hidden">
+          <img
+            src="/images/investor-hero-building.jpg"
+            alt="Corporate Innovation Center at Sunset"
+            className="w-full h-full object-cover object-center filter brightness-[0.95] contrast-[1.05]"
+          />
+          {/* Feathered dark gradient on the left edge */}
+          <div className="absolute inset-y-0 left-0 w-28 sm:w-44 lg:w-64 bg-gradient-to-r from-[#0B0C0E] via-[#0B0C0E]/80 to-transparent" />
+          {/* Mobile vertical gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0B0C0E] via-[#0B0C0E]/80 to-[#0B0C0E]/30 sm:hidden" />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16 relative z-10 w-full">
+          <div className="max-w-xl space-y-3.5">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[11px] font-semibold text-slate-300 tracking-wider">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#7E8056]" />
+              <span>Investor Hub</span>
+            </div>
+
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-serif text-white tracking-tight drop-shadow-sm">
               Investor Hub
             </h1>
-            <p className="text-lg sm:text-xl text-[#8C7A58] dark:text-[#C2B59B] font-semibold">
-              Invest in Innovation.
+
+            <p className="text-base sm:text-xl font-bold text-[#E8DEC8] dark:text-[#C2B59B] tracking-tight">
+              Invest in Innovation
             </p>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-md">
               Discover the opportunity behind No-Tech HVAC's modular solution. We are redefining the global heating, ventilation, and air-conditioning industry through hot-swappable compartmental engineering.
             </p>
 
             <div className="pt-2 flex flex-wrap gap-3">
               <a
                 href="#why-invest"
-                className="px-5 py-2.5 rounded-full bg-[#7E8056] hover:bg-[#6e7049] text-white font-bold text-xs shadow-lg transition-all"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#7E8056] hover:bg-[#6e7049] active:scale-95 text-white font-semibold text-xs sm:text-sm transition-all shadow-lg hover:shadow-xl hover:gap-3 cursor-pointer"
               >
-                Learn More →
+                <span>Learn More</span>
+                <ArrowRight className="w-4 h-4" />
               </a>
               <Link
                 to="/buyers"
-                className="px-5 py-2.5 rounded-full bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/15 text-slate-800 dark:text-slate-200 text-xs font-semibold border border-slate-300 dark:border-white/15"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-semibold border border-white/20 transition-all"
               >
-                View Consumer Demand
+                <span>View Consumer Demand</span>
               </Link>
             </div>
           </div>
-
-          {/* Architectural Headquarters Image from Reference Mockup */}
-          <div className="relative z-10 flex-shrink-0">
-            <div className="w-36 sm:w-44 h-24 sm:h-28 rounded-2xl overflow-hidden border border-slate-200 dark:border-white/10 shadow-md bg-white dark:bg-black/40">
-              <img
-                src="/images/slices/investor-building.jpg"
-                alt="Corporate Innovation Center"
-                className="w-full h-full object-cover object-center"
-              />
-            </div>
-          </div>
         </div>
+      </section>
+
+      {/* Main Page Content Body */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-10">
 
         {/* ===================== WHY INVEST? CARDS ===================== */}
         {/* Exactly matches "Why Invest?" section in reference screenshot */}
