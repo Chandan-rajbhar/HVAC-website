@@ -43,8 +43,10 @@ export default function HomePage() {
   const [hoveredColor, setHoveredColor] = useState(null);
   const [selectedCompartment, setSelectedCompartment] = useState(1);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  const [isReserveModalOpen, setIsReserveModalOpen] = useState(false);
   const [howItWorksModalOpen, setHowItWorksModalOpen] = useState(false);
   const [showInteractiveModel, setShowInteractiveModel] = useState(false);
+  const [exploreTab, setExploreTab] = useState('video'); // 'video' | 'specs' | 'diagram'
 
   // High-Definition Hero Background Video Controls
   const videoRef = useRef(null);
@@ -81,20 +83,21 @@ export default function HomePage() {
         <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-black">
           <video
             ref={videoRef}
+            key="hero-video-gemini"
             autoPlay
             loop
             muted={isMuted}
             playsInline
             preload="auto"
-            poster="/images/hero-bg-unit.jpg"
-            className="w-full h-full object-cover object-center transform-gpu will-change-transform filter contrast-[1.08] saturate-[1.06] brightness-[1.02] transition-opacity duration-700"
+            className="w-full h-full object-cover object-center transform-gpu will-change-transform filter contrast-[1.05] saturate-[1.05] brightness-[1.02] transition-opacity duration-700"
             style={{
               imageRendering: '-webkit-optimize-contrast',
               WebkitBackfaceVisibility: 'hidden',
               transform: 'translateZ(0)',
             }}
           >
-            <source src="/videos/hero-background-video.mp4" type="video/mp4" />
+            <source src="/videos/hero-background-video.mp4?v=gemini" type="video/mp4" />
+            <source src="/videos/gemini_generated_hero.mp4" type="video/mp4" />
             {/* Fallback image if video is not supported */}
             <img
               src="/images/hero-bg-unit.jpg"
@@ -141,21 +144,40 @@ export default function HomePage() {
 
             {/* Hero Call-To-Action Buttons */}
             <div className="flex flex-wrap items-center gap-3.5 pt-2">
-              <Link
-                to="/buyers"
-                className="inline-flex items-center gap-2.5 px-5 sm:px-6 py-3 rounded-full bg-[#7E8056] hover:bg-[#6c6e49] text-white font-semibold text-xs sm:text-sm tracking-wide shadow-xl shadow-[#7E8056]/30 transition-all duration-200 hover:scale-[1.02] active:scale-95"
+              <button
+                onClick={() => setIsReserveModalOpen(true)}
+                className="inline-flex items-center gap-2.5 px-5 sm:px-6 py-3 rounded-full bg-[#7E8056] hover:bg-[#6c6e49] text-white font-semibold text-xs sm:text-sm tracking-wide shadow-xl shadow-[#7E8056]/30 transition-all duration-200 hover:scale-[1.02] active:scale-95 group cursor-pointer"
               >
                 <Calendar className="w-4 h-4 text-white" />
-                <span>Reserve Your No-Tech HVAC System Today →</span>
-              </Link>
+                <span>Reserve Your No-Tech HVAC</span>
+                <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-0.5 transition-transform" />
+              </button>
 
               <button
                 onClick={() => setIsVideoModalOpen(true)}
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-black/50 hover:bg-black/70 text-white font-medium text-xs sm:text-sm border border-white/30 backdrop-blur-md transition-all duration-200 hover:scale-[1.02]"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-black/60 hover:bg-black/80 text-white font-medium text-xs sm:text-sm border border-white/30 backdrop-blur-md transition-all duration-200 hover:scale-[1.02] cursor-pointer"
               >
                 <Play className="w-3.5 h-3.5 text-white fill-current" />
                 <span>Explore the System</span>
               </button>
+            </div>
+
+            {/* Micro-Content & Key Highlights directly in Hero under buttons */}
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-slate-300 pt-1">
+              <div className="flex items-center gap-1.5 text-[#C2B59B] font-semibold">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#A4A77E] animate-pulse" />
+                <span>$200 Refundable Deposit</span>
+              </div>
+              <span className="text-white/25 hidden sm:inline">•</span>
+              <div className="flex items-center gap-1.5 text-slate-300">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#A4A77E]" />
+                <span>Priority 2026 Batch Allocation</span>
+              </div>
+              <span className="text-white/25 hidden sm:inline">•</span>
+              <div className="flex items-center gap-1.5 text-slate-300">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#A4A77E]" />
+                <span>10-Year Local Mechanical Guarantee</span>
+              </div>
             </div>
 
             {/* Feature Highlights Mini Strip */}
@@ -569,57 +591,254 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===================== VIDEO / EXPLORE MODAL ===================== */}
-      {isVideoModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 animate-in fade-in">
-          <div className="bg-white dark:bg-[#1C1E22] border border-slate-200 dark:border-[#A4A77E]/50 rounded-2xl max-w-2xl w-full p-6 text-slate-900 dark:text-slate-100 shadow-2xl relative">
+      {/* ===================== HERO QUICK RESERVATION MODAL ===================== */}
+      {isReserveModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 animate-in fade-in">
+          <div className="bg-white dark:bg-[#16181B] border border-slate-200 dark:border-white/15 rounded-2xl max-w-2xl w-full p-6 text-slate-900 dark:text-slate-100 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            {/* Close Button */}
             <button
-              onClick={() => setIsVideoModalOpen(false)}
-              className="absolute top-4 right-4 p-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20 text-slate-600 dark:text-slate-300 hover:text-black dark:hover:text-white"
+              onClick={() => setIsReserveModalOpen(false)}
+              className="absolute top-4 right-4 p-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20 text-slate-600 dark:text-slate-300 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2.5 rounded-xl bg-[#7E8056] text-white">
-                <Play className="w-5 h-5 fill-white" />
+            {/* Modal Header */}
+            <div className="flex items-center gap-3 mb-5">
+              <div className="p-3 rounded-xl bg-[#7E8056] text-white">
+                <Calendar className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h3 className="text-lg font-bold font-serif">No-Tech HVAC Modular Engineering Video</h3>
-                <p className="text-xs text-slate-500 dark:text-[#C2B59B]">Showcasing plug-and-play modular functionality & installation efficiency</p>
+                <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#7E8056]/15 text-[#7E8056] dark:text-[#C2B59B] text-[10px] font-bold uppercase tracking-wider mb-1">
+                  Production Batch 2026 Reservation
+                </div>
+                <h3 className="text-xl font-bold font-serif text-slate-900 dark:text-white">
+                  Reserve Your No-Tech Modular HVAC System
+                </h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400">
+                  Lock in your production batch number and pricing with a $200 fully refundable deposit.
+                </p>
               </div>
             </div>
 
-            {/* Video demonstration */}
-            <div className="relative aspect-video rounded-xl bg-black border border-slate-200 dark:border-white/15 overflow-hidden shadow-2xl">
-              <video
-                src="/videos/hero-background-video.mp4"
-                controls
-                autoPlay
-                playsInline
-                className="w-full h-full object-contain bg-black"
-                poster="/images/hero-bg-unit.jpg"
-              >
-                Your browser does not support the video tag.
-              </video>
+            {/* 3 Step Reservation Process */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+              <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-white/10 space-y-1.5">
+                <span className="w-6 h-6 rounded-full bg-[#7E8056] text-white font-bold text-xs flex items-center justify-center">1</span>
+                <h4 className="text-xs font-bold text-slate-900 dark:text-white">Configure Tonnage</h4>
+                <p className="text-[11px] text-slate-600 dark:text-slate-400">
+                  Choose 3.0, 4.0 or 5.0 ton capacity with upflow/downflow/horizontal duct routing.
+                </p>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-white/10 space-y-1.5">
+                <span className="w-6 h-6 rounded-full bg-[#7E8056] text-white font-bold text-xs flex items-center justify-center">2</span>
+                <h4 className="text-xs font-bold text-slate-900 dark:text-white">$200 Deposit</h4>
+                <p className="text-[11px] text-slate-600 dark:text-slate-400">
+                  Secures your spot in line. 100% refundable prior to production delivery.
+                </p>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-white/10 space-y-1.5">
+                <span className="w-6 h-6 rounded-full bg-[#7E8056] text-white font-bold text-xs flex items-center justify-center">3</span>
+                <h4 className="text-xs font-bold text-slate-900 dark:text-white">Certified Install</h4>
+                <p className="text-[11px] text-slate-600 dark:text-slate-400">
+                  Local Mechanical certified technician executes 3-hour sub-base installation.
+                </p>
+              </div>
             </div>
 
-            <div className="mt-5 flex justify-end gap-3">
-              <button
-                onClick={() => setIsVideoModalOpen(false)}
-                className="px-5 py-2.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-300"
-              >
-                Close
-              </button>
-              <button
-                onClick={() => {
-                  setIsVideoModalOpen(false);
-                  navigate('/buyers');
-                }}
-                className="px-5 py-2.5 rounded-xl text-xs font-semibold bg-[#7E8056] hover:bg-[#6e7049] text-white"
-              >
-                Configure My System
-              </button>
+            {/* System Highlights Included */}
+            <div className="p-4 rounded-xl bg-[#FAF7F2] dark:bg-white/5 border border-slate-200 dark:border-white/10 mb-6 space-y-2">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#7E8056] dark:text-[#C2B59B]">
+                Included with Every Modular System:
+              </h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-700 dark:text-slate-300">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#7E8056] flex-shrink-0" />
+                  <span>4 Hot-Swappable Independent Bays</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#7E8056] flex-shrink-0" />
+                  <span>Zero-Loss Quick Refrigerant Couplings</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#7E8056] flex-shrink-0" />
+                  <span>Dual Conductor Male/Female Self-Aligning Pins</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#7E8056] flex-shrink-0" />
+                  <span>Local Mechanical Lifetime Quality Telemetry</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Actions */}
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-slate-200 dark:border-white/10">
+              <div className="text-xs text-slate-500 dark:text-slate-400">
+                Estimated Delivery: <strong className="text-slate-800 dark:text-white">Q1 2026 Batch</strong>
+              </div>
+              <div className="flex items-center gap-2.5 w-full sm:w-auto">
+                <button
+                  onClick={() => setIsReserveModalOpen(false)}
+                  className="w-full sm:w-auto px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-300 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => {
+                    setIsReserveModalOpen(false);
+                    navigate('/buyers');
+                  }}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl text-xs font-semibold bg-[#7E8056] hover:bg-[#6e7049] text-white shadow-lg shadow-[#7E8056]/30 transition-all hover:scale-[1.02] cursor-pointer"
+                >
+                  <span>Go to Buyers Customizer & Pay $200 Deposit</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ===================== VIDEO & SYSTEM EXPLORER MODAL ===================== */}
+      {isVideoModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 animate-in fade-in">
+          <div className="bg-white dark:bg-[#1C1E22] border border-slate-200 dark:border-[#A4A77E]/50 rounded-2xl max-w-3xl w-full p-6 text-slate-900 dark:text-slate-100 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <button
+              onClick={() => setIsVideoModalOpen(false)}
+              className="absolute top-4 right-4 p-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20 text-slate-600 dark:text-slate-300 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {/* Modal Title & Navigation Tabs */}
+            <div className="mb-4">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="p-2.5 rounded-xl bg-[#7E8056] text-white">
+                  <Play className="w-5 h-5 fill-white" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold font-serif text-slate-900 dark:text-white">
+                    Explore the No-Tech Modular HVAC System
+                  </h3>
+                  <p className="text-xs text-slate-500 dark:text-[#C2B59B]">
+                    Engineered for zero downtime, 4-bay plug-and-play swapping, and certified by Local Mechanical
+                  </p>
+                </div>
+              </div>
+
+              {/* Tab Navigation */}
+              <div className="flex items-center gap-2 border-b border-slate-200 dark:border-white/10 pb-2">
+                <button
+                  onClick={() => setExploreTab('video')}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${exploreTab === 'video'
+                      ? 'bg-[#7E8056] text-white shadow-sm'
+                      : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5'
+                    }`}
+                >
+                  Video Walkthrough
+                </button>
+                <button
+                  onClick={() => setExploreTab('specs')}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${exploreTab === 'specs'
+                      ? 'bg-[#7E8056] text-white shadow-sm'
+                      : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5'
+                    }`}
+                >
+                  Technical Specifications
+                </button>
+                <button
+                  onClick={() => setExploreTab('diagram')}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${exploreTab === 'diagram'
+                      ? 'bg-[#7E8056] text-white shadow-sm'
+                      : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5'
+                    }`}
+                >
+                  Interactive 3D Diagram
+                </button>
+              </div>
+            </div>
+
+            {/* Tab 1: Video */}
+            {exploreTab === 'video' && (
+              <div className="relative aspect-video rounded-xl bg-black border border-slate-200 dark:border-white/15 overflow-hidden shadow-2xl mb-4">
+                <video
+                  src="/videos/hero-background-video.mp4?v=gemini"
+                  controls
+                  autoPlay
+                  playsInline
+                  className="w-full h-full object-contain bg-black"
+                >
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            )}
+
+            {/* Tab 2: Technical Specs */}
+            {exploreTab === 'specs' && (
+              <div className="space-y-4 py-2 mb-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-200 dark:border-white/10">
+                    <span className="text-[10px] uppercase font-bold text-[#7E8056] dark:text-[#A4A77E]">Efficiency Rating</span>
+                    <h5 className="text-sm font-bold text-slate-900 dark:text-white mt-0.5">Up to 24.5 SEER2 / 14.5 HSPF2</h5>
+                    <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-1">Inverter variable-speed scroll compressor with intelligent staged cooling.</p>
+                  </div>
+                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-200 dark:border-white/10">
+                    <span className="text-[10px] uppercase font-bold text-[#7E8056] dark:text-[#A4A77E]">Refrigerant Coupling</span>
+                    <h5 className="text-sm font-bold text-slate-900 dark:text-white mt-0.5">Dry-Break Zero-Loss Disconnects</h5>
+                    <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-1">Self-sealing flat face couplers prevent any refrigerant venting during swap.</p>
+                  </div>
+                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-200 dark:border-white/10">
+                    <span className="text-[10px] uppercase font-bold text-[#7E8056] dark:text-[#A4A77E]">Electrical Pins</span>
+                    <h5 className="text-sm font-bold text-slate-900 dark:text-white mt-0.5">Self-Aligning Male/Female Terminals</h5>
+                    <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-1">High-amperage silver-plated guide pins with dual micro-switch safety lockouts.</p>
+                  </div>
+                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-200 dark:border-white/10">
+                    <span className="text-[10px] uppercase font-bold text-[#7E8056] dark:text-[#A4A77E]">Telemetry</span>
+                    <h5 className="text-sm font-bold text-slate-900 dark:text-white mt-0.5">Cryptographic RFID Asset Tracking</h5>
+                    <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-1">Every compartment serial is cryptographically validated with Local Mechanical.</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Tab 3: Interactive 3D Diagram */}
+            {exploreTab === 'diagram' && (
+              <div className="mb-4">
+                <HvacModularVisualizer
+                  activeColor={activeColorPreview}
+                  selectedCompartment={selectedCompartment}
+                  onSelectCompartment={setSelectedCompartment}
+                  isInteractive={true}
+                  showLabels={true}
+                />
+              </div>
+            )}
+
+            {/* Footer Buttons */}
+            <div className="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-white/10">
+              <span className="text-xs text-slate-500 dark:text-slate-400 hidden sm:inline">
+                Patent-Pending Modular Architecture
+              </span>
+              <div className="flex items-center gap-2.5 w-full sm:w-auto justify-end">
+                <button
+                  onClick={() => setIsVideoModalOpen(false)}
+                  className="px-5 py-2.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-300 transition-colors"
+                >
+                  Close
+                </button>
+                <button
+                  onClick={() => {
+                    setIsVideoModalOpen(false);
+                    navigate('/buyers');
+                  }}
+                  className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-xs font-semibold bg-[#7E8056] hover:bg-[#6e7049] text-white shadow-md transition-all hover:scale-[1.02] cursor-pointer"
+                >
+                  <span>Configure My System</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
