@@ -79,69 +79,72 @@ export default function HelpChatbotPage() {
   return (
     <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#121315] text-slate-900 dark:text-slate-100 transition-colors duration-200">
       
-      {/* ===================== FULL-WIDTH HERO SECTION (NOT IN A CARD) ===================== */}
-      <section className="relative w-full bg-[#0B0C0E] text-white overflow-hidden border-b border-white/10 min-h-[380px] sm:min-h-[420px] lg:min-h-[450px] flex items-center">
-        {/* Properly Contained Right Visual Image with Newly Provided 3D Robot Mascot */}
-        <div className="absolute right-0 top-0 bottom-0 w-full sm:w-[58%] lg:w-[50%] xl:w-[48%] pointer-events-none overflow-hidden">
-          <img
-            src="/images/help-robot-hero.jpg"
-            alt="3D AI Assistant Robot"
-            className="w-full h-full object-cover object-center filter brightness-[0.95] contrast-[1.05]"
-          />
-          {/* Feathered dark gradient on the left edge for seamless blend */}
-          <div className="absolute inset-y-0 left-0 w-28 sm:w-44 lg:w-64 bg-gradient-to-r from-[#0B0C0E] via-[#0B0C0E]/80 to-transparent" />
-          {/* Mobile vertical gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0B0C0E] via-[#0B0C0E]/80 to-[#0B0C0E]/30 sm:hidden" />
-        </div>
+      {/* ===================== HERO SECTION ===================== */}
+      <section className="relative w-full bg-[#0B0C0E] text-white border-b border-white/10 overflow-hidden">
+        <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            {/* Left Column: Text & CTA */}
+            <div className="lg:col-span-6 space-y-4 sm:space-y-5">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[11px] font-semibold text-slate-300 tracking-wider">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#7E8056]" />
+                <span>Help & AI Chatbot</span>
+              </div>
 
-        {/* Speech Bubble Matching Mockup */}
-        <div className="hidden sm:flex absolute top-8 sm:top-12 lg:top-14 right-6 sm:right-10 lg:right-16 z-20 pointer-events-none">
-          <div className="relative bg-white text-slate-900 px-5 sm:px-6 py-3 sm:py-4 rounded-3xl shadow-2xl border border-slate-100">
-            <p className="font-extrabold text-sm sm:text-base lg:text-lg text-slate-900 leading-tight tracking-tight text-center">
-              How can<br />I help you?
-            </p>
-            {/* Bubble tail pointing toward the robot */}
-            <div className="absolute -bottom-2 left-6 w-0 h-0 border-x-[8px] border-x-transparent border-t-[10px] border-t-white" />
-          </div>
-        </div>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold font-serif text-white tracking-tight leading-tight drop-shadow-sm">
+                Help & AI Chatbot
+              </h1>
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16 relative z-10 w-full">
-          <div className="max-w-xl space-y-3.5">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[11px] font-semibold text-slate-300 tracking-wider">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#7E8056]" />
-              <span>Help & AI Chatbot</span>
+              <p className="text-lg sm:text-xl font-bold text-[#E8DEC8] dark:text-[#C2B59B] tracking-tight">
+                Get Instant Assistance
+              </p>
+
+              <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-xl">
+                Find answers, get guidance, and resolve issues quickly.
+              </p>
+
+              <div className="pt-2 flex flex-wrap items-center gap-3">
+                <button
+                  onClick={() => {
+                    const el = document.getElementById('chat-interface-area');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#7E8056] hover:bg-[#6e7049] active:scale-95 text-white font-semibold text-sm transition-all shadow-lg hover:shadow-xl hover:gap-3 cursor-pointer"
+                >
+                  <span>Chat Now</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-serif text-white tracking-tight drop-shadow-sm">
-              Help & AI Chatbot
-            </h1>
+            {/* Right Column: Visual Showcase (Framed with equal right margin aligned to Header) */}
+            <div className="lg:col-span-6">
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/15 bg-black/60 aspect-[16/10] sm:aspect-[16/9] group">
+                <img
+                  src="/images/help-robot-hero.jpg"
+                  alt="3D AI Assistant Robot"
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
 
-            <p className="text-base sm:text-xl font-bold text-[#E8DEC8] dark:text-[#C2B59B] tracking-tight">
-              Get Instant Assistance
-            </p>
-
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-md">
-              Find answers, get guidance, and resolve issues quickly.
-            </p>
-
-            <div className="pt-2 flex flex-wrap items-center gap-3">
-              <button
-                onClick={() => {
-                  const el = document.getElementById('chat-interface-area');
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#7E8056] hover:bg-[#6e7049] active:scale-95 text-white font-semibold text-xs sm:text-sm transition-all shadow-lg hover:shadow-xl hover:gap-3 cursor-pointer"
-              >
-                <span>Chat Now</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
+                {/* Speech Bubble Matching Mockup */}
+                <div className="absolute top-5 right-5 sm:top-6 sm:right-6 pointer-events-none">
+                  <div className="relative bg-white text-slate-900 px-4 sm:px-5 py-2.5 sm:py-3 rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-100">
+                    <p className="font-extrabold text-xs sm:text-sm lg:text-base text-slate-900 leading-tight tracking-tight text-center">
+                      How can<br />I help you?
+                    </p>
+                    <div className="absolute -bottom-2 left-5 w-0 h-0 border-x-[6px] border-x-transparent border-t-[8px] border-t-white" />
+                  </div>
+                </div>
+              </div>
             </div>
+
           </div>
         </div>
       </section>
 
-      {/* Main Page Content Body */}
-      <div id="chat-interface-area" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8">
+      {/* Main Page Content Body with matching max-w-[1480px] container */}
+      <div id="chat-interface-area" className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8">
 
         {/* ===================== POPULAR TOPICS & INTERACTIVE CHAT ===================== */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">

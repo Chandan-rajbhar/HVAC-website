@@ -108,61 +108,63 @@ export default function BuyersPortalPage() {
   return (
     <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#121315] text-slate-900 dark:text-slate-100 transition-colors duration-200">
       
-      {/* ===================== FULL-WIDTH HERO SECTION (NOT IN A CARD) ===================== */}
-      <section className="relative w-full bg-[#0B0C0E] text-white overflow-hidden border-b border-white/10 min-h-[380px] sm:min-h-[430px] lg:min-h-[460px] flex flex-col justify-between">
-        
-        {/* Properly Contained Right Visual Image */}
-        <div className="absolute right-0 top-0 bottom-0 w-full sm:w-[58%] lg:w-[52%] xl:w-[48%] pointer-events-none overflow-hidden">
-          <img
-            src="/images/buyers-hero-unit.jpg"
-            alt="No-Tech Modular HVAC Outdoor Unit"
-            className="w-full h-full object-cover object-[center_right] filter brightness-[0.95] contrast-[1.05]"
-          />
-          {/* Feathered dark gradient on the left edge for seamless blend */}
-          <div className="absolute inset-y-0 left-0 w-28 sm:w-44 lg:w-64 bg-gradient-to-r from-[#0B0C0E] via-[#0B0C0E]/80 to-transparent" />
-          {/* Mobile vertical gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0B0C0E] via-[#0B0C0E]/80 to-[#0B0C0E]/30 sm:hidden" />
-        </div>
+      {/* ===================== HERO SECTION ===================== */}
+      <section className="relative w-full bg-[#0B0C0E] text-white border-b border-white/10 overflow-hidden">
+        <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            {/* Left Column: Text & CTA */}
+            <div className="lg:col-span-6 space-y-4 sm:space-y-5">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[11px] font-semibold text-slate-300 tracking-wider">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#7E8056]" />
+                <span>no-techhvac/buyers.com</span>
+              </div>
 
-        {/* Banner Content Container */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16 relative z-10 w-full">
-          <div className="max-w-xl space-y-3.5">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[11px] font-semibold text-slate-300 tracking-wider">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#7E8056]" />
-              <span>no-techhvac/buyers.com</span>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold font-serif text-white tracking-tight leading-tight drop-shadow-sm">
+                Buyers Portal
+              </h1>
+
+              <p className="text-lg sm:text-xl font-bold text-[#E8DEC8] dark:text-[#C2B59B] tracking-tight">
+                Select. Customize. Reserve.
+              </p>
+
+              <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-xl">
+                Configure your No-Tech HVAC system with real-time compatibility and pricing.
+              </p>
+
+              <div className="pt-2">
+                <button
+                  onClick={() => {
+                    setCurrentStep(1);
+                    const el = document.getElementById('buyers-selection-area');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#7E8056] hover:bg-[#6e7049] active:scale-95 text-white font-semibold text-sm transition-all shadow-lg hover:shadow-xl hover:gap-3 cursor-pointer"
+                >
+                  <span>Start Selection</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-serif text-white tracking-tight drop-shadow-sm">
-              Buyers Portal
-            </h1>
-
-            <p className="text-base sm:text-xl font-bold text-[#E8DEC8] dark:text-[#C2B59B] tracking-tight">
-              Select. Customize. Reserve.
-            </p>
-
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-md">
-              Configure your No-Tech HVAC system with real-time compatibility and pricing.
-            </p>
-
-            <div className="pt-2">
-              <button
-                onClick={() => {
-                  setCurrentStep(1);
-                  const el = document.getElementById('buyers-selection-area');
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#7E8056] hover:bg-[#6e7049] active:scale-95 text-white font-semibold text-xs sm:text-sm transition-all shadow-lg hover:shadow-xl hover:gap-3 cursor-pointer"
-              >
-                <span>Start Selection</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
+            {/* Right Column: Visual Showcase (Framed with equal right margin aligned to Header) */}
+            <div className="lg:col-span-6">
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/15 bg-black/60 aspect-[16/10] sm:aspect-[16/9] group">
+                <img
+                  src="/images/buyers-hero-unit.jpg"
+                  alt="No-Tech Modular HVAC Outdoor Unit"
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+              </div>
             </div>
+
           </div>
         </div>
 
         {/* Stepper Progress Badges with Glassmorphism Footer Bar */}
-        <div className="relative z-10 border-t border-white/10 bg-black/55 backdrop-blur-md">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
+        <div className="border-t border-white/10 bg-black/55 backdrop-blur-md">
+          <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 text-xs">
               {[
                 { num: 1, title: '1. Customize System' },
@@ -199,8 +201,8 @@ export default function BuyersPortalPage() {
         </div>
       </section>
 
-      {/* Main Page Content Body */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+      {/* Main Page Content Body with matching max-w-[1480px] container */}
+      <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
 
         {/* ===================== STEP 1: SYSTEM SELECTION & CUSTOMIZATION ===================== */}
         {currentStep === 1 && (

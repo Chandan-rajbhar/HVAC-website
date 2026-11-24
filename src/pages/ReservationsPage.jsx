@@ -55,55 +55,59 @@ export default function ReservationsPage() {
   return (
     <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#121315] text-slate-900 dark:text-slate-100 transition-colors duration-200">
       
-      {/* ===================== FULL-WIDTH HERO SECTION (NOT IN A CARD) ===================== */}
-      <section className="relative w-full bg-[#0B0C0E] text-white overflow-hidden border-b border-white/10 min-h-[380px] sm:min-h-[420px] lg:min-h-[450px] flex items-center">
-        {/* Properly Contained Right Visual Image */}
-        <div className="absolute right-0 top-0 bottom-0 w-full sm:w-[56%] lg:w-[48%] xl:w-[45%] pointer-events-none overflow-hidden">
-          <img
-            src="/images/reservations-hero-calendar.jpg"
-            alt="Installation Calendar with Date Circled"
-            className="w-full h-full object-cover object-center filter brightness-[0.95] contrast-[1.05]"
-          />
-          {/* Feathered dark gradient on the left edge */}
-          <div className="absolute inset-y-0 left-0 w-28 sm:w-44 lg:w-64 bg-gradient-to-r from-[#0B0C0E] via-[#0B0C0E]/80 to-transparent" />
-          {/* Mobile vertical gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0B0C0E] via-[#0B0C0E]/80 to-[#0B0C0E]/30 sm:hidden" />
-        </div>
+      {/* ===================== HERO SECTION ===================== */}
+      <section className="relative w-full bg-[#0B0C0E] text-white border-b border-white/10 overflow-hidden">
+        <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            {/* Left Column: Text & CTA */}
+            <div className="lg:col-span-6 space-y-4 sm:space-y-5">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[11px] font-semibold text-slate-300 tracking-wider">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#7E8056]" />
+                <span>Reservations</span>
+              </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16 relative z-10 w-full">
-          <div className="max-w-xl space-y-3.5">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[11px] font-semibold text-slate-300 tracking-wider">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#7E8056]" />
-              <span>Reservations</span>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold font-serif text-white tracking-tight leading-tight drop-shadow-sm">
+                Reservations & Scheduling
+              </h1>
+
+              <p className="text-lg sm:text-xl font-bold text-[#E8DEC8] dark:text-[#C2B59B] tracking-tight">
+                Choose Your Date. We'll Handle the Rest.
+              </p>
+
+              <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-xl">
+                Schedule your installation with ease and track your reservation status across our certified Local Mechanical contractor network.
+              </p>
+
+              <div className="pt-2 flex flex-wrap items-center gap-3">
+                <a
+                  href="#schedule-form"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#7E8056] hover:bg-[#6e7049] active:scale-95 text-white font-semibold text-sm transition-all shadow-lg hover:shadow-xl hover:gap-3 cursor-pointer"
+                >
+                  <span>Schedule Now</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-serif text-white tracking-tight drop-shadow-sm">
-              Reservations & Scheduling
-            </h1>
-
-            <p className="text-base sm:text-xl font-bold text-[#E8DEC8] dark:text-[#C2B59B] tracking-tight">
-              Choose Your Date. We'll Handle the Rest.
-            </p>
-
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-md">
-              Schedule your installation with ease and track your reservation status across our certified Local Mechanical contractor network.
-            </p>
-
-            <div className="pt-2 flex flex-wrap items-center gap-3">
-              <a
-                href="#schedule-form"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#7E8056] hover:bg-[#6e7049] active:scale-95 text-white font-semibold text-xs sm:text-sm transition-all shadow-lg hover:shadow-xl hover:gap-3 cursor-pointer"
-              >
-                <span>Schedule Now</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
+            {/* Right Column: Visual Showcase (Framed with equal right margin aligned to Header) */}
+            <div className="lg:col-span-6">
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/15 bg-black/60 aspect-[16/10] sm:aspect-[16/9] group">
+                <img
+                  src="/images/reservations-hero-calendar.jpg"
+                  alt="Installation Calendar with Date Circled"
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+              </div>
             </div>
+
           </div>
         </div>
       </section>
 
-      {/* Main Page Content Body */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8">
+      {/* Main Page Content Body with matching max-w-[1480px] container */}
+      <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8">
 
         {/* Confirmation Banner if confirmed */}
         {reservationConfirmed && (
