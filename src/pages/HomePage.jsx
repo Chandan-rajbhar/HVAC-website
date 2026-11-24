@@ -243,14 +243,19 @@ export default function HomePage() {
                 <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
 
                   {/* Left: Unit image with glowing highlighted compartment and hand cursor */}
-                  <div className="sm:col-span-7 relative rounded-xl overflow-hidden bg-slate-900 border border-slate-200 dark:border-white/10 aspect-[16/10] max-h-[190px]">
+                  <div className="sm:col-span-7 relative rounded-xl overflow-hidden bg-slate-900 border border-slate-200 dark:border-white/10 aspect-[16/10] group/img shadow-inner">
                     <img
-                      src="/images/slices/demo-compartment-glow.jpg"
-                      alt="Modular Unit Interactive Compartment Demo"
-                      className="w-full h-full object-cover object-center cursor-pointer hover:scale-105 transition-transform duration-300"
+                      src="/images/demo-interactive-aura-unit.jpg"
+                      alt="Aura Series S Modular Unit Interactive Compartment Demo"
+                      className="w-full h-full object-cover object-center cursor-pointer group-hover/img:scale-105 transition-transform duration-500"
                       onClick={() => setSelectedCompartment(prev => prev === 4 ? 1 : prev + 1)}
                       title="Click compartment to simulate swap"
                     />
+                    {/* Live Bay Indicator & Interactive Click Hint */}
+                    <div className="absolute bottom-2 left-2 px-2 py-1 rounded-md bg-black/75 border border-white/20 backdrop-blur-md text-[10px] font-semibold text-white flex items-center gap-1.5 pointer-events-none">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#A4A77E] animate-pulse" />
+                      <span>Bay #{selectedCompartment} Active</span>
+                    </div>
                   </div>
 
                   {/* Right: 3 Steps & Watch Demo Button */}
@@ -340,16 +345,25 @@ export default function HomePage() {
                   </div>
 
                   {/* Right: Customized HVAC Unit Visual from Reference Image */}
-                  <div className="sm:col-span-6 relative rounded-xl overflow-hidden bg-slate-900 border border-slate-200 dark:border-white/10 aspect-[16/10] max-h-[190px]">
+                  <div className="sm:col-span-6 relative rounded-xl overflow-hidden bg-slate-900 border border-slate-200 dark:border-white/10 aspect-[16/10] group/colorimg shadow-inner">
                     <img
-                      src="/images/slices/customize-colored-unit.jpg"
+                      src="/images/customize-hvac-unit.jpg"
                       alt="Customized HVAC Modular System"
-                      className="w-full h-full object-cover object-center transition-all duration-300"
+                      className="w-full h-full object-cover object-center group-hover/colorimg:scale-105 transition-transform duration-500"
                     />
+                    {/* Dynamic color tint responding in real-time to selected/hovered swatch */}
                     <div
-                      className="absolute inset-0 pointer-events-none mix-blend-color opacity-30 transition-colors duration-300"
+                      className="absolute inset-0 pointer-events-none mix-blend-color opacity-35 transition-colors duration-300"
                       style={{ backgroundColor: activeColorPreview }}
                     />
+                    {/* Architectural color badge */}
+                    <div className="absolute bottom-2 right-2 px-2.5 py-1 rounded-md bg-black/75 border border-white/20 backdrop-blur-md text-[10px] font-semibold text-white flex items-center gap-1.5 pointer-events-none">
+                      <span
+                        className="w-2 h-2 rounded-full border border-white/40 shadow-sm"
+                        style={{ backgroundColor: activeColorPreview }}
+                      />
+                      <span className="capitalize">{HOMEPAGE_SWATCHES.find(s => s.hex === activeColorPreview)?.name || 'Custom'}</span>
+                    </div>
                   </div>
 
                 </div>
