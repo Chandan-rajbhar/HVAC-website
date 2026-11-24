@@ -17,6 +17,8 @@ import {
   Box,
   Palette,
   CheckCircle2,
+  RotateCw,
+  Sparkles,
   X,
   ExternalLink,
   Settings,
@@ -268,53 +270,119 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
 
             {/* Card 1: Interactive System Demo */}
-            <div className="rounded-2xl bg-white dark:bg-[#23262A] border border-slate-200/90 dark:border-white/10 p-5 sm:p-6 flex flex-col justify-between shadow-md">
+            <div className="group rounded-2xl sm:rounded-3xl bg-white dark:bg-[#1C1E22] border border-slate-200/90 dark:border-white/10 p-5 sm:p-7 flex flex-col justify-between shadow-md hover:shadow-xl dark:shadow-none transition-all duration-300">
               <div>
-                <div className="flex items-center gap-2.5 mb-4">
-                  <Box className="w-5 h-5 text-[#7E8056] dark:text-white" />
-                  <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-tight">Interactive System Demo</h3>
+                {/* Header */}
+                <div className="flex items-center justify-between mb-4 sm:mb-5">
+                  <div className="flex items-center gap-2.5">
+                    <div className="p-2 rounded-xl bg-[#7E8056]/15 text-[#7E8056] dark:text-[#A4A77E]">
+                      <Box className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h3 className="text-base sm:text-lg font-bold font-serif text-slate-900 dark:text-white tracking-tight">
+                        Interactive System Demo
+                      </h3>
+                      <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">
+                        Patented 4-bay modular slide-out drawer architecture
+                      </p>
+                    </div>
+                  </div>
+                  <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[11px] font-medium text-slate-600 dark:text-slate-300">
+                    <span className="w-2 h-2 rounded-full bg-[#7E8056] animate-pulse" />
+                    Bay {selectedCompartment} / 4
+                  </span>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
+                {/* Content Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
 
-                  {/* Left: Unit image with glowing highlighted compartment and hand cursor */}
-                  <div className="sm:col-span-7 relative rounded-xl overflow-hidden bg-slate-900 border border-slate-200 dark:border-white/10 aspect-[16/10] max-h-[190px]">
+                  {/* Left: Interactive pulled-out compartment drawer image */}
+                  <div className="sm:col-span-7 relative rounded-xl sm:rounded-2xl overflow-hidden bg-slate-950 border border-slate-200 dark:border-white/10 aspect-[16/10] shadow-inner group/img">
                     <img
-                      src="/images/slices/demo-compartment-glow.jpg"
-                      alt="Modular Unit Interactive Compartment Demo"
-                      className="w-full h-full object-cover object-center cursor-pointer hover:scale-105 transition-transform duration-300"
+                      src="/images/demo-compartment-drawer-swap.jpg"
+                      alt="Modular Unit Interactive Compartment Slide-Out Drawer"
+                      className="w-full h-full object-cover object-center cursor-pointer group-hover/img:scale-105 transition-transform duration-500"
                       onClick={() => setSelectedCompartment(prev => prev === 4 ? 1 : prev + 1)}
-                      title="Click compartment to simulate swap"
+                      title="Click to simulate compartment slide-out & swap"
                     />
+                    {/* Live overlay badge */}
+                    <div className="absolute top-2.5 left-2.5 px-2 py-1 rounded-lg bg-black/75 border border-white/20 backdrop-blur-md text-[10px] font-semibold text-white flex items-center gap-1.5 pointer-events-none">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#A4A77E]" />
+                      <span>Slide-Out Drawer Bay #{selectedCompartment}</span>
+                    </div>
+
+                    {/* Bottom click hint */}
+                    <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-lg bg-black/75 border border-white/20 backdrop-blur-md text-[10px] font-medium text-[#C2B59B] pointer-events-none flex items-center gap-1">
+                      <span>Click to cycle bays</span>
+                      <RotateCw className="w-3 h-3 text-[#A4A77E]" />
+                    </div>
                   </div>
 
                   {/* Right: 3 Steps & Watch Demo Button */}
-                  <div className="sm:col-span-5 flex flex-col justify-between space-y-3">
-                    <div className="space-y-2.5">
-                      <div className="flex items-center gap-2.5 p-1.5 rounded-lg bg-[#FAF7F2] dark:bg-black/30 border border-slate-200/60 dark:border-white/5">
-                        <span className="w-5 h-5 rounded-full bg-[#7E8056] text-white font-bold text-[11px] flex items-center justify-center flex-shrink-0">
+                  <div className="sm:col-span-5 flex flex-col justify-between space-y-3 sm:space-y-3.5">
+                    <div className="space-y-2 sm:space-y-2.5">
+                      <div
+                        onClick={() => setSelectedCompartment(1)}
+                        className={`flex items-center gap-2.5 p-2 rounded-xl border transition-all cursor-pointer ${
+                          selectedCompartment === 1
+                            ? 'bg-[#7E8056]/15 border-[#7E8056] text-slate-900 dark:text-white shadow-sm'
+                            : 'bg-slate-50 dark:bg-black/30 border-slate-200/60 dark:border-white/5 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5'
+                        }`}
+                      >
+                        <span className={`w-5 h-5 rounded-full font-bold text-[11px] flex items-center justify-center flex-shrink-0 ${
+                          selectedCompartment === 1 ? 'bg-[#7E8056] text-white' : 'bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-slate-300'
+                        }`}>
                           1
                         </span>
-                        <span className="text-xs font-medium text-slate-700 dark:text-slate-200">Click a compartment</span>
+                        <div className="leading-tight">
+                          <span className="text-xs font-semibold block">Click a compartment</span>
+                          <span className="text-[10px] text-slate-500 dark:text-slate-400">Pull out slide-in module</span>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-2.5 p-1.5 rounded-lg bg-[#FAF7F2] dark:bg-black/30 border border-slate-200/60 dark:border-white/5">
-                        <span className="w-5 h-5 rounded-full bg-[#7E8056] text-white font-bold text-[11px] flex items-center justify-center flex-shrink-0">
+
+                      <div
+                        onClick={() => setSelectedCompartment(2)}
+                        className={`flex items-center gap-2.5 p-2 rounded-xl border transition-all cursor-pointer ${
+                          selectedCompartment === 2
+                            ? 'bg-[#7E8056]/15 border-[#7E8056] text-slate-900 dark:text-white shadow-sm'
+                            : 'bg-slate-50 dark:bg-black/30 border-slate-200/60 dark:border-white/5 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5'
+                        }`}
+                      >
+                        <span className={`w-5 h-5 rounded-full font-bold text-[11px] flex items-center justify-center flex-shrink-0 ${
+                          selectedCompartment === 2 ? 'bg-[#7E8056] text-white' : 'bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-slate-300'
+                        }`}>
                           2
                         </span>
-                        <span className="text-xs font-medium text-slate-700 dark:text-slate-200">See the swap process</span>
+                        <div className="leading-tight">
+                          <span className="text-xs font-semibold block">See the swap process</span>
+                          <span className="text-[10px] text-slate-500 dark:text-slate-400">Zero refrigerant venting</span>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-2.5 p-1.5 rounded-lg bg-[#FAF7F2] dark:bg-black/30 border border-slate-200/60 dark:border-white/5">
-                        <span className="w-5 h-5 rounded-full bg-[#7E8056] text-white font-bold text-[11px] flex items-center justify-center flex-shrink-0">
+
+                      <div
+                        onClick={() => setSelectedCompartment(3)}
+                        className={`flex items-center gap-2.5 p-2 rounded-xl border transition-all cursor-pointer ${
+                          selectedCompartment === 3
+                            ? 'bg-[#7E8056]/15 border-[#7E8056] text-slate-900 dark:text-white shadow-sm'
+                            : 'bg-slate-50 dark:bg-black/30 border-slate-200/60 dark:border-white/5 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5'
+                        }`}
+                      >
+                        <span className={`w-5 h-5 rounded-full font-bold text-[11px] flex items-center justify-center flex-shrink-0 ${
+                          selectedCompartment === 3 ? 'bg-[#7E8056] text-white' : 'bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-slate-300'
+                        }`}>
                           3
                         </span>
-                        <span className="text-xs font-medium text-slate-700 dark:text-slate-200">Reinstall with ease</span>
+                        <div className="leading-tight">
+                          <span className="text-xs font-semibold block">Reinstall with ease</span>
+                          <span className="text-[10px] text-slate-500 dark:text-slate-400">Self-aligning pin lock</span>
+                        </div>
                       </div>
                     </div>
 
-                    <div className="pt-2">
+                    <div className="pt-1">
                       <button
                         onClick={() => setIsVideoModalOpen(true)}
-                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#7E8056] hover:bg-[#6c6e49] text-white font-semibold text-xs transition-all shadow-md active:scale-95"
+                        className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-full bg-[#7E8056] hover:bg-[#6c6e49] text-white font-semibold text-xs transition-all shadow-md hover:shadow-lg shadow-[#7E8056]/20 active:scale-95 cursor-pointer"
                       >
                         <span>Watch Demo</span>
                         <Play className="w-3 h-3 fill-white ml-0.5" />
@@ -327,64 +395,105 @@ export default function HomePage() {
             </div>
 
             {/* Card 2: Customize Your HVAC System */}
-            <div className="rounded-2xl bg-white dark:bg-[#23262A] border border-slate-200/90 dark:border-white/10 p-5 sm:p-6 flex flex-col justify-between shadow-md">
+            <div className="group rounded-2xl sm:rounded-3xl bg-white dark:bg-[#1C1E22] border border-slate-200/90 dark:border-white/10 p-5 sm:p-7 flex flex-col justify-between shadow-md hover:shadow-xl dark:shadow-none transition-all duration-300">
               <div>
-                <div className="flex items-center gap-2.5 mb-4">
-                  <Palette className="w-5 h-5 text-[#7E8056] dark:text-white" />
-                  <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-tight">Customize Your HVAC System</h3>
+                {/* Header */}
+                <div className="flex items-center justify-between mb-4 sm:mb-5">
+                  <div className="flex items-center gap-2.5">
+                    <div className="p-2 rounded-xl bg-[#7E8056]/15 text-[#7E8056] dark:text-[#A4A77E]">
+                      <Palette className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h3 className="text-base sm:text-lg font-bold font-serif text-slate-900 dark:text-white tracking-tight">
+                        Customize Your HVAC System
+                      </h3>
+                      <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">
+                        Architectural powder-coated exterior panels
+                      </p>
+                    </div>
+                  </div>
+                  <span className="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#7E8056] dark:text-[#C2B59B] capitalize">
+                    {HOMEPAGE_SWATCHES.find(s => s.hex === activeColorPreview)?.name || 'Custom Color'}
+                  </span>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
+                {/* Content Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
 
                   {/* Left: Swatches, Description, and Choose Color Button */}
-                  <div className="sm:col-span-6 space-y-4">
-                    {/* Color Swatch Circles */}
-                    <div className="flex items-center gap-2.5 flex-wrap">
-                      {HOMEPAGE_SWATCHES.map((swatch) => {
-                        const isSelected = selectedColor === swatch.hex;
-                        return (
-                          <button
-                            key={swatch.id}
-                            onClick={() => setSelectedColor(swatch.hex)}
-                            onMouseEnter={() => setHoveredColor(swatch.hex)}
-                            onMouseLeave={() => setHoveredColor(null)}
-                            className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full transition-all duration-200 shadow-md ${isSelected
-                              ? 'ring-2 ring-slate-900 dark:ring-white ring-offset-2 ring-offset-white dark:ring-offset-[#23262A] scale-110'
-                              : 'hover:scale-105 opacity-85 hover:opacity-100'
-                              }`}
-                            style={{ backgroundColor: swatch.hex }}
-                            aria-label={`Select ${swatch.name}`}
-                            title={swatch.name}
-                          />
-                        );
-                      })}
+                  <div className="sm:col-span-6 space-y-3.5 sm:space-y-4">
+                    {/* Swatch Selection Area */}
+                    <div>
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block mb-2">
+                        Select Panel Color:
+                      </span>
+                      <div className="flex items-center gap-2.5 flex-wrap">
+                        {HOMEPAGE_SWATCHES.map((swatch) => {
+                          const isSelected = selectedColor === swatch.hex;
+                          return (
+                            <button
+                              key={swatch.id}
+                              onClick={() => setSelectedColor(swatch.hex)}
+                              onMouseEnter={() => setHoveredColor(swatch.hex)}
+                              onMouseLeave={() => setHoveredColor(null)}
+                              className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full transition-all duration-200 shadow-md cursor-pointer relative ${isSelected
+                                ? 'ring-2 ring-[#7E8056] dark:ring-white ring-offset-2 ring-offset-white dark:ring-offset-[#1C1E22] scale-110'
+                                : 'hover:scale-105 opacity-85 hover:opacity-100'
+                                }`}
+                              style={{ backgroundColor: swatch.hex }}
+                              aria-label={`Select ${swatch.name}`}
+                              title={swatch.name}
+                            >
+                              {isSelected && (
+                                <span className="absolute inset-0 flex items-center justify-center">
+                                  <CheckCircle2 className="w-4 h-4 text-white drop-shadow" />
+                                </span>
+                              )}
+                            </button>
+                          );
+                        })}
+                      </div>
                     </div>
 
-                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                      Real-time preview with your preferred color.
-                    </p>
+                    <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-200/60 dark:border-white/5 space-y-0.5">
+                      <span className="text-xs font-semibold text-slate-800 dark:text-slate-200 block">
+                        Real-time Architectural Preview
+                      </span>
+                      <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                        Matches luxury exterior facade, stucco, brick, and modern siding.
+                      </p>
+                    </div>
 
-                    <div>
+                    <div className="pt-1">
                       <Link
                         to={`/buyers?color=${encodeURIComponent(selectedColor)}`}
-                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#7E8056] hover:bg-[#6c6e49] text-white font-semibold text-xs transition-all shadow-md active:scale-95"
+                        className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#7E8056] hover:bg-[#6c6e49] text-white font-semibold text-xs transition-all shadow-md hover:shadow-lg shadow-[#7E8056]/20 active:scale-95 cursor-pointer"
                       >
                         <span>Choose Color →</span>
                       </Link>
                     </div>
                   </div>
 
-                  {/* Right: Customized HVAC Unit Visual from Reference Image */}
-                  <div className="sm:col-span-6 relative rounded-xl overflow-hidden bg-slate-900 border border-slate-200 dark:border-white/10 aspect-[16/10] max-h-[190px]">
+                  {/* Right: Architectural Luxury Villa HVAC Render with Dynamic Color Tint */}
+                  <div className="sm:col-span-6 relative rounded-xl sm:rounded-2xl overflow-hidden bg-slate-950 border border-slate-200 dark:border-white/10 aspect-[16/10] shadow-inner group/img">
                     <img
-                      src="/images/slices/customize-colored-unit.jpg"
-                      alt="Customized HVAC Modular System"
-                      className="w-full h-full object-cover object-center transition-all duration-300"
+                      src="/images/customize-architectural-unit.jpg"
+                      alt="Customized Architectural HVAC Modular System at Modern Luxury Home"
+                      className="w-full h-full object-cover object-center group-hover/img:scale-105 transition-transform duration-500"
                     />
+                    {/* Dynamic color tint overlay that responds in real-time to selected/hovered swatch */}
                     <div
-                      className="absolute inset-0 pointer-events-none mix-blend-color opacity-30 transition-colors duration-300"
+                      className="absolute inset-0 pointer-events-none mix-blend-color opacity-35 transition-colors duration-300"
                       style={{ backgroundColor: activeColorPreview }}
                     />
+                    {/* Architectural tag pill */}
+                    <div className="absolute bottom-2.5 left-2.5 px-2.5 py-1 rounded-lg bg-black/75 border border-white/20 backdrop-blur-md text-[10px] font-medium text-white flex items-center gap-1.5 pointer-events-none">
+                      <span
+                        className="w-2 h-2 rounded-full border border-white/50"
+                        style={{ backgroundColor: activeColorPreview }}
+                      />
+                      <span className="capitalize">{HOMEPAGE_SWATCHES.find(s => s.hex === activeColorPreview)?.name}</span>
+                    </div>
                   </div>
 
                 </div>
