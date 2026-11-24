@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   Calendar,
   Play,
+  Pause,
+  Volume2,
+  VolumeX,
   ArrowRight,
   Layers,
   Zap,
@@ -43,31 +46,65 @@ export default function HomePage() {
   const [howItWorksModalOpen, setHowItWorksModalOpen] = useState(false);
   const [showInteractiveModel, setShowInteractiveModel] = useState(false);
 
+  // High-Definition Hero Background Video Controls
+  const videoRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [isMuted, setIsMuted] = useState(true);
+
+  const togglePlay = () => {
+    if (!videoRef.current) return;
+    if (videoRef.current.paused) {
+      videoRef.current.play();
+      setIsPlaying(true);
+    } else {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    }
+  };
+
+  const toggleMute = () => {
+    if (!videoRef.current) return;
+    videoRef.current.muted = !videoRef.current.muted;
+    setIsMuted(videoRef.current.muted);
+  };
+
   const activeColorPreview = hoveredColor || selectedColor;
 
   return (
     <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#16181B] text-slate-800 dark:text-slate-100 overflow-hidden font-sans transition-colors duration-200">
 
       {/* ===================== HERO SECTION ===================== */}
-      {/* Dark dusk left section with full proper HVAC unit image on the right */}
+      {/* Dark dusk left section with high-definition modular HVAC video on the right */}
       <section className="relative w-full min-h-[520px] lg:min-h-[560px] flex items-center overflow-hidden bg-[#0D0E11] border-b border-slate-200/80 dark:border-white/10 transition-colors">
 
-        {/* Right Side: Full Proper HVAC Unit Image */}
-        <div className="absolute top-0 right-0 bottom-0 w-full md:w-[68%] lg:w-[63%] xl:w-[59%] h-full z-0">
-          <img
-            src="/images/hero-bg-unit.jpg"
-            alt="The Next Generation Modular HVAC System by No-Tech Systems"
-            className="w-full h-full object-cover object-[center_35%] lg:object-center"
-          />
+        {/* Full-Bleed Hero Background Video: Completely clear without any left-side blur */}
+        <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-black">
+          <video
+            ref={videoRef}
+            autoPlay
+            loop
+            muted={isMuted}
+            playsInline
+            preload="auto"
+            poster="/images/hero-bg-unit.jpg"
+            className="w-full h-full object-cover object-center transform-gpu will-change-transform filter contrast-[1.08] saturate-[1.06] brightness-[1.02] transition-opacity duration-700"
+            style={{
+              imageRendering: '-webkit-optimize-contrast',
+              WebkitBackfaceVisibility: 'hidden',
+              transform: 'translateZ(0)',
+            }}
+          >
+            <source src="/videos/hero-background-video.mp4" type="video/mp4" />
+            {/* Fallback image if video is not supported */}
+            <img
+              src="/images/hero-bg-unit.jpg"
+              alt="The Next Generation Modular HVAC System by No-Tech Systems"
+              className="w-full h-full object-cover object-center"
+            />
+          </video>
 
-          {/* On mobile: soft dark overlay for text readability; transparent on desktop */}
-          <div className="absolute inset-0 bg-[#0D0E11]/75 md:hidden pointer-events-none" />
-
-          {/* Light & Gentle Left Gradient: Halka blur/blend so the machine stays clearly visible without heavy dark obscuring */}
-          <div className="absolute inset-y-0 left-0 w-16 sm:w-24 md:w-32 lg:w-40 bg-gradient-to-r from-[#0D0E11] via-[#0D0E11]/25 to-transparent pointer-events-none" />
-
-          {/* Subtle Top & Bottom Vignette */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0D0E11]/35 via-transparent to-[#0D0E11]/20 pointer-events-none" />
+          {/* Subtle clean ambient tint for crystal-clear text readability across the video without any left-side blur */}
+          <div className="absolute inset-0 bg-black/35 pointer-events-none" />
         </div>
 
         {/* Left Side: Dark Dusk Content Area */}
@@ -84,20 +121,20 @@ export default function HomePage() {
 
             {/* Headline */}
             <div className="space-y-1">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-[52px] font-bold font-serif text-white tracking-tight leading-[1.12]">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-[52px] font-bold font-serif text-white tracking-tight leading-[1.12] drop-shadow-lg">
                 The Next Generation
               </h1>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-[52px] font-bold font-serif text-[#C2B59B] tracking-tight leading-[1.12]">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-[52px] font-bold font-serif text-[#C2B59B] tracking-tight leading-[1.12] drop-shadow-lg">
                 Modular HVAC System
               </h2>
             </div>
 
             {/* Tagline & Description */}
             <div className="space-y-2">
-              <p className="text-base sm:text-lg font-bold text-white tracking-wide">
+              <p className="text-base sm:text-lg font-bold text-white tracking-wide drop-shadow-md">
                 Plug-and-play. Efficient. Built for You.
               </p>
-              <p className="text-xs sm:text-sm text-slate-300 max-w-lg leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-200 max-w-lg leading-relaxed drop-shadow-sm">
                 No-Tech HVAC delivers a revolutionary modular system with unmatched flexibility, easy installation, and modern design.
               </p>
             </div>
@@ -142,13 +179,34 @@ export default function HomePage() {
 
         {/* Floating Controls on bottom right of the hero */}
         <div className="absolute bottom-5 right-5 z-20 hidden sm:flex items-center gap-2.5">
+          {/* Video Play/Pause & Audio Mute Toggles */}
+          <div className="flex items-center bg-black/80 rounded-full border border-white/20 backdrop-blur-md px-1.5 py-1 shadow-2xl">
+            <button
+              onClick={togglePlay}
+              className="p-1.5 rounded-full hover:bg-white/15 text-white transition-colors"
+              title={isPlaying ? "Pause Background Video" : "Play Background Video"}
+            >
+              {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-current" />}
+            </button>
+            <button
+              onClick={toggleMute}
+              className="p-1.5 rounded-full hover:bg-white/15 text-white transition-colors"
+              title={isMuted ? "Unmute Background Video" : "Mute Background Video"}
+            >
+              {isMuted ? <VolumeX className="w-3.5 h-3.5 text-slate-300" /> : <Volume2 className="w-3.5 h-3.5 text-[#C2B59B]" />}
+            </button>
+            <span className="text-[10px] font-bold text-[#A4A77E] px-2 uppercase tracking-widest hidden md:inline border-l border-white/15 ml-1">
+              HD Video
+            </span>
+          </div>
+
           <button
             onClick={() => setShowInteractiveModel(!showInteractiveModel)}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/75 hover:bg-black text-white text-xs font-medium border border-white/20 backdrop-blur-md transition-all shadow-xl hover:scale-105"
-            title="Toggle 3D Diagram or Architectural Photo"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/80 hover:bg-black text-white text-xs font-medium border border-white/20 backdrop-blur-md transition-all shadow-xl hover:scale-105"
+            title="Toggle 3D Diagram or Architectural Video"
           >
             <Box className="w-4 h-4 text-[#C2B59B]" />
-            <span>{showInteractiveModel ? 'Show Architectural Photo' : 'Switch to 3D Diagram View'}</span>
+            <span>{showInteractiveModel ? 'Show Video View' : 'Switch to 3D Diagram View'}</span>
           </button>
         </div>
 
@@ -533,21 +591,17 @@ export default function HomePage() {
             </div>
 
             {/* Video demonstration */}
-            <div className="relative aspect-video rounded-xl bg-black border border-slate-200 dark:border-white/15 overflow-hidden flex flex-col items-center justify-center p-6 text-center">
-              <div className="w-16 h-16 rounded-full bg-[#7E8056]/20 text-[#7E8056] border-2 border-[#7E8056] flex items-center justify-center mb-3 animate-pulse">
-                <Play className="w-8 h-8 fill-[#7E8056] ml-1" />
-              </div>
-              <h4 className="text-base font-bold text-white mb-1">
-                Modular 4-Bay Plug & Play Video Demonstration
-              </h4>
-              <p className="text-xs text-slate-300 max-w-md">
-                Demonstrates zero-loss quick-connect couplings, dual conductor safety inspections, and seamless 4-minute field swaps.
-              </p>
-              <div className="mt-4 flex gap-2">
-                <span className="px-2.5 py-1 rounded bg-white/10 text-[10px] text-slate-300">4K UHD</span>
-                <span className="px-2.5 py-1 rounded bg-white/10 text-[10px] text-slate-300">Stereo Audio</span>
-                <span className="px-2.5 py-1 rounded bg-[#7E8056]/30 text-[10px] text-white">EPA Compliant</span>
-              </div>
+            <div className="relative aspect-video rounded-xl bg-black border border-slate-200 dark:border-white/15 overflow-hidden shadow-2xl">
+              <video
+                src="/videos/hero-background-video.mp4"
+                controls
+                autoPlay
+                playsInline
+                className="w-full h-full object-contain bg-black"
+                poster="/images/hero-bg-unit.jpg"
+              >
+                Your browser does not support the video tag.
+              </video>
             </div>
 
             <div className="mt-5 flex justify-end gap-3">
