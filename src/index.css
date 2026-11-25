@@ -1,3 +1,4 @@
+/* Centralized theme & Tailwind base styles */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -37,6 +38,21 @@
     --color-primary: #6D6E71;
     --color-accent: #A4A77E;
     --color-highlight: #C2B59B;
+
+    /* Centralized Light Theme Tokens (RGB channels for Tailwind opacity support) */
+    --theme-page: 255 255 255;           /* #FFFFFF */
+    --theme-surface: 255 255 255;        /* #FFFFFF */
+    --theme-surface-muted: 250 247 242;  /* #FAF7F2 */
+    --theme-surface-elevated: 244 241 234; /* #F4F1EA */
+    --theme-banner-edge: 244 241 234;    /* #F4F1EA */
+    --theme-banner-mid: 248 246 240;     /* #F8F6F0 */
+    --theme-brand: 126 128 86;           /* #7E8056 */
+    --theme-brand-hover: 110 112 73;     /* #6E7049 */
+    --theme-brand-ink: 126 128 86;       /* #7E8056 */
+    --theme-brand-muted: 108 111 77;     /* #6C6F4D */
+    --theme-brand-accent: 164 167 126;   /* #A4A77E */
+    --theme-highlight: 140 122 88;       /* #8C7A58 */
+    --theme-highlight-soft: 194 181 155; /* #C2B59B */
   }
 
   .dark {
@@ -67,6 +83,21 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+
+    /* Centralized Dark Theme Tokens */
+    --theme-page: 18 19 21;              /* #121315 */
+    --theme-surface: 24 26 29;           /* #181A1D */
+    --theme-surface-muted: 28 30 34;     /* #1C1E22 */
+    --theme-surface-elevated: 37 40 45;  /* #25282D */
+    --theme-banner-edge: 27 29 32;       /* #1B1D20 */
+    --theme-banner-mid: 34 37 42;        /* #22252A */
+    --theme-brand: 126 128 86;           /* #7E8056 */
+    --theme-brand-hover: 110 112 73;     /* #6E7049 */
+    --theme-brand-ink: 164 167 126;      /* #A4A77E */
+    --theme-brand-muted: 164 167 126;    /* #A4A77E */
+    --theme-brand-accent: 164 167 126;   /* #A4A77E */
+    --theme-highlight: 194 181 155;      /* #C2B59B */
+    --theme-highlight-soft: 194 181 155; /* #C2B59B */
   }
 
   * {

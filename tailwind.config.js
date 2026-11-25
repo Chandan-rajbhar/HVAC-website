@@ -50,6 +50,28 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        /* Centralized Semantic Theme Tokens (driven by src/index.css) */
+        page: "rgb(var(--theme-page) / <alpha-value>)",
+        surface: {
+          DEFAULT: "rgb(var(--theme-surface) / <alpha-value>)",
+          muted: "rgb(var(--theme-surface-muted) / <alpha-value>)",
+          elevated: "rgb(var(--theme-surface-elevated) / <alpha-value>)",
+        },
+        banner: {
+          edge: "rgb(var(--theme-banner-edge) / <alpha-value>)",
+          mid: "rgb(var(--theme-banner-mid) / <alpha-value>)",
+        },
+        brand: {
+          DEFAULT: "rgb(var(--theme-brand) / <alpha-value>)",
+          hover: "rgb(var(--theme-brand-hover) / <alpha-value>)",
+          ink: "rgb(var(--theme-brand-ink) / <alpha-value>)",
+          muted: "rgb(var(--theme-brand-muted) / <alpha-value>)",
+          accent: "rgb(var(--theme-brand-accent) / <alpha-value>)",
+        },
+        highlight: {
+          DEFAULT: "rgb(var(--theme-highlight) / <alpha-value>)",
+          soft: "rgb(var(--theme-highlight-soft) / <alpha-value>)",
+        },
         steel: {
           DEFAULT: '#6D6E71',
           50: '#F5F5F6',
