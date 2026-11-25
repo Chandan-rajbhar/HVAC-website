@@ -73,12 +73,6 @@ export default function Footer() {
                 <Link to="/contractor#questionnaire" className="text-slate-300 hover:text-[#A4A77E] transition-colors">10-Question Certification</Link>
               </li>
               <li>
-                <Link to="/contractor/schedule" className="text-slate-300 hover:text-[#A4A77E] transition-colors">Scheduling Controls</Link>
-              </li>
-              <li>
-                <Link to="/contractor/rfid" className="text-slate-300 hover:text-[#A4A77E] transition-colors">RFID Scanning Demo</Link>
-              </li>
-              <li>
                 <Link to="/local-mechanical" className="text-slate-300 hover:text-[#A4A77E] transition-colors">Local Mechanical Audits</Link>
               </li>
             </ul>
