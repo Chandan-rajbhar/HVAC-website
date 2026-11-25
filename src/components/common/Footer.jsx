@@ -9,31 +9,6 @@ export default function Footer() {
   const { isDark } = useTheme();
   return (
     <footer className="w-full bg-gradient-to-r from-[#F4F1EA] via-[#F8F6F0] to-[#F4F1EA] dark:from-[#1B1D20] dark:via-[#22252A] dark:to-[#1B1D20] border-t border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 transition-colors duration-200">
-      {/* Top Banner with Local Mechanical Endorsement */}
-      <div className="border-b border-slate-200 dark:border-white/10 bg-black/[0.02] dark:bg-black/30 py-6 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <LocalMechanicalLogo className="h-10" light={!isDark} />
-            <div>
-              <h4 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">
-                Approved by Local Mechanical
-              </h4>
-              <p className="text-xs text-slate-600 dark:text-slate-400">
-                Official regulatory and compliance enforcement body for all No-Tech modular installations worldwide.
-              </p>
-            </div>
-          </div>
-
-          <Link
-            to="/local-mechanical"
-            className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-white/80 dark:bg-white/10 hover:bg-[#7E8056] hover:text-white text-slate-800 dark:text-slate-200 transition-all border border-slate-300 dark:border-white/10"
-          >
-            <span>View Quality Dashboard</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-      </div>
-
       {/* Main Footer Links */}
       <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
