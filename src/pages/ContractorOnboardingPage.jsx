@@ -381,102 +381,102 @@ export default function ContractorOnboardingPage() {
           transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
           whileHover={{ y: -2, transition: { duration: 0.25 } }}
         >
-        < Card className="w-full bg-white dark:bg-[#121315] border-slate-200/90 dark:border-white/25 shadow-sm hover:shadow-md transition-shadow" >
-          <CardContent className="p-6 sm:p-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+          < Card className="w-full bg-white dark:bg-[#121315] border-slate-200/90 dark:border-white/25 shadow-sm hover:shadow-md transition-shadow" >
+            <CardContent className="p-6 sm:p-8">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
 
-              {/* Left: Header, Description & Exam Topics */}
-              <div className="lg:col-span-8 space-y-4">
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div className="flex items-center gap-2.5">
-                    <div className="p-2 rounded-lg bg-[#7E8056]/15 text-[#7E8056] dark:text-[#A4A77E]">
-                      <Award className="w-4 h-4" />
+                {/* Left: Header, Description & Exam Topics */}
+                <div className="lg:col-span-8 space-y-4">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <div className="flex items-center gap-2.5">
+                      <div className="p-2 rounded-lg bg-[#7E8056]/15 text-[#7E8056] dark:text-[#A4A77E]">
+                        <Award className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <h3 className="text-base sm:text-lg font-bold font-serif text-slate-900 dark:text-white tracking-tight">
+                          Installation Questionnaire
+                        </h3>
+                        <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                          Local Mechanical Technical Certification Exam
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="text-base sm:text-lg font-bold font-serif text-slate-900 dark:text-white tracking-tight">
-                        Installation Questionnaire
-                      </h3>
-                      <p className="text-[11px] text-slate-500 dark:text-slate-400">
-                        Local Mechanical Technical Certification Exam
+                    <span className="text-[11px] px-2.5 py-1 rounded-full bg-[#7E8056]/15 dark:bg-[#A4A77E]/20 text-[#555845] dark:text-[#C2B59B] font-semibold">
+                      10 Technical Questions
+                    </span>
+                  </div>
+
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                    Covers structural sub-base requirements, 80ft line sizing, gas detector leak checks, male/female conductor inspection, and RFID app logging per the PDF.
+                  </p>
+
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-[11px]">
+                    {[
+                      "2'x6' Sub-Base Framing",
+                      "80ft Line Sizing Rules",
+                      "Gas Leak & Pin Checks",
+                      "RFID App Validation"
+                    ].map((topic) => (
+                      <div
+                        key={topic}
+                        className="px-3 py-2 rounded-lg bg-slate-50 dark:bg-black/40 border border-slate-200/80 dark:border-white/10 text-slate-700 dark:text-slate-300 font-medium flex items-center gap-1.5"
+                      >
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#7E8056] dark:text-[#A4A77E] flex-shrink-0" />
+                        <span className="truncate">{topic}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Right: Passing Requirement / Score & Action Button */}
+                <div className="lg:col-span-4 flex flex-col justify-between gap-4 p-4 sm:p-5 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200/80 dark:border-white/10">
+                  {quizSubmitted ? (
+                    <div className="space-y-1.5 text-xs">
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-slate-900 dark:text-white">Your Score:</span>
+                        <span className="font-mono text-sm font-bold text-emerald-600 dark:text-emerald-400">{quizScore} / 10 ({quizScore * 10}%)</span>
+                      </div>
+                      <p className="text-slate-600 dark:text-slate-300">
+                        {quizScore >= 8 ? 'Congratulations! You passed the Local Mechanical technical exam.' : 'Score below 80%. Review PDF materials and retake.'}
+                      </p>
+                      <button
+                        onClick={() => navigate('/contractor/quiz', {
+                          state: {
+                            reviewMode: true,
+                            quizScore,
+                            userAnswers: navState.userAnswers || {},
+                          },
+                        })}
+                        className="mt-1 text-xs text-[#7E8056] dark:text-[#A4A77E] underline font-semibold block cursor-pointer"
+                      >
+                        Review Answers & Explanations
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="space-y-1 text-xs text-slate-600 dark:text-slate-400">
+                      <span className="font-bold text-slate-900 dark:text-white block">Certification Requirement</span>
+                      <p>
+                        Passing score: <strong className="text-slate-800 dark:text-slate-200">8/10 (80%)</strong>. Unlimited practice attempts.
                       </p>
                     </div>
-                  </div>
-                  <span className="text-[11px] px-2.5 py-1 rounded-full bg-[#7E8056]/15 dark:bg-[#A4A77E]/20 text-[#555845] dark:text-[#C2B59B] font-semibold">
-                    10 Technical Questions
-                  </span>
-                </div>
+                  )}
 
-                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                  Covers structural sub-base requirements, 80ft line sizing, gas detector leak checks, male/female conductor inspection, and RFID app logging per the PDF.
-                </p>
-
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-[11px]">
-                  {[
-                    "2'x6' Sub-Base Framing",
-                    "80ft Line Sizing Rules",
-                    "Gas Leak & Pin Checks",
-                    "RFID App Validation"
-                  ].map((topic) => (
-                    <div
-                      key={topic}
-                      className="px-3 py-2 rounded-lg bg-slate-50 dark:bg-black/40 border border-slate-200/80 dark:border-white/10 text-slate-700 dark:text-slate-300 font-medium flex items-center gap-1.5"
+                  <div className="flex justify-end">
+                    <Button
+                      type="button"
+                      size="sm"
+                      onClick={() => navigate('/contractor/quiz')}
+                      className="h-8 px-4 rounded-lg bg-[#7E8056] hover:bg-[#6c6e49] dark:bg-[#A4A77E] dark:hover:bg-[#8e9167] text-white dark:text-black font-semibold text-xs shadow-sm transition-all inline-flex items-center gap-1.5"
                     >
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#7E8056] dark:text-[#A4A77E] flex-shrink-0" />
-                      <span className="truncate">{topic}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Right: Passing Requirement / Score & Action Button */}
-              <div className="lg:col-span-4 flex flex-col justify-between gap-4 p-4 sm:p-5 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200/80 dark:border-white/10">
-                {quizSubmitted ? (
-                  <div className="space-y-1.5 text-xs">
-                    <div className="flex items-center justify-between">
-                      <span className="font-bold text-slate-900 dark:text-white">Your Score:</span>
-                      <span className="font-mono text-sm font-bold text-emerald-600 dark:text-emerald-400">{quizScore} / 10 ({quizScore * 10}%)</span>
-                    </div>
-                    <p className="text-slate-600 dark:text-slate-300">
-                      {quizScore >= 8 ? 'Congratulations! You passed the Local Mechanical technical exam.' : 'Score below 80%. Review PDF materials and retake.'}
-                    </p>
-                    <button
-                      onClick={() => navigate('/contractor/quiz', {
-                        state: {
-                          reviewMode: true,
-                          quizScore,
-                          userAnswers: navState.userAnswers || {},
-                        },
-                      })}
-                      className="mt-1 text-xs text-[#7E8056] dark:text-[#A4A77E] underline font-semibold block cursor-pointer"
-                    >
-                      Review Answers & Explanations
-                    </button>
+                      <Award className="w-3.5 h-3.5" />
+                      <span>{quizSubmitted ? 'Retake Quiz' : 'Start Quiz →'}</span>
+                    </Button>
                   </div>
-                ) : (
-                  <div className="space-y-1 text-xs text-slate-600 dark:text-slate-400">
-                    <span className="font-bold text-slate-900 dark:text-white block">Certification Requirement</span>
-                    <p>
-                      Passing score: <strong className="text-slate-800 dark:text-slate-200">8/10 (80%)</strong>. Unlimited practice attempts.
-                    </p>
-                  </div>
-                )}
-
-                <div className="flex justify-end">
-                  <Button
-                    type="button"
-                    size="sm"
-                    onClick={() => navigate('/contractor/quiz')}
-                    className="h-8 px-4 rounded-lg bg-[#7E8056] hover:bg-[#6c6e49] dark:bg-[#A4A77E] dark:hover:bg-[#8e9167] text-white dark:text-black font-semibold text-xs shadow-sm transition-all inline-flex items-center gap-1.5"
-                  >
-                    <Award className="w-3.5 h-3.5" />
-                    <span>{quizSubmitted ? 'Retake Quiz' : 'Start Quiz →'}</span>
-                  </Button>
                 </div>
-              </div>
 
-            </div>
-          </CardContent>
-        </Card >
+              </div>
+            </CardContent>
+          </Card >
         </motion.div>
 
         {/* ===================== VIDEO TRAINING MODAL ===================== */}
