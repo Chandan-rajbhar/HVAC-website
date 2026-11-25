@@ -89,34 +89,41 @@ export default function ManageContractorPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#121315] text-slate-900 dark:text-slate-100 py-8 lg:py-10 transition-colors duration-200">
-      <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+    <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#121315] text-slate-900 dark:text-slate-100 transition-colors duration-200">
 
-        {/* Header Banner */}
-        <Card className="rounded-2xl bg-gradient-to-r from-[#F4F1EA] via-[#F8F6F0] to-[#F4F1EA] dark:from-[#1B1D20] dark:via-[#22252A] dark:to-[#1B1D20] border-slate-200/90 dark:border-[#A4A77E]/30 shadow-[0_2px_12px_rgba(0,0,0,0.03)] dark:shadow-xl">
-          <CardContent className="p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div className="max-w-2xl space-y-2">
-              <Badge
-                variant="outline"
-                className="border-[#7E8056]/30 bg-[#7E8056]/10 text-[#7E8056] dark:text-[#C2B59B] text-[10px] font-semibold uppercase tracking-wider"
-              >
-                Customer &amp; Contractor Portal
-              </Badge>
-              <h1 className="text-2xl sm:text-4xl font-bold font-serif text-slate-900 dark:text-white tracking-tight">
+      {/* ===================== FULL-WIDTH CENTERED HERO SECTION WITH BACKGROUND IMAGE ===================== */}
+      <section className="relative w-full bg-[#0B0C0E] text-white overflow-hidden border-b border-white/10 h-[400px] sm:h-[440px] lg:h-[480px] flex items-center justify-center">
+        {/* Full-Width Panoramic Background Image */}
+        <div className="absolute inset-0 pointer-events-none">
+          <img
+            src="/images/manage-contractor-hero.jpg"
+            alt="Certified HVAC Specialist Inspecting Modular System"
+            className="w-full h-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-black/45" />
+        </div>
+
+        {/* Centered Hero Content Container */}
+        <div className="relative z-10 max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 w-full flex flex-col items-center text-center">
+          <div className="max-w-3xl mx-auto space-y-4 sm:space-y-5 flex flex-col items-center">
+            <div className="space-y-1.5">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-serif text-white tracking-tight leading-[1.12] drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
                 Manage My Contractor
               </h1>
-              <p className="text-sm sm:text-base text-[#7E8056] dark:text-[#C2B59B] font-semibold">
+              <p className="text-lg sm:text-2xl font-bold text-[#E8DEC8] dark:text-[#C2B59B] tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]">
                 Certified Technicians. Local Compliance.
               </p>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                Review your assigned certified technician, view verified ratings, or switch to another Local Mechanical approved contractor.
-              </p>
             </div>
-            <div className="flex-shrink-0">
+
+            <p className="text-sm sm:text-base text-white leading-relaxed max-w-2xl mx-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
+              Review your assigned certified technician, view verified ratings, or switch to another Local Mechanical approved contractor.
+            </p>
+
+            <div className="pt-1 flex flex-wrap items-center justify-center gap-2.5">
               <Button
                 asChild
                 size="sm"
-                className="h-8 px-3.5 rounded-lg bg-[#7E8056] hover:bg-[#6c6e49] text-white font-semibold text-xs shadow-xs"
+                className="h-9 px-4 rounded-lg bg-[#7E8056] hover:bg-[#6e7049] text-white font-semibold text-xs shadow-md transition-all"
               >
                 <Link to="/reservations">
                   <span>Reservations Dashboard</span>
@@ -124,8 +131,11 @@ export default function ManageContractorPage() {
                 </Link>
               </Button>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
+      </section>
+
+      <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-10 space-y-6">
 
         {/* Feedback Submitted Confirmation Alert */}
         {feedbackSubmitted && (
