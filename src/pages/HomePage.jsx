@@ -77,7 +77,7 @@ export default function HomePage() {
 
       {/* ===================== HERO SECTION ===================== */}
       {/* Dark dusk left section with high-definition modular HVAC video on the right */}
-      <section className="relative w-full min-h-[520px] lg:min-h-[560px] flex items-center overflow-hidden bg-[#0D0E11] border-b border-slate-200/80 dark:border-white/10 transition-colors">
+      <section className="relative w-full min-h-[600px] lg:min-h-[calc(100vh-5rem)] flex items-center overflow-hidden bg-[#0D0E11] border-b border-slate-200/80 dark:border-white/10 transition-colors">
 
         {/* Full-Bleed Hero Background Video: Completely clear without any left-side blur */}
         <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-black">
@@ -89,11 +89,11 @@ export default function HomePage() {
             muted={isMuted}
             playsInline
             preload="auto"
-            className="w-full h-full object-cover object-center transform-gpu will-change-transform filter contrast-[1.05] saturate-[1.05] brightness-[1.02] transition-opacity duration-700"
+            className="w-full h-full object-cover object-center transform-gpu will-change-transform filter contrast-[1.05] saturate-[1.05] brightness-110 transition-opacity duration-700"
             style={{
               imageRendering: '-webkit-optimize-contrast',
               WebkitBackfaceVisibility: 'hidden',
-              transform: 'translateZ(0)',
+              transform: 'translateZ(0) scale(1.14)',
             }}
           >
             <source src="/videos/hero-background-video.mp4?v=gemini" type="video/mp4" />
@@ -106,41 +106,37 @@ export default function HomePage() {
             />
           </video>
 
-          {/* Directional Scrim: Dark on the left behind text for 100% readability, completely transparent on the right so video is 100% clear and bright */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-transparent pointer-events-none" />
         </div>
 
-        {/* Left Side: Content Area shifted to left */}
-        <div className="relative z-10 w-full px-6 sm:px-10 lg:px-14 xl:px-16 py-10 lg:py-12">
-          <div className="max-w-xl lg:max-w-2xl space-y-4 sm:space-y-5">
+        {/* Left Side: Content Area aligned with page container & vertically centered */}
+        <div className="relative z-10 w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-12">
+          <div className="max-w-3xl space-y-6">
 
-
-
-            {/* Headline - Larger & Impactful */}
-            <div className="space-y-1">
-              <h1 className="text-3xl sm:text-4xl lg:text-[44px] xl:text-[48px] font-bold font-serif text-white tracking-tight leading-[1.12] drop-shadow-md">
+            {/* Headline - Fixed high-contrast colors identical in both Light & Dark themes */}
+            <div className="space-y-1.5">
+              <h1 className="text-3xl sm:text-5xl lg:text-[56px] xl:text-[62px] font-bold font-serif text-white tracking-tight leading-[1.06] drop-shadow-lg">
                 The Next Generation
               </h1>
-              <h2 className="text-3xl sm:text-4xl lg:text-[44px] xl:text-[48px] font-bold font-serif text-[#C2B59B] tracking-tight leading-[1.12] drop-shadow-md">
+              <h2 className="text-3xl sm:text-5xl lg:text-[56px] xl:text-[62px] font-bold font-serif text-[#7E8056] tracking-tight leading-[1.06] drop-shadow-lg">
                 Modular HVAC System
               </h2>
             </div>
 
             {/* Tagline & Description */}
-            <div className="space-y-2">
-              <p className="text-base sm:text-lg font-bold text-white tracking-wide drop-shadow-sm">
+            <div className="space-y-2.5 max-w-xl">
+              <p className="text-base sm:text-lg lg:text-xl font-semibold text-white tracking-wide drop-shadow-md">
                 Plug-and-play. Efficient. Built for You.
               </p>
-              <p className="text-xs sm:text-sm text-slate-200 max-w-lg leading-relaxed">
+              <p className="text-sm sm:text-base text-slate-100 leading-relaxed drop-shadow-sm">
                 No-Tech HVAC delivers a revolutionary modular system with unmatched flexibility, easy installation, and modern design.
               </p>
             </div>
 
             {/* Hero Call-To-Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3.5 pt-1.5">
+            <div className="flex flex-wrap items-center gap-3.5 pt-1">
               <button
                 onClick={() => setIsReserveModalOpen(true)}
-                className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-[#7E8056] hover:bg-[#6c6e49] text-white font-semibold text-xs sm:text-sm tracking-wide shadow-lg shadow-[#7E8056]/30 transition-all duration-200 hover:scale-[1.02] active:scale-95 group cursor-pointer"
+                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-[#7E8056] hover:bg-[#6E7049] text-white font-semibold text-sm tracking-wide shadow-lg shadow-[#7E8056]/30 transition-all duration-200 hover:scale-[1.02] active:scale-95 group cursor-pointer"
               >
                 <Calendar className="w-4 h-4 text-white" />
                 <span>Reserve Your No-Tech HVAC</span>
@@ -149,44 +145,44 @@ export default function HomePage() {
 
               <button
                 onClick={() => setIsVideoModalOpen(true)}
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-black/60 hover:bg-black/80 text-white font-medium text-xs sm:text-sm border border-white/30 backdrop-blur-md transition-all duration-200 hover:scale-[1.02] cursor-pointer"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-black/60 hover:bg-black/80 text-white font-medium text-sm border border-white/30 backdrop-blur-md transition-all duration-200 hover:scale-[1.02] cursor-pointer shadow-lg"
               >
                 <Play className="w-3.5 h-3.5 text-white fill-current" />
                 <span>Explore the System</span>
               </button>
             </div>
 
-            {/* Micro-Content & Trust Badges */}
-            <div className="space-y-2.5 pt-1 text-xs text-slate-300">
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5">
+            {/* Micro-Content & Trust Highlights */}
+            <div className="space-y-3.5 pt-2">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs sm:text-[13px] font-medium text-white drop-shadow-sm">
                 <div className="flex items-center gap-1.5 text-[#C2B59B] font-semibold">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#A4A77E] animate-pulse" />
+                  <span className="w-2 h-2 rounded-full bg-[#A4A77E] animate-pulse" />
                   <span>$200 Refundable Deposit</span>
                 </div>
-                <span className="text-white/25 hidden sm:inline">•</span>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#A4A77E]" />
+                <span className="text-white/40 hidden sm:inline">•</span>
+                <div className="flex items-center gap-1.5 text-white">
+                  <CheckCircle2 className="w-4 h-4 text-[#A4A77E]" />
                   <span>Priority 2026 Batch Allocation</span>
                 </div>
-                <span className="text-white/25 hidden sm:inline">•</span>
-                <div className="flex items-center gap-1.5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#A4A77E]" />
+                <span className="text-white/40 hidden sm:inline">•</span>
+                <div className="flex items-center gap-1.5 text-white">
+                  <ShieldCheck className="w-4 h-4 text-[#A4A77E]" />
                   <span>10-Year Local Mechanical Guarantee</span>
                 </div>
               </div>
 
-              {/* Feature Highlights Mini Strip */}
-              <div className="pt-2 border-t border-white/10 flex flex-wrap items-center gap-4 sm:gap-6 text-xs text-slate-300">
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#A4A77E]" />
+              {/* Feature Highlights Pill Strip (Frosted for 100% legibility over bright frames) */}
+              <div className="flex flex-wrap items-center gap-2.5 text-xs font-medium text-white">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/50 border border-white/20 backdrop-blur-md shadow-sm">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#A4A77E]" />
                   <span>4-Bay Hot-Swappable</span>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#A4A77E]" />
+                <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/50 border border-white/20 backdrop-blur-md shadow-sm">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#A4A77E]" />
                   <span>Zero-Loss Disconnects</span>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#A4A77E]" />
+                <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/50 border border-white/20 backdrop-blur-md shadow-sm">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#A4A77E]" />
                   <span>Local Mechanical Approved</span>
                 </div>
               </div>
