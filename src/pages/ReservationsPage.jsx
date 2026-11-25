@@ -87,7 +87,7 @@ export default function ReservationsPage() {
         <div className="relative z-10 max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 w-full flex flex-col items-center text-center">
           <div className="max-w-3xl mx-auto space-y-4 sm:space-y-5 flex flex-col items-center">
             <div className="space-y-1.5">
-              <h1 className="text-3xl sm:text-5xl lg:text-4xl font-extrabold font-serif text-white tracking-tight leading-[1.12] drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-serif text-white tracking-tight leading-[1.12] drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
                 Reservations & Scheduling
               </h1>
               <p className="text-lg sm:text-2xl font-bold text-[#E8DEC8] dark:text-[#C2B59B] tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]">
@@ -178,8 +178,8 @@ export default function ReservationsPage() {
                         key={slot}
                         onClick={() => setSelectedSlot(slot)}
                         className={`p-3 rounded-xl text-xs font-bold transition-all border text-center ${isSelected
-                            ? 'bg-[#7E8056] text-white border-[#7E8056] shadow-md scale-[1.02]'
-                            : 'bg-slate-50 dark:bg-black/40 border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5'
+                          ? 'bg-[#7E8056] text-white border-[#7E8056] shadow-md scale-[1.02]'
+                          : 'bg-slate-50 dark:bg-black/40 border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5'
                           }`}
                       >
                         <span className="block text-xs">{slot}</span>
@@ -343,8 +343,8 @@ export default function ReservationsPage() {
                     key={c.id}
                     onClick={() => setActiveRFIDBay(c.id)}
                     className={`p-3 rounded-xl border transition-all cursor-pointer flex items-center justify-between ${activeRFIDBay === c.id
-                        ? 'bg-[#7E8056]/10 border-[#7E8056] text-slate-900 dark:text-white shadow-sm'
-                        : 'bg-slate-50 dark:bg-black/40 border-slate-200 dark:border-white/5 text-slate-600 dark:text-slate-400 hover:bg-slate-100'
+                      ? 'bg-[#7E8056]/10 border-[#7E8056] text-slate-900 dark:text-white shadow-sm'
+                      : 'bg-slate-50 dark:bg-black/40 border-slate-200 dark:border-white/5 text-slate-600 dark:text-slate-400 hover:bg-slate-100'
                       }`}
                   >
                     <div>

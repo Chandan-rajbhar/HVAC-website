@@ -8,6 +8,7 @@ import InvestorHubPage from './pages/InvestorHubPage';
 import ReservationsPage from './pages/ReservationsPage';
 import ReservationConfirmedPage from './pages/ReservationConfirmedPage';
 import ContractorOnboardingPage from './pages/ContractorOnboardingPage';
+import ContractorQuizPage from './pages/ContractorQuizPage';
 import ContractorSchedulePage from './pages/ContractorSchedulePage';
 import ContractorRfidPage from './pages/ContractorRfidPage';
 import ManageContractorPage from './pages/ManageContractorPage';
@@ -39,6 +40,7 @@ export default function App() {
             <Route path="reservations" element={<ReservationsPage />} />
             <Route path="reservations/confirmed" element={<ReservationConfirmedPage />} />
             <Route path="contractor" element={<ContractorOnboardingPage />} />
+            <Route path="contractor/quiz" element={<ContractorQuizPage />} />
             <Route path="contractor/schedule" element={<ContractorSchedulePage />} />
             <Route path="contractor/rfid" element={<ContractorRfidPage />} />
             <Route path="manage-contractor" element={<ManageContractorPage />} />
