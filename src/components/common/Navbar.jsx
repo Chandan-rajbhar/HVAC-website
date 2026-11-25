@@ -28,8 +28,8 @@ export default function Navbar() {
   const allNavItems = [
     { name: 'Home', path: '/', icon: Home },
     { name: 'Buyer', path: '/buyers', icon: ShoppingCart },
-    { name: 'Investor Hub', path: '/investor', icon: TrendingUp },
     { name: 'Reservations', path: '/reservations', icon: Calendar },
+    { name: 'Investor Hub', path: '/investor', icon: TrendingUp },
     { name: 'Contractor Onboarding', path: '/contractor', icon: HardHat },
     { name: 'Manage Contractor', path: '/manage-contractor', icon: UserCheck },
     { name: 'Local Mechanical', path: '/local-mechanical', icon: ShieldCheck },
