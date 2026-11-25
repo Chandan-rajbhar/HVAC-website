@@ -123,7 +123,7 @@ export default function LocalMechanicalPage() {
     : applications.filter(a => a.status === statusFilter);
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#121315] text-slate-900 dark:text-slate-100 transition-colors duration-200">
+    <div className="min-h-screen bg-white dark:bg-[#212428] text-slate-900 dark:text-slate-100 transition-colors duration-200">
 
       {/* ===================== FULL-WIDTH CENTERED HERO SECTION WITH BACKGROUND IMAGE ===================== */}
       <section className="relative w-full bg-[#0B0C0E] text-white overflow-hidden border-b border-white/10 h-[400px] sm:h-[440px] lg:h-[480px] flex items-center justify-center">
@@ -176,7 +176,7 @@ export default function LocalMechanicalPage() {
       <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8">
 
         {/* Navigation Sub-Tabs Bar */}
-        <div id="local-mech-tabs" className="p-2 sm:p-2.5 rounded-xl bg-white dark:bg-[#181A1D] border border-slate-200 dark:border-white/10 shadow-sm flex flex-wrap gap-2">
+        <div id="local-mech-tabs" className="p-2 sm:p-2.5 rounded-xl bg-white dark:bg-[#121315] border border-slate-200/90 dark:border-white/25 shadow-sm flex flex-wrap gap-2">
           {[
             { id: 'dashboard', label: 'Approval Dashboard' },
             { id: 'compliance', label: 'Installation Compliance & RFID Logs' },
@@ -210,7 +210,7 @@ export default function LocalMechanicalPage() {
                 className={`transition-all cursor-pointer ${
                   statusFilter === 'pending'
                     ? 'bg-amber-50 dark:bg-amber-500/15 border-amber-500 ring-1 ring-amber-500'
-                    : 'bg-white dark:bg-[#181A1D] border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20'
+                    : 'bg-white dark:bg-[#121315] border-slate-200/90 dark:border-white/25 hover:border-slate-300 dark:hover:border-white/40'
                 }`}
               >
                 <CardContent className="p-4 sm:p-5">
@@ -228,7 +228,7 @@ export default function LocalMechanicalPage() {
                 className={`transition-all cursor-pointer ${
                   statusFilter === 'approved'
                     ? 'bg-emerald-50 dark:bg-emerald-500/15 border-emerald-500 ring-1 ring-emerald-500'
-                    : 'bg-white dark:bg-[#181A1D] border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20'
+                    : 'bg-white dark:bg-[#121315] border-slate-200/90 dark:border-white/25 hover:border-slate-300 dark:hover:border-white/40'
                 }`}
               >
                 <CardContent className="p-4 sm:p-5">
@@ -246,7 +246,7 @@ export default function LocalMechanicalPage() {
                 className={`transition-all cursor-pointer ${
                   statusFilter === 'rejected'
                     ? 'bg-red-50 dark:bg-red-500/15 border-red-500 ring-1 ring-red-500'
-                    : 'bg-white dark:bg-[#181A1D] border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20'
+                    : 'bg-white dark:bg-[#121315] border-slate-200/90 dark:border-white/25 hover:border-slate-300 dark:hover:border-white/40'
                 }`}
               >
                 <CardContent className="p-4 sm:p-5">
@@ -264,7 +264,7 @@ export default function LocalMechanicalPage() {
                 className={`transition-all cursor-pointer ${
                   statusFilter === 'under_review'
                     ? 'bg-[#7E8056]/10 dark:bg-[#C2B59B]/15 border-[#7E8056] dark:border-[#C2B59B] ring-1 ring-[#7E8056] dark:ring-[#C2B59B]'
-                    : 'bg-white dark:bg-[#181A1D] border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20'
+                    : 'bg-white dark:bg-[#121315] border-slate-200/90 dark:border-white/25 hover:border-slate-300 dark:hover:border-white/40'
                 }`}
               >
                 <CardContent className="p-4 sm:p-5">
@@ -279,7 +279,7 @@ export default function LocalMechanicalPage() {
             </div>
 
             {/* Contractor Applications Table (shadcn Card + Table + Select + Badge + Button) */}
-            <Card className="bg-white dark:bg-[#181A1D] border-slate-200 dark:border-white/10 shadow-sm overflow-hidden">
+            <Card className="bg-white dark:bg-[#121315] border-slate-200/90 dark:border-white/25 shadow-sm overflow-hidden">
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 px-6 py-4 border-b border-slate-200 dark:border-white/10">
                 <h3 className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white">
                   Contractor Verification Applications ({filteredApps.length})
@@ -362,8 +362,7 @@ export default function LocalMechanicalPage() {
         {/* ===================== TAB 2: COMPLIANCE & RFID LOGS ===================== */}
         {activeTab === 'compliance' && (
           <div className="space-y-6">
-
-            <Card className="bg-white dark:bg-[#181A1D] border-slate-200 dark:border-white/10 shadow-sm overflow-hidden">
+            <Card className="bg-white dark:bg-[#121315] border-slate-200/90 dark:border-white/25 shadow-sm overflow-hidden">
               <div className="flex flex-wrap items-center justify-between gap-2 px-6 py-4 border-b border-slate-200 dark:border-white/10">
                 <div className="flex items-center gap-2">
                   <Radio className="w-4 h-4 text-[#7E8056] dark:text-[#A4A77E]" />
@@ -422,7 +421,7 @@ export default function LocalMechanicalPage() {
 
             {/* Quality Compliance Overview */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Card className="bg-white dark:bg-[#181A1D] border-slate-200 dark:border-white/10 shadow-sm">
+              <Card className="bg-white dark:bg-[#121315] border-slate-200/90 dark:border-white/25 shadow-sm">
                 <CardContent className="p-6 space-y-4">
                   <h4 className="text-xs font-bold uppercase tracking-wider text-[#7E8056] dark:text-[#A4A77E]">
                     Code Enforcement Standards
@@ -448,7 +447,7 @@ export default function LocalMechanicalPage() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-white dark:bg-[#181A1D] border-slate-200 dark:border-white/10 shadow-sm">
+              <Card className="bg-white dark:bg-[#121315] border-slate-200/90 dark:border-white/25 shadow-sm">
                 <CardContent className="p-6 space-y-4">
                   <h4 className="text-xs font-bold uppercase tracking-wider text-[#8C7A58] dark:text-[#C2B59B]">
                     Flagged Service Issues & Corrective Actions
@@ -469,8 +468,7 @@ export default function LocalMechanicalPage() {
         {/* ===================== TAB 3: PERFORMANCE & REVIEWS ===================== */}
         {activeTab === 'performance' && (
           <div className="space-y-6">
-
-            <Card className="bg-white dark:bg-[#181A1D] border-slate-200 dark:border-white/10 shadow-sm">
+            <Card className="bg-white dark:bg-[#121315] border-slate-200/90 dark:border-white/25 shadow-sm">
               <CardContent className="p-6 space-y-5">
                 <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-200 dark:border-white/10">
                   <div className="flex items-center gap-2">
@@ -521,7 +519,7 @@ export default function LocalMechanicalPage() {
         {/* Review Contractor Modal / Drawer */}
         {selectedApp && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/65 backdrop-blur-sm p-4 animate-in fade-in">
-            <Card className="bg-white dark:bg-[#181A1D] border-slate-200 dark:border-white/15 rounded-2xl max-w-lg w-full p-6 text-slate-900 dark:text-slate-100 shadow-2xl relative space-y-4">
+            <Card className="bg-white dark:bg-[#121315] border-slate-200/90 dark:border-white/25 rounded-2xl max-w-lg w-full p-6 text-slate-900 dark:text-slate-100 shadow-2xl relative space-y-4">
               <button
                 onClick={() => setSelectedApp(null)}
                 className="absolute top-4 right-4 p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors cursor-pointer"

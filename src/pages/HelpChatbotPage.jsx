@@ -85,7 +85,7 @@ export default function HelpChatbotPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#121315] text-slate-900 dark:text-slate-100 transition-colors duration-200">
+    <div className="min-h-screen bg-white dark:bg-[#212428] text-slate-900 dark:text-slate-100 transition-colors duration-200">
 
       {/* ===================== FULL-WIDTH CENTERED HERO SECTION WITH BACKGROUND IMAGE ===================== */}
       <section className="relative w-full bg-[#0B0C0E] text-white overflow-hidden border-b border-white/10 h-[400px] sm:h-[440px] lg:h-[480px] flex items-center justify-center">
@@ -169,7 +169,7 @@ export default function HelpChatbotPage() {
                 const Icon = topic.icon;
                 return (
                   <Link key={idx} to={topic.route} className="block group">
-                    <Card className="p-3.5 rounded-xl bg-white dark:bg-[#181A1D] border-slate-200/90 dark:border-white/[0.08] hover:border-[#7E8056]/60 dark:hover:border-[#A4A77E]/50 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-md transition-all">
+                    <Card className="p-3.5 rounded-xl bg-white dark:bg-[#121315] border-slate-200/90 dark:border-white/25 hover:border-[#7E8056]/60 dark:hover:border-[#A4A77E]/50 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-md transition-all">
                       <div className="flex items-center gap-3.5">
                         <div className="w-9 h-9 rounded-lg bg-[#FAF7F2] dark:bg-white/[0.06] border border-slate-200/70 dark:border-white/10 text-[#7E8056] dark:text-[#A4A77E] flex items-center justify-center flex-shrink-0 group-hover:bg-[#7E8056] group-hover:text-white group-hover:border-[#7E8056] transition-colors">
                           <Icon className="w-4 h-4" />
@@ -195,8 +195,7 @@ export default function HelpChatbotPage() {
 
           {/* Right Column: Embedded Interactive AI Assistant Widget */}
           <div className="lg:col-span-7">
-            <Card className="rounded-2xl bg-white dark:bg-[#181A1D] border-slate-200/90 dark:border-white/[0.08] shadow-[0_6px_24px_rgba(0,0,0,0.05)] dark:shadow-2xl flex flex-col h-[530px] overflow-hidden py-0 gap-0">
-
+            <Card className="rounded-2xl bg-white dark:bg-[#121315] border-slate-200/90 dark:border-white/25 shadow-[0_6px_24px_rgba(0,0,0,0.05)] dark:shadow-2xl flex flex-col h-[530px] overflow-hidden py-0 gap-0">
               {/* Header */}
               <CardHeader className="px-5 py-3.5 bg-slate-50/90 dark:bg-[#1F2226] border-b border-slate-200/80 dark:border-white/[0.08] flex flex-row items-center justify-between space-y-0">
                 <div className="flex items-center gap-3">
