@@ -151,7 +151,7 @@ export default function HomePage() {
               className="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-2"
             >
               <button
-                onClick={() => setIsReserveModalOpen(true)}
+                onClick={() => navigate('/buyers')}
                 className="w-full sm:w-[220px] inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full bg-black/60 hover:bg-black/80 text-white font-semibold text-sm tracking-wide border border-white/30 hover:border-white/50 backdrop-blur-md shadow-lg transition-all duration-200 hover:scale-[1.02] active:scale-95 group cursor-pointer whitespace-nowrap"
               >
                 <Calendar className="w-4 h-4 text-[#A4A77E] flex-shrink-0" />
@@ -677,81 +677,82 @@ export default function HomePage() {
 
       {/* ===================== HERO QUICK RESERVATION MODAL ===================== */}
       {isReserveModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 animate-in fade-in">
-          <div className="bg-white dark:bg-[#16181B] border border-slate-200 dark:border-white/15 rounded-2xl max-w-2xl w-full p-6 text-slate-900 dark:text-slate-100 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-4 animate-in fade-in">
+          <div className="bg-white dark:bg-[#16181B] border border-slate-200/90 dark:border-white/15 rounded-2xl max-w-2xl w-full p-5 sm:p-6 text-slate-900 dark:text-slate-100 shadow-2xl relative max-h-[90vh] overflow-y-auto space-y-5">
             {/* Close Button */}
             <button
               onClick={() => setIsReserveModalOpen(false)}
-              className="absolute top-4 right-4 p-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20 text-slate-600 dark:text-slate-300 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
+              className="absolute top-4 right-4 p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20 text-slate-500 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer"
+              aria-label="Close modal"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4" />
             </button>
 
             {/* Modal Header */}
-            <div className="flex items-center gap-3 mb-5">
-              <div className="p-3 rounded-xl bg-[#7E8056] text-white">
-                <Calendar className="w-6 h-6 text-white" />
+            <div className="flex items-start gap-3.5 pr-8">
+              <div className="w-10 h-10 rounded-xl bg-[#7E8056] text-white flex items-center justify-center flex-shrink-0 shadow-sm mt-0.5">
+                <Calendar className="w-5 h-5 text-white" />
               </div>
-              <div>
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#A4A77E]/15 border border-[#A4A77E]/30 text-[#6C6F4D] dark:text-[#A4A77E] text-[10px] font-bold uppercase tracking-widest mb-1.5">
+              <div className="space-y-1">
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-[#7E8056]/10 border border-[#7E8056]/25 text-[#7E8056] dark:text-[#C2B59B] text-[10px] font-bold uppercase tracking-wider">
                   Production Batch 2026 Reservation
-                </div>
-                <h3 className="text-xl font-bold font-serif text-slate-900 dark:text-white">
+                </span>
+                <h3 className="text-lg sm:text-xl font-bold font-serif text-slate-900 dark:text-white leading-tight">
                   Reserve Your No-Tech Modular HVAC System
                 </h3>
-                <p className="text-xs text-slate-600 dark:text-slate-400">
+                <p className="text-xs text-slate-500 dark:text-slate-400">
                   Lock in your production batch number and pricing with a $200 fully refundable deposit.
                 </p>
               </div>
             </div>
 
             {/* 3 Step Reservation Process */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
-              <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-white/10 space-y-1.5">
-                <span className="w-6 h-6 rounded-full bg-[#7E8056] text-white font-bold text-xs flex items-center justify-center">1</span>
-                <h4 className="text-xs font-bold text-slate-900 dark:text-white">Configure Tonnage</h4>
-                <p className="text-[11px] text-slate-600 dark:text-slate-400">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="p-4 rounded-xl bg-[#FAF7F2]/70 dark:bg-black/40 border border-slate-200/80 dark:border-white/10 space-y-1.5">
+                <span className="w-6 h-6 rounded-full bg-[#7E8056] text-white font-bold text-[11px] flex items-center justify-center">1</span>
+                <h4 className="text-xs font-bold text-slate-900 dark:text-white pt-0.5">Configure Tonnage</h4>
+                <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
                   Choose 3.0, 4.0 or 5.0 ton capacity with upflow/downflow/horizontal duct routing.
                 </p>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-white/10 space-y-1.5">
-                <span className="w-6 h-6 rounded-full bg-[#7E8056] text-white font-bold text-xs flex items-center justify-center">2</span>
-                <h4 className="text-xs font-bold text-slate-900 dark:text-white">$200 Deposit</h4>
-                <p className="text-[11px] text-slate-600 dark:text-slate-400">
+              <div className="p-4 rounded-xl bg-[#FAF7F2]/70 dark:bg-black/40 border border-slate-200/80 dark:border-white/10 space-y-1.5">
+                <span className="w-6 h-6 rounded-full bg-[#7E8056] text-white font-bold text-[11px] flex items-center justify-center">2</span>
+                <h4 className="text-xs font-bold text-slate-900 dark:text-white pt-0.5">$200 Deposit</h4>
+                <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
                   Secures your spot in line. 100% refundable prior to production delivery.
                 </p>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-white/10 space-y-1.5">
-                <span className="w-6 h-6 rounded-full bg-[#7E8056] text-white font-bold text-xs flex items-center justify-center">3</span>
-                <h4 className="text-xs font-bold text-slate-900 dark:text-white">Certified Install</h4>
-                <p className="text-[11px] text-slate-600 dark:text-slate-400">
+              <div className="p-4 rounded-xl bg-[#FAF7F2]/70 dark:bg-black/40 border border-slate-200/80 dark:border-white/10 space-y-1.5">
+                <span className="w-6 h-6 rounded-full bg-[#7E8056] text-white font-bold text-[11px] flex items-center justify-center">3</span>
+                <h4 className="text-xs font-bold text-slate-900 dark:text-white pt-0.5">Certified Install</h4>
+                <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
                   Local Mechanical certified technician executes 3-hour sub-base installation.
                 </p>
               </div>
             </div>
 
             {/* System Highlights Included */}
-            <div className="p-4 rounded-xl bg-[#FAF7F2] dark:bg-white/5 border border-slate-200 dark:border-white/10 mb-6 space-y-2">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#7E8056] dark:text-[#C2B59B]">
-                Included with Every Modular System:
+            <div className="p-4 rounded-xl bg-[#FAF7F2] dark:bg-white/5 border border-slate-200/80 dark:border-white/10 space-y-2.5">
+              <h4 className="text-[11px] font-bold uppercase tracking-wider text-[#7E8056] dark:text-[#C2B59B]">
+                Included with Every Modular System
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-700 dark:text-slate-300">
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#7E8056] flex-shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#7E8056] flex-shrink-0" />
                   <span>4 Hot-Swappable Independent Bays</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#7E8056] flex-shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#7E8056] flex-shrink-0" />
                   <span>Zero-Loss Quick Refrigerant Couplings</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#7E8056] flex-shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#7E8056] flex-shrink-0" />
                   <span>Dual Conductor Male/Female Self-Aligning Pins</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#7E8056] flex-shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#7E8056] flex-shrink-0" />
                   <span>Local Mechanical Lifetime Quality Telemetry</span>
                 </div>
               </div>
@@ -759,25 +760,27 @@ export default function HomePage() {
 
             {/* Modal Actions */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-slate-200 dark:border-white/10">
-              <div className="text-xs text-slate-500 dark:text-slate-400">
-                Estimated Delivery: <strong className="text-slate-800 dark:text-white">Q1 2026 Batch</strong>
+              <div className="text-xs text-slate-500 dark:text-slate-400 whitespace-nowrap">
+                Estimated Delivery: <strong className="text-slate-900 dark:text-white">Q1 2026 Batch</strong>
               </div>
-              <div className="flex items-center gap-2.5 w-full sm:w-auto">
+              <div className="flex items-center justify-end gap-2 w-full sm:w-auto">
                 <button
+                  type="button"
                   onClick={() => setIsReserveModalOpen(false)}
-                  className="w-full sm:w-auto px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-300 transition-colors"
+                  className="h-8 px-3.5 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-300 transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
+                  type="button"
                   onClick={() => {
                     setIsReserveModalOpen(false);
                     navigate('/buyers');
                   }}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl text-xs font-semibold bg-[#7E8056] hover:bg-[#6e7049] text-white shadow-lg shadow-[#7E8056]/30 transition-all hover:scale-[1.02] cursor-pointer"
+                  className="h-8 px-4 rounded-lg inline-flex items-center justify-center gap-1.5 text-xs font-semibold bg-[#7E8056] hover:bg-[#6e7049] text-white shadow-sm transition-all cursor-pointer whitespace-nowrap"
                 >
-                  <span>Go to Buyers Customizer & Pay $200 Deposit</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <span>Customize &amp; Pay $200</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
             </div>
