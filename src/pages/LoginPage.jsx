@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, LogIn, CheckCircle2, ArrowRight, ShieldCheck, User, Wrench, TrendingUp } from 'lucide-react';
-import LocalIndustriesLogo from '../components/common/LocalIndustriesLogo';
 import { Card } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
@@ -61,7 +60,11 @@ export default function LoginPage() {
 
           <div className="relative z-10 h-full p-6 sm:p-8 flex flex-col justify-between">
             <div className="inline-flex items-center w-fit px-3.5 py-2 rounded-xl bg-white/95 shadow-md border border-white/40">
-              <LocalIndustriesLogo className="h-10 sm:h-11" isDark={false} />
+              <img
+                src="/images/no-tech-hvac-logo.png"
+                alt="No-Tech HVAC"
+                className="h-7 sm:h-8 w-auto object-contain"
+              />
             </div>
 
             <div className="space-y-3">

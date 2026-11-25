@@ -15,7 +15,6 @@ import {
   Headphones,
   User
 } from 'lucide-react';
-import LocalIndustriesLogo from './LocalIndustriesLogo';
 import { useTheme } from '../../context/ThemeContext';
 import { useAuth, ROLE_CONFIG } from '../../context/AuthContext';
 
@@ -46,9 +45,13 @@ export default function Navbar() {
       <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
 
-          {/* Left: Brand Logo emblem - Local Industries */}
-          <Link to="/" className="flex items-center group transition-transform hover:scale-[1.01] flex-shrink-0" title="Local Industries">
-            <LocalIndustriesLogo className="h-12 sm:h-14" isDark={isDark} />
+          {/* Left: Brand Logo - No-Tech HVAC */}
+          <Link to="/" className="flex items-center group transition-transform hover:scale-[1.01] flex-shrink-0" title="No-Tech HVAC">
+            <img
+              src="/images/no-tech-hvac-logo.png"
+              alt="No-Tech HVAC"
+              className={`h-8 sm:h-9 w-auto object-contain transition-all duration-200 group-hover:scale-[1.02] ${isDark ? 'bg-white/95 px-2.5 py-1 rounded-xl shadow-sm' : ''}`}
+            />
           </Link>
 
           {/* Center: Desktop Clean Text-Only Navigation Links with Underline Indicator */}

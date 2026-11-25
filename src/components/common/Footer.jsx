@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ShieldCheck, Phone, Mail, MapPin, ExternalLink, ArrowRight, CheckCircle2 } from 'lucide-react';
-import LocalIndustriesLogo from './LocalIndustriesLogo';
 import LocalMechanicalLogo from './LocalMechanicalLogo';
 import { useTheme } from '../../context/ThemeContext';
 
@@ -14,8 +13,14 @@ export default function Footer() {
 
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
-            <Link to="/" className="inline-block group" title="Local Industries">
-              <LocalIndustriesLogo className="h-12 sm:h-14" isDark={true} />
+            <Link to="/" className="inline-block group" title="No-Tech HVAC">
+              <div className="inline-flex items-center px-3 py-1.5 rounded-xl bg-white/95 shadow-sm">
+                <img
+                  src="/images/no-tech-hvac-logo.png"
+                  alt="No-Tech HVAC"
+                  className="h-8 sm:h-9 w-auto object-contain"
+                />
+              </div>
             </Link>
             <p className="text-xs text-slate-400 max-w-sm leading-relaxed">
               No-Tech HVAC is redefining climate infrastructure with hot-swappable 4-bay modular systems, zero-loss refrigerant disconnects, and continuous RFID validation.
