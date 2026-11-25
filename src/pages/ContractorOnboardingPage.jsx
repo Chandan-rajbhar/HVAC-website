@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import {
   HardHat,
   Upload,
@@ -103,20 +104,35 @@ export default function ContractorOnboardingPage() {
         {/* Centered Hero Content Container */}
         <div className="relative z-10 max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 w-full flex flex-col items-center text-center">
           <div className="max-w-3xl mx-auto space-y-4 sm:space-y-5 flex flex-col items-center">
-            <div className="space-y-1.5">
+            <motion.div
+              initial={{ opacity: 0, y: 26 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-1.5"
+            >
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-serif text-white tracking-tight leading-[1.12] drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
                 Contractor Onboarding
               </h1>
               <p className="text-lg sm:text-2xl font-bold text-[#E8DEC8] dark:text-[#C2B59B] tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]">
                 Join Our Trusted Network.
               </p>
-            </div>
+            </motion.div>
 
-            <p className="text-sm sm:text-base text-white leading-relaxed max-w-xl mx-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
+            <motion.p
+              initial={{ opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="text-sm sm:text-base text-white leading-relaxed max-w-xl mx-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]"
+            >
               Complete your certification and training to become an approved contractor certified by Local Mechanical.
-            </p>
+            </motion.p>
 
-            <div className="pt-1 flex flex-wrap items-center justify-center gap-2.5">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.85, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="pt-1 flex flex-wrap items-center justify-center gap-2.5"
+            >
               <a
                 href="#registration-form"
                 className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#7E8056] hover:bg-[#6e7049] active:scale-95 text-white font-semibold text-xs shadow-md transition-all cursor-pointer"
@@ -124,13 +140,19 @@ export default function ContractorOnboardingPage() {
                 <span>Start Application</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </a>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Main Page Content Body */}
-      <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8">
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.08 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8"
+      >
 
         {/* Global Onboarding Approval Status Banner */}
         {isApproved && (
@@ -352,7 +374,14 @@ export default function ContractorOnboardingPage() {
         </div >
 
         {/* ===================== EXPANDED FULL-WIDTH INSTALLATION QUESTIONNAIRE CARD ===================== */}
-        < Card className="w-full bg-white dark:bg-[#121315] border-slate-200/90 dark:border-white/25 shadow-sm" >
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+          whileHover={{ y: -2, transition: { duration: 0.25 } }}
+        >
+        < Card className="w-full bg-white dark:bg-[#121315] border-slate-200/90 dark:border-white/25 shadow-sm hover:shadow-md transition-shadow" >
           <CardContent className="p-6 sm:p-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
 
@@ -448,6 +477,7 @@ export default function ContractorOnboardingPage() {
             </div>
           </CardContent>
         </Card >
+        </motion.div>
 
         {/* ===================== VIDEO TRAINING MODAL ===================== */}
         {
@@ -494,7 +524,7 @@ export default function ContractorOnboardingPage() {
           )
         }
 
-      </div >
+      </motion.div >
     </div >
   );
 }

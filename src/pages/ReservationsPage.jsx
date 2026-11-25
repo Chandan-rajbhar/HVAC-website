@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import {
   Calendar as CalendarIcon,
   Clock,
@@ -86,20 +87,35 @@ export default function ReservationsPage() {
         {/* Centered Hero Content Container */}
         <div className="relative z-10 max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 w-full flex flex-col items-center text-center">
           <div className="max-w-3xl mx-auto space-y-4 sm:space-y-5 flex flex-col items-center">
-            <div className="space-y-1.5">
+            <motion.div
+              initial={{ opacity: 0, y: 26 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-1.5"
+            >
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-serif text-white tracking-tight leading-[1.12] drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
                 Reservations & Scheduling
               </h1>
               <p className="text-lg sm:text-2xl font-bold text-[#E8DEC8] dark:text-[#C2B59B] tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]">
                 Choose Your Date. We'll Handle the Rest.
               </p>
-            </div>
+            </motion.div>
 
-            <p className="text-sm sm:text-base text-white leading-relaxed max-w-xl mx-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
+            <motion.p
+              initial={{ opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="text-sm sm:text-base text-white leading-relaxed max-w-xl mx-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]"
+            >
               Schedule your installation with ease and track your reservation status across our certified Local Mechanical contractor network.
-            </p>
+            </motion.p>
 
-            <div className="pt-1 flex flex-wrap items-center justify-center gap-2.5">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.85, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="pt-1 flex flex-wrap items-center justify-center gap-2.5"
+            >
               <a
                 href="#schedule-form"
                 className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#7E8056] hover:bg-[#6e7049] active:scale-95 text-white font-semibold text-xs shadow-md transition-all cursor-pointer"
@@ -107,19 +123,31 @@ export default function ReservationsPage() {
                 <span>Schedule Now</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </a>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Main Page Content Body */}
-      <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8">
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.08 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8"
+      >
 
         {/* ===================== MAIN SCHEDULING & DASHBOARD GRID ===================== */}
         <div id="schedule-form" className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
           {/* Left Column: Date & Exact 8 PDF Time Slots */}
-          <div className="lg:col-span-7 space-y-6">
+          <motion.div
+            initial={{ opacity: 0, x: -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-7 space-y-6"
+          >
             <div className="p-6 rounded-2xl bg-white dark:bg-[#121315] border border-slate-200/90 dark:border-white/25 space-y-6 shadow-md">
               {/* Region Selector */}
               <div className="space-y-2">
@@ -255,10 +283,16 @@ export default function ReservationsPage() {
               </div>
             </div>
 
-          </div>
+          </motion.div>
 
           {/* Right Column: Reservation Capacity Dashboard & RFID Tracking Demo */}
-          <div className="lg:col-span-5 space-y-6">
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 0.75, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5 space-y-6"
+          >
 
             {/* Circular Gauge / Capacity Dashboard matching reference screenshot */}
             <div className="p-6 rounded-2xl bg-white dark:bg-[#121315] border border-slate-200/90 dark:border-white/25 space-y-5 shadow-md text-center">
@@ -368,13 +402,20 @@ export default function ReservationsPage() {
               </div>
             </div>
 
-          </div>
+          </motion.div>
 
         </div>
 
         {/* ===================== BOTTOM 3 FEATURE BADGES ===================== */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
-          <div className="p-5 rounded-2xl bg-white dark:bg-[#121315] border border-slate-200/90 dark:border-white/25 flex items-center gap-4 shadow-sm">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.65, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{ y: -3, transition: { duration: 0.2 } }}
+            className="p-5 rounded-2xl bg-white dark:bg-[#121315] border border-slate-200/90 dark:border-white/25 flex items-center gap-4 shadow-sm hover:shadow-md transition-shadow"
+          >
             <div className="w-12 h-12 rounded-xl bg-[#7E8056]/20 text-[#7E8056] flex items-center justify-center flex-shrink-0">
               <CalendarIcon className="w-6 h-6" />
             </div>
@@ -382,9 +423,16 @@ export default function ReservationsPage() {
               <h4 className="text-sm font-bold text-slate-900 dark:text-white">$200 Reservation Fee</h4>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Locks in your batch number and priority schedule.</p>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="p-5 rounded-2xl bg-white dark:bg-[#121315] border border-slate-200/90 dark:border-white/25 flex items-center gap-4 shadow-sm">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.65, delay: 0.14, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{ y: -3, transition: { duration: 0.2 } }}
+            className="p-5 rounded-2xl bg-white dark:bg-[#121315] border border-slate-200/90 dark:border-white/25 flex items-center gap-4 shadow-sm hover:shadow-md transition-shadow"
+          >
             <div className="w-12 h-12 rounded-xl bg-[#8C7A58]/20 text-[#8C7A58] dark:text-[#C2B59B] flex items-center justify-center flex-shrink-0">
               <Clock className="w-6 h-6" />
             </div>
@@ -392,9 +440,16 @@ export default function ReservationsPage() {
               <h4 className="text-sm font-bold text-slate-900 dark:text-white">Real-Time Availability</h4>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">8 certified 3-hour slots with contractor dispatch.</p>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="p-5 rounded-2xl bg-white dark:bg-[#121315] border border-slate-200/90 dark:border-white/25 flex items-center gap-4 shadow-sm">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.65, delay: 0.23, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{ y: -3, transition: { duration: 0.2 } }}
+            className="p-5 rounded-2xl bg-white dark:bg-[#121315] border border-slate-200/90 dark:border-white/25 flex items-center gap-4 shadow-sm hover:shadow-md transition-shadow"
+          >
             <div className="w-12 h-12 rounded-xl bg-[#7E8056]/20 text-[#7E8056] flex items-center justify-center flex-shrink-0">
               <Bell className="w-6 h-6" />
             </div>
@@ -402,10 +457,10 @@ export default function ReservationsPage() {
               <h4 className="text-sm font-bold text-slate-900 dark:text-white">Automated Reminders</h4>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Real-time alerts on production and dispatch.</p>
             </div>
-          </div>
+          </motion.div>
         </div>
 
-      </div>
+      </motion.div>
     </div>
   );
 }

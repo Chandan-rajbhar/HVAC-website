@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import {
   UserCheck,
   Star,
@@ -106,20 +107,35 @@ export default function ManageContractorPage() {
         {/* Centered Hero Content Container */}
         <div className="relative z-10 max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 w-full flex flex-col items-center text-center">
           <div className="max-w-3xl mx-auto space-y-4 sm:space-y-5 flex flex-col items-center">
-            <div className="space-y-1.5">
+            <motion.div
+              initial={{ opacity: 0, y: 26 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-1.5"
+            >
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-serif text-white tracking-tight leading-[1.12] drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
                 Manage My Contractor
               </h1>
               <p className="text-lg sm:text-2xl font-bold text-[#E8DEC8] dark:text-[#C2B59B] tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]">
                 Certified Technicians. Local Compliance.
               </p>
-            </div>
+            </motion.div>
 
-            <p className="text-sm sm:text-base text-white leading-relaxed max-w-2xl mx-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
+            <motion.p
+              initial={{ opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="text-sm sm:text-base text-white leading-relaxed max-w-2xl mx-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]"
+            >
               Review your assigned certified technician, view verified ratings, or switch to another Local Mechanical approved contractor.
-            </p>
+            </motion.p>
 
-            <div className="pt-1 flex flex-wrap items-center justify-center gap-2.5">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.85, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="pt-1 flex flex-wrap items-center justify-center gap-2.5"
+            >
               <Button
                 asChild
                 size="sm"
@@ -130,12 +146,18 @@ export default function ManageContractorPage() {
                   <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
                 </Link>
               </Button>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-10 space-y-6">
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.08 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-10 space-y-6"
+      >
 
         {/* Feedback Submitted Confirmation Alert */}
         {feedbackSubmitted && (
@@ -156,6 +178,13 @@ export default function ManageContractorPage() {
         )}
 
         {/* ===================== CURRENTLY ASSIGNED CONTRACTOR CARD ===================== */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.12 }}
+          transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+          whileHover={{ y: -2, transition: { duration: 0.25 } }}
+        >
         <Card className="rounded-2xl bg-white dark:bg-[#181A1D] border-slate-200/90 dark:border-white/[0.08] shadow-[0_4px_20px_rgba(0,0,0,0.04)] dark:shadow-2xl overflow-hidden py-0 gap-0">
           <CardHeader className="px-6 py-5 bg-slate-50/70 dark:bg-[#1F2226] border-b border-slate-200/80 dark:border-white/[0.08] flex flex-col sm:flex-row sm:items-center justify-between gap-4 space-y-0">
             <div>
@@ -256,6 +285,7 @@ export default function ManageContractorPage() {
             </div>
           </CardContent>
         </Card>
+        </motion.div>
 
         {/* ===================== SELECT ANOTHER AVAILABLE CONTRACTOR ===================== */}
         <div className="space-y-4">
@@ -277,10 +307,18 @@ export default function ManageContractorPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {availableContractors.map((c) => (
-              <Card
+            {availableContractors.map((c, idx) => (
+              <motion.div
                 key={c.id}
-                className="rounded-2xl bg-white dark:bg-[#181A1D] border-slate-200/90 dark:border-white/[0.08] flex flex-col justify-between shadow-[0_2px_12px_rgba(0,0,0,0.03)] dark:shadow-xl hover:border-[#7E8056]/60 dark:hover:border-[#A4A77E]/50 transition-all py-0 gap-0"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.65, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                className="flex"
+              >
+              <Card
+                className="w-full rounded-2xl bg-white dark:bg-[#181A1D] border-slate-200/90 dark:border-white/[0.08] flex flex-col justify-between shadow-[0_2px_12px_rgba(0,0,0,0.03)] dark:shadow-xl hover:border-[#7E8056]/60 dark:hover:border-[#A4A77E]/50 transition-all py-0 gap-0"
               >
                 <CardContent className="p-5 space-y-3.5">
                   <div className="flex items-center gap-3">
@@ -332,11 +370,18 @@ export default function ManageContractorPage() {
                   </Button>
                 </CardFooter>
               </Card>
+              </motion.div>
             ))}
           </div>
         </div>
 
         {/* ===================== CONTRACTOR FEEDBACK REPORTS (SHADCN TABLE) ===================== */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.12 }}
+          transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+        >
         <Card className="rounded-2xl bg-white dark:bg-[#181A1D] border-slate-200/90 dark:border-white/[0.08] shadow-[0_4px_20px_rgba(0,0,0,0.04)] dark:shadow-xl overflow-hidden py-0 gap-0">
           <CardHeader className="px-6 py-4 bg-slate-50/70 dark:bg-[#1F2226] border-b border-slate-200/80 dark:border-white/[0.08] flex flex-col sm:flex-row sm:items-center justify-between gap-2 space-y-0">
             <div className="flex items-center gap-2">
@@ -400,6 +445,7 @@ export default function ManageContractorPage() {
             </Table>
           </CardContent>
         </Card>
+        </motion.div>
 
         {/* ===================== UNSELECT FEEDBACK MODAL ===================== */}
         {unselectModalOpen && (
@@ -493,7 +539,7 @@ export default function ManageContractorPage() {
           </div>
         )}
 
-      </div>
+      </motion.div>
     </div>
   );
 }

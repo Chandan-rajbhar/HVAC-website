@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import {
   ShoppingCart,
   CheckCircle2,
@@ -134,20 +135,35 @@ export default function BuyersPortalPage() {
         <div className="relative z-10 max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16 lg:py-20 w-full flex flex-col items-center text-center">
           <div className="max-w-3xl mx-auto space-y-4 sm:space-y-5 flex flex-col items-center">
 
-            <div className="space-y-1.5">
+            <motion.div
+              initial={{ opacity: 0, y: 26 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-1.5"
+            >
               <h1 className="text-3xl sm:text-5xl lg:text-5xl font-extrabold font-serif text-white tracking-tight leading-[1.12] drop-shadow-md">
                 Buyers Portal
               </h1>
               <p className="text-lg sm:text-2xl font-bold text-[#E8DEC8] dark:text-[#C2B59B] tracking-tight drop-shadow-sm">
                 Select. Customize. Reserve.
               </p>
-            </div>
+            </motion.div>
 
-            <p className="text-sm sm:text-base text-slate-200 leading-relaxed max-w-xl mx-auto drop-shadow-sm">
+            <motion.p
+              initial={{ opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="text-sm sm:text-base text-slate-200 leading-relaxed max-w-xl mx-auto drop-shadow-sm"
+            >
               Configure your No-Tech HVAC system with real-time compatibility and pricing.
-            </p>
+            </motion.p>
 
-            <div className="pt-1 flex flex-wrap items-center justify-center gap-2.5">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.85, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="pt-1 flex flex-wrap items-center justify-center gap-2.5"
+            >
               <button
                 onClick={() => {
                   setCurrentStep(1);
@@ -159,13 +175,20 @@ export default function BuyersPortalPage() {
                 <span>Start Selection</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Main Page Content Body */}
-      <div id="buyers-selection-area" className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+      <motion.div
+        id="buyers-selection-area"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.05 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12"
+      >
 
         {/* Stepper Progress Badges (Moved out of Hero Section) */}
         <div className="mb-8 p-3 sm:p-4 rounded-2xl bg-white dark:bg-[#121315] border border-slate-200/90 dark:border-white/25 shadow-sm">
@@ -890,7 +913,7 @@ export default function BuyersPortalPage() {
           </button>
         </div>
 
-      </div>
+      </motion.div>
     </div>
   );
 }

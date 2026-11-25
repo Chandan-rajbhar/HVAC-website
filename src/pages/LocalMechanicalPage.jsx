@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import {
   ShieldCheck,
   FileCheck,
@@ -141,20 +142,35 @@ export default function LocalMechanicalPage() {
         {/* Centered Hero Content Container */}
         <div className="relative z-10 max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 w-full flex flex-col items-center text-center">
           <div className="max-w-3xl mx-auto space-y-4 sm:space-y-5 flex flex-col items-center">
-            <div className="space-y-1.5">
+            <motion.div
+              initial={{ opacity: 0, y: 26 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-1.5"
+            >
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-serif text-white tracking-tight leading-[1.12] drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
                 Local Mechanical
               </h1>
               <p className="text-lg sm:text-2xl font-bold text-[#E8DEC8] dark:text-[#C2B59B] tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]">
                 Approval. Compliance. Quality.
               </p>
-            </div>
+            </motion.div>
 
-            <p className="text-sm sm:text-base text-white leading-relaxed max-w-2xl mx-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
+            <motion.p
+              initial={{ opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="text-sm sm:text-base text-white leading-relaxed max-w-2xl mx-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]"
+            >
               Local Mechanical functions as the certification and quality enforcement hub for all mechanical contractors working with No-Tech HVAC, ensuring standardized service and regulatory compliance worldwide.
-            </p>
+            </motion.p>
 
-            <div className="pt-1 flex flex-wrap items-center justify-center gap-2.5">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.85, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="pt-1 flex flex-wrap items-center justify-center gap-2.5"
+            >
               <button
                 type="button"
                 onClick={() => {
@@ -167,13 +183,19 @@ export default function LocalMechanicalPage() {
                 <span>View Dashboard</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Main Page Content Body */}
-      <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8">
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.08 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8"
+      >
 
         {/* Navigation Sub-Tabs Bar */}
         <div id="local-mech-tabs" className="p-2 sm:p-2.5 rounded-xl bg-white dark:bg-[#121315] border border-slate-200/90 dark:border-white/25 shadow-sm flex flex-wrap gap-2">
@@ -204,7 +226,13 @@ export default function LocalMechanicalPage() {
           <div className="space-y-6">
 
             {/* 4 Stats Cards (Uniform Light/Dark Theme with shadcn Card) */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="grid grid-cols-2 sm:grid-cols-4 gap-4"
+            >
               <Card
                 onClick={() => setStatusFilter('pending')}
                 className={`transition-all cursor-pointer ${
@@ -276,9 +304,15 @@ export default function LocalMechanicalPage() {
                   <span className="text-[11px] text-slate-500 dark:text-slate-400">Additional training or docs</span>
                 </CardContent>
               </Card>
-            </div>
+            </motion.div>
 
             {/* Contractor Applications Table (shadcn Card + Table + Select + Badge + Button) */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.75, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            >
             <Card className="bg-white dark:bg-[#121315] border-slate-200/90 dark:border-white/25 shadow-sm overflow-hidden">
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 px-6 py-4 border-b border-slate-200 dark:border-white/10">
                 <h3 className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white">
@@ -355,6 +389,7 @@ export default function LocalMechanicalPage() {
                 </TableBody>
               </Table>
             </Card>
+            </motion.div>
 
           </div>
         )}
@@ -585,7 +620,7 @@ export default function LocalMechanicalPage() {
           </div>
         )}
 
-      </div>
+      </motion.div>
     </div>
   );
 }
