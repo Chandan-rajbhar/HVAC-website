@@ -14,43 +14,63 @@ import {
 } from 'lucide-react';
 import NoTechLogo from '../components/common/NoTechLogo';
 import LocalMechanicalLogo from '../components/common/LocalMechanicalLogo';
+import { Card, CardContent } from '../components/ui/card';
+import { Button } from '../components/ui/button';
 
 export default function InvestorHubPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-[#16181B] text-slate-800 dark:text-slate-100 py-8 lg:py-12 transition-colors duration-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-        
-        {/* ===================== HERO BANNER ===================== */}
-        <div className="rounded-2xl bg-gradient-to-r from-[#F4F1EA] via-[#F8F6F0] to-[#F4F1EA] dark:from-[#1B1D20] dark:via-[#22252A] dark:to-[#1B1D20] border border-slate-200 dark:border-[#A4A77E]/30 p-6 sm:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.02)] dark:shadow-xl relative overflow-hidden">
-          <div className="relative z-10">
-            <div className="max-w-2xl space-y-2.5">
-              <h1 className="text-2xl sm:text-4xl font-bold font-serif text-slate-900 dark:text-white tracking-tight">
+    <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#16181B] text-slate-800 dark:text-slate-100 transition-colors duration-200">
+
+      {/* ===================== FULL-WIDTH CENTERED HERO SECTION WITH BACKGROUND IMAGE ===================== */}
+      <section className="relative w-full bg-[#0B0C0E] text-white overflow-hidden border-b border-white/10 min-h-[380px] sm:aspect-[1024/350] flex items-center justify-center">
+        {/* Full-Width Background Image */}
+        <div className="absolute inset-0 pointer-events-none">
+          <img
+            src="/images/investor-hero-building.jpg"
+            alt="Corporate Innovation Center at Sunset"
+            className="w-full h-full object-cover object-center"
+          />
+          {/* Light clean tint so the sunset building shines clearly while text remains readable */}
+          <div className="absolute inset-0 bg-black/30" />
+        </div>
+
+        {/* Centered Hero Content Container */}
+        <div className="relative z-10 max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16 lg:py-20 w-full flex flex-col items-center text-center">
+          <div className="max-w-3xl mx-auto space-y-4 sm:space-y-5 flex flex-col items-center">
+            <div className="space-y-1.5">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-serif text-white tracking-tight leading-[1.12] drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
                 Investor Hub
               </h1>
-              <p className="text-base sm:text-lg text-[#8C7A58] dark:text-[#C2B59B] font-semibold">
+              <p className="text-lg sm:text-2xl font-bold text-[#E8DEC8] dark:text-[#C2B59B] tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]">
                 Invest in Innovation.
               </p>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                Discover the opportunity behind No-Tech HVAC's modular solution. We are redefining the global heating, ventilation, and air-conditioning industry through hot-swappable compartmental engineering.
-              </p>
+            </div>
 
-              <div className="pt-2 flex flex-wrap gap-3">
-                <a
-                  href="#why-invest"
-                  className="px-5 py-2.5 rounded-full bg-[#7E8056] hover:bg-[#6e7049] text-white font-bold text-xs shadow-lg transition-all"
-                >
-                  Learn More →
-                </a>
-                <Link
-                  to="/buyers"
-                  className="px-5 py-2.5 rounded-full bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/15 text-slate-800 dark:text-slate-200 text-xs font-semibold border border-slate-300 dark:border-white/15"
-                >
-                  View Consumer Demand
-                </Link>
-              </div>
+            <p className="text-sm sm:text-base text-white leading-relaxed max-w-xl mx-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
+              Discover the opportunity behind No-Tech HVAC's modular solution. We are redefining the global heating, ventilation, and air-conditioning industry through hot-swappable compartmental engineering.
+            </p>
+
+            <div className="pt-1 flex flex-wrap items-center justify-center gap-2.5">
+              <a
+                href="#why-invest"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#7E8056] hover:bg-[#6e7049] active:scale-95 text-white font-semibold text-xs shadow-md transition-all cursor-pointer"
+              >
+                <span>Learn More</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </a>
+              <Link
+                to="/buyers"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 active:scale-95 text-white text-xs font-semibold border border-white/25 transition-all shadow-sm"
+              >
+                <span>View Consumer Demand</span>
+              </Link>
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Main Page Content Body */}
+      <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-10">
 
         {/* ===================== WHY INVEST? CARDS ===================== */}
         {/* Exactly matches "Why Invest?" section in reference screenshot */}
@@ -65,7 +85,7 @@ export default function InvestorHubPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
+
             {/* Pillar 1: Innovative Technology */}
             <div className="p-6 rounded-2xl bg-white dark:bg-[#1E2024] border border-slate-200 dark:border-white/10 space-y-3 shadow-md hover:border-[#7E8056]/50 transition-all">
               <div className="w-12 h-12 rounded-xl bg-[#7E8056]/20 text-[#7E8056] flex items-center justify-center">
@@ -114,40 +134,48 @@ export default function InvestorHubPage() {
           </div>
         </section>
 
-        {/* ===================== NO-TECH HVAC - A SMARTER FUTURE ===================== */}
-        <div className="relative rounded-2xl overflow-hidden shadow-md border border-slate-200 dark:border-white/10 p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 bg-white dark:bg-[#181A1D]">
-          <div className="space-y-1.5 z-10">
-            <h3 className="text-xl sm:text-2xl font-bold font-serif text-slate-900 dark:text-white">
-              No-Tech HVAC – A Smarter Future
-            </h3>
-            <p className="text-sm font-semibold text-[#7E8056] dark:text-[#A4A77E]">
-              Modular. Scalable. Sustainable.
-            </p>
-            <p className="text-xs text-slate-600 dark:text-slate-400 max-w-xl">
-              Connect with our corporate development and investor relations team to request formal introductory materials and strategic briefing decks.
-            </p>
-            <div className="pt-2">
-              <a
-                href="mailto:investors@no-techhvac.com"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#7E8056] hover:bg-[#6e7049] text-white font-bold text-xs shadow-md transition-all"
-              >
-                <Mail className="w-3.5 h-3.5" />
-                <span>Explore Opportunities →</span>
-              </a>
-            </div>
-          </div>
+        {/* ===================== NO-TECH HVAC - A SMARTER FUTURE (SHADCN CARD) ===================== */}
+        <Card className="overflow-hidden shadow-md border-slate-200 dark:border-white/10 bg-white dark:bg-[#181A1D]">
+          <CardContent className="p-6 sm:p-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
+              {/* Left Side: Content & Action */}
+              <div className="lg:col-span-7 space-y-3">
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold font-serif text-slate-900 dark:text-white tracking-tight">
+                  No-Tech HVAC – A Smarter Future
+                </h3>
+                <p className="text-sm sm:text-base font-semibold text-[#7E8056] dark:text-[#C2B59B]">
+                  Modular. Scalable. Sustainable.
+                </p>
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-xl leading-relaxed">
+                  Connect with our corporate development and investor relations team to request formal introductory materials and strategic briefing decks.
+                </p>
+                <div className="pt-2">
+                  <Button
+                    asChild
+                    size="sm"
+                    className="rounded-lg bg-[#7E8056] hover:bg-[#6e7049] text-white font-semibold text-xs px-4 py-2 h-auto shadow-sm transition-all"
+                  >
+                    <a href="mailto:investors@no-techhvac.com" className="inline-flex items-center gap-1.5">
+                      <Mail className="w-3.5 h-3.5" />
+                      <span>Explore Opportunities →</span>
+                    </a>
+                  </Button>
+                </div>
+              </div>
 
-          {/* Glowing Modular Unit graphic on the right */}
-          <div className="relative z-10 flex-shrink-0">
-            <div className="w-36 sm:w-44 h-20 sm:h-24 rounded-xl overflow-hidden border border-slate-200 dark:border-white/10 shadow-md bg-slate-900">
-              <img
-                src="/images/slices/investor-bottom-unit.jpg"
-                alt="No-Tech HVAC Glowing Modular Unit"
-                className="w-full h-full object-cover object-center"
-              />
+              {/* Right Side: High-Res Modular Unit Image */}
+              <div className="lg:col-span-5">
+                <div className="relative rounded-2xl overflow-hidden border border-slate-200 dark:border-white/10 shadow-md bg-slate-950 aspect-[16/10] group">
+                  <img
+                    src="/images/investor-smarter-future.jpg"
+                    alt="No-Tech Systems Commercial Modular HVAC Unit"
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
 
       </div>
     </div>
