@@ -62,7 +62,7 @@ export default function ContractorQuizPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#121315] text-slate-900 dark:text-slate-100 py-8 lg:py-12 transition-colors duration-200">
+    <div className="min-h-screen bg-white dark:bg-[#212428] text-slate-900 dark:text-slate-100 py-8 lg:py-12 transition-colors duration-200">
       <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto space-y-6">
 
