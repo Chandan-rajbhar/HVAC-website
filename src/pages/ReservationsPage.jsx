@@ -68,7 +68,7 @@ export default function ReservationsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#121315] text-slate-900 dark:text-slate-100 transition-colors duration-200">
+    <div className="min-h-screen bg-white dark:bg-[#212428] text-slate-900 dark:text-slate-100 transition-colors duration-200">
 
       {/* ===================== FULL-WIDTH CENTERED HERO SECTION WITH BACKGROUND IMAGE ===================== */}
       <section className="relative w-full bg-[#0B0C0E] text-white overflow-hidden border-b border-white/10 h-[400px] sm:h-[440px] lg:h-[480px] flex items-center justify-center">
@@ -120,9 +120,7 @@ export default function ReservationsPage() {
 
           {/* Left Column: Date & Exact 8 PDF Time Slots */}
           <div className="lg:col-span-7 space-y-6">
-
-            <div className="p-6 rounded-2xl bg-white dark:bg-[#181A1D] border border-slate-200 dark:border-white/10 space-y-6 shadow-md">
-
+            <div className="p-6 rounded-2xl bg-white dark:bg-[#121315] border border-slate-200/90 dark:border-white/25 space-y-6 shadow-md">
               {/* Region Selector */}
               <div className="space-y-2">
                 <label className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
@@ -232,7 +230,7 @@ export default function ReservationsPage() {
             </div>
 
             {/* Upcoming Appointments List */}
-            <div className="p-6 rounded-2xl bg-white dark:bg-[#181A1D] border border-slate-200 dark:border-white/10 space-y-4 shadow-md">
+            <div className="p-6 rounded-2xl bg-white dark:bg-[#121315] border border-slate-200/90 dark:border-white/25 space-y-4 shadow-md">
               <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
                 <CalendarIcon className="w-4 h-4 text-[#7E8056] dark:text-[#C2B59B]" /> Upcoming Scheduled Installations
               </h3>
@@ -263,7 +261,7 @@ export default function ReservationsPage() {
           <div className="lg:col-span-5 space-y-6">
 
             {/* Circular Gauge / Capacity Dashboard matching reference screenshot */}
-            <div className="p-6 rounded-2xl bg-white dark:bg-[#181A1D] border border-slate-200 dark:border-white/10 space-y-5 shadow-md text-center">
+            <div className="p-6 rounded-2xl bg-white dark:bg-[#121315] border border-slate-200/90 dark:border-white/25 space-y-5 shadow-md text-center">
               <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-white/10">
                 <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">
                   Reservation Dashboard
@@ -324,7 +322,7 @@ export default function ReservationsPage() {
             </div>
 
             {/* RFID Inventory Status Component */}
-            <div className="p-6 rounded-2xl bg-white dark:bg-[#181A1D] border border-slate-200 dark:border-white/10 space-y-4 shadow-md">
+            <div className="p-6 rounded-2xl bg-white dark:bg-[#121315] border border-slate-200/90 dark:border-white/25 space-y-4 shadow-md">
               <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-white/10">
                 <div className="flex items-center gap-2">
                   <Radio className="w-5 h-5 text-[#7E8056] dark:text-[#A4A77E]" />
@@ -376,7 +374,7 @@ export default function ReservationsPage() {
 
         {/* ===================== BOTTOM 3 FEATURE BADGES ===================== */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
-          <div className="p-5 rounded-2xl bg-white dark:bg-[#181A1D] border border-slate-200 dark:border-white/10 flex items-center gap-4 shadow-sm">
+          <div className="p-5 rounded-2xl bg-white dark:bg-[#121315] border border-slate-200/90 dark:border-white/25 flex items-center gap-4 shadow-sm">
             <div className="w-12 h-12 rounded-xl bg-[#7E8056]/20 text-[#7E8056] flex items-center justify-center flex-shrink-0">
               <CalendarIcon className="w-6 h-6" />
             </div>
@@ -386,7 +384,7 @@ export default function ReservationsPage() {
             </div>
           </div>
 
-          <div className="p-5 rounded-2xl bg-white dark:bg-[#181A1D] border border-slate-200 dark:border-white/10 flex items-center gap-4 shadow-sm">
+          <div className="p-5 rounded-2xl bg-white dark:bg-[#121315] border border-slate-200/90 dark:border-white/25 flex items-center gap-4 shadow-sm">
             <div className="w-12 h-12 rounded-xl bg-[#8C7A58]/20 text-[#8C7A58] dark:text-[#C2B59B] flex items-center justify-center flex-shrink-0">
               <Clock className="w-6 h-6" />
             </div>
@@ -396,7 +394,7 @@ export default function ReservationsPage() {
             </div>
           </div>
 
-          <div className="p-5 rounded-2xl bg-white dark:bg-[#181A1D] border border-slate-200 dark:border-white/10 flex items-center gap-4 shadow-sm">
+          <div className="p-5 rounded-2xl bg-white dark:bg-[#121315] border border-slate-200/90 dark:border-white/25 flex items-center gap-4 shadow-sm">
             <div className="w-12 h-12 rounded-xl bg-[#7E8056]/20 text-[#7E8056] flex items-center justify-center flex-shrink-0">
               <Bell className="w-6 h-6" />
             </div>

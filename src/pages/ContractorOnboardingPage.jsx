@@ -85,7 +85,7 @@ export default function ContractorOnboardingPage() {
   const isApproved = formSubmitted && videoWatched && quizSubmitted && quizScore >= 8;
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#121315] text-slate-900 dark:text-slate-100 transition-colors duration-200">
+    <div className="min-h-screen bg-white dark:bg-[#212428] text-slate-900 dark:text-slate-100 transition-colors duration-200">
 
       {/* ===================== FULL-WIDTH CENTERED HERO SECTION WITH BACKGROUND IMAGE ===================== */}
       <section className="relative w-full bg-[#0B0C0E] text-white overflow-hidden border-b border-white/10 h-[400px] sm:h-[440px] lg:h-[480px] flex items-center justify-center">
@@ -174,11 +174,11 @@ export default function ContractorOnboardingPage() {
 
         {/* ===================== MAIN 2-COLUMN ONBOARDING INTERFACE ===================== */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
+
           {/* Left Column: Simple shadcn Registration Form & Uploads */}
           <div id="registration-form" className="lg:col-span-7 space-y-6">
 
-            <Card className="bg-white dark:bg-[#181A1D] border-slate-200/90 dark:border-white/[0.08] shadow-sm">
+            <Card className="bg-white dark:bg-[#121315] border-slate-200/90 dark:border-white/25 shadow-sm">
               <CardContent className="p-5 sm:p-6 space-y-5">
 
                 <div className="flex items-center justify-between pb-3 border-b border-slate-200/80 dark:border-white/10">
@@ -291,9 +291,9 @@ export default function ContractorOnboardingPage() {
 
           {/* Right Column: Video Training & 10-Question Questionnaire */}
           <div className="lg:col-span-5 space-y-6">
-            
+
             {/* Required Video Training Card */}
-            <div className="p-6 rounded-2xl bg-white dark:bg-[#181A1D] border border-slate-200/90 dark:border-white/[0.08] space-y-4 shadow-[0_2px_12px_rgba(0,0,0,0.03)] dark:shadow-xl">
+            <div className="p-6 rounded-2xl bg-white dark:bg-[#121315] border border-slate-200/90 dark:border-white/25 space-y-4 shadow-[0_2px_12px_rgba(0,0,0,0.03)] dark:shadow-xl">
               <div className="flex items-center justify-between pb-3 border-b border-slate-200/80 dark:border-white/10">
                 <div className="flex items-center gap-2.5">
                   <div className="p-2 rounded-lg bg-[#7E8056]/15 text-[#7E8056] dark:text-[#C2B59B]">
@@ -336,11 +336,10 @@ export default function ContractorOnboardingPage() {
                 <button
                   type="button"
                   onClick={() => setVideoWatched(true)}
-                  className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer active:scale-95 ${
-                    videoWatched
-                      ? 'bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 border border-emerald-500/40'
-                      : 'bg-[#7E8056] hover:bg-[#6c6e49] text-white shadow-sm'
-                  }`}
+                  className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer active:scale-95 ${videoWatched
+                    ? 'bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 border border-emerald-500/40'
+                    : 'bg-[#7E8056] hover:bg-[#6c6e49] text-white shadow-sm'
+                    }`}
                 >
                   <Check className="w-3.5 h-3.5" />
                   <span>{videoWatched ? 'Training Completed ✓' : 'Mark Completed'}</span>
@@ -348,12 +347,12 @@ export default function ContractorOnboardingPage() {
               </div>
             </div>
 
-          </div>
+          </div >
 
-        </div>
+        </div >
 
         {/* ===================== EXPANDED FULL-WIDTH INSTALLATION QUESTIONNAIRE CARD ===================== */}
-        <Card className="w-full bg-white dark:bg-[#181A1D] border-slate-200/90 dark:border-white/[0.08] shadow-sm">
+        < Card className="w-full bg-white dark:bg-[#121315] border-slate-200/90 dark:border-white/25 shadow-sm" >
           <CardContent className="p-6 sm:p-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
 
@@ -448,52 +447,54 @@ export default function ContractorOnboardingPage() {
 
             </div>
           </CardContent>
-        </Card>
+        </Card >
 
         {/* ===================== VIDEO TRAINING MODAL ===================== */}
-        {videoModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 animate-in fade-in">
-            <div className="bg-[#1C1E22] border border-[#A4A77E]/50 rounded-2xl max-w-2xl w-full p-6 text-slate-100 shadow-2xl relative">
-              <button
-                onClick={() => setVideoModalOpen(false)}
-                className="absolute top-4 right-4 p-2 rounded-xl bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
-              <h3 className="text-lg font-bold font-serif mb-1">Local Mechanical Required Training</h3>
-              <p className="text-xs text-[#C2B59B] mb-4">Module 1: Modular Handling & Safety Swapping Protocols</p>
-
-              {/* Video Player Display */}
-              <div className="relative aspect-video rounded-xl bg-black border border-white/15 overflow-hidden flex flex-col items-center justify-center p-6 text-center">
-                <div className="w-16 h-16 rounded-full bg-[#A4A77E]/20 text-[#A4A77E] border-2 border-[#A4A77E] flex items-center justify-center mb-3 animate-pulse">
-                  <Play className="w-8 h-8 fill-[#A4A77E] ml-1" />
-                </div>
-                <h4 className="text-base font-bold text-white mb-1">
-                  Technician Installation & Servicing Stream
-                </h4>
-                <p className="text-xs text-slate-400 max-w-md">
-                  Training video on 2'x6' structural framing, conductor pin safety inspection, and RFID validation steps.
-                </p>
-              </div>
-
-              <div className="mt-5 flex items-center justify-between">
-                <span className="text-xs text-slate-400">Duration: 12 minutes</span>
+        {
+          videoModalOpen && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 animate-in fade-in">
+              <div className="bg-[#1C1E22] border border-[#A4A77E]/50 rounded-2xl max-w-2xl w-full p-6 text-slate-100 shadow-2xl relative">
                 <button
-                  onClick={() => {
-                    setVideoWatched(true);
-                    setVideoModalOpen(false);
-                  }}
-                  className="px-6 py-2.5 rounded-xl bg-[#A4A77E] hover:bg-[#8e9167] text-black font-bold text-xs"
+                  onClick={() => setVideoModalOpen(false)}
+                  className="absolute top-4 right-4 p-2 rounded-xl bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white"
                 >
-                  Complete Training & Proceed
+                  <X className="w-5 h-5" />
                 </button>
+
+                <h3 className="text-lg font-bold font-serif mb-1">Local Mechanical Required Training</h3>
+                <p className="text-xs text-[#C2B59B] mb-4">Module 1: Modular Handling & Safety Swapping Protocols</p>
+
+                {/* Video Player Display */}
+                <div className="relative aspect-video rounded-xl bg-black border border-white/15 overflow-hidden flex flex-col items-center justify-center p-6 text-center">
+                  <div className="w-16 h-16 rounded-full bg-[#A4A77E]/20 text-[#A4A77E] border-2 border-[#A4A77E] flex items-center justify-center mb-3 animate-pulse">
+                    <Play className="w-8 h-8 fill-[#A4A77E] ml-1" />
+                  </div>
+                  <h4 className="text-base font-bold text-white mb-1">
+                    Technician Installation & Servicing Stream
+                  </h4>
+                  <p className="text-xs text-slate-400 max-w-md">
+                    Training video on 2'x6' structural framing, conductor pin safety inspection, and RFID validation steps.
+                  </p>
+                </div>
+
+                <div className="mt-5 flex items-center justify-between">
+                  <span className="text-xs text-slate-400">Duration: 12 minutes</span>
+                  <button
+                    onClick={() => {
+                      setVideoWatched(true);
+                      setVideoModalOpen(false);
+                    }}
+                    className="px-6 py-2.5 rounded-xl bg-[#A4A77E] hover:bg-[#8e9167] text-black font-bold text-xs"
+                  >
+                    Complete Training & Proceed
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )
+        }
 
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }

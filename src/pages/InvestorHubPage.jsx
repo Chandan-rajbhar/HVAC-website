@@ -19,7 +19,7 @@ import { Button } from '../components/ui/button';
 
 export default function InvestorHubPage() {
   return (
-    <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#16181B] text-slate-800 dark:text-slate-100 transition-colors duration-200">
+    <div className="min-h-screen bg-white dark:bg-[#212428] text-slate-800 dark:text-slate-100 transition-colors duration-200">
 
       {/* ===================== FULL-WIDTH CENTERED HERO SECTION WITH BACKGROUND IMAGE ===================== */}
       <section className="relative w-full bg-[#0B0C0E] text-white overflow-hidden border-b border-white/10 h-[400px] sm:h-[440px] lg:h-[480px] flex items-center justify-center">
@@ -87,7 +87,7 @@ export default function InvestorHubPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
             {/* Pillar 1: Innovative Technology */}
-            <div className="p-6 rounded-2xl bg-white dark:bg-[#1E2024] border border-slate-200 dark:border-white/10 space-y-3 shadow-md hover:border-[#7E8056]/50 transition-all">
+            <div className="p-6 rounded-2xl bg-white dark:bg-[#121315] border border-slate-200/90 dark:border-white/25 space-y-3 shadow-md hover:border-[#7E8056]/50 transition-all">
               <div className="w-12 h-12 rounded-xl bg-[#7E8056]/20 text-[#7E8056] flex items-center justify-center">
                 <Cpu className="w-6 h-6" />
               </div>
@@ -102,7 +102,7 @@ export default function InvestorHubPage() {
             </div>
 
             {/* Pillar 2: Growing Market */}
-            <div className="p-6 rounded-2xl bg-white dark:bg-[#1E2024] border border-slate-200 dark:border-white/10 space-y-3 shadow-md hover:border-[#8C7A58]/50 transition-all">
+            <div className="p-6 rounded-2xl bg-white dark:bg-[#121315] border border-slate-200/90 dark:border-white/25 space-y-3 shadow-md hover:border-[#8C7A58]/50 transition-all">
               <div className="w-12 h-12 rounded-xl bg-[#8C7A58]/20 text-[#8C7A58] dark:text-[#C2B59B] flex items-center justify-center">
                 <Globe2 className="w-6 h-6" />
               </div>
@@ -117,7 +117,7 @@ export default function InvestorHubPage() {
             </div>
 
             {/* Pillar 3: Strong Partnerships */}
-            <div className="p-6 rounded-2xl bg-white dark:bg-[#1E2024] border border-slate-200 dark:border-white/10 space-y-3 shadow-md hover:border-[#7E8056]/50 transition-all">
+            <div className="p-6 rounded-2xl bg-white dark:bg-[#121315] border border-slate-200/90 dark:border-white/25 space-y-3 shadow-md hover:border-[#7E8056]/50 transition-all">
               <div className="w-12 h-12 rounded-xl bg-[#7E8056]/20 text-[#7E8056] flex items-center justify-center">
                 <Handshake className="w-6 h-6" />
               </div>
@@ -135,7 +135,7 @@ export default function InvestorHubPage() {
         </section>
 
         {/* ===================== NO-TECH HVAC - A SMARTER FUTURE (SHADCN CARD) ===================== */}
-        <Card className="overflow-hidden shadow-md border-slate-200 dark:border-white/10 bg-white dark:bg-[#181A1D]">
+        <Card className="overflow-hidden shadow-md border-slate-200/90 dark:border-white/25 bg-white dark:bg-[#121315]">
           <CardContent className="p-6 sm:p-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
               {/* Left Side: Content & Action */}

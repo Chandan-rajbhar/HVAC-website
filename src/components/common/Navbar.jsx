@@ -34,7 +34,7 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-gradient-to-r from-[#F4F1EA] via-[#F8F6F0] to-[#F4F1EA] dark:from-[#1B1D20] dark:via-[#22252A] dark:to-[#1B1D20] border-b border-slate-200 dark:border-[#A4A77E]/20 shadow-[0_2px_12px_rgba(0,0,0,0.02)] dark:shadow-xl transition-colors">
+    <header className="sticky top-0 z-50 w-full bg-white dark:bg-[#212428] border-b border-slate-200 dark:border-[#A4A77E]/20 shadow-[0_2px_12px_rgba(0,0,0,0.02)] dark:shadow-xl transition-colors">
       <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
 
@@ -69,19 +69,18 @@ export default function Navbar() {
           {/* Right: Theme Toggle Switch, Profile Avatar, Mobile Menu */}
           <div className="flex items-center space-x-3 flex-shrink-0">
 
-            {/* Pill Slider Theme Toggle matching reference image */}
+            {/* Single Icon Theme Button */}
             <button
               onClick={toggleTheme}
               aria-label="Toggle Dark and Light Mode"
-              className="relative flex items-center justify-between w-14 h-7 px-1.5 rounded-full bg-slate-100 dark:bg-[#25282D] border border-slate-300 dark:border-white/10 hover:border-slate-400 dark:hover:border-white/20 transition-all cursor-pointer shadow-inner"
+              className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-[#25282D] dark:hover:bg-[#32363D] border border-slate-300 dark:border-white/15 flex items-center justify-center text-slate-700 dark:text-slate-200 transition-all hover:scale-105 shadow-sm cursor-pointer"
               title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
             >
-              <Sun className={`w-3.5 h-3.5 z-10 transition-colors ${!isDark ? 'text-amber-500' : 'text-slate-500'}`} />
-              <Moon className={`w-3.5 h-3.5 z-10 transition-colors ${isDark ? 'text-[#C2B59B]' : 'text-slate-400'}`} />
-              <span
-                className={`absolute top-0.5 w-6 h-6 rounded-full bg-[#7E8056] transition-transform duration-200 shadow-md ${isDark ? 'left-[calc(100%-26px)]' : 'left-0.5'
-                  }`}
-              />
+              {isDark ? (
+                <Sun className="w-4 h-4 text-[#C2B59B]" />
+              ) : (
+                <Moon className="w-4 h-4 text-slate-700" />
+              )}
             </button>
 
             {/* Compact Login Button */}
@@ -108,7 +107,7 @@ export default function Navbar() {
 
       {/* Mobile Drawer Navigation */}
       {mobileMenuOpen && (
-        <div className="xl:hidden bg-gradient-to-r from-[#F4F1EA] via-[#F8F6F0] to-[#F4F1EA] dark:from-[#1B1D20] dark:via-[#22252A] dark:to-[#1B1D20] border-b border-slate-200 dark:border-[#A4A77E]/20 px-4 pt-3 pb-6 space-y-2 animate-in slide-in-from-top-4 duration-200 shadow-xl">
+        <div className="xl:hidden bg-white dark:bg-[#212428] border-b border-slate-200 dark:border-[#A4A77E]/20 px-4 pt-3 pb-6 space-y-2 animate-in slide-in-from-top-4 duration-200 shadow-xl">
           <div className="text-[11px] font-bold uppercase tracking-wider text-[#7E8056] dark:text-[#A4A77E] px-3 py-1">
             Navigation Portals
           </div>

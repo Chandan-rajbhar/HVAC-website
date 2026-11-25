@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import {
   Calendar,
   Play,
@@ -73,7 +74,7 @@ export default function HomePage() {
   const activeColorPreview = hoveredColor || selectedColor;
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#16181B] text-slate-800 dark:text-slate-100 overflow-hidden font-sans transition-colors duration-200">
+    <div className="min-h-screen bg-white dark:bg-[#212428] text-slate-800 dark:text-slate-100 overflow-hidden font-sans transition-colors duration-200">
 
       {/* ===================== HERO SECTION ===================== */}
       {/* Dark dusk left section with high-definition modular HVAC video on the right */}
@@ -93,7 +94,7 @@ export default function HomePage() {
             style={{
               imageRendering: '-webkit-optimize-contrast',
               WebkitBackfaceVisibility: 'hidden',
-              transform: 'translateZ(0) scale(1.14)',
+              transform: 'translateZ(0) scale(1.24)',
             }}
           >
             <source src="/videos/hero-background-video.mp4?v=gemini" type="video/mp4" />
@@ -108,85 +109,64 @@ export default function HomePage() {
 
         </div>
 
-        {/* Left Side: Content Area aligned with page container & vertically centered */}
+        {/* Centered Hero Content Area */}
         <div className="relative z-10 w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-12">
-          <div className="max-w-3xl space-y-6">
+          <div className="max-w-4xl mx-auto text-center space-y-6">
 
             {/* Headline - Fixed high-contrast colors identical in both Light & Dark themes */}
-            <div className="space-y-1.5">
-              <h1 className="text-3xl sm:text-5xl lg:text-[56px] xl:text-[62px] font-bold font-serif text-white tracking-tight leading-[1.06] drop-shadow-lg">
+            <motion.div
+              initial={{ opacity: 0, y: 26 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-1.5"
+            >
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-[72px] font-bold font-serif text-white tracking-tight leading-[1.05] drop-shadow-lg">
                 The Next Generation
               </h1>
-              <h2 className="text-3xl sm:text-5xl lg:text-[56px] xl:text-[62px] font-bold font-serif text-[#7E8056] tracking-tight leading-[1.06] drop-shadow-lg">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-[72px] font-bold font-serif text-[#7E8056] tracking-tight leading-[1.05] drop-shadow-lg">
                 Modular HVAC System
               </h2>
-            </div>
+            </motion.div>
 
             {/* Tagline & Description */}
-            <div className="space-y-2.5 max-w-xl">
-              <p className="text-base sm:text-lg lg:text-xl font-semibold text-white tracking-wide drop-shadow-md">
+            <motion.div
+              initial={{ opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-3 max-w-2xl mx-auto"
+            >
+              <p className="text-lg sm:text-xl lg:text-2xl font-semibold text-white tracking-wide drop-shadow-md">
                 Plug-and-play. Efficient. Built for You.
               </p>
-              <p className="text-sm sm:text-base text-slate-100 leading-relaxed drop-shadow-sm">
+              <p className="text-base sm:text-lg text-slate-100 leading-relaxed drop-shadow-sm">
                 No-Tech HVAC delivers a revolutionary modular system with unmatched flexibility, easy installation, and modern design.
               </p>
-            </div>
+            </motion.div>
 
             {/* Hero Call-To-Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3.5 pt-1">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.85, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-2"
+            >
               <button
                 onClick={() => setIsReserveModalOpen(true)}
-                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-[#7E8056] hover:bg-[#6E7049] text-white font-semibold text-sm tracking-wide shadow-lg shadow-[#7E8056]/30 transition-all duration-200 hover:scale-[1.02] active:scale-95 group cursor-pointer"
+                className="w-full sm:w-[220px] inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full bg-black/60 hover:bg-black/80 text-white font-semibold text-sm tracking-wide border border-white/30 hover:border-white/50 backdrop-blur-md shadow-lg transition-all duration-200 hover:scale-[1.02] active:scale-95 group cursor-pointer whitespace-nowrap"
               >
-                <Calendar className="w-4 h-4 text-white" />
-                <span>Reserve Your No-Tech HVAC</span>
-                <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-0.5 transition-transform" />
+                <Calendar className="w-4 h-4 text-[#A4A77E] flex-shrink-0" />
+                <span>Reserve Now</span>
+                <ArrowRight className="w-4 h-4 text-[#A4A77E] flex-shrink-0 group-hover:translate-x-0.5 transition-transform" />
               </button>
 
               <button
                 onClick={() => setIsVideoModalOpen(true)}
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-black/60 hover:bg-black/80 text-white font-medium text-sm border border-white/30 backdrop-blur-md transition-all duration-200 hover:scale-[1.02] cursor-pointer shadow-lg"
+                className="w-full sm:w-[220px] inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full bg-black/60 hover:bg-black/80 text-white font-semibold text-sm tracking-wide border border-white/30 hover:border-white/50 backdrop-blur-md shadow-lg transition-all duration-200 hover:scale-[1.02] active:scale-95 cursor-pointer whitespace-nowrap"
               >
-                <Play className="w-3.5 h-3.5 text-white fill-current" />
-                <span>Explore the System</span>
+                <Play className="w-3.5 h-3.5 text-[#A4A77E] fill-current flex-shrink-0" />
+                <span>Explore System</span>
               </button>
-            </div>
-
-            {/* Micro-Content & Trust Highlights */}
-            <div className="space-y-3.5 pt-2">
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs sm:text-[13px] font-medium text-white drop-shadow-sm">
-                <div className="flex items-center gap-1.5 text-[#C2B59B] font-semibold">
-                  <span className="w-2 h-2 rounded-full bg-[#A4A77E] animate-pulse" />
-                  <span>$200 Refundable Deposit</span>
-                </div>
-                <span className="text-white/40 hidden sm:inline">•</span>
-                <div className="flex items-center gap-1.5 text-white">
-                  <CheckCircle2 className="w-4 h-4 text-[#A4A77E]" />
-                  <span>Priority 2026 Batch Allocation</span>
-                </div>
-                <span className="text-white/40 hidden sm:inline">•</span>
-                <div className="flex items-center gap-1.5 text-white">
-                  <ShieldCheck className="w-4 h-4 text-[#A4A77E]" />
-                  <span>10-Year Local Mechanical Guarantee</span>
-                </div>
-              </div>
-
-              {/* Feature Highlights Pill Strip (Frosted for 100% legibility over bright frames) */}
-              <div className="flex flex-wrap items-center gap-2.5 text-xs font-medium text-white">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/50 border border-white/20 backdrop-blur-md shadow-sm">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#A4A77E]" />
-                  <span>4-Bay Hot-Swappable</span>
-                </div>
-                <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/50 border border-white/20 backdrop-blur-md shadow-sm">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#A4A77E]" />
-                  <span>Zero-Loss Disconnects</span>
-                </div>
-                <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/50 border border-white/20 backdrop-blur-md shadow-sm">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#A4A77E]" />
-                  <span>Local Mechanical Approved</span>
-                </div>
-              </div>
-            </div>
+            </motion.div>
 
           </div>
         </div>
@@ -224,22 +204,48 @@ export default function HomePage() {
 
       {/* ===================== INTERACTIVE DEMO & COLOR CUSTOMIZER CARDS ===================== */}
       {/* 2 Side-by-side cards with clean light/dark styling */}
-      <section id="interactive-demo" className="py-8 bg-white dark:bg-[#16181B] transition-colors">
+      <section id="interactive-demo" className="py-12 sm:py-16 bg-white dark:bg-[#212428] transition-colors">
         <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
+
+          {/* Centered Section Heading */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className="text-center max-w-2xl mx-auto mb-8 sm:mb-10 space-y-2"
+          >
+            <h2 className="text-2xl sm:text-3xl font-bold font-serif text-slate-900 dark:text-white tracking-tight">
+              Explore & Customize Your System
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+              Interact with modular bay swaps and preview custom finishes in real time.
+            </p>
+          </motion.div>
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
 
             {/* Card 1: Interactive System Demo */}
-            <div className="rounded-2xl bg-white dark:bg-[#23262A] border border-slate-200/90 dark:border-white/10 p-5 sm:p-6 flex flex-col justify-between shadow-md">
-              <div>
-                <div className="flex items-center gap-2.5 mb-4">
-                  <Box className="w-5 h-5 text-[#7E8056] dark:text-white" />
+            <motion.div
+              initial={{ opacity: 0, x: -60 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -3, transition: { duration: 0.35, ease: 'easeOut' } }}
+              className="rounded-2xl bg-white dark:bg-[#121315] border border-slate-200/90 dark:border-white/25 p-6 sm:p-7 flex flex-col shadow-md"
+            >
+              <div className="flex flex-col flex-1">
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-9 h-9 rounded-xl bg-transparent border border-[#7E8056]/35 dark:border-[#A4A77E]/35 text-[#7E8056] dark:text-[#A4A77E] flex items-center justify-center flex-shrink-0">
+                    <Box className="w-4 h-4" />
+                  </div>
                   <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-tight">Interactive System Demo</h3>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
+                <div className="flex-1 grid grid-cols-1 sm:grid-cols-12 gap-5 items-stretch">
 
                   {/* Left: Unit image with glowing highlighted compartment and hand cursor */}
-                  <div className="sm:col-span-7 relative rounded-xl overflow-hidden bg-slate-900 border border-slate-200 dark:border-white/10 aspect-[16/10] group/img shadow-inner">
+                  <div className="sm:col-span-6 relative rounded-xl overflow-hidden bg-slate-900 border border-slate-200 dark:border-white/10 aspect-[16/10] group/img shadow-inner">
                     <img
                       src="/images/demo-interactive-aura-unit.jpg"
                       alt="Aura Series S Modular Unit Interactive Compartment Demo"
@@ -255,7 +261,7 @@ export default function HomePage() {
                   </div>
 
                   {/* Right: 3 Steps & Watch Demo Button */}
-                  <div className="sm:col-span-5 flex flex-col justify-between space-y-3">
+                  <div className="sm:col-span-6 h-full flex flex-col justify-between space-y-3">
                     <div className="space-y-2.5">
                       <div className="flex items-center gap-2.5 p-1.5 rounded-lg bg-[#FAF7F2] dark:bg-black/30 border border-slate-200/60 dark:border-white/5">
                         <span className="w-5 h-5 rounded-full bg-[#7E8056] text-white font-bold text-[11px] flex items-center justify-center flex-shrink-0">
@@ -290,57 +296,28 @@ export default function HomePage() {
 
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Card 2: Customize Your HVAC System */}
-            <div className="rounded-2xl bg-white dark:bg-[#23262A] border border-slate-200/90 dark:border-white/10 p-5 sm:p-6 flex flex-col justify-between shadow-md">
-              <div>
-                <div className="flex items-center gap-2.5 mb-4">
-                  <Palette className="w-5 h-5 text-[#7E8056] dark:text-white" />
+            <motion.div
+              initial={{ opacity: 0, x: 60 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 1.05, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -3, transition: { duration: 0.35, ease: 'easeOut' } }}
+              className="rounded-2xl bg-white dark:bg-[#121315] border border-slate-200/90 dark:border-white/25 p-6 sm:p-7 flex flex-col shadow-md"
+            >
+              <div className="flex flex-col flex-1">
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-9 h-9 rounded-xl bg-transparent border border-[#7E8056]/35 dark:border-[#A4A77E]/35 text-[#7E8056] dark:text-[#A4A77E] flex items-center justify-center flex-shrink-0">
+                    <Palette className="w-4 h-4" />
+                  </div>
                   <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-tight">Customize Your HVAC System</h3>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
+                <div className="flex-1 grid grid-cols-1 sm:grid-cols-12 gap-5 items-stretch">
 
-                  {/* Left: Swatches, Description, and Choose Color Button */}
-                  <div className="sm:col-span-6 space-y-4">
-                    {/* Color Swatch Circles */}
-                    <div className="flex items-center gap-2.5 flex-wrap">
-                      {HOMEPAGE_SWATCHES.map((swatch) => {
-                        const isSelected = selectedColor === swatch.hex;
-                        return (
-                          <button
-                            key={swatch.id}
-                            onClick={() => setSelectedColor(swatch.hex)}
-                            onMouseEnter={() => setHoveredColor(swatch.hex)}
-                            onMouseLeave={() => setHoveredColor(null)}
-                            className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full transition-all duration-200 shadow-md ${isSelected
-                              ? 'ring-2 ring-slate-900 dark:ring-white ring-offset-2 ring-offset-white dark:ring-offset-[#23262A] scale-110'
-                              : 'hover:scale-105 opacity-85 hover:opacity-100'
-                              }`}
-                            style={{ backgroundColor: swatch.hex }}
-                            aria-label={`Select ${swatch.name}`}
-                            title={swatch.name}
-                          />
-                        );
-                      })}
-                    </div>
-
-                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                      Real-time preview with your preferred color.
-                    </p>
-
-                    <div>
-                      <Link
-                        to={`/buyers?color=${encodeURIComponent(selectedColor)}`}
-                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#7E8056] hover:bg-[#6c6e49] text-white font-semibold text-xs transition-all shadow-md active:scale-95"
-                      >
-                        <span>Choose Color →</span>
-                      </Link>
-                    </div>
-                  </div>
-
-                  {/* Right: Customized HVAC Unit Visual from Reference Image */}
+                  {/* Left: Customized HVAC Unit Visual from Reference Image */}
                   <div className="sm:col-span-6 relative rounded-xl overflow-hidden bg-slate-900 border border-slate-200 dark:border-white/10 aspect-[16/10] group/colorimg shadow-inner">
                     <img
                       src="/images/customize-hvac-unit.jpg"
@@ -362,171 +339,303 @@ export default function HomePage() {
                     </div>
                   </div>
 
+                  {/* Right: Swatches, Description, and Choose Color Button */}
+                  <div className="sm:col-span-6 h-full flex flex-col justify-between space-y-4">
+                    <div className="space-y-4">
+                      {/* Color Swatch Circles */}
+                      <div className="flex items-center gap-2.5 flex-wrap">
+                        {HOMEPAGE_SWATCHES.map((swatch) => {
+                          const isSelected = selectedColor === swatch.hex;
+                          return (
+                            <button
+                              key={swatch.id}
+                              onClick={() => setSelectedColor(swatch.hex)}
+                              onMouseEnter={() => setHoveredColor(swatch.hex)}
+                              onMouseLeave={() => setHoveredColor(null)}
+                              className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full transition-all duration-200 shadow-md ${isSelected
+                                ? 'ring-2 ring-slate-900 dark:ring-white ring-offset-2 ring-offset-white dark:ring-offset-[#121315] scale-110'
+                                : 'hover:scale-105 opacity-85 hover:opacity-100'
+                                }`}
+                              style={{ backgroundColor: swatch.hex }}
+                              aria-label={`Select ${swatch.name}`}
+                              title={swatch.name}
+                            />
+                          );
+                        })}
+                      </div>
+
+                      <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                        Real-time preview with your preferred color.
+                      </p>
+                    </div>
+
+                    <div className="pt-2">
+                      <Link
+                        to={`/buyers?color=${encodeURIComponent(selectedColor)}`}
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#7E8056] hover:bg-[#6c6e49] text-white font-semibold text-xs transition-all shadow-md active:scale-95"
+                      >
+                        <span>Choose Color →</span>
+                      </Link>
+                    </div>
+                  </div>
+
                 </div>
               </div>
-            </div>
+            </motion.div>
 
           </div>
         </div>
       </section>
 
       {/* ===================== FEATURES ROW ===================== */}
-      {/* Light sand / cream banner matching the reference image strip */}
-      <section className="bg-[#EAE4D7] dark:bg-[#1E2024] py-4 border-y border-[#DDD5C7] dark:border-white/10 text-slate-800 dark:text-slate-100 transition-colors">
+      <section className="py-8 sm:py-10 bg-white dark:bg-[#212428] transition-colors">
         <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
+            className="rounded-2xl bg-white dark:bg-[#121315] border border-slate-200/90 dark:border-white/25 px-6 py-10 sm:px-10 sm:py-12 min-h-[220px] flex flex-col justify-center space-y-8 shadow-md"
+          >
 
-            {/* Feature 1 */}
-            <div className="flex items-center gap-3 py-1">
-              <div className="text-[#555845] dark:text-[#A4A77E]">
-                <Settings className="w-5 h-5" />
-              </div>
-              <div>
-                <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white leading-tight">Modular Design</h4>
-                <p className="text-[11px] text-slate-600 dark:text-slate-400">Maximum Flexibility</p>
-              </div>
-            </div>
+            {/* Centered Section Heading Inside Box */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.85, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+              className="text-center max-w-2xl mx-auto space-y-1.5"
+            >
+              <h2 className="text-xl sm:text-2xl font-bold font-serif text-slate-900 dark:text-white tracking-tight">
+                Why Choose No-Tech HVAC?
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+                Engineered for plug-and-play simplicity, lasting durability, and lower installation costs.
+              </p>
+            </motion.div>
 
-            {/* Feature 2 */}
-            <div className="flex items-center gap-3 py-1">
-              <div className="text-[#555845] dark:text-[#A4A77E]">
-                <Zap className="w-5 h-5" />
-              </div>
-              <div>
-                <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white leading-tight">Quick Installation</h4>
-                <p className="text-[11px] text-slate-600 dark:text-slate-400">Save Time & Cost</p>
-              </div>
-            </div>
+            {/* 4 Core Pillars */}
+            <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 lg:divide-x lg:divide-slate-200/90 dark:lg:divide-white/10">
 
-            {/* Feature 3 */}
-            <div className="flex items-center gap-3 py-1">
-              <div className="text-[#555845] dark:text-[#A4A77E]">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <div>
-                <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white leading-tight">Reliable Performance</h4>
-                <p className="text-[11px] text-slate-600 dark:text-slate-400">Built to Last</p>
-              </div>
-            </div>
-
-            {/* Feature 4 */}
-            <div className="flex items-center gap-3 py-1">
-              <div className="text-[#555845] dark:text-[#A4A77E]">
-                <Leaf className="w-5 h-5" />
-              </div>
-              <div>
-                <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white leading-tight">Energy Efficient</h4>
-                <p className="text-[11px] text-slate-600 dark:text-slate-400">Greener Tomorrow</p>
-              </div>
-            </div>
-
-            {/* Feature 5: How No-Tech HVAC Works? Action Card */}
-            <div className="col-span-2 md:col-span-1 flex items-center justify-between gap-3 bg-white/80 dark:bg-black/30 rounded-xl p-2.5 border border-slate-300/80 dark:border-white/10 shadow-sm">
-              <div>
-                <h4 className="text-xs font-bold text-slate-900 dark:text-white leading-tight">How No-Tech HVAC Works?</h4>
-                <p className="text-[10px] sm:text-[11px] text-slate-600 dark:text-slate-400">Discover the simple 4-step process.</p>
-              </div>
-              <button
-                onClick={() => setHowItWorksModalOpen(true)}
-                className="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-black text-white text-[11px] font-semibold whitespace-nowrap transition-colors shadow-sm"
+              {/* Feature 1 */}
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.85, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ y: -2, transition: { duration: 0.3, ease: 'easeOut' } }}
+                className="flex items-center lg:justify-center gap-3.5 lg:pr-6"
               >
-                Learn More →
-              </button>
-            </div>
+                <div className="w-11 h-11 rounded-xl bg-transparent border border-[#7E8056]/35 dark:border-[#A4A77E]/35 text-[#7E8056] dark:text-[#A4A77E] flex items-center justify-center flex-shrink-0">
+                  <Settings className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-slate-900 dark:text-white leading-tight">Modular Design</h4>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">Maximum Flexibility</p>
+                </div>
+              </motion.div>
 
-          </div>
+              {/* Feature 2 */}
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.85, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ y: -2, transition: { duration: 0.3, ease: 'easeOut' } }}
+                className="flex items-center lg:justify-center gap-3.5 lg:px-6"
+              >
+                <div className="w-11 h-11 rounded-xl bg-transparent border border-[#7E8056]/35 dark:border-[#A4A77E]/35 text-[#7E8056] dark:text-[#A4A77E] flex items-center justify-center flex-shrink-0">
+                  <Zap className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-slate-900 dark:text-white leading-tight">Quick Installation</h4>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">Save Time & Cost</p>
+                </div>
+              </motion.div>
+
+              {/* Feature 3 */}
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.85, delay: 0.42, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ y: -2, transition: { duration: 0.3, ease: 'easeOut' } }}
+                className="flex items-center lg:justify-center gap-3.5 lg:px-6"
+              >
+                <div className="w-11 h-11 rounded-xl bg-transparent border border-[#7E8056]/35 dark:border-[#A4A77E]/35 text-[#7E8056] dark:text-[#A4A77E] flex items-center justify-center flex-shrink-0">
+                  <ShieldCheck className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-slate-900 dark:text-white leading-tight">Reliable Performance</h4>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">Built to Last</p>
+                </div>
+              </motion.div>
+
+              {/* Feature 4 */}
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.85, delay: 0.54, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ y: -2, transition: { duration: 0.3, ease: 'easeOut' } }}
+                className="flex items-center lg:justify-center gap-3.5 lg:pl-6"
+              >
+                <div className="w-11 h-11 rounded-xl bg-transparent border border-[#7E8056]/35 dark:border-[#A4A77E]/35 text-[#7E8056] dark:text-[#A4A77E] flex items-center justify-center flex-shrink-0">
+                  <Leaf className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-slate-900 dark:text-white leading-tight">Energy Efficient</h4>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">Greener Tomorrow</p>
+                </div>
+              </motion.div>
+
+            </div>
+          </motion.div>
         </div>
       </section>
 
       {/* ===================== OUR PORTALS & LOCAL MECHANICAL ===================== */}
       {/* Light ivory/cream background with portals and technician card */}
-      <section className="bg-white dark:bg-[#121315] py-12 text-slate-900 dark:text-slate-100 transition-colors">
+      <section className="bg-white dark:bg-[#212428] py-12 sm:py-16 text-slate-900 dark:text-slate-100 transition-colors">
         <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
 
-            {/* Left Header */}
-            <div className="lg:col-span-3 space-y-2">
-              <h3 className="text-2xl sm:text-3xl font-bold font-serif text-slate-900 dark:text-white tracking-tight">Our Portals</h3>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">Find everything you need in one place.</p>
-              <div className="h-0.5 w-14 bg-[#7E8056] dark:bg-[#C2B59B] mt-1" />
-            </div>
+          {/* Centered Section Heading */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className="text-center max-w-2xl mx-auto mb-8 sm:mb-10 space-y-2"
+          >
+            <h2 className="text-2xl sm:text-3xl font-bold font-serif text-slate-900 dark:text-white tracking-tight">
+              Our Portals
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+              Find everything you need in one place.
+            </p>
+          </motion.div>
 
-            {/* Center: 4 Portals Cards */}
-            <div className="lg:col-span-5 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+
+            {/* Left: 4 Portals Cards */}
+            <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-3.5 sm:gap-4">
 
               {/* Portal 1: Buyers Portal */}
-              <Link
-                to="/buyers"
-                className="group p-3.5 rounded-2xl bg-white dark:bg-[#1E2125] border border-[#E6E0D6] dark:border-white/10 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between text-center items-center hover:-translate-y-0.5"
+              <motion.div
+                initial={{ opacity: 0, x: 55 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: 0.95, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ y: -3, transition: { duration: 0.3, ease: 'easeOut' } }}
+                className="h-full"
               >
-                <div className="w-9 h-9 rounded-xl bg-[#F0EDE6] dark:bg-white/10 text-[#555845] dark:text-[#A4A77E] flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-                  <ShoppingCart className="w-5 h-5 text-[#7E8056] dark:text-[#A4A77E]" />
-                </div>
-                <div>
-                  <h4 className="text-xs font-bold text-slate-900 dark:text-white">Buyers Portal</h4>
-                  <div className="mt-2 inline-flex items-center gap-1 text-[11px] font-semibold text-slate-600 dark:text-slate-300 group-hover:text-black dark:group-hover:text-white">
-                    <span>Select & Purchase</span>
-                    <span className="w-4 h-4 rounded-full border border-slate-400 dark:border-slate-500 flex items-center justify-center text-[9px] group-hover:border-black dark:group-hover:border-white">→</span>
+                <Link
+                  to="/buyers"
+                  className="group h-full p-4 sm:p-5 rounded-2xl bg-white dark:bg-[#121315] border border-[#E6E0D6] dark:border-white/25 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between text-center items-center"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-[#F0EDE6] dark:bg-white/10 text-[#555845] dark:text-[#A4A77E] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <ShoppingCart className="w-5 h-5 text-[#7E8056] dark:text-[#A4A77E]" />
                   </div>
-                </div>
-              </Link>
+                  <div>
+                    <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">Buyers Portal</h4>
+                    <div className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-semibold text-slate-600 dark:text-slate-300 group-hover:text-black dark:group-hover:text-white">
+                      <span>Select & Purchase</span>
+                      <span className="w-4 h-4 rounded-full border border-slate-400 dark:border-slate-500 flex items-center justify-center text-[9px] group-hover:border-black dark:group-hover:border-white">→</span>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
 
               {/* Portal 2: Investor Hub */}
-              <Link
-                to="/investor"
-                className="group p-3.5 rounded-2xl bg-white dark:bg-[#1E2125] border border-[#E6E0D6] dark:border-white/10 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between text-center items-center hover:-translate-y-0.5"
+              <motion.div
+                initial={{ opacity: 0, x: 55 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: 0.95, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ y: -3, transition: { duration: 0.3, ease: 'easeOut' } }}
+                className="h-full"
               >
-                <div className="w-9 h-9 rounded-xl bg-[#F0EDE6] dark:bg-white/10 text-[#555845] dark:text-[#A4A77E] flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-                  <TrendingUp className="w-5 h-5 text-[#7E8056] dark:text-[#A4A77E]" />
-                </div>
-                <div>
-                  <h4 className="text-xs font-bold text-slate-900 dark:text-white">Investor Hub</h4>
-                  <div className="mt-2 inline-flex items-center gap-1 text-[11px] font-semibold text-slate-600 dark:text-slate-300 group-hover:text-black dark:group-hover:text-white">
-                    <span>Learn More</span>
-                    <span className="w-4 h-4 rounded-full border border-slate-400 dark:border-slate-500 flex items-center justify-center text-[9px] group-hover:border-black dark:group-hover:border-white">→</span>
+                <Link
+                  to="/investor"
+                  className="group h-full p-4 sm:p-5 rounded-2xl bg-white dark:bg-[#121315] border border-[#E6E0D6] dark:border-white/25 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between text-center items-center"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-[#F0EDE6] dark:bg-white/10 text-[#555845] dark:text-[#A4A77E] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <TrendingUp className="w-5 h-5 text-[#7E8056] dark:text-[#A4A77E]" />
                   </div>
-                </div>
-              </Link>
+                  <div>
+                    <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">Investor Hub</h4>
+                    <div className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-semibold text-slate-600 dark:text-slate-300 group-hover:text-black dark:group-hover:text-white">
+                      <span>Learn More</span>
+                      <span className="w-4 h-4 rounded-full border border-slate-400 dark:border-slate-500 flex items-center justify-center text-[9px] group-hover:border-black dark:group-hover:border-white">→</span>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
 
               {/* Portal 3: Reservations */}
-              <Link
-                to="/reservations"
-                className="group p-3.5 rounded-2xl bg-white dark:bg-[#1E2125] border border-[#E6E0D6] dark:border-white/10 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between text-center items-center hover:-translate-y-0.5"
+              <motion.div
+                initial={{ opacity: 0, x: 55 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: 0.95, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ y: -3, transition: { duration: 0.3, ease: 'easeOut' } }}
+                className="h-full"
               >
-                <div className="w-9 h-9 rounded-xl bg-[#F0EDE6] dark:bg-white/10 text-[#555845] dark:text-[#A4A77E] flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-                  <Calendar className="w-5 h-5 text-[#7E8056] dark:text-[#A4A77E]" />
-                </div>
-                <div>
-                  <h4 className="text-xs font-bold text-slate-900 dark:text-white">Reservations</h4>
-                  <div className="mt-2 inline-flex items-center gap-1 text-[11px] font-semibold text-slate-600 dark:text-slate-300 group-hover:text-black dark:group-hover:text-white">
-                    <span>Book Your Install</span>
-                    <span className="w-4 h-4 rounded-full border border-slate-400 dark:border-slate-500 flex items-center justify-center text-[9px] group-hover:border-black dark:group-hover:border-white">→</span>
+                <Link
+                  to="/reservations"
+                  className="group h-full p-4 sm:p-5 rounded-2xl bg-white dark:bg-[#121315] border border-[#E6E0D6] dark:border-white/25 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between text-center items-center"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-[#F0EDE6] dark:bg-white/10 text-[#555845] dark:text-[#A4A77E] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Calendar className="w-5 h-5 text-[#7E8056] dark:text-[#A4A77E]" />
                   </div>
-                </div>
-              </Link>
+                  <div>
+                    <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">Reservations</h4>
+                    <div className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-semibold text-slate-600 dark:text-slate-300 group-hover:text-black dark:group-hover:text-white">
+                      <span>Book Your Install</span>
+                      <span className="w-4 h-4 rounded-full border border-slate-400 dark:border-slate-500 flex items-center justify-center text-[9px] group-hover:border-black dark:group-hover:border-white">→</span>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
 
               {/* Portal 4: Contractor Onboarding */}
-              <Link
-                to="/contractor"
-                className="group p-3.5 rounded-2xl bg-white dark:bg-[#1E2125] border border-[#E6E0D6] dark:border-white/10 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between text-center items-center hover:-translate-y-0.5"
+              <motion.div
+                initial={{ opacity: 0, x: 55 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: 0.95, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ y: -3, transition: { duration: 0.3, ease: 'easeOut' } }}
+                className="h-full"
               >
-                <div className="w-9 h-9 rounded-xl bg-[#F0EDE6] dark:bg-white/10 text-[#555845] dark:text-[#A4A77E] flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-                  <HardHat className="w-5 h-5 text-[#7E8056] dark:text-[#A4A77E]" />
-                </div>
-                <div>
-                  <h4 className="text-xs font-bold text-slate-900 dark:text-white">Contractor Onboarding</h4>
-                  <div className="mt-2 inline-flex items-center gap-1 text-[11px] font-semibold text-slate-600 dark:text-slate-300 group-hover:text-black dark:group-hover:text-white">
-                    <span>Join Our Network</span>
-                    <span className="w-4 h-4 rounded-full border border-slate-400 dark:border-slate-500 flex items-center justify-center text-[9px] group-hover:border-black dark:group-hover:border-white">→</span>
+                <Link
+                  to="/contractor"
+                  className="group h-full p-4 sm:p-5 rounded-2xl bg-white dark:bg-[#121315] border border-[#E6E0D6] dark:border-white/25 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between text-center items-center"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-[#F0EDE6] dark:bg-white/10 text-[#555845] dark:text-[#A4A77E] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <HardHat className="w-5 h-5 text-[#7E8056] dark:text-[#A4A77E]" />
                   </div>
-                </div>
-              </Link>
+                  <div>
+                    <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">Contractor Onboarding</h4>
+                    <div className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-semibold text-slate-600 dark:text-slate-300 group-hover:text-black dark:group-hover:text-white">
+                      <span>Join Our Network</span>
+                      <span className="w-4 h-4 rounded-full border border-slate-400 dark:border-slate-500 flex items-center justify-center text-[9px] group-hover:border-black dark:group-hover:border-white">→</span>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
 
             </div>
 
             {/* Right: Wide Technician & Local Mechanical Card */}
-            <div className="lg:col-span-4">
-              <div className="relative rounded-2xl overflow-hidden shadow-lg border border-slate-300 dark:border-[#3E4249] bg-[#1E2024] text-white p-4 sm:p-5 flex items-center justify-between min-h-[120px]">
+            <motion.div
+              initial={{ opacity: 0, x: 55 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.95, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -3, transition: { duration: 0.3, ease: 'easeOut' } }}
+              className="lg:col-span-4"
+            >
+              <div className="relative h-full rounded-2xl overflow-hidden shadow-lg border border-slate-300 dark:border-white/25 bg-[#121315] text-white p-5 sm:p-6 flex items-center justify-between min-h-[140px]">
 
                 {/* Background Technician Photo from Image */}
                 <div className="absolute inset-0">
@@ -553,14 +662,14 @@ export default function HomePage() {
                 <div className="relative z-10 self-end">
                   <Link
                     to="/local-mechanical"
-                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#7E8056] hover:bg-[#6c6e49] text-white font-semibold text-[11px] transition-all shadow-md"
+                    className="inline-flex items-center gap-1 px-3.5 py-2 rounded-full bg-[#7E8056] hover:bg-[#6c6e49] text-white font-semibold text-[11px] transition-all shadow-md"
                   >
                     <span>Learn More →</span>
                   </Link>
                 </div>
 
               </div>
-            </div>
+            </motion.div>
 
           </div>
         </div>
@@ -708,8 +817,8 @@ export default function HomePage() {
                 <button
                   onClick={() => setExploreTab('video')}
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${exploreTab === 'video'
-                      ? 'bg-[#7E8056] text-white shadow-sm'
-                      : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5'
+                    ? 'bg-[#7E8056] text-white shadow-sm'
+                    : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5'
                     }`}
                 >
                   Video Walkthrough
@@ -717,8 +826,8 @@ export default function HomePage() {
                 <button
                   onClick={() => setExploreTab('specs')}
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${exploreTab === 'specs'
-                      ? 'bg-[#7E8056] text-white shadow-sm'
-                      : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5'
+                    ? 'bg-[#7E8056] text-white shadow-sm'
+                    : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5'
                     }`}
                 >
                   Technical Specifications
@@ -726,8 +835,8 @@ export default function HomePage() {
                 <button
                   onClick={() => setExploreTab('diagram')}
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${exploreTab === 'diagram'
-                      ? 'bg-[#7E8056] text-white shadow-sm'
-                      : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5'
+                    ? 'bg-[#7E8056] text-white shadow-sm'
+                    : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5'
                     }`}
                 >
                   Interactive 3D Diagram
