@@ -159,13 +159,13 @@ export default function HomePage() {
                 <ArrowRight className="w-4 h-4 text-[#A4A77E] flex-shrink-0 group-hover:translate-x-0.5 transition-transform" />
               </button>
 
-              <button
+              {/* <button
                 onClick={() => setIsVideoModalOpen(true)}
                 className="w-full sm:w-[220px] inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full bg-black/60 hover:bg-black/80 text-white font-semibold text-sm tracking-wide border border-white/30 hover:border-white/50 backdrop-blur-md shadow-lg transition-all duration-200 hover:scale-[1.02] active:scale-95 cursor-pointer whitespace-nowrap"
               >
                 <Play className="w-3.5 h-3.5 text-[#A4A77E] fill-current flex-shrink-0" />
                 <span>Explore System</span>
-              </button>
+              </button> */}
             </motion.div>
 
           </div>
@@ -823,7 +823,7 @@ export default function HomePage() {
                 >
                   Video Walkthrough
                 </button>
-                <button
+                {/* <button
                   onClick={() => setExploreTab('specs')}
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${exploreTab === 'specs'
                     ? 'bg-[#7E8056] text-white shadow-sm'
@@ -840,7 +840,7 @@ export default function HomePage() {
                     }`}
                 >
                   Interactive 3D Diagram
-                </button>
+                </button> */}
               </div>
             </div>
 
