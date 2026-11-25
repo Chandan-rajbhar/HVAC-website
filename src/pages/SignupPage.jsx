@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Eye, EyeOff, UserPlus, CheckCircle2, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Eye, EyeOff, UserPlus, CheckCircle2, ArrowRight, ShieldCheck, User, Wrench, TrendingUp } from 'lucide-react';
 import LocalIndustriesLogo from '../components/common/LocalIndustriesLogo';
 import { Card } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from '../components/ui/select';
+import { useAuth, ROLE_CONFIG } from '../context/AuthContext';
+
+const ROLE_OPTIONS = [
+  { id: 'customer', label: 'Customer', icon: User },
+  { id: 'contractor', label: 'Contractor', icon: Wrench },
+  { id: 'investor', label: 'Investor', icon: TrendingUp },
+];
 
 export default function SignupPage() {
   const navigate = useNavigate();
+  const { signup } = useAuth();
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [accountRole, setAccountRole] = useState('customer');
@@ -27,9 +28,11 @@ export default function SignupPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!fullName.trim() || !email.trim() || !password.trim()) return;
+    signup({ name: fullName, email, role: accountRole });
     setCreated(true);
+    const targetRoute = ROLE_CONFIG[accountRole]?.homeRoute || '/buyers';
     setTimeout(() => {
-      navigate(accountRole === 'contractor' ? '/contractor' : '/buyers');
+      navigate(targetRoute);
     }, 900);
   };
 
@@ -85,17 +88,45 @@ export default function SignupPage() {
                 Join Local Industries
               </h1>
               <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                Register as a property buyer, certified HVAC contractor, or investor partner.
+                Choose your account role to unlock tailored portal access.
               </p>
             </div>
 
             {created ? (
               <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 flex items-center gap-3 text-xs text-emerald-800 dark:text-emerald-300">
                 <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
-                <span>Account created successfully. Redirecting to your portal...</span>
+                <span>
+                  Account created as <strong>{ROLE_CONFIG[accountRole]?.label}</strong>. Redirecting to your portal...
+                </span>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-3.5">
+                {/* 3-Role Segmented Pill Selector */}
+                <div className="space-y-1.5">
+                  <Label>Account Type</Label>
+                  <div className="grid grid-cols-3 gap-1 p-1 rounded-full bg-slate-100 dark:bg-black/40 border border-slate-200/80 dark:border-white/10">
+                    {ROLE_OPTIONS.map((role) => {
+                      const Icon = role.icon;
+                      const isActive = accountRole === role.id;
+                      return (
+                        <button
+                          key={role.id}
+                          type="button"
+                          onClick={() => setAccountRole(role.id)}
+                          className={`flex items-center justify-center gap-1.5 py-2 px-2 rounded-full text-xs font-semibold transition-all cursor-pointer ${
+                            isActive
+                              ? 'bg-[#7E8056] text-white shadow-sm'
+                              : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                          }`}
+                        >
+                          <Icon className="w-3.5 h-3.5 flex-shrink-0" />
+                          <span>{role.label}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
                 <div className="space-y-1.5">
                   <Label htmlFor="signup-name">Full Name</Label>
                   <Input
@@ -120,20 +151,6 @@ export default function SignupPage() {
                     placeholder="name@company.com"
                     className="h-9 bg-[#FAF7F2] dark:bg-black/50 border-slate-200 dark:border-white/15 text-xs"
                   />
-                </div>
-
-                <div className="space-y-1.5">
-                  <Label>Account Type</Label>
-                  <Select value={accountRole} onValueChange={setAccountRole}>
-                    <SelectTrigger className="w-full h-9 bg-[#FAF7F2] dark:bg-black/50 border-slate-200 dark:border-white/15 text-xs">
-                      <SelectValue placeholder="Select account type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="customer">Homeowner / Buyer</SelectItem>
-                      <SelectItem value="contractor">Certified HVAC Contractor</SelectItem>
-                      <SelectItem value="investor">Investor / Partner</SelectItem>
-                    </SelectContent>
-                  </Select>
                 </div>
 
                 <div className="space-y-1.5">
@@ -166,7 +183,7 @@ export default function SignupPage() {
                   className="w-full h-9 rounded-lg bg-[#7E8056] hover:bg-[#6c6e49] dark:bg-[#A4A77E] dark:hover:bg-[#8e9167] text-white dark:text-black font-semibold text-xs shadow-xs"
                 >
                   <UserPlus className="w-3.5 h-3.5 mr-1.5" />
-                  <span>Create Account</span>
+                  <span>Create {ROLE_CONFIG[accountRole]?.label} Account</span>
                 </Button>
               </form>
             )}

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
+import { AuthProvider, useAuth, ROLE_CONFIG } from './context/AuthContext';
 import Layout from './components/common/Layout';
 import HomePage from './pages/HomePage';
 import BuyersPortalPage from './pages/BuyersPortalPage';
@@ -16,6 +17,7 @@ import LocalMechanicalPage from './pages/LocalMechanicalPage';
 import HelpChatbotPage from './pages/HelpChatbotPage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
+import ProfilePage from './pages/ProfilePage';
 import NotFoundPage from './pages/NotFoundPage';
 
 // Auto scroll-to-top component on route transitions
@@ -29,31 +31,114 @@ function ScrollToTop() {
   return null;
 }
 
+// Guard role-specific pages only when a user is signed in; when signed out, all pages remain accessible
+function RoleGuard({ allowedRoles, children }) {
+  const { user } = useAuth();
+  if (user && !allowedRoles.includes(user.role)) {
+    const fallback = ROLE_CONFIG[user.role]?.homeRoute || '/';
+    return <Navigate to={fallback} replace />;
+  }
+  return children;
+}
+
 export default function App() {
   return (
     <ThemeProvider>
-      <BrowserRouter>
-        <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<HomePage />} />
-            <Route path="buyers" element={<BuyersPortalPage />} />
-            <Route path="investor" element={<InvestorHubPage />} />
-            <Route path="reservations" element={<ReservationsPage />} />
-            <Route path="reservations/confirmed" element={<ReservationConfirmedPage />} />
-            <Route path="contractor" element={<ContractorOnboardingPage />} />
-            <Route path="contractor/quiz" element={<ContractorQuizPage />} />
-            <Route path="contractor/schedule" element={<ContractorSchedulePage />} />
-            <Route path="contractor/rfid" element={<ContractorRfidPage />} />
-            <Route path="manage-contractor" element={<ManageContractorPage />} />
-            <Route path="local-mechanical" element={<LocalMechanicalPage />} />
-            <Route path="help" element={<HelpChatbotPage />} />
-            <Route path="login" element={<LoginPage />} />
-            <Route path="signup" element={<SignupPage />} />
-          </Route>
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <ScrollToTop />
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<HomePage />} />
+              <Route
+                path="buyers"
+                element={
+                  <RoleGuard allowedRoles={['customer']}>
+                    <BuyersPortalPage />
+                  </RoleGuard>
+                }
+              />
+              <Route
+                path="investor"
+                element={
+                  <RoleGuard allowedRoles={['investor']}>
+                    <InvestorHubPage />
+                  </RoleGuard>
+                }
+              />
+              <Route
+                path="reservations"
+                element={
+                  <RoleGuard allowedRoles={['customer']}>
+                    <ReservationsPage />
+                  </RoleGuard>
+                }
+              />
+              <Route
+                path="reservations/confirmed"
+                element={
+                  <RoleGuard allowedRoles={['customer']}>
+                    <ReservationConfirmedPage />
+                  </RoleGuard>
+                }
+              />
+              <Route
+                path="contractor"
+                element={
+                  <RoleGuard allowedRoles={['contractor']}>
+                    <ContractorOnboardingPage />
+                  </RoleGuard>
+                }
+              />
+              <Route
+                path="contractor/quiz"
+                element={
+                  <RoleGuard allowedRoles={['contractor']}>
+                    <ContractorQuizPage />
+                  </RoleGuard>
+                }
+              />
+              <Route
+                path="contractor/schedule"
+                element={
+                  <RoleGuard allowedRoles={['contractor']}>
+                    <ContractorSchedulePage />
+                  </RoleGuard>
+                }
+              />
+              <Route
+                path="contractor/rfid"
+                element={
+                  <RoleGuard allowedRoles={['contractor']}>
+                    <ContractorRfidPage />
+                  </RoleGuard>
+                }
+              />
+              <Route
+                path="manage-contractor"
+                element={
+                  <RoleGuard allowedRoles={['customer', 'contractor']}>
+                    <ManageContractorPage />
+                  </RoleGuard>
+                }
+              />
+              <Route
+                path="local-mechanical"
+                element={
+                  <RoleGuard allowedRoles={['contractor']}>
+                    <LocalMechanicalPage />
+                  </RoleGuard>
+                }
+              />
+              <Route path="help" element={<HelpChatbotPage />} />
+              <Route path="login" element={<LoginPage />} />
+              <Route path="signup" element={<SignupPage />} />
+              <Route path="profile" element={<ProfilePage />} />
+            </Route>
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </ThemeProvider>
   );
 }

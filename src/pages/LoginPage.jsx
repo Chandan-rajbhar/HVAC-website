@@ -1,15 +1,24 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Eye, EyeOff, LogIn, CheckCircle2, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Eye, EyeOff, LogIn, CheckCircle2, ArrowRight, ShieldCheck, User, Wrench, TrendingUp } from 'lucide-react';
 import LocalIndustriesLogo from '../components/common/LocalIndustriesLogo';
 import { Card } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
+import { useAuth, ROLE_CONFIG } from '../context/AuthContext';
+
+const ROLE_OPTIONS = [
+  { id: 'customer', label: 'Customer', icon: User },
+  { id: 'contractor', label: 'Contractor', icon: Wrench },
+  { id: 'investor', label: 'Investor', icon: TrendingUp },
+];
 
 export default function LoginPage() {
   const navigate = useNavigate();
+  const { login } = useAuth();
+  const [selectedRole, setSelectedRole] = useState('customer');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -18,9 +27,11 @@ export default function LoginPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email.trim() || !password.trim()) return;
+    login({ email, role: selectedRole });
     setSignedIn(true);
+    const targetRoute = ROLE_CONFIG[selectedRole]?.homeRoute || '/buyers';
     setTimeout(() => {
-      navigate('/manage-contractor');
+      navigate(targetRoute);
     }, 800);
   };
 
@@ -64,7 +75,7 @@ export default function LoginPage() {
 
         {/* Right Side: Clean shadcn Login Form */}
         <div className="lg:col-span-6 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-          <div className="w-full max-w-sm mx-auto space-y-6">
+          <div className="w-full max-w-sm mx-auto space-y-5">
             <div className="space-y-1.5">
               <Badge
                 variant="outline"
@@ -76,17 +87,45 @@ export default function LoginPage() {
                 Sign in to your account
               </h1>
               <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                Enter your credentials to access your dashboard.
+                Select your role and enter your credentials to access your portal.
               </p>
             </div>
 
             {signedIn ? (
               <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 flex items-center gap-3 text-xs text-emerald-800 dark:text-emerald-300">
                 <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
-                <span>Signed in successfully. Redirecting to your portal...</span>
+                <span>
+                  Signed in as <strong>{ROLE_CONFIG[selectedRole]?.label}</strong>. Redirecting to your portal...
+                </span>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
+                {/* 3-Role Segmented Pill Selector */}
+                <div className="space-y-1.5">
+                  <Label>Select Role</Label>
+                  <div className="grid grid-cols-3 gap-1 p-1 rounded-full bg-slate-100 dark:bg-black/40 border border-slate-200/80 dark:border-white/10">
+                    {ROLE_OPTIONS.map((role) => {
+                      const Icon = role.icon;
+                      const isActive = selectedRole === role.id;
+                      return (
+                        <button
+                          key={role.id}
+                          type="button"
+                          onClick={() => setSelectedRole(role.id)}
+                          className={`flex items-center justify-center gap-1.5 py-2 px-2 rounded-full text-xs font-semibold transition-all cursor-pointer ${
+                            isActive
+                              ? 'bg-[#7E8056] text-white shadow-sm'
+                              : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                          }`}
+                        >
+                          <Icon className="w-3.5 h-3.5 flex-shrink-0" />
+                          <span>{role.label}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
                 <div className="space-y-1.5">
                   <Label htmlFor="login-email">Email Address</Label>
                   <Input
@@ -137,7 +176,7 @@ export default function LoginPage() {
                   className="w-full h-9 rounded-lg bg-[#7E8056] hover:bg-[#6c6e49] dark:bg-[#A4A77E] dark:hover:bg-[#8e9167] text-white dark:text-black font-semibold text-xs shadow-xs"
                 >
                   <LogIn className="w-3.5 h-3.5 mr-1.5" />
-                  <span>Sign In</span>
+                  <span>Sign In as {ROLE_CONFIG[selectedRole]?.label}</span>
                 </Button>
               </form>
             )}
