@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage';
 import BuyersPortalPage from './pages/BuyersPortalPage';
 import InvestorHubPage from './pages/InvestorHubPage';
 import ReservationsPage from './pages/ReservationsPage';
+import ReservationConfirmedPage from './pages/ReservationConfirmedPage';
 import ContractorOnboardingPage from './pages/ContractorOnboardingPage';
 import ContractorSchedulePage from './pages/ContractorSchedulePage';
 import ContractorRfidPage from './pages/ContractorRfidPage';
@@ -36,6 +37,7 @@ export default function App() {
             <Route path="buyers" element={<BuyersPortalPage />} />
             <Route path="investor" element={<InvestorHubPage />} />
             <Route path="reservations" element={<ReservationsPage />} />
+            <Route path="reservations/confirmed" element={<ReservationConfirmedPage />} />
             <Route path="contractor" element={<ContractorOnboardingPage />} />
             <Route path="contractor/schedule" element={<ContractorSchedulePage />} />
             <Route path="contractor/rfid" element={<ContractorRfidPage />} />

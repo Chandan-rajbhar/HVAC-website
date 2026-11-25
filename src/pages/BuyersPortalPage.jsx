@@ -118,7 +118,7 @@ export default function BuyersPortalPage() {
     <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#121315] text-slate-900 dark:text-slate-100 transition-colors duration-200">
 
       {/* ===================== FULL-WIDTH CENTERED HERO SECTION WITH BACKGROUND IMAGE ===================== */}
-      <section className="relative w-full bg-[#0B0C0E] text-white overflow-hidden border-b border-white/10 min-h-[420px] sm:min-h-[460px] lg:min-h-[500px] flex items-center justify-center">
+      <section className="relative w-full bg-[#0B0C0E] text-white overflow-hidden border-b border-white/10 h-[400px] sm:h-[440px] lg:h-[480px] flex items-center justify-center">
         {/* Full-Width Background Image */}
         <div className="absolute inset-0 pointer-events-none">
           <img
@@ -158,17 +158,6 @@ export default function BuyersPortalPage() {
               >
                 <span>Start Selection</span>
                 <ArrowRight className="w-3.5 h-3.5" />
-              </button>
-
-              <button
-                onClick={() => {
-                  setCurrentStep(2);
-                  const el = document.getElementById('buyers-selection-area');
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 active:scale-95 text-white font-semibold text-xs border border-white/25 transition-all shadow-sm cursor-pointer"
-              >
-                <span>Check Compatibility</span>
               </button>
             </div>
           </div>
