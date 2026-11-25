@@ -19,15 +19,26 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const { login } = useAuth();
   const [selectedRole, setSelectedRole] = useState('customer');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState(ROLE_CONFIG.customer.defaultCredentials.email);
+  const [password, setPassword] = useState(ROLE_CONFIG.customer.defaultCredentials.password);
   const [showPassword, setShowPassword] = useState(false);
   const [signedIn, setSignedIn] = useState(false);
+
+  const handleRoleSelect = (roleId) => {
+    setSelectedRole(roleId);
+    const creds = ROLE_CONFIG[roleId]?.defaultCredentials;
+    if (creds) {
+      setEmail(creds.email);
+      setPassword(creds.password);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email.trim() || !password.trim()) return;
-    login({ email, role: selectedRole });
+    const defaultCreds = ROLE_CONFIG[selectedRole]?.defaultCredentials;
+    const matchedName = email.trim() === defaultCreds?.email ? defaultCreds.name : undefined;
+    login({ email, role: selectedRole, name: matchedName });
     setSignedIn(true);
     const targetRoute = ROLE_CONFIG[selectedRole]?.homeRoute || '/buyers';
     setTimeout(() => {
@@ -111,7 +122,7 @@ export default function LoginPage() {
                         <button
                           key={role.id}
                           type="button"
-                          onClick={() => setSelectedRole(role.id)}
+                          onClick={() => handleRoleSelect(role.id)}
                           className={`flex items-center justify-center gap-1.5 py-2 px-2 rounded-full text-xs font-semibold transition-all cursor-pointer ${
                             isActive
                               ? 'bg-[#7E8056] text-white shadow-sm'

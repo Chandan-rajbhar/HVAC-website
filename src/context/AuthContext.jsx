@@ -7,16 +7,31 @@ export const ROLE_CONFIG = {
     label: 'Customer',
     homeRoute: '/buyers',
     allowedNavPaths: ['/', '/buyers', '/reservations', '/manage-contractor', '/help'],
+    defaultCredentials: {
+      name: 'Sarah Jenkins',
+      email: 'customer@notechhvac.com',
+      password: 'customer123',
+    },
   },
   contractor: {
     label: 'Contractor',
     homeRoute: '/contractor',
     allowedNavPaths: ['/', '/contractor', '/manage-contractor', '/local-mechanical', '/help'],
+    defaultCredentials: {
+      name: 'David Vance',
+      email: 'contractor@notechhvac.com',
+      password: 'contractor123',
+    },
   },
   investor: {
     label: 'Investor',
     homeRoute: '/investor',
     allowedNavPaths: ['/', '/investor', '/help'],
+    defaultCredentials: {
+      name: 'Marcus Sterling',
+      email: 'investor@notechhvac.com',
+      password: 'investor123',
+    },
   },
 };
 
