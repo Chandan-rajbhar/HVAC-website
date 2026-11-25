@@ -94,7 +94,7 @@ export default function HomePage() {
             style={{
               imageRendering: '-webkit-optimize-contrast',
               WebkitBackfaceVisibility: 'hidden',
-              transform: 'translateZ(0) scale(1.14)',
+              transform: 'translateZ(0) scale(1.24)',
             }}
           >
             <source src="/videos/hero-background-video.mp4?v=gemini" type="video/mp4" />
