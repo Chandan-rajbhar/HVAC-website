@@ -5,23 +5,42 @@ import {
   Star,
   ShieldCheck,
   UserX,
-  RotateCw,
-  Phone,
-  Mail,
-  MapPin,
   CheckCircle2,
-  AlertCircle,
   MessageSquare,
-  Award,
   ArrowRight,
-  Send,
   X
 } from 'lucide-react';
 import { DEMO_CONTRACTORS } from '../data/mockData';
 import LocalMechanicalLogo from '../components/common/LocalMechanicalLogo';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter
+} from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
+import { Label } from '../components/ui/label';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from '../components/ui/select';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow
+} from '../components/ui/table';
 
 export default function ManageContractorPage() {
-  const [contractorsList, setContractorsList] = useState(DEMO_CONTRACTORS);
+  const [contractorsList] = useState(DEMO_CONTRACTORS);
   const [assignedContractorId, setAssignedContractorId] = useState('cnt-01');
 
   // Unselection & Feedback Form state
@@ -51,11 +70,10 @@ export default function ManageContractorPage() {
 
   const handleConfirmUnselect = (e) => {
     e.preventDefault();
-    // Add to feedback reports
     const report = {
       id: `fb-${Date.now()}`,
       date: new Date().toISOString().split('T')[0],
-      previousTech: assignedContractor.name + ' (' + assignedContractor.company + ')',
+      previousTech: `${assignedContractor.name} (${assignedContractor.company})`,
       reason: feedbackReason,
       notes: feedbackNotes,
       status: 'Delivered to Contractor & Local Mechanical'
@@ -63,9 +81,6 @@ export default function ManageContractorPage() {
     setFeedbackReports(prev => [report, ...prev]);
     setFeedbackSubmitted(true);
     setUnselectModalOpen(false);
-
-    // Prompt user to select another available contractor
-    // We unassign until they pick a new one, or auto-assign the next
   };
 
   const handleSelectNewContractor = (newId) => {
@@ -74,319 +89,397 @@ export default function ManageContractorPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#121315] text-slate-900 dark:text-slate-100 py-8 lg:py-12 transition-colors duration-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-        
-        {/* Header */}
-        <div className="rounded-2xl bg-gradient-to-r from-[#F4F1EA] via-[#F8F6F0] to-[#F4F1EA] dark:from-[#1B1D20] dark:via-[#22252A] dark:to-[#1B1D20] border border-slate-200 dark:border-[#A4A77E]/30 p-6 sm:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.02)] dark:shadow-xl relative overflow-hidden">
-          <div className="max-w-2xl relative z-10 space-y-2.5">
-            <h1 className="text-2xl sm:text-4xl font-bold font-serif text-slate-900 dark:text-white tracking-tight">
-              Manage My Contractor
-            </h1>
-            <p className="text-base sm:text-lg text-[#8C7A58] dark:text-[#C2B59B] font-semibold">
-              Certified Technicians. Local Compliance.
-            </p>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-              Review your assigned certified technician, view verified ratings, or switch to another Local Mechanical approved contractor.
-            </p>
-            <div className="pt-2">
-              <Link
-                to="/reservations"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7E8056] hover:bg-[#6c6e49] text-white font-semibold text-xs shadow-md transition-colors"
+    <div className="min-h-screen bg-[#FAF7F2] dark:bg-[#121315] text-slate-900 dark:text-slate-100 py-8 lg:py-10 transition-colors duration-200">
+      <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+
+        {/* Header Banner */}
+        <Card className="rounded-2xl bg-gradient-to-r from-[#F4F1EA] via-[#F8F6F0] to-[#F4F1EA] dark:from-[#1B1D20] dark:via-[#22252A] dark:to-[#1B1D20] border-slate-200/90 dark:border-[#A4A77E]/30 shadow-[0_2px_12px_rgba(0,0,0,0.03)] dark:shadow-xl">
+          <CardContent className="p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="max-w-2xl space-y-2">
+              <Badge
+                variant="outline"
+                className="border-[#7E8056]/30 bg-[#7E8056]/10 text-[#7E8056] dark:text-[#C2B59B] text-[10px] font-semibold uppercase tracking-wider"
               >
-                <span>Reservations Dashboard →</span>
-              </Link>
+                Customer &amp; Contractor Portal
+              </Badge>
+              <h1 className="text-2xl sm:text-4xl font-bold font-serif text-slate-900 dark:text-white tracking-tight">
+                Manage My Contractor
+              </h1>
+              <p className="text-sm sm:text-base text-[#7E8056] dark:text-[#C2B59B] font-semibold">
+                Certified Technicians. Local Compliance.
+              </p>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                Review your assigned certified technician, view verified ratings, or switch to another Local Mechanical approved contractor.
+              </p>
             </div>
-          </div>
-        </div>
+            <div className="flex-shrink-0">
+              <Button
+                asChild
+                size="sm"
+                className="h-8 px-3.5 rounded-lg bg-[#7E8056] hover:bg-[#6c6e49] text-white font-semibold text-xs shadow-xs"
+              >
+                <Link to="/reservations">
+                  <span>Reservations Dashboard</span>
+                  <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
+                </Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Feedback Submitted Confirmation Alert */}
         {feedbackSubmitted && (
-          <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between text-xs text-emerald-300 animate-in fade-in">
+          <div className="p-3.5 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-emerald-800 dark:text-emerald-300 animate-in fade-in">
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
               <span>
                 Feedback report recorded. Please select a new certified contractor from the available network below.
               </span>
             </div>
-            <span className="text-[10px] text-slate-400">Local Mechanical QC Copied</span>
+            <Badge
+              variant="outline"
+              className="w-fit border-emerald-300 dark:border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-[10px]"
+            >
+              Local Mechanical QC Copied
+            </Badge>
           </div>
         )}
 
         {/* ===================== CURRENTLY ASSIGNED CONTRACTOR CARD ===================== */}
-        <div className="p-6 sm:p-8 rounded-2xl bg-[#181A1D] border border-[#A4A77E]/40 space-y-6 shadow-2xl relative overflow-hidden">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
+        <Card className="rounded-2xl bg-white dark:bg-[#181A1D] border-slate-200/90 dark:border-white/[0.08] shadow-[0_4px_20px_rgba(0,0,0,0.04)] dark:shadow-2xl overflow-hidden py-0 gap-0">
+          <CardHeader className="px-6 py-5 bg-slate-50/70 dark:bg-[#1F2226] border-b border-slate-200/80 dark:border-white/[0.08] flex flex-col sm:flex-row sm:items-center justify-between gap-4 space-y-0">
             <div>
-              <span className="text-[10px] font-bold uppercase tracking-widest text-[#A4A77E] block">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-[#7E8056] dark:text-[#A4A77E] block">
                 Primary Assigned Technician
               </span>
-              <h2 className="text-xl sm:text-2xl font-bold font-serif text-white mt-0.5">
+              <CardTitle className="text-xl sm:text-2xl font-bold font-serif text-slate-900 dark:text-white mt-0.5">
                 {assignedContractor.name}
-              </h2>
-              <p className="text-xs text-[#C2B59B] font-semibold">{assignedContractor.company}</p>
+              </CardTitle>
+              <CardDescription className="text-xs text-[#8C7A58] dark:text-[#C2B59B] font-semibold">
+                {assignedContractor.company}
+              </CardDescription>
             </div>
 
-            {/* Verified and approved by Local Mechanical badge with name and logo (PDF Page 7) */}
-            <div className="p-3 rounded-xl bg-black/50 border border-[#A4A77E]/40 flex items-center gap-3">
-              <LocalMechanicalLogo className="h-10" />
+            {/* Verified and approved by Local Mechanical badge */}
+            <div className="px-3.5 py-2.5 rounded-xl bg-white dark:bg-[#141619] border border-slate-200/90 dark:border-[#A4A77E]/30 flex items-center gap-3 shadow-2xs">
+              <LocalMechanicalLogo className="h-9" />
               <div className="text-right">
-                <span className="text-[9px] text-[#A4A77E] uppercase font-bold tracking-wider block">
+                <span className="text-[9px] text-[#7E8056] dark:text-[#A4A77E] uppercase font-bold tracking-wider block">
                   Official Status
                 </span>
-                <span className="text-xs font-bold text-emerald-400 flex items-center justify-end gap-1">
+                <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 flex items-center justify-end gap-1">
                   <CheckCircle2 className="w-3.5 h-3.5" /> Approved by Local Mechanical
                 </span>
               </div>
             </div>
-          </div>
+          </CardHeader>
 
-          {/* Profile Details & Ratings */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-            
-            {/* Avatar & Fast Stats */}
-            <div className="md:col-span-3 flex flex-col items-center text-center space-y-3">
-              <img
-                src={assignedContractor.avatar}
-                alt={assignedContractor.name}
-                className="w-24 h-24 rounded-2xl object-cover border-2 border-[#A4A77E] shadow-xl"
-              />
-              <div className="space-y-1">
-                <div className="flex items-center justify-center gap-1 text-amber-400 text-sm font-bold">
-                  <Star className="w-4 h-4 fill-amber-400" />
-                  <span>{assignedContractor.rating}</span>
-                  <span className="text-xs text-slate-400 font-normal">({assignedContractor.reviewsCount} reviews)</span>
-                </div>
-                <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-semibold">
-                  {assignedContractor.completedInstalls} Completed Modular Installs
-                </span>
-              </div>
-            </div>
-
-            {/* Bio & Credentials */}
-            <div className="md:col-span-6 space-y-3 text-xs">
-              <p className="text-slate-300 leading-relaxed italic">
-                "{assignedContractor.bio}"
-              </p>
-              
-              <div className="grid grid-cols-2 gap-2 text-slate-300">
-                <div className="p-2.5 rounded-xl bg-black/40 border border-white/5">
-                  <span className="text-slate-500 block text-[10px]">State License</span>
-                  <span className="font-mono font-semibold text-white">{assignedContractor.license}</span>
-                </div>
-                <div className="p-2.5 rounded-xl bg-black/40 border border-white/5">
-                  <span className="text-slate-500 block text-[10px]">EPA 608 Universal</span>
-                  <span className="font-mono font-semibold text-[#A4A77E]">{assignedContractor.epaCert}</span>
-                </div>
-                <div className="p-2.5 rounded-xl bg-black/40 border border-white/5">
-                  <span className="text-slate-500 block text-[10px]">Territory Base</span>
-                  <span className="font-semibold text-white">{assignedContractor.location}</span>
-                </div>
-                <div className="p-2.5 rounded-xl bg-black/40 border border-white/5">
-                  <span className="text-slate-500 block text-[10px]">Insurance Active Through</span>
-                  <span className="font-mono font-semibold text-[#C2B59B]">{assignedContractor.insuranceExpires}</span>
+          <CardContent className="p-6">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+              {/* Avatar & Fast Stats */}
+              <div className="md:col-span-3 flex flex-col items-center text-center space-y-2.5">
+                <img
+                  src={assignedContractor.avatar}
+                  alt={assignedContractor.name}
+                  className="w-24 h-24 rounded-2xl object-cover border-2 border-[#7E8056] dark:border-[#A4A77E] shadow-md"
+                />
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-center gap-1 text-amber-500 text-sm font-bold">
+                    <Star className="w-4 h-4 fill-amber-500" />
+                    <span>{assignedContractor.rating}</span>
+                    <span className="text-xs text-slate-500 dark:text-slate-400 font-normal">
+                      ({assignedContractor.reviewsCount} reviews)
+                    </span>
+                  </div>
+                  <Badge
+                    variant="secondary"
+                    className="bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 text-[10px] font-semibold"
+                  >
+                    {assignedContractor.completedInstalls} Completed Modular Installs
+                  </Badge>
                 </div>
               </div>
+
+              {/* Bio & Credentials */}
+              <div className="md:col-span-6 space-y-3 text-xs">
+                <p className="text-slate-600 dark:text-slate-300 leading-relaxed italic">
+                  "{assignedContractor.bio}"
+                </p>
+
+                <div className="grid grid-cols-2 gap-2.5">
+                  <div className="p-3 rounded-xl bg-[#FAF7F2] dark:bg-black/40 border border-slate-200/70 dark:border-white/5">
+                    <span className="text-slate-500 block text-[10px]">State License</span>
+                    <span className="font-mono font-semibold text-slate-900 dark:text-white">{assignedContractor.license}</span>
+                  </div>
+                  <div className="p-3 rounded-xl bg-[#FAF7F2] dark:bg-black/40 border border-slate-200/70 dark:border-white/5">
+                    <span className="text-slate-500 block text-[10px]">EPA 608 Universal</span>
+                    <span className="font-mono font-semibold text-[#7E8056] dark:text-[#A4A77E]">{assignedContractor.epaCert}</span>
+                  </div>
+                  <div className="p-3 rounded-xl bg-[#FAF7F2] dark:bg-black/40 border border-slate-200/70 dark:border-white/5">
+                    <span className="text-slate-500 block text-[10px]">Territory Base</span>
+                    <span className="font-semibold text-slate-900 dark:text-white">{assignedContractor.location}</span>
+                  </div>
+                  <div className="p-3 rounded-xl bg-[#FAF7F2] dark:bg-black/40 border border-slate-200/70 dark:border-white/5">
+                    <span className="text-slate-500 block text-[10px]">Insurance Active Through</span>
+                    <span className="font-mono font-semibold text-[#8C7A58] dark:text-[#C2B59B]">{assignedContractor.insuranceExpires}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Customer Actions */}
+              <div className="md:col-span-3 space-y-2.5 flex flex-col items-center justify-center">
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={handleUnselect}
+                  className="h-8 px-3.5 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 font-semibold text-xs border-red-500/30"
+                >
+                  <UserX className="w-3.5 h-3.5 mr-1.5" />
+                  <span>Unselect Contractor</span>
+                </Button>
+
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 text-center leading-relaxed max-w-[240px]">
+                  Dissatisfied or need different availability? Unselect and choose another certified provider at zero penalty.
+                </p>
+              </div>
             </div>
-
-            {/* Customer Actions */}
-            <div className="md:col-span-3 space-y-3 flex flex-col justify-center">
-              <button
-                onClick={handleUnselect}
-                className="w-full py-2.5 px-4 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-400 hover:text-red-300 font-semibold text-xs border border-red-500/30 transition-all flex items-center justify-center gap-2"
-              >
-                <UserX className="w-4 h-4" />
-                <span>Unselect Contractor</span>
-              </button>
-
-              <p className="text-[10px] text-slate-500 text-center leading-normal">
-                Dissatisfied or need different availability? You can unselect and choose another certified provider at zero penalty.
-              </p>
-            </div>
-
-          </div>
-        </div>
+          </CardContent>
+        </Card>
 
         {/* ===================== SELECT ANOTHER AVAILABLE CONTRACTOR ===================== */}
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
-              <h3 className="text-base font-bold font-serif text-white">
+              <h3 className="text-lg font-bold font-serif text-slate-900 dark:text-white">
                 Available Certified Contractors in Your Territory
               </h3>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-600 dark:text-slate-400">
                 All candidates carry active EPA Universal certification and Local Mechanical verified standing.
               </p>
             </div>
-            <span className="text-xs text-[#A4A77E] font-semibold">
+            <Badge
+              variant="outline"
+              className="w-fit border-[#7E8056]/30 bg-[#7E8056]/10 text-[#7E8056] dark:text-[#C2B59B] text-xs font-semibold"
+            >
               {availableContractors.length} Verified Alternatives
-            </span>
+            </Badge>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {availableContractors.map((c) => (
-              <div
+              <Card
                 key={c.id}
-                className="p-5 rounded-2xl bg-[#181A1D] border border-white/10 flex flex-col justify-between space-y-4 shadow-xl hover:border-[#A4A77E]/50 transition-all"
+                className="rounded-2xl bg-white dark:bg-[#181A1D] border-slate-200/90 dark:border-white/[0.08] flex flex-col justify-between shadow-[0_2px_12px_rgba(0,0,0,0.03)] dark:shadow-xl hover:border-[#7E8056]/60 dark:hover:border-[#A4A77E]/50 transition-all py-0 gap-0"
               >
-                <div className="space-y-3">
+                <CardContent className="p-5 space-y-3.5">
                   <div className="flex items-center gap-3">
                     <img
                       src={c.avatar}
                       alt={c.name}
-                      className="w-12 h-12 rounded-xl object-cover border border-[#A4A77E]"
+                      className="w-12 h-12 rounded-xl object-cover border border-[#7E8056]/60 dark:border-[#A4A77E]"
                     />
-                    <div>
-                      <h4 className="text-sm font-bold text-white">{c.name}</h4>
-                      <p className="text-[11px] text-[#C2B59B] truncate">{c.company}</p>
-                      <div className="flex items-center gap-1 text-amber-400 text-xs mt-0.5">
-                        <Star className="w-3 h-3 fill-amber-400" />
+                    <div className="min-w-0">
+                      <h4 className="text-sm font-bold text-slate-900 dark:text-white truncate">{c.name}</h4>
+                      <p className="text-[11px] text-[#8C7A58] dark:text-[#C2B59B] font-medium truncate">{c.company}</p>
+                      <div className="flex items-center gap-1 text-amber-500 text-xs mt-0.5">
+                        <Star className="w-3 h-3 fill-amber-500" />
                         <span className="font-bold">{c.rating}</span>
-                        <span className="text-slate-400 text-[10px]">({c.reviewsCount})</span>
+                        <span className="text-slate-500 dark:text-slate-400 text-[10px]">({c.reviewsCount})</span>
                       </div>
                     </div>
                   </div>
 
-                  <p className="text-xs text-slate-300 line-clamp-2">
+                  <p className="text-xs text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">
                     {c.bio}
                   </p>
 
-                  <div className="p-2.5 rounded-xl bg-black/40 border border-white/5 text-[11px] space-y-1">
-                    <div className="flex justify-between text-slate-400">
+                  <div className="p-3 rounded-xl bg-[#FAF7F2] dark:bg-black/40 border border-slate-200/70 dark:border-white/5 text-[11px] space-y-1.5">
+                    <div className="flex justify-between text-slate-500 dark:text-slate-400">
                       <span>License:</span>
-                      <span className="font-mono text-white">{c.license}</span>
+                      <span className="font-mono font-semibold text-slate-900 dark:text-white">{c.license}</span>
                     </div>
-                    <div className="flex justify-between text-slate-400">
+                    <div className="flex justify-between text-slate-500 dark:text-slate-400">
                       <span>Area:</span>
-                      <span className="text-slate-200">{c.location}</span>
+                      <span className="text-slate-800 dark:text-slate-200 font-medium">{c.location}</span>
                     </div>
-                    <div className="flex items-center gap-1.5 text-emerald-400 pt-1 border-t border-white/5">
+                    <div className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 pt-1.5 border-t border-slate-200/70 dark:border-white/5 font-medium">
                       <ShieldCheck className="w-3.5 h-3.5" />
                       <span>Verified by Local Mechanical</span>
                     </div>
                   </div>
-                </div>
+                </CardContent>
 
-                <button
-                  onClick={() => handleSelectNewContractor(c.id)}
-                  className="w-full py-2.5 rounded-xl bg-[#A4A77E] hover:bg-[#8e9167] text-black font-bold text-xs shadow-md transition-all flex items-center justify-center gap-1.5"
-                >
-                  <UserCheck className="w-4 h-4" />
-                  <span>Select This Contractor</span>
-                </button>
-              </div>
+                <CardFooter className="px-5 pb-5 pt-0">
+                  <Button
+                    type="button"
+                    size="sm"
+                    onClick={() => handleSelectNewContractor(c.id)}
+                    className="w-full h-8 rounded-lg bg-[#7E8056] hover:bg-[#6c6e49] dark:bg-[#A4A77E] dark:hover:bg-[#8e9167] text-white dark:text-black font-semibold text-xs shadow-xs"
+                  >
+                    <UserCheck className="w-3.5 h-3.5 mr-1.5" />
+                    <span>Select This Contractor</span>
+                  </Button>
+                </CardFooter>
+              </Card>
             ))}
           </div>
         </div>
 
-        {/* ===================== CONTRACTOR FEEDBACK REPORTS ===================== */}
-        {/* PDF Requirement: "Contractors receive feedback reports on why they were unselected." */}
-        <div className="p-6 rounded-2xl bg-[#181A1D] border border-white/10 space-y-4 shadow-xl">
-          <div className="flex items-center justify-between pb-3 border-b border-white/10">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-white flex items-center gap-2">
-              <MessageSquare className="w-4 h-4 text-[#C2B59B]" /> Contractor Removal & Feedback Reports (PDF Log)
-            </h3>
-            <span className="text-xs text-slate-400">Transparency & Continuous Improvement</span>
-          </div>
+        {/* ===================== CONTRACTOR FEEDBACK REPORTS (SHADCN TABLE) ===================== */}
+        <Card className="rounded-2xl bg-white dark:bg-[#181A1D] border-slate-200/90 dark:border-white/[0.08] shadow-[0_4px_20px_rgba(0,0,0,0.04)] dark:shadow-xl overflow-hidden py-0 gap-0">
+          <CardHeader className="px-6 py-4 bg-slate-50/70 dark:bg-[#1F2226] border-b border-slate-200/80 dark:border-white/[0.08] flex flex-col sm:flex-row sm:items-center justify-between gap-2 space-y-0">
+            <div className="flex items-center gap-2">
+              <MessageSquare className="w-4 h-4 text-[#7E8056] dark:text-[#C2B59B]" />
+              <CardTitle className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white">
+                Contractor Removal &amp; Feedback Reports (PDF Log)
+              </CardTitle>
+            </div>
+            <Badge
+              variant="outline"
+              className="w-fit border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-300 text-[10px] font-medium"
+            >
+              Transparency &amp; Continuous Improvement
+            </Badge>
+          </CardHeader>
 
-          <div className="space-y-3">
-            {feedbackReports.map((report) => (
-              <div
-                key={report.id}
-                className="p-4 rounded-xl bg-black/40 border border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs"
-              >
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2">
-                    <span className="font-bold text-white">{report.previousTech}</span>
-                    <span className="text-slate-400 font-mono text-[10px]">Report #{report.id}</span>
-                  </div>
-                  <p className="text-slate-300">
-                    <strong className="text-amber-400">Reason:</strong> {report.reason}
-                  </p>
-                  <p className="text-slate-400 italic">
-                    Notes: "{report.notes}"
-                  </p>
-                </div>
-
-                <div className="text-right flex-shrink-0">
-                  <span className="text-slate-400 block text-[10px]">{report.date}</span>
-                  <span className="px-2 py-0.5 rounded bg-white/10 text-emerald-400 text-[10px] font-semibold">
-                    {report.status}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+          <CardContent className="p-0">
+            <Table>
+              <TableHeader>
+                <TableRow className="bg-[#FAF7F2]/80 dark:bg-white/[0.02] border-slate-200/80 dark:border-white/[0.08]">
+                  <TableHead className="text-[11px] font-bold uppercase text-slate-600 dark:text-slate-400">Report ID</TableHead>
+                  <TableHead className="text-[11px] font-bold uppercase text-slate-600 dark:text-slate-400">Technician / Company</TableHead>
+                  <TableHead className="text-[11px] font-bold uppercase text-slate-600 dark:text-slate-400">Reason</TableHead>
+                  <TableHead className="text-[11px] font-bold uppercase text-slate-600 dark:text-slate-400">Customer Notes</TableHead>
+                  <TableHead className="text-[11px] font-bold uppercase text-slate-600 dark:text-slate-400">Date</TableHead>
+                  <TableHead className="text-[11px] font-bold uppercase text-slate-600 dark:text-slate-400 text-right">Status</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {feedbackReports.map((report) => (
+                  <TableRow
+                    key={report.id}
+                    className="border-slate-200/70 dark:border-white/[0.06] hover:bg-slate-50/80 dark:hover:bg-white/[0.02]"
+                  >
+                    <TableCell className="font-mono text-[11px] text-slate-500 dark:text-slate-400">
+                      #{report.id}
+                    </TableCell>
+                    <TableCell className="text-xs font-semibold text-slate-900 dark:text-white">
+                      {report.previousTech}
+                    </TableCell>
+                    <TableCell className="text-xs text-amber-700 dark:text-amber-400 font-medium">
+                      {report.reason}
+                    </TableCell>
+                    <TableCell className="text-xs text-slate-600 dark:text-slate-400 italic max-w-xs">
+                      "{report.notes}"
+                    </TableCell>
+                    <TableCell className="font-mono text-[11px] text-slate-500 dark:text-slate-400 whitespace-nowrap">
+                      {report.date}
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <Badge
+                        variant="secondary"
+                        className="bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 text-[10px] font-semibold"
+                      >
+                        {report.status}
+                      </Badge>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
 
         {/* ===================== UNSELECT FEEDBACK MODAL ===================== */}
         {unselectModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 animate-in fade-in">
-            <div className="bg-[#1C1E22] border border-red-500/40 rounded-2xl max-w-lg w-full p-6 text-slate-100 shadow-2xl relative space-y-4">
-              <button
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 animate-in fade-in">
+            <Card className="bg-white dark:bg-[#1C1E22] border-red-500/30 rounded-2xl max-w-lg w-full text-slate-900 dark:text-slate-100 shadow-2xl relative py-0 gap-0">
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
                 onClick={() => setUnselectModalOpen(false)}
-                className="absolute top-4 right-4 p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-slate-400 hover:text-white"
+                className="absolute top-3.5 right-3.5 h-7 w-7 rounded-lg text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
               >
-                <X className="w-5 h-5" />
-              </button>
+                <X className="w-4 h-4" />
+              </Button>
 
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center">
-                  <UserX className="w-6 h-6" />
+              <CardHeader className="p-6 pb-3 flex flex-row items-center gap-3 space-y-0">
+                <div className="w-9 h-9 rounded-xl bg-red-500/15 text-red-600 dark:text-red-400 flex items-center justify-center flex-shrink-0">
+                  <UserX className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-white">Unselect Current Contractor</h3>
-                  <p className="text-xs text-slate-400">{assignedContractor.name} ({assignedContractor.company})</p>
+                  <CardTitle className="text-base font-bold text-slate-900 dark:text-white">
+                    Unselect Current Contractor
+                  </CardTitle>
+                  <CardDescription className="text-xs text-slate-500 dark:text-slate-400">
+                    {assignedContractor.name} ({assignedContractor.company})
+                  </CardDescription>
                 </div>
-              </div>
+              </CardHeader>
 
-              <p className="text-xs text-slate-300">
-                To maintain service quality and help technicians improve, contractors receive a feedback report outlining why they were unselected.
-              </p>
+              <CardContent className="p-6 pt-2 space-y-4">
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                  To maintain service quality and help technicians improve, contractors receive a feedback report outlining why they were unselected.
+                </p>
 
-              <form onSubmit={handleConfirmUnselect} className="space-y-3 text-xs">
-                <div>
-                  <label className="text-slate-300 font-semibold block mb-1">Select Primary Reason:</label>
-                  <select
-                    value={feedbackReason}
-                    onChange={(e) => setFeedbackReason(e.target.value)}
-                    className="w-full bg-black/60 border border-white/15 focus:border-[#A4A77E] rounded-xl px-3.5 py-2 text-white outline-none"
-                  >
-                    <option value="Scheduling conflict / requested different time window">Scheduling conflict / requested different time window</option>
-                    <option value="Slow communication / response time">Slow communication / response time</option>
-                    <option value="Customer preferred a different certified specialist">Customer preferred a different certified specialist</option>
-                    <option value="Workmanship or site cleanliness concern">Workmanship or site cleanliness concern</option>
-                  </select>
-                </div>
+                <form onSubmit={handleConfirmUnselect} className="space-y-3.5 text-xs">
+                  <div className="space-y-1.5">
+                    <Label>Select Primary Reason</Label>
+                    <Select value={feedbackReason} onValueChange={setFeedbackReason}>
+                      <SelectTrigger className="w-full h-9 bg-[#FAF7F2] dark:bg-black/50 border-slate-200 dark:border-white/15 text-xs">
+                        <SelectValue placeholder="Select a reason" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="Scheduling conflict / requested different time window">
+                          Scheduling conflict / requested different time window
+                        </SelectItem>
+                        <SelectItem value="Slow communication / response time">
+                          Slow communication / response time
+                        </SelectItem>
+                        <SelectItem value="Customer preferred a different certified specialist">
+                          Customer preferred a different certified specialist
+                        </SelectItem>
+                        <SelectItem value="Workmanship or site cleanliness concern">
+                          Workmanship or site cleanliness concern
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
 
-                <div>
-                  <label className="text-slate-300 font-semibold block mb-1">Additional Feedback Comments:</label>
-                  <textarea
-                    rows={3}
-                    value={feedbackNotes}
-                    onChange={(e) => setFeedbackNotes(e.target.value)}
-                    placeholder="Provide constructive feedback for the contractor..."
-                    className="w-full bg-black/60 border border-white/15 focus:border-[#A4A77E] rounded-xl p-3 text-white outline-none"
-                  />
-                </div>
+                  <div className="space-y-1.5">
+                    <Label>Additional Feedback Comments</Label>
+                    <textarea
+                      rows={3}
+                      value={feedbackNotes}
+                      onChange={(e) => setFeedbackNotes(e.target.value)}
+                      placeholder="Provide constructive feedback for the contractor..."
+                      className="w-full bg-[#FAF7F2] dark:bg-black/50 border border-slate-200 dark:border-white/15 focus:border-[#7E8056] dark:focus:border-[#A4A77E] rounded-lg p-3 text-xs text-slate-900 dark:text-white outline-none"
+                    />
+                  </div>
 
-                <div className="flex items-center justify-between pt-3 border-t border-white/10">
-                  <button
-                    type="button"
-                    onClick={() => setUnselectModalOpen(false)}
-                    className="px-4 py-2 rounded-xl bg-white/10 text-slate-300 text-xs font-semibold"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    className="px-5 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs"
-                  >
-                    Submit Report & Switch Contractor
-                  </button>
-                </div>
-              </form>
-
-            </div>
+                  <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-200 dark:border-white/10">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setUnselectModalOpen(false)}
+                      className="h-8 px-3.5 rounded-lg text-xs"
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      type="submit"
+                      size="sm"
+                      className="h-8 px-4 rounded-lg bg-red-600 hover:bg-red-700 text-white font-semibold text-xs"
+                    >
+                      Submit Report &amp; Switch Contractor
+                    </Button>
+                  </div>
+                </form>
+              </CardContent>
+            </Card>
           </div>
         )}
 

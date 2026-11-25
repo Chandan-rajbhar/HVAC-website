@@ -14,6 +14,8 @@ import ContractorRfidPage from './pages/ContractorRfidPage';
 import ManageContractorPage from './pages/ManageContractorPage';
 import LocalMechanicalPage from './pages/LocalMechanicalPage';
 import HelpChatbotPage from './pages/HelpChatbotPage';
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 // Auto scroll-to-top component on route transitions
@@ -46,6 +48,8 @@ export default function App() {
             <Route path="manage-contractor" element={<ManageContractorPage />} />
             <Route path="local-mechanical" element={<LocalMechanicalPage />} />
             <Route path="help" element={<HelpChatbotPage />} />
+            <Route path="login" element={<LoginPage />} />
+            <Route path="signup" element={<SignupPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

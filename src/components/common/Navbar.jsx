@@ -3,7 +3,7 @@ import { NavLink, Link, useLocation } from 'react-router-dom';
 import {
   Sun,
   Moon,
-  User,
+  UserCheck,
   Menu,
   X,
   Home,
@@ -28,6 +28,7 @@ export default function Navbar() {
     { name: 'Investor Hub', path: '/investor', icon: TrendingUp },
     { name: 'Reservations', path: '/reservations', icon: Calendar },
     { name: 'Contractor Onboarding', path: '/contractor', icon: HardHat },
+    { name: 'Manage Contractor', path: '/manage-contractor', icon: UserCheck },
     { name: 'Local Mechanical', path: '/local-mechanical', icon: ShieldCheck },
     { name: 'Help & AI', path: '/help', icon: Headphones },
   ];
@@ -83,13 +84,12 @@ export default function Navbar() {
               />
             </button>
 
-            {/* Circular Profile Avatar Button matching reference image */}
+            {/* Compact Login Button */}
             <Link
-              to="/manage-contractor"
-              className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-[#25282D] dark:hover:bg-[#32363D] border border-slate-300 dark:border-white/15 flex items-center justify-center text-slate-700 dark:text-slate-200 transition-all hover:scale-105 shadow-sm"
-              title="Customer Profile & Contractor Portal"
+              to="/login"
+              className="inline-flex items-center px-3.5 h-7 rounded-lg bg-[#7E8056] hover:bg-[#6c6e49] text-white text-xs font-semibold transition-colors shadow-xs"
             >
-              <User className="w-4 h-4" />
+              Login
             </Link>
 
             {/* Mobile Hamburger Menu Button */}
