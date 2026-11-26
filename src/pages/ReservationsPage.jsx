@@ -16,10 +16,14 @@ import {
   Sparkles,
   Users,
   ChevronRight,
-  ChevronLeft
+  ChevronLeft,
+  X,
+  Lock,
+  LogIn
 } from 'lucide-react';
 import { TIME_SLOTS, COMPARTMENTS } from '../data/mockData';
 import LocalMechanicalLogo from '../components/common/LocalMechanicalLogo';
+import { useAuth } from '../context/AuthContext';
 import {
   Select,
   SelectContent,
@@ -29,11 +33,57 @@ import {
 } from '../components/ui/select';
 
 export default function ReservationsPage() {
+  const { user } = useAuth();
+  const isContractor = user?.role === 'contractor';
   const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState('2026-12-15');
   const [selectedSlot, setSelectedSlot] = useState(TIME_SLOTS[0]);
   const [selectedRegion, setSelectedRegion] = useState('Dallas-Fort Worth Metro');
   const [activeRFIDBay, setActiveRFIDBay] = useState(1);
+  const [scheduleUpdatedMsg, setScheduleUpdatedMsg] = useState('');
+
+  // Contractor Shift Calendar & Reschedule Modal state
+  const shiftDates = [
+    { day: 'WED', num: '16', label: 'Dec 16, 2026' },
+    { day: 'FRI', num: '18', label: 'Dec 18, 2026' },
+    { day: 'MON', num: '21', label: 'Dec 21, 2026' },
+    { day: 'WED', num: '23', label: 'Dec 23, 2026' },
+    { day: 'FRI', num: '25', label: 'Dec 25, 2026' },
+  ];
+  const [selectedShiftDate, setSelectedShiftDate] = useState('all');
+  const [rescheduleModalOpen, setRescheduleModalOpen] = useState(false);
+  const [selectedAppt, setSelectedAppt] = useState(null);
+  const [rescheduleDate, setRescheduleDate] = useState('2026-12-23');
+  const [rescheduleSlot, setRescheduleSlot] = useState(TIME_SLOTS[1]);
+
+  const openRescheduleModal = (appt) => {
+    setSelectedAppt(appt);
+    setRescheduleSlot(appt.time || TIME_SLOTS[0]);
+    setRescheduleModalOpen(true);
+  };
+
+  const handleConfirmReschedule = (e) => {
+    e.preventDefault();
+    if (!selectedAppt) return;
+    const formattedDate = new Date(`${rescheduleDate}T12:00:00`).toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    });
+    const updated = upcomingAppointments.map((a) =>
+      a.id === selectedAppt.id
+        ? { ...a, date: formattedDate, time: rescheduleSlot, status: 'Rescheduled' }
+        : a
+    );
+    setUpcomingAppointments(updated);
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(updated));
+    } catch {
+      // ignore storage errors
+    }
+    setScheduleUpdatedMsg(`Shift for ${selectedAppt.customer.split('•')[0].trim()} rescheduled to ${formattedDate} (${rescheduleSlot}).`);
+    setRescheduleModalOpen(false);
+  };
 
   // Automated notification toggles
   const [smsAlerts, setSmsAlerts] = useState(true);
@@ -49,14 +99,87 @@ export default function ReservationsPage() {
 
   const currentRegionData = regionCapacities[selectedRegion] || regionCapacities['Dallas-Fort Worth Metro'];
 
-  const upcomingAppointments = [
-    { id: 'apt-1', date: 'Dec 15, 2026', time: '10 AM – 1 PM', customer: 'David Vance (Apex Precision)', status: 'Confirmed', bay: 'All 4 Modular Bays' },
-    { id: 'apt-2', date: 'Dec 17, 2026', time: '1 PM – 4 PM', customer: 'Elena Rostova (Vanguard)', status: 'Dispatch Ready', bay: 'Bay 01 Inverter Swap' },
-    { id: 'apt-3', date: 'Dec 21, 2026', time: '7 AM – 10 AM', customer: 'Marcus Holloway (Metro Modular)', status: 'Scheduled', bay: 'Commissioning' },
-  ];
+  const storageKey = isContractor
+    ? `notech_contractor_schedule_${user?.email || 'contractor'}`
+    : `notech_customer_reservations_${user?.email || 'guest'}`;
+
+  const [upcomingAppointments, setUpcomingAppointments] = useState(() => {
+    try {
+      const saved = localStorage.getItem(storageKey);
+      if (saved) return JSON.parse(saved);
+    } catch {
+      // ignore storage errors
+    }
+    if (isContractor) {
+      return [
+        {
+          id: 'c-apt-1',
+          date: 'Dec 16, 2026',
+          time: '10 AM – 1 PM',
+          customer: 'Robert Chen • 7721 Preston Hollow Way, Dallas, TX',
+          status: 'Assigned',
+          bay: 'New System Install & Initial Commissioning (3.0 Ton)',
+        },
+        {
+          id: 'c-apt-2',
+          date: 'Dec 18, 2026',
+          time: '1 PM – 4 PM',
+          customer: 'Sarah Montgomery • 4105 River Crest Dr, Fort Worth, TX',
+          status: 'Assigned',
+          bay: 'Bay 02 ECM Blower Hot-Swap (4.0 Ton)',
+        },
+        {
+          id: 'c-apt-3',
+          date: 'Dec 21, 2026',
+          time: '7 AM – 10 AM',
+          customer: 'Michael Lawson • 1903 Legacy Dr, Plano, TX',
+          status: 'Confirmed',
+          bay: 'Bay 03 Microchannel Valve Inspection (2.5 Ton)',
+        },
+      ];
+    }
+    return [
+      {
+        id: 'apt-1',
+        date: 'Dec 15, 2026',
+        time: '10 AM – 1 PM',
+        customer: user?.name || 'Your Installation',
+        status: 'Confirmed',
+        bay: 'All 4 Modular Bays • Dallas-Fort Worth Metro',
+      },
+    ];
+  });
 
   const handleConfirmReservation = (e) => {
     e.preventDefault();
+    const formattedDate = new Date(`${selectedDate}T12:00:00`).toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    });
+    const newReservation = {
+      id: `apt-${Date.now()}`,
+      date: formattedDate,
+      time: selectedSlot,
+      customer: isContractor
+        ? `${user?.name || 'Contractor'} • Assigned Dispatch Block`
+        : user?.name || 'Your Installation',
+      status: isContractor ? 'Scheduled' : 'Confirmed',
+      bay: isContractor
+        ? `Available Dispatch Slot • ${selectedRegion}`
+        : `All 4 Modular Bays • ${selectedRegion}`,
+    };
+    const updated = [newReservation, ...upcomingAppointments];
+    setUpcomingAppointments(updated);
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(updated));
+    } catch {
+      // ignore storage errors
+    }
+    if (isContractor) {
+      setScheduleUpdatedMsg(`Dispatch slot added for ${formattedDate} (${selectedSlot}) in ${selectedRegion}.`);
+      return;
+    }
     navigate('/reservations/confirmed', {
       state: {
         selectedDate,
@@ -67,6 +190,41 @@ export default function ReservationsPage() {
       },
     });
   };
+
+  if (!user) {
+    return (
+      <div className="min-h-[calc(100vh-80px)] bg-white dark:bg-[#212428] text-slate-900 dark:text-slate-100 flex items-center justify-center px-4 py-12 transition-colors duration-200">
+        <div className="max-w-md w-full p-8 rounded-2xl bg-[#FAF7F2] dark:bg-[#181A1D] border border-slate-200 dark:border-white/15 shadow-lg text-center space-y-5">
+          <div className="w-14 h-14 rounded-2xl bg-[#7E8056]/15 text-[#7E8056] dark:text-[#A4A77E] flex items-center justify-center mx-auto border border-[#7E8056]/25">
+            <Lock className="w-6 h-6" />
+          </div>
+          <div className="space-y-2">
+            <h1 className="text-xl sm:text-2xl font-bold font-serif text-slate-900 dark:text-white">
+              Customer Login Required
+            </h1>
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              Please sign in or create a Customer account to view and manage installation reservations.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-1">
+            <Link
+              to="/login"
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg bg-[#7E8056] hover:bg-[#6c6e49] text-white text-xs font-semibold shadow-sm"
+            >
+              <LogIn className="w-3.5 h-3.5" />
+              <span>Login</span>
+            </Link>
+            <Link
+              to="/signup"
+              className="inline-flex items-center px-5 py-2.5 rounded-lg border border-slate-300 dark:border-white/20 text-xs font-semibold"
+            >
+              Sign Up
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#212428] text-slate-900 dark:text-slate-100 transition-colors duration-200">
@@ -94,10 +252,10 @@ export default function ReservationsPage() {
               className="space-y-1.5"
             >
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-serif text-white tracking-tight leading-[1.12] drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
-                Reservations & Scheduling
+                {isContractor ? 'My Schedule & Dispatch' : 'Reservations & Scheduling'}
               </h1>
               <p className="text-lg sm:text-2xl font-bold text-[#E8DEC8] dark:text-[#C2B59B] tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]">
-                Choose Your Date. We'll Handle the Rest.
+                {isContractor ? 'Assigned Installations. Dispatch Windows.' : "Choose Your Date. We'll Handle the Rest."}
               </p>
             </motion.div>
 
@@ -107,7 +265,9 @@ export default function ReservationsPage() {
               transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="text-sm sm:text-base text-white leading-relaxed max-w-xl mx-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]"
             >
-              Schedule your installation with ease and track your reservation status across our certified Local Mechanical contractor network.
+              {isContractor
+                ? 'View your upcoming assigned customer installations, manage your 3-hour dispatch windows, and track territory availability.'
+                : 'Schedule your installation with ease and track your reservation status across our certified Local Mechanical contractor network.'}
             </motion.p>
 
             <motion.div
@@ -246,24 +406,82 @@ export default function ReservationsPage() {
               </div>
 
               {/* Confirmation CTA Button */}
+              {isContractor && scheduleUpdatedMsg && (
+                <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 text-xs text-emerald-800 dark:text-emerald-300 flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
+                  <span>{scheduleUpdatedMsg}</span>
+                </div>
+              )}
+
               <div className="pt-2 flex justify-end">
                 <button
                   onClick={handleConfirmReservation}
                   className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#7E8056] hover:bg-[#6e7049] text-white font-bold text-sm shadow-md transition-all"
                 >
-                  Confirm Reservation →
+                  {isContractor ? 'Add Dispatch Slot →' : 'Confirm Reservation →'}
                 </button>
               </div>
 
             </div>
 
-            {/* Upcoming Appointments List */}
+            {/* Contractor Shift Calendar (Contractor Only) */}
+            {isContractor && (
+              <div className="p-6 rounded-2xl bg-white dark:bg-[#121315] border border-slate-200/90 dark:border-white/25 space-y-4 shadow-md">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white flex items-center gap-2">
+                    <CalendarIcon className="w-4 h-4 text-[#7E8056] dark:text-[#C2B59B]" /> Shift Calendar
+                  </h3>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedShiftDate('all')}
+                    className={`text-[11px] font-semibold px-2.5 py-1 rounded-full cursor-pointer transition-colors ${
+                      selectedShiftDate === 'all'
+                        ? 'bg-[#7E8056] text-white'
+                        : 'bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300'
+                    }`}
+                  >
+                    All Shifts
+                  </button>
+                </div>
+                <div className="grid grid-cols-5 gap-2">
+                  {shiftDates.map((d) => {
+                    const active = selectedShiftDate === d.label;
+                    return (
+                      <button
+                        key={d.label}
+                        type="button"
+                        onClick={() => setSelectedShiftDate(active ? 'all' : d.label)}
+                        className={`py-2.5 px-2 rounded-xl border text-center transition-all cursor-pointer ${
+                          active
+                            ? 'bg-slate-900 dark:bg-[#7E8056] text-white border-slate-900 dark:border-[#7E8056] shadow-sm'
+                            : 'bg-slate-50 dark:bg-black/40 border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:border-[#7E8056]/50'
+                        }`}
+                      >
+                        <span className="text-[10px] font-bold uppercase block opacity-75">{d.day}</span>
+                        <span className="text-base font-bold font-mono">{d.num}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* Upcoming Appointments / Assigned Shifts List */}
             <div className="p-6 rounded-2xl bg-white dark:bg-[#121315] border border-slate-200/90 dark:border-white/25 space-y-4 shadow-md">
-              <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
-                <CalendarIcon className="w-4 h-4 text-[#7E8056] dark:text-[#C2B59B]" /> Upcoming Scheduled Installations
-              </h3>
+              <div className="flex items-center justify-between gap-2">
+                <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
+                  <CalendarIcon className="w-4 h-4 text-[#7E8056] dark:text-[#C2B59B]" />{' '}
+                  {isContractor ? `Assigned Shifts (${upcomingAppointments.length})` : 'Upcoming Scheduled Installations'}
+                </h3>
+                {isContractor && (
+                  <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">Active Queue</span>
+                )}
+              </div>
               <div className="space-y-2.5">
-                {upcomingAppointments.map((apt) => (
+                {(isContractor && selectedShiftDate !== 'all'
+                  ? upcomingAppointments.filter((apt) => apt.date === selectedShiftDate)
+                  : upcomingAppointments
+                ).map((apt) => (
                   <div key={apt.id} className="p-3.5 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
                     <div>
                       <span className="font-bold text-slate-900 dark:text-white block">{apt.customer}</span>
@@ -277,6 +495,16 @@ export default function ReservationsPage() {
                       <span className="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 text-[10px] font-semibold">
                         {apt.status}
                       </span>
+                      {isContractor && (
+                        <button
+                          type="button"
+                          onClick={() => openRescheduleModal(apt)}
+                          className="px-2.5 py-1 rounded-lg bg-white dark:bg-white/10 border border-slate-200 dark:border-white/15 hover:bg-[#7E8056] hover:text-white hover:border-[#7E8056] text-slate-700 dark:text-slate-200 text-[11px] font-semibold inline-flex items-center gap-1 transition-colors cursor-pointer"
+                        >
+                          <RotateCw className="w-3 h-3" />
+                          <span>Reschedule</span>
+                        </button>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -459,6 +687,76 @@ export default function ReservationsPage() {
             </div>
           </motion.div>
         </div>
+
+        {/* Contractor Reschedule Shift Modal */}
+        {isContractor && rescheduleModalOpen && selectedAppt && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 animate-in fade-in">
+            <div className="bg-white dark:bg-[#181A1D] border border-slate-200 dark:border-white/15 rounded-2xl max-w-md w-full p-6 text-slate-900 dark:text-slate-100 shadow-2xl relative space-y-4">
+              <button
+                type="button"
+                onClick={() => setRescheduleModalOpen(false)}
+                className="absolute top-4 right-4 p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20 text-slate-500 dark:text-slate-300 cursor-pointer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#7E8056] dark:text-[#C2B59B]">
+                  Reschedule Shift
+                </span>
+                <h3 className="text-base font-bold font-serif text-slate-900 dark:text-white mt-0.5">
+                  {selectedAppt.customer}
+                </h3>
+              </div>
+              <form onSubmit={handleConfirmReschedule} className="space-y-3 text-xs">
+                <div className="space-y-1.5">
+                  <label className="font-semibold text-slate-700 dark:text-slate-300 block">New Date</label>
+                  <input
+                    type="date"
+                    value={rescheduleDate}
+                    min="2026-11-25"
+                    max="2027-04-30"
+                    onChange={(e) => setRescheduleDate(e.target.value)}
+                    className="w-full bg-slate-50 dark:bg-black/50 border border-slate-300 dark:border-white/15 rounded-xl px-3 py-2 text-xs font-mono outline-none focus:border-[#7E8056]"
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="font-semibold text-slate-700 dark:text-slate-300 block">New Time Window</label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {TIME_SLOTS.map((slot) => (
+                      <button
+                        key={slot}
+                        type="button"
+                        onClick={() => setRescheduleSlot(slot)}
+                        className={`py-2 px-2 rounded-lg border text-[11px] font-semibold cursor-pointer transition-all ${
+                          rescheduleSlot === slot
+                            ? 'bg-[#7E8056] text-white border-[#7E8056]'
+                            : 'bg-slate-50 dark:bg-black/40 border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300'
+                        }`}
+                      >
+                        {slot}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex justify-end gap-2 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setRescheduleModalOpen(false)}
+                    className="px-4 py-2 rounded-lg border border-slate-200 dark:border-white/15 text-xs font-semibold cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-4 py-2 rounded-lg bg-[#7E8056] hover:bg-[#6c6e49] text-white text-xs font-semibold cursor-pointer"
+                  >
+                    Confirm Reschedule
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
 
       </motion.div>
     </div>

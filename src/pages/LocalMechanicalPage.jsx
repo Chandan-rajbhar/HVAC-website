@@ -18,9 +18,12 @@ import {
   Check,
   X,
   FileText,
-  ArrowRight
+  ArrowRight,
+  Lock,
+  LogIn
 } from 'lucide-react';
 import LocalMechanicalLogo from '../components/common/LocalMechanicalLogo';
+import { useAuth } from '../context/AuthContext';
 import { DEMO_CONTRACTORS } from '../data/mockData';
 import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
@@ -42,11 +45,12 @@ import {
 } from '../components/ui/select';
 
 export default function LocalMechanicalPage() {
+  const { user } = useAuth();
   const [activeTab, setActiveTab] = useState('dashboard'); // 'dashboard' | 'applications' | 'compliance' | 'performance'
   const [statusFilter, setStatusFilter] = useState('all'); // 'all' | 'pending' | 'approved' | 'rejected' | 'under_review'
 
   // Contractor applications state
-  const [applications, setApplications] = useState([
+  const [applications] = useState([
     {
       id: 'app-101',
       name: 'David Vance',
@@ -109,16 +113,6 @@ export default function LocalMechanicalPage() {
     }
   ]);
 
-  // Selected applicant for review drawer
-  const [selectedApp, setSelectedApp] = useState(null);
-
-  const handleUpdateStatus = (appId, newStatus) => {
-    setApplications(prev =>
-      prev.map(a => (a.id === appId ? { ...a, status: newStatus } : a))
-    );
-    setSelectedApp(null);
-  };
-
   const filteredApps = statusFilter === 'all'
     ? applications
     : applications.filter(a => a.status === statusFilter);
@@ -162,7 +156,7 @@ export default function LocalMechanicalPage() {
               transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="text-sm sm:text-base text-white leading-relaxed max-w-2xl mx-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]"
             >
-              Local Mechanical functions as the certification and quality enforcement hub for all mechanical contractors working with No-Tech HVAC, ensuring standardized service and regulatory compliance worldwide.
+              Track your Local Mechanical contractor certification application status—check whether your submission is approved, pending, under review, or rejected—along with compliance logs and performance standings.
             </motion.p>
 
             <motion.div
@@ -197,10 +191,50 @@ export default function LocalMechanicalPage() {
         className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8"
       >
 
+        {user?.role !== 'contractor' ? (
+          <Card className="max-w-2xl mx-auto bg-white dark:bg-[#121315] border-slate-200/90 dark:border-white/20 shadow-md rounded-2xl">
+            <CardContent className="p-8 sm:p-10 text-center space-y-5">
+              <div className="w-14 h-14 rounded-2xl bg-[#7E8056]/15 text-[#7E8056] dark:text-[#A4A77E] flex items-center justify-center mx-auto border border-[#7E8056]/25">
+                <Lock className="w-6 h-6" />
+              </div>
+              <div className="space-y-2">
+                <h2 className="text-xl sm:text-2xl font-bold font-serif text-slate-900 dark:text-white">
+                  Authorized Portal Access Required
+                </h2>
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-lg mx-auto">
+                  Local Mechanical administrative records—including contractor verification applications, license audits, RFID telemetry logs, and performance reviews—are restricted to authorized Contractor accounts.
+                </p>
+              </div>
+              {!user && (
+                <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+                  <Button
+                    asChild
+                    size="sm"
+                    className="h-9 px-5 rounded-lg bg-[#7E8056] hover:bg-[#6c6e49] text-white font-semibold text-xs shadow-sm"
+                  >
+                    <Link to="/login">
+                      <LogIn className="w-3.5 h-3.5 mr-1.5" />
+                      <span>Sign In to Continue</span>
+                    </Link>
+                  </Button>
+                  <Button
+                    asChild
+                    variant="outline"
+                    size="sm"
+                    className="h-9 px-5 rounded-lg border-slate-300 dark:border-white/15 text-xs font-semibold"
+                  >
+                    <Link to="/signup">Create Account</Link>
+                  </Button>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        ) : (
+        <>
         {/* Navigation Sub-Tabs Bar */}
         <div id="local-mech-tabs" className="p-2 sm:p-2.5 rounded-xl bg-white dark:bg-[#121315] border border-slate-200/90 dark:border-white/25 shadow-sm flex flex-wrap gap-2">
           {[
-            { id: 'dashboard', label: 'Approval Dashboard' },
+            { id: 'dashboard', label: 'Application Tracking' },
             { id: 'compliance', label: 'Installation Compliance & RFID Logs' },
             { id: 'performance', label: 'Contractor Performance & Reviews' },
           ].map((tab) => (
@@ -316,7 +350,7 @@ export default function LocalMechanicalPage() {
             <Card className="bg-white dark:bg-[#121315] border-slate-200/90 dark:border-white/25 shadow-sm overflow-hidden">
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 px-6 py-4 border-b border-slate-200 dark:border-white/10">
                 <h3 className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white">
-                  Contractor Verification Applications ({filteredApps.length})
+                  Contractor Application Tracking ({filteredApps.length})
                 </h3>
                 <div className="flex items-center gap-2">
                   <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Filter:</span>
@@ -344,7 +378,6 @@ export default function LocalMechanicalPage() {
                     <TableHead>Insurance (COI)</TableHead>
                     <TableHead>Quiz Score</TableHead>
                     <TableHead>Status</TableHead>
-                    <TableHead className="text-right">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -372,17 +405,6 @@ export default function LocalMechanicalPage() {
                         >
                           {app.status.replace('_', ' ')}
                         </Badge>
-                      </TableCell>
-                      <TableCell className="text-right">
-                        <Button
-                          type="button"
-                          variant="outline"
-                          size="sm"
-                          onClick={() => setSelectedApp(app)}
-                          className="h-7 px-2.5 rounded-md border-slate-300 dark:border-white/15 bg-slate-50 dark:bg-white/5 hover:bg-[#7E8056] hover:text-white hover:border-[#7E8056] text-slate-700 dark:text-slate-200 text-[11px] font-semibold transition-all"
-                        >
-                          Review
-                        </Button>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -551,73 +573,7 @@ export default function LocalMechanicalPage() {
           </div>
         )}
 
-        {/* Review Contractor Modal / Drawer */}
-        {selectedApp && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/65 backdrop-blur-sm p-4 animate-in fade-in">
-            <Card className="bg-white dark:bg-[#121315] border-slate-200/90 dark:border-white/25 rounded-2xl max-w-lg w-full p-6 text-slate-900 dark:text-slate-100 shadow-2xl relative space-y-4">
-              <button
-                onClick={() => setSelectedApp(null)}
-                className="absolute top-4 right-4 p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors cursor-pointer"
-              >
-                <X className="w-4 h-4" />
-              </button>
-
-              <div className="flex items-center gap-3">
-                <LocalMechanicalLogo className="h-10" />
-                <div>
-                  <h3 className="text-base font-bold text-slate-900 dark:text-white font-serif">{selectedApp.name}</h3>
-                  <p className="text-xs text-[#7E8056] dark:text-[#C2B59B]">{selectedApp.company} ({selectedApp.state})</p>
-                </div>
-              </div>
-
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-white/10 space-y-2 text-xs">
-                <div className="flex justify-between">
-                  <span className="text-slate-500 dark:text-slate-400">State License:</span>
-                  <span className="font-mono text-slate-900 dark:text-white font-semibold">{selectedApp.license}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-500 dark:text-slate-400">EPA 608 Universal:</span>
-                  <span className="font-mono text-[#7E8056] dark:text-[#A4A77E] font-semibold">{selectedApp.epaCert}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-500 dark:text-slate-400">COI (Insurance):</span>
-                  <span className="text-slate-700 dark:text-slate-200">{selectedApp.insurance}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-500 dark:text-slate-400">10-Question Score:</span>
-                  <span className="font-bold text-[#7E8056] dark:text-[#A4A77E]">{selectedApp.score}</span>
-                </div>
-              </div>
-
-              <div className="flex flex-wrap items-center justify-end gap-2 pt-3 border-t border-slate-200 dark:border-white/10 text-xs">
-                <Button
-                  type="button"
-                  size="sm"
-                  onClick={() => handleUpdateStatus(selectedApp.id, 'rejected')}
-                  className="h-8 px-3 rounded-lg bg-red-600 hover:bg-red-700 text-white font-semibold text-xs"
-                >
-                  Reject
-                </Button>
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  onClick={() => handleUpdateStatus(selectedApp.id, 'under_review')}
-                  className="h-8 px-3 rounded-lg border-slate-300 dark:border-white/15 text-slate-700 dark:text-slate-200 font-semibold text-xs"
-                >
-                  Place Under Review
-                </Button>
-                <Button
-                  type="button"
-                  size="sm"
-                  onClick={() => handleUpdateStatus(selectedApp.id, 'approved')}
-                  className="h-8 px-3.5 rounded-lg bg-[#7E8056] hover:bg-[#6c6e49] text-white font-semibold text-xs"
-                >
-                  Approve Application
-                </Button>
-              </div>
-            </Card>
-          </div>
+        </>
         )}
 
       </motion.div>

@@ -21,12 +21,15 @@ import {
   X,
   ExternalLink,
   Settings,
-  Building2
+  Building2,
+  Lock,
+  LogIn
 } from 'lucide-react';
 import HvacModularVisualizer from '../components/hvac/HvacModularVisualizer';
 import LocalMechanicalLogo from '../components/common/LocalMechanicalLogo';
 import NoTechLogo from '../components/common/NoTechLogo';
 import { COLOR_SWATCHES, COMPARTMENTS } from '../data/mockData';
+import { useAuth } from '../context/AuthContext';
 
 // Image 1 exact color palette swatches
 const HOMEPAGE_SWATCHES = [
@@ -39,7 +42,9 @@ const HOMEPAGE_SWATCHES = [
 ];
 
 export default function HomePage() {
+  const { user } = useAuth();
   const navigate = useNavigate();
+  const [reservationsAuthModalOpen, setReservationsAuthModalOpen] = useState(false);
   const [selectedColor, setSelectedColor] = useState(HOMEPAGE_SWATCHES[1].hex); // Default Olive
   const [hoveredColor, setHoveredColor] = useState(null);
   const [selectedCompartment, setSelectedCompartment] = useState(1);
@@ -583,6 +588,12 @@ export default function HomePage() {
               >
                 <Link
                   to="/reservations"
+                  onClick={(e) => {
+                    if (!user || (user.role !== 'customer' && user.role !== 'contractor')) {
+                      e.preventDefault();
+                      setReservationsAuthModalOpen(true);
+                    }
+                  }}
                   className="group h-full p-4 sm:p-5 rounded-2xl bg-white dark:bg-[#121315] border border-[#E6E0D6] dark:border-white/25 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between text-center items-center"
                 >
                   <div className="w-10 h-10 rounded-xl bg-[#F0EDE6] dark:bg-white/10 text-[#555845] dark:text-[#A4A77E] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
@@ -986,6 +997,60 @@ export default function HomePage() {
               >
                 Understood, Close
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Reservations Auth Required Modal */}
+      {reservationsAuthModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 animate-in fade-in">
+          <div className="bg-white dark:bg-[#181A1D] border border-slate-200 dark:border-white/15 rounded-2xl max-w-md w-full p-6 text-slate-900 dark:text-slate-100 shadow-2xl relative text-center space-y-4">
+            <button
+              type="button"
+              onClick={() => setReservationsAuthModalOpen(false)}
+              className="absolute top-3.5 right-3.5 p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20 text-slate-500 dark:text-slate-300 cursor-pointer"
+            >
+              <X className="w-4 h-4" />
+            </button>
+            <div className="w-12 h-12 rounded-2xl bg-[#7E8056]/15 text-[#7E8056] dark:text-[#A4A77E] flex items-center justify-center mx-auto border border-[#7E8056]/25">
+              <Lock className="w-5 h-5" />
+            </div>
+            <div className="space-y-1.5">
+              <h3 className="text-lg font-bold font-serif text-slate-900 dark:text-white">
+                Customer Login Required
+              </h3>
+              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                {!user
+                  ? 'Please log in or sign up as a Customer to view and book installation reservations.'
+                  : 'Only authorized Customer accounts can access installation reservations.'}
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-2.5 pt-1">
+              <button
+                type="button"
+                onClick={() => setReservationsAuthModalOpen(false)}
+                className="px-4 py-2 rounded-lg border border-slate-200 dark:border-white/15 text-xs font-semibold cursor-pointer"
+              >
+                Cancel
+              </button>
+              {!user && (
+                <>
+                  <Link
+                    to="/login"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#7E8056] hover:bg-[#6c6e49] text-white text-xs font-semibold"
+                  >
+                    <LogIn className="w-3.5 h-3.5" />
+                    <span>Login</span>
+                  </Link>
+                  <Link
+                    to="/signup"
+                    className="inline-flex items-center px-4 py-2 rounded-lg border border-slate-300 dark:border-white/20 text-xs font-semibold"
+                  >
+                    Sign Up
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>

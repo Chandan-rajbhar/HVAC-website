@@ -19,13 +19,16 @@ import {
   ChevronRight,
   Download,
   Loader2,
-  Lock
+  Lock,
+  LogIn,
+  X
 } from 'lucide-react';
 import HvacModularVisualizer from '../components/hvac/HvacModularVisualizer';
 import LocalMechanicalLogo from '../components/common/LocalMechanicalLogo';
 import NoTechLogo from '../components/common/NoTechLogo';
 import { COLOR_SWATCHES, COMPARTMENTS } from '../data/mockData';
 import { useTheme } from '../context/ThemeContext';
+import { useAuth } from '../context/AuthContext';
 import {
   Select,
   SelectContent,
@@ -36,6 +39,9 @@ import {
 
 export default function BuyersPortalPage() {
   const { isDark } = useTheme();
+  const { user } = useAuth();
+  const isCustomer = user?.role === 'customer';
+  const [authPromptOpen, setAuthPromptOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -147,6 +153,10 @@ export default function BuyersPortalPage() {
 
   const handleStepClick = (targetStep) => {
     if (!canNavigateToStep(targetStep)) return;
+    if (targetStep >= 3 && !isCustomer) {
+      setAuthPromptOpen(true);
+      return;
+    }
     if (targetStep === 4 && !batchNumber) {
       const randomBatch = `NT-2026-B0${Math.floor(Math.random() * 89 + 10)}`;
       const futureDate = new Date();
@@ -675,7 +685,13 @@ export default function BuyersPortalPage() {
                   ← Back to Customizer
                 </button>
                 <button
-                  onClick={() => setCurrentStep(3)}
+                  onClick={() => {
+                    if (!isCustomer) {
+                      setAuthPromptOpen(true);
+                      return;
+                    }
+                    setCurrentStep(3);
+                  }}
                   className="flex items-center gap-1.5 px-6 py-2.5 rounded-xl bg-[#7E8056] hover:bg-[#6e7049] active:scale-95 text-white font-semibold text-xs shadow-md transition-all cursor-pointer"
                 >
                   <span>Proceed to $200 Reservation →</span>
@@ -1036,6 +1052,59 @@ export default function BuyersPortalPage() {
             <div className="pt-2 border-t border-slate-200/80 dark:border-white/10 flex items-center justify-center gap-1.5 text-[11px] text-slate-500 dark:text-slate-400 font-mono">
               <Lock className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
               <span>256-Bit Encrypted Payment Gateway</span>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Login / Sign Up Required Modal for Payment Step */}
+      {authPromptOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 animate-in fade-in">
+          <div className="bg-white dark:bg-[#181A1D] border border-slate-200 dark:border-white/15 rounded-2xl max-w-md w-full p-6 text-slate-900 dark:text-slate-100 shadow-2xl relative text-center space-y-4">
+            <button
+              type="button"
+              onClick={() => setAuthPromptOpen(false)}
+              className="absolute top-3.5 right-3.5 p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20 text-slate-500 dark:text-slate-300 cursor-pointer"
+            >
+              <X className="w-4 h-4" />
+            </button>
+            <div className="w-12 h-12 rounded-2xl bg-[#7E8056]/15 text-[#7E8056] dark:text-[#A4A77E] flex items-center justify-center mx-auto border border-[#7E8056]/25">
+              <Lock className="w-5 h-5" />
+            </div>
+            <div className="space-y-1.5">
+              <h3 className="text-lg font-bold font-serif text-slate-900 dark:text-white">
+                Customer Login Required
+              </h3>
+              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                {!user
+                  ? 'Please log in or sign up as a Customer before proceeding to the $200 reservation payment.'
+                  : 'Only Customer accounts can complete a $200 unit reservation payment.'}
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-2.5 pt-1">
+              <button
+                type="button"
+                onClick={() => setAuthPromptOpen(false)}
+                className="px-4 py-2 rounded-lg border border-slate-200 dark:border-white/15 text-xs font-semibold cursor-pointer"
+              >
+                Cancel
+              </button>
+              {!user && (
+                <>
+                  <Link
+                    to="/login"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#7E8056] hover:bg-[#6c6e49] text-white text-xs font-semibold"
+                  >
+                    <LogIn className="w-3.5 h-3.5" />
+                    <span>Login</span>
+                  </Link>
+                  <Link
+                    to="/signup"
+                    className="inline-flex items-center px-4 py-2 rounded-lg border border-slate-300 dark:border-white/20 text-xs font-semibold"
+                  >
+                    Sign Up
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>

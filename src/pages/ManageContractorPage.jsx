@@ -9,10 +9,14 @@ import {
   CheckCircle2,
   MessageSquare,
   ArrowRight,
-  X
+  X,
+  Lock,
+  LogIn
 } from 'lucide-react';
 import { DEMO_CONTRACTORS } from '../data/mockData';
 import LocalMechanicalLogo from '../components/common/LocalMechanicalLogo';
+import { useAuth } from '../context/AuthContext';
+import { loadCompanionState, saveCompanionState } from '../lib/hvacSync';
 import {
   Card,
   CardHeader,
@@ -41,6 +45,9 @@ import {
 } from '../components/ui/table';
 
 export default function ManageContractorPage() {
+  const { user } = useAuth();
+  const isCustomer = user?.role === 'customer';
+  const [loginPromptOpen, setLoginPromptOpen] = useState(false);
   const [contractorsList] = useState(DEMO_CONTRACTORS);
   const [assignedContractorId, setAssignedContractorId] = useState('cnt-01');
 
@@ -63,7 +70,9 @@ export default function ManageContractorPage() {
   ]);
 
   const assignedContractor = contractorsList.find(c => c.id === assignedContractorId) || contractorsList[0];
-  const availableContractors = contractorsList.filter(c => c.id !== assignedContractorId);
+  const availableContractors = isCustomer
+    ? contractorsList.filter(c => c.id !== assignedContractorId)
+    : contractorsList;
 
   const handleUnselect = () => {
     setUnselectModalOpen(true);
@@ -87,6 +96,21 @@ export default function ManageContractorPage() {
   const handleSelectNewContractor = (newId) => {
     setAssignedContractorId(newId);
     setFeedbackSubmitted(false);
+    const chosen = contractorsList.find(c => c.id === newId);
+    if (chosen) {
+      const current = loadCompanionState();
+      saveCompanionState({
+        ...current,
+        updatedAt: Date.now(),
+        contractor: {
+          id: chosen.id,
+          company: chosen.company,
+          technician: chosen.name,
+          phone: '1-800-555-NOTECH',
+          installedDate: current.contractor?.installedDate || 'October 14, 2024',
+        },
+      });
+    }
   };
 
   return (
@@ -136,16 +160,28 @@ export default function ManageContractorPage() {
               transition={{ duration: 0.85, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
               className="pt-1 flex flex-wrap items-center justify-center gap-2.5"
             >
-              <Button
-                asChild
-                size="sm"
-                className="h-9 px-4 rounded-lg bg-[#7E8056] hover:bg-[#6e7049] text-white font-semibold text-xs shadow-md transition-all"
-              >
-                <Link to="/reservations">
+              {isCustomer ? (
+                <Button
+                  asChild
+                  size="sm"
+                  className="h-9 px-4 rounded-lg bg-[#7E8056] hover:bg-[#6e7049] text-white font-semibold text-xs shadow-md transition-all"
+                >
+                  <Link to="/reservations">
+                    <span>Reservations Dashboard</span>
+                    <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
+                  </Link>
+                </Button>
+              ) : (
+                <Button
+                  type="button"
+                  size="sm"
+                  onClick={() => setLoginPromptOpen(true)}
+                  className="h-9 px-4 rounded-lg bg-[#7E8056] hover:bg-[#6e7049] text-white font-semibold text-xs shadow-md transition-all"
+                >
                   <span>Reservations Dashboard</span>
                   <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
-                </Link>
-              </Button>
+                </Button>
+              )}
             </motion.div>
           </div>
         </div>
@@ -159,8 +195,36 @@ export default function ManageContractorPage() {
         className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-10 space-y-6"
       >
 
+        {/* Public Showcase Notice when not logged in as Customer */}
+        {!isCustomer && (
+          <div className="p-4 rounded-xl bg-white dark:bg-[#181A1D] border border-slate-200/90 dark:border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs shadow-xs">
+            <div className="flex items-center gap-2.5 text-slate-700 dark:text-slate-300">
+              <div className="p-2 rounded-lg bg-[#7E8056]/15 text-[#7E8056] dark:text-[#A4A77E] flex-shrink-0">
+                <Lock className="w-4 h-4" />
+              </div>
+              <span>
+                {!user
+                  ? 'You are viewing our certified contractor directory. Sign in as a Customer to select or manage your assigned contractor.'
+                  : 'Contractor assignment and management controls are available for Customer accounts.'}
+              </span>
+            </div>
+            {!user && (
+              <Button
+                asChild
+                size="sm"
+                className="h-8 px-4 rounded-lg bg-[#7E8056] hover:bg-[#6c6e49] text-white font-semibold text-xs flex-shrink-0"
+              >
+                <Link to="/login">
+                  <LogIn className="w-3.5 h-3.5 mr-1.5" />
+                  <span>Customer Login</span>
+                </Link>
+              </Button>
+            )}
+          </div>
+        )}
+
         {/* Feedback Submitted Confirmation Alert */}
-        {feedbackSubmitted && (
+        {isCustomer && feedbackSubmitted && (
           <div className="p-3.5 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-emerald-800 dark:text-emerald-300 animate-in fade-in">
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
@@ -178,6 +242,7 @@ export default function ManageContractorPage() {
         )}
 
         {/* ===================== CURRENTLY ASSIGNED CONTRACTOR CARD ===================== */}
+        {isCustomer && (
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -286,6 +351,7 @@ export default function ManageContractorPage() {
           </CardContent>
         </Card>
         </motion.div>
+        )}
 
         {/* ===================== SELECT ANOTHER AVAILABLE CONTRACTOR ===================== */}
         <div className="space-y-4">
@@ -302,7 +368,7 @@ export default function ManageContractorPage() {
               variant="outline"
               className="w-fit border-[#7E8056]/30 bg-[#7E8056]/10 text-[#7E8056] dark:text-[#C2B59B] text-xs font-semibold"
             >
-              {availableContractors.length} Verified Alternatives
+              {availableContractors.length} {isCustomer ? 'Verified Alternatives' : 'Certified Contractors'}
             </Badge>
           </div>
 
@@ -359,15 +425,34 @@ export default function ManageContractorPage() {
                 </CardContent>
 
                 <CardFooter className="px-5 pb-5 pt-0">
-                  <Button
-                    type="button"
-                    size="sm"
-                    onClick={() => handleSelectNewContractor(c.id)}
-                    className="w-full h-8 rounded-lg bg-[#7E8056] hover:bg-[#6c6e49] dark:bg-[#A4A77E] dark:hover:bg-[#8e9167] text-white dark:text-black font-semibold text-xs shadow-xs"
-                  >
-                    <UserCheck className="w-3.5 h-3.5 mr-1.5" />
-                    <span>Select This Contractor</span>
-                  </Button>
+                  {isCustomer ? (
+                    <Button
+                      type="button"
+                      size="sm"
+                      onClick={() => handleSelectNewContractor(c.id)}
+                      className="w-full h-8 rounded-lg bg-[#7E8056] hover:bg-[#6c6e49] dark:bg-[#A4A77E] dark:hover:bg-[#8e9167] text-white dark:text-black font-semibold text-xs shadow-xs"
+                    >
+                      <UserCheck className="w-3.5 h-3.5 mr-1.5" />
+                      <span>Select This Contractor</span>
+                    </Button>
+                  ) : !user ? (
+                    <Button
+                      asChild
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      className="w-full h-8 rounded-lg border-slate-300 dark:border-white/15 text-slate-700 dark:text-slate-200 font-semibold text-xs"
+                    >
+                      <Link to="/login">
+                        <LogIn className="w-3.5 h-3.5 mr-1.5" />
+                        <span>Sign in as Customer to Select</span>
+                      </Link>
+                    </Button>
+                  ) : (
+                    <div className="w-full text-center py-1.5 rounded-lg bg-slate-100 dark:bg-white/5 text-[11px] font-medium text-slate-500 dark:text-slate-400">
+                      Status: {c.status}
+                    </div>
+                  )}
                 </CardFooter>
               </Card>
               </motion.div>
@@ -375,80 +460,8 @@ export default function ManageContractorPage() {
           </div>
         </div>
 
-        {/* ===================== CONTRACTOR FEEDBACK REPORTS (SHADCN TABLE) ===================== */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.12 }}
-          transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-        >
-        <Card className="rounded-2xl bg-white dark:bg-[#181A1D] border-slate-200/90 dark:border-white/[0.08] shadow-[0_4px_20px_rgba(0,0,0,0.04)] dark:shadow-xl overflow-hidden py-0 gap-0">
-          <CardHeader className="px-6 py-4 bg-slate-50/70 dark:bg-[#1F2226] border-b border-slate-200/80 dark:border-white/[0.08] flex flex-col sm:flex-row sm:items-center justify-between gap-2 space-y-0">
-            <div className="flex items-center gap-2">
-              <MessageSquare className="w-4 h-4 text-[#7E8056] dark:text-[#C2B59B]" />
-              <CardTitle className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white">
-                Contractor Removal &amp; Feedback Reports (PDF Log)
-              </CardTitle>
-            </div>
-            <Badge
-              variant="outline"
-              className="w-fit border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-300 text-[10px] font-medium"
-            >
-              Transparency &amp; Continuous Improvement
-            </Badge>
-          </CardHeader>
-
-          <CardContent className="p-0">
-            <Table>
-              <TableHeader>
-                <TableRow className="bg-[#FAF7F2]/80 dark:bg-white/[0.02] border-slate-200/80 dark:border-white/[0.08]">
-                  <TableHead className="text-[11px] font-bold uppercase text-slate-600 dark:text-slate-400">Report ID</TableHead>
-                  <TableHead className="text-[11px] font-bold uppercase text-slate-600 dark:text-slate-400">Technician / Company</TableHead>
-                  <TableHead className="text-[11px] font-bold uppercase text-slate-600 dark:text-slate-400">Reason</TableHead>
-                  <TableHead className="text-[11px] font-bold uppercase text-slate-600 dark:text-slate-400">Customer Notes</TableHead>
-                  <TableHead className="text-[11px] font-bold uppercase text-slate-600 dark:text-slate-400">Date</TableHead>
-                  <TableHead className="text-[11px] font-bold uppercase text-slate-600 dark:text-slate-400 text-right">Status</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {feedbackReports.map((report) => (
-                  <TableRow
-                    key={report.id}
-                    className="border-slate-200/70 dark:border-white/[0.06] hover:bg-slate-50/80 dark:hover:bg-white/[0.02]"
-                  >
-                    <TableCell className="font-mono text-[11px] text-slate-500 dark:text-slate-400">
-                      #{report.id}
-                    </TableCell>
-                    <TableCell className="text-xs font-semibold text-slate-900 dark:text-white">
-                      {report.previousTech}
-                    </TableCell>
-                    <TableCell className="text-xs text-amber-700 dark:text-amber-400 font-medium">
-                      {report.reason}
-                    </TableCell>
-                    <TableCell className="text-xs text-slate-600 dark:text-slate-400 italic max-w-xs">
-                      "{report.notes}"
-                    </TableCell>
-                    <TableCell className="font-mono text-[11px] text-slate-500 dark:text-slate-400 whitespace-nowrap">
-                      {report.date}
-                    </TableCell>
-                    <TableCell className="text-right">
-                      <Badge
-                        variant="secondary"
-                        className="bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 text-[10px] font-semibold"
-                      >
-                        {report.status}
-                      </Badge>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
-        </motion.div>
-
         {/* ===================== UNSELECT FEEDBACK MODAL ===================== */}
-        {unselectModalOpen && (
+        {isCustomer && unselectModalOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 animate-in fade-in">
             <Card className="bg-white dark:bg-[#1C1E22] border-red-500/30 rounded-2xl max-w-lg w-full text-slate-900 dark:text-slate-100 shadow-2xl relative py-0 gap-0">
               <Button
@@ -534,6 +547,61 @@ export default function ManageContractorPage() {
                     </Button>
                   </div>
                 </form>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {/* ===================== LOGIN REQUIRED MODAL FOR RESERVATIONS DASHBOARD ===================== */}
+        {loginPromptOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 animate-in fade-in">
+            <Card className="bg-white dark:bg-[#1C1E22] border-slate-200 dark:border-white/15 rounded-2xl max-w-md w-full text-slate-900 dark:text-slate-100 shadow-2xl relative py-0 gap-0">
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                onClick={() => setLoginPromptOpen(false)}
+                className="absolute top-3.5 right-3.5 h-7 w-7 rounded-lg text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+              >
+                <X className="w-4 h-4" />
+              </Button>
+              <CardContent className="p-6 text-center space-y-4">
+                <div className="w-12 h-12 rounded-2xl bg-[#7E8056]/15 text-[#7E8056] dark:text-[#A4A77E] flex items-center justify-center mx-auto border border-[#7E8056]/25">
+                  <Lock className="w-5 h-5" />
+                </div>
+                <div className="space-y-1.5">
+                  <h3 className="text-lg font-bold font-serif text-slate-900 dark:text-white">
+                    Customer Login Required
+                  </h3>
+                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                    {!user
+                      ? 'Please sign in as a Customer to access the Reservations Dashboard.'
+                      : 'Only Customer accounts can access the Reservations Dashboard.'}
+                  </p>
+                </div>
+                <div className="flex items-center justify-center gap-2.5 pt-1">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setLoginPromptOpen(false)}
+                    className="h-8 px-4 rounded-lg text-xs"
+                  >
+                    Cancel
+                  </Button>
+                  {!user && (
+                    <Button
+                      asChild
+                      size="sm"
+                      className="h-8 px-4 rounded-lg bg-[#7E8056] hover:bg-[#6c6e49] text-white font-semibold text-xs"
+                    >
+                      <Link to="/login">
+                        <LogIn className="w-3.5 h-3.5 mr-1.5" />
+                        <span>Sign In</span>
+                      </Link>
+                    </Button>
+                  )}
+                </div>
               </CardContent>
             </Card>
           </div>

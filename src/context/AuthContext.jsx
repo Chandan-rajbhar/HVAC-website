@@ -6,7 +6,7 @@ export const ROLE_CONFIG = {
   customer: {
     label: 'Customer',
     homeRoute: '/buyers',
-    allowedNavPaths: ['/', '/buyers', '/reservations', '/manage-contractor', '/help'],
+    allowedNavPaths: ['/', '/buyers', '/reservations', '/manage-contractor', '/my-system', '/help'],
     defaultCredentials: {
       name: 'Sarah Jenkins',
       email: 'customer@notechhvac.com',
@@ -16,7 +16,7 @@ export const ROLE_CONFIG = {
   contractor: {
     label: 'Contractor',
     homeRoute: '/contractor',
-    allowedNavPaths: ['/', '/contractor', '/manage-contractor', '/local-mechanical', '/help'],
+    allowedNavPaths: ['/', '/contractor', '/contractor/jobs', '/contractor/schedule', '/reservations', '/manage-contractor', '/local-mechanical', '/help'],
     defaultCredentials: {
       name: 'David Vance',
       email: 'contractor@notechhvac.com',

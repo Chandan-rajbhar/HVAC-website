@@ -18,9 +18,12 @@ import {
   Check,
   Eye,
   Radio,
-  ArrowRight
+  ArrowRight,
+  Lock,
+  LogIn
 } from 'lucide-react';
 import LocalMechanicalLogo from '../components/common/LocalMechanicalLogo';
+import { useAuth } from '../context/AuthContext';
 import { CONTRACTOR_QUESTIONNAIRE } from '../data/mockData';
 import { Card, CardContent } from '../components/ui/card';
 import { Input } from '../components/ui/input';
@@ -28,9 +31,12 @@ import { Label } from '../components/ui/label';
 import { Button } from '../components/ui/button';
 
 export default function ContractorOnboardingPage() {
+  const { user } = useAuth();
+  const isContractor = user?.role === 'contractor';
   const location = useLocation();
   const navigate = useNavigate();
   const navState = location.state || {};
+  const [authError, setAuthError] = useState('');
 
   // Form State (empty by default for clean user input)
   const [fullName, setFullName] = useState('');
@@ -59,9 +65,37 @@ export default function ContractorOnboardingPage() {
     if (type === 'insurance') setInsuranceDoc('COI_Local_Mechanical_Uploaded.pdf');
   };
 
+  const getRoleError = (actionText) =>
+    !user
+      ? `Please log in or sign up as a Contractor before ${actionText}.`
+      : `Only Contractor accounts can ${actionText}. Please sign in with a Contractor account.`;
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    if (!isContractor) {
+      setAuthError(getRoleError('submitting the contractor registration form'));
+      return;
+    }
+    setAuthError('');
     setFormSubmitted(true);
+  };
+
+  const handleMarkVideoCompleted = () => {
+    if (!isContractor) {
+      setAuthError(getRoleError('playing or completing the training video'));
+      return;
+    }
+    setAuthError('');
+    setVideoWatched(true);
+  };
+
+  const handleStartQuiz = () => {
+    if (!isContractor) {
+      setAuthError(getRoleError('starting the certification quiz'));
+      return;
+    }
+    setAuthError('');
+    navigate('/contractor/quiz');
   };
 
   const handleSelectAnswer = (qId, optionIndex) => {
@@ -153,6 +187,45 @@ export default function ContractorOnboardingPage() {
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8"
       >
+
+        {/* Auth / Role Required Notice */}
+        {!isContractor && (
+          <div className={`p-4 rounded-xl border flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs transition-colors ${authError
+              ? 'bg-red-50 dark:bg-red-500/10 border-red-300 dark:border-red-500/40 text-red-800 dark:text-red-200'
+              : 'bg-amber-50/90 dark:bg-amber-500/10 border-amber-200 dark:border-amber-500/30 text-amber-900 dark:text-amber-200'
+            }`}>
+            <div className="flex items-center gap-2.5">
+              <AlertCircle className={`w-4 h-4 flex-shrink-0 ${authError ? 'text-red-600 dark:text-red-400' : 'text-amber-600 dark:text-amber-400'}`} />
+              <span>
+                {authError || (!user
+                  ? 'Account Required: Please sign in or sign up as a Contractor to submit your application, play training videos, or start the certification quiz.'
+                  : 'Contractor Account Required: You are viewing the public preview. Only Contractor accounts can submit applications, play training videos, or start the quiz.')}
+              </span>
+            </div>
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <Button
+                asChild
+                size="sm"
+                className="h-8 px-3.5 rounded-lg bg-[#7E8056] hover:bg-[#6c6e49] text-white font-semibold text-xs"
+              >
+                <Link to="/login">
+                  <LogIn className="w-3.5 h-3.5 mr-1.5" />
+                  <span>{user ? 'Switch Account' : 'Login'}</span>
+                </Link>
+              </Button>
+              {!user && (
+                <Button
+                  asChild
+                  variant="outline"
+                  size="sm"
+                  className="h-8 px-3.5 rounded-lg border-slate-300 dark:border-white/20 bg-white dark:bg-transparent text-xs font-semibold"
+                >
+                  <Link to="/signup">Sign Up</Link>
+                </Button>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* Global Onboarding Approval Status Banner */}
         {isApproved && (
@@ -295,11 +368,16 @@ export default function ContractorOnboardingPage() {
                     )}
                   </div>
 
-                  <div className="pt-1 flex justify-end">
+                  <div className="pt-1 flex flex-wrap items-center justify-between gap-2">
+                    {!isContractor && (
+                      <span className="text-[11px] text-amber-700 dark:text-amber-400 flex items-center gap-1 font-medium">
+                        <Lock className="w-3 h-3" /> {user ? 'Contractor account required to submit' : 'Login or Sign Up required to submit'}
+                      </span>
+                    )}
                     <Button
                       type="submit"
                       size="sm"
-                      className="h-8 px-4 rounded-lg bg-[#7E8056] hover:bg-[#6c6e49] dark:bg-[#A4A77E] dark:hover:bg-[#8e9167] text-white dark:text-black font-semibold text-xs shadow-sm transition-all"
+                      className="ml-auto h-8 px-4 rounded-lg bg-[#7E8056] hover:bg-[#6c6e49] dark:bg-[#A4A77E] dark:hover:bg-[#8e9167] text-white dark:text-black font-semibold text-xs shadow-sm transition-all"
                     >
                       <span>{formSubmitted ? 'Documentation Submitted ✓' : 'Submit Application →'}</span>
                     </Button>
@@ -338,17 +416,43 @@ export default function ContractorOnboardingPage() {
               {/* Real Interactive HVAC Training Video Player */}
               <div className="relative aspect-video rounded-xl bg-slate-950 border border-slate-200 dark:border-white/15 overflow-hidden shadow-md">
                 <video
-                  controls
+                  controls={isContractor}
                   playsInline
                   preload="metadata"
                   poster="/images/demo-interactive-aura-unit.jpg"
-                  onEnded={() => setVideoWatched(true)}
+                  onEnded={() => isContractor && setVideoWatched(true)}
                   className="w-full h-full object-cover"
                 >
                   <source src="/videos/hero-background-video.mp4" type="video/mp4" />
                   <source src="/videos/gemini_generated_hero.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
+                {!isContractor && (
+                  <div className="absolute inset-0 bg-black/75 backdrop-blur-xs flex flex-col items-center justify-center p-4 text-center space-y-2.5">
+                    <div className="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-[#C2B59B]">
+                      <Lock className="w-5 h-5" />
+                    </div>
+                    <p className="text-xs font-semibold text-white">
+                      {user ? 'Contractor account required to play training video' : 'Sign in or Sign up to play training video'}
+                    </p>
+                    <div className="flex items-center gap-2">
+                      <Link
+                        to="/login"
+                        className="px-3 py-1.5 rounded-lg bg-[#7E8056] hover:bg-[#6c6e49] text-white text-[11px] font-semibold"
+                      >
+                        {user ? 'Switch Account' : 'Login'}
+                      </Link>
+                      {!user && (
+                        <Link
+                          to="/signup"
+                          className="px-3 py-1.5 rounded-lg bg-white/15 hover:bg-white/25 text-white text-[11px] font-semibold"
+                        >
+                          Sign Up
+                        </Link>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200/80 dark:border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs">
@@ -357,7 +461,7 @@ export default function ContractorOnboardingPage() {
                 </span>
                 <button
                   type="button"
-                  onClick={() => setVideoWatched(true)}
+                  onClick={handleMarkVideoCompleted}
                   className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer active:scale-95 ${videoWatched
                     ? 'bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 border border-emerald-500/40'
                     : 'bg-[#7E8056] hover:bg-[#6c6e49] text-white shadow-sm'
@@ -461,12 +565,17 @@ export default function ContractorOnboardingPage() {
                     </div>
                   )}
 
-                  <div className="flex justify-end">
+                  <div className="flex items-center justify-between gap-2">
+                    {!isContractor && (
+                      <span className="text-[11px] text-amber-700 dark:text-amber-400 flex items-center gap-1 font-medium">
+                        <Lock className="w-3 h-3" /> {user ? 'Contractor account required' : 'Login required'}
+                      </span>
+                    )}
                     <Button
                       type="button"
                       size="sm"
-                      onClick={() => navigate('/contractor/quiz')}
-                      className="h-8 px-4 rounded-lg bg-[#7E8056] hover:bg-[#6c6e49] dark:bg-[#A4A77E] dark:hover:bg-[#8e9167] text-white dark:text-black font-semibold text-xs shadow-sm transition-all inline-flex items-center gap-1.5"
+                      onClick={handleStartQuiz}
+                      className="ml-auto h-8 px-4 rounded-lg bg-[#7E8056] hover:bg-[#6c6e49] dark:bg-[#A4A77E] dark:hover:bg-[#8e9167] text-white dark:text-black font-semibold text-xs shadow-sm transition-all inline-flex items-center gap-1.5"
                     >
                       <Award className="w-3.5 h-3.5" />
                       <span>{quizSubmitted ? 'Retake Quiz' : 'Start Quiz →'}</span>

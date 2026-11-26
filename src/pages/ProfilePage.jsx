@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
@@ -18,9 +18,11 @@ import {
   Pencil,
   Camera,
   Check,
-  X
+  X,
+  Cpu
 } from 'lucide-react';
 import { useAuth, ROLE_CONFIG } from '../context/AuthContext';
+import { loadCompanionState, saveCompanionState } from '../lib/hvacSync';
 import {
   Card,
   CardHeader,
@@ -37,12 +39,12 @@ const ROLE_META = {
   customer: {
     icon: User,
     badge: 'Homeowner / Buyer',
-    description: 'Configure modular HVAC units, lock in $200 batch reservations, and manage your assigned certified contractor.',
+    description: 'Configure modular HVAC units, lock in $200 batch reservations, and manage your synced VIVID-400 system.',
     links: [
-      { title: 'Buyers Portal', desc: 'Customize tonnage, airflow & finishes', path: '/buyers', icon: ShoppingCart },
-      { title: 'Reservations & Scheduling', desc: 'Pick an installation date & slot', path: '/reservations', icon: Calendar },
-      { title: 'Manage My Contractor', desc: 'View or switch assigned technician', path: '/manage-contractor', icon: UserCheck },
-      { title: 'Help & AI Support', desc: 'Instant answers & technical guidance', path: '/help', icon: Headphones },
+      { title: 'Reserve Your System', desc: 'Customize tonnage, airflow & finishes', path: '/buyers', icon: ShoppingCart },
+      { title: 'My Reservations', desc: 'Pick an installation date & slot', path: '/reservations', icon: Calendar },
+      { title: 'Manage Your Contractor', desc: 'View or switch your assigned technician', path: '/manage-contractor', icon: UserCheck },
+      { title: 'My System', desc: 'View your purchased VIVID-400 system details', path: '/my-system', icon: Cpu },
     ],
   },
   contractor: {
@@ -76,6 +78,19 @@ export default function ProfilePage() {
   const [editName, setEditName] = useState(user?.name || '');
   const [editEmail, setEditEmail] = useState(user?.email || '');
   const [editAvatar, setEditAvatar] = useState(user?.avatar || null);
+
+  useEffect(() => {
+    if (user?.role === 'customer') {
+      const current = loadCompanionState();
+      if (current.customer?.name !== user.name || current.customer?.email !== user.email) {
+        saveCompanionState({
+          ...current,
+          updatedAt: Date.now(),
+          customer: { name: user.name, email: user.email },
+        });
+      }
+    }
+  }, [user?.name, user?.email, user?.role]);
 
   const handleLogout = () => {
     logout();
@@ -218,6 +233,7 @@ export default function ProfilePage() {
             </div>
           </CardHeader>
 
+          {(isEditing || user.role !== 'customer') && (
           <CardContent className="p-6 sm:p-8 space-y-5">
             {isEditing && (
               <form
@@ -311,6 +327,7 @@ export default function ProfilePage() {
               </form>
             )}
 
+            {user.role !== 'customer' && (
             <div className="flex flex-wrap items-center justify-between gap-2 p-4 rounded-xl bg-[#FAF7F2] dark:bg-black/40 border border-slate-200/70 dark:border-white/10">
               <div className="space-y-1">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-[#7E8056] dark:text-[#C2B59B] block">
@@ -329,7 +346,9 @@ export default function ProfilePage() {
                 Verified Session
               </Badge>
             </div>
+            )}
           </CardContent>
+          )}
         </Card>
 
         {/* Role-Specific Portal Shortcuts */}

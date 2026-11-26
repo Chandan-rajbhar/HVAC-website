@@ -7,12 +7,16 @@ import {
   CheckCircle2,
   ArrowLeft,
   RotateCw,
+  Lock,
+  LogIn
 } from 'lucide-react';
 import { CONTRACTOR_QUESTIONNAIRE } from '../data/mockData';
+import { useAuth } from '../context/AuthContext';
 import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 
 export default function ContractorQuizPage() {
+  const { user } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const initialState = location.state || {};
@@ -60,6 +64,60 @@ export default function ContractorQuizPage() {
       },
     });
   };
+
+  if (user?.role !== 'contractor') {
+    return (
+      <div className="min-h-screen bg-white dark:bg-[#212428] text-slate-900 dark:text-slate-100 py-12 px-4 flex items-center justify-center transition-colors duration-200">
+        <Card className="max-w-lg w-full bg-white dark:bg-[#181A1D] border-slate-200 dark:border-white/15 rounded-2xl shadow-lg">
+          <CardContent className="p-8 text-center space-y-5">
+            <div className="w-14 h-14 rounded-2xl bg-[#7E8056]/15 text-[#7E8056] dark:text-[#A4A77E] flex items-center justify-center mx-auto border border-[#7E8056]/25">
+              <Lock className="w-6 h-6" />
+            </div>
+            <div className="space-y-2">
+              <h1 className="text-xl sm:text-2xl font-bold font-serif text-slate-900 dark:text-white">
+                Contractor Account Required
+              </h1>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                {!user
+                  ? 'Please sign in or create a contractor account before starting the Local Mechanical certification questionnaire.'
+                  : 'Only Contractor accounts can take the Local Mechanical certification questionnaire.'}
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-3 pt-1">
+              <Button
+                asChild
+                size="sm"
+                className="h-9 px-5 rounded-lg bg-[#7E8056] hover:bg-[#6c6e49] text-white text-xs font-semibold"
+              >
+                <Link to="/login">
+                  <LogIn className="w-3.5 h-3.5 mr-1.5" />
+                  <span>{user ? 'Switch Account' : 'Login'}</span>
+                </Link>
+              </Button>
+              {!user && (
+                <Button
+                  asChild
+                  variant="outline"
+                  size="sm"
+                  className="h-9 px-5 rounded-lg border-slate-300 dark:border-white/15 text-xs font-semibold"
+                >
+                  <Link to="/signup">Sign Up</Link>
+                </Button>
+              )}
+              <Button
+                asChild
+                variant="ghost"
+                size="sm"
+                className="h-9 px-4 rounded-lg text-xs font-semibold"
+              >
+                <Link to="/contractor">← Back to Onboarding</Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#212428] text-slate-900 dark:text-slate-100 py-8 lg:py-12 transition-colors duration-200">

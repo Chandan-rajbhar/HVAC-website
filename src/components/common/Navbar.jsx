@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink, Link, useLocation } from 'react-router-dom';
+import { NavLink, Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   Sun,
   Moon,
@@ -9,7 +9,6 @@ import {
   Home,
   ShoppingCart,
   TrendingUp,
-  Calendar,
   HardHat,
   ShieldCheck,
   Headphones,
@@ -17,28 +16,40 @@ import {
 } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 import { useAuth, ROLE_CONFIG } from '../../context/AuthContext';
+import ProfileDrawer from './ProfileDrawer';
 
 export default function Navbar() {
   const { isDark, toggleTheme } = useTheme();
   const { user } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const profileDrawerOpen = Boolean(user && location.pathname === '/profile');
+
+  const handleCloseProfileDrawer = () => {
+    if (window.history.length > 1) {
+      navigate(-1);
+    } else {
+      navigate('/');
+    }
+  };
 
   const allNavItems = [
     { name: 'Home', path: '/', icon: Home },
     { name: 'Buyer', path: '/buyers', icon: ShoppingCart },
-    { name: 'Reservations', path: '/reservations', icon: Calendar },
     { name: 'Investor Hub', path: '/investor', icon: TrendingUp },
     { name: 'Contractor Onboarding', path: '/contractor', icon: HardHat },
-    { name: 'Manage Contractor', path: '/manage-contractor', icon: UserCheck },
+    {
+      name: user?.role === 'customer' ? 'Manage Contractor' : 'View Contractors',
+      path: '/manage-contractor',
+      icon: UserCheck,
+    },
     { name: 'Local Mechanical', path: '/local-mechanical', icon: ShieldCheck },
     { name: 'Help & AI', path: '/help', icon: Headphones },
   ];
 
-  // Show role-filtered links when logged in; show all links when signed out
-  const navItems = user
-    ? allNavItems.filter((item) => ROLE_CONFIG[user.role]?.allowedNavPaths.includes(item.path))
-    : allNavItems;
+  // Keep navigation identical across all roles and signed-out state
+  const navItems = allNavItems;
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white dark:bg-[#212428] border-b border-slate-200 dark:border-[#A4A77E]/20 shadow-[0_2px_12px_rgba(0,0,0,0.02)] dark:shadow-xl transition-colors">
@@ -94,12 +105,14 @@ export default function Navbar() {
               )}
             </button>
 
-            {/* Auth Button: Only Circular Profile Picture when signed in, Login when signed out */}
+            {/* Auth Button: Navigates to /profile and opens Side Profile Drawer when signed in */}
             {user ? (
-              <Link
-                to="/profile"
-                className="w-9 h-9 rounded-full overflow-hidden border-2 border-[#7E8056]/60 hover:border-[#7E8056] flex items-center justify-center bg-[#7E8056] text-white transition-all hover:scale-105 shadow-sm flex-shrink-0"
+              <button
+                type="button"
+                onClick={() => navigate('/profile')}
+                className="w-9 h-9 rounded-full overflow-hidden border-2 border-[#7E8056]/60 hover:border-[#7E8056] flex items-center justify-center bg-[#7E8056] text-white transition-all hover:scale-105 shadow-sm flex-shrink-0 cursor-pointer"
                 title={`${user.name} (${ROLE_CONFIG[user.role]?.label || user.role}) — Open Profile`}
+                aria-label="Open Profile Drawer"
               >
                 {user.avatar ? (
                   <img
@@ -112,7 +125,7 @@ export default function Navbar() {
                     {user.name?.charAt(0) || <User className="w-4 h-4" />}
                   </span>
                 )}
-              </Link>
+              </button>
             ) : (
               <Link
                 to="/login"
@@ -176,6 +189,11 @@ export default function Navbar() {
           </div>
         </div>
       )}
+
+      <ProfileDrawer
+        open={profileDrawerOpen}
+        onClose={handleCloseProfileDrawer}
+      />
     </header>
   );
 }
