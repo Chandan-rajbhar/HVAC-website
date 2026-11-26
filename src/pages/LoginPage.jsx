@@ -58,14 +58,7 @@ export default function LoginPage() {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/20" />
 
-          <div className="relative z-10 h-full p-6 sm:p-8 flex flex-col justify-between">
-            <div className="inline-flex items-center w-fit px-3.5 py-2 rounded-xl bg-white/95 shadow-md border border-white/40">
-              <img
-                src="/images/no-tech-hvac-logo.png"
-                alt="No-Tech HVAC"
-                className="h-7 sm:h-8 w-auto object-contain"
-              />
-            </div>
+          <div className="relative z-10 h-full p-6 sm:p-8 flex flex-col justify-end">
 
             <div className="space-y-3">
               <Badge className="bg-[#7E8056] hover:bg-[#7E8056] text-white border-0 text-[10px] font-semibold uppercase tracking-wider">
@@ -91,12 +84,6 @@ export default function LoginPage() {
         <div className="lg:col-span-6 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
           <div className="w-full max-w-sm mx-auto space-y-5">
             <div className="space-y-1.5">
-              <Badge
-                variant="outline"
-                className="border-[#7E8056]/30 bg-[#7E8056]/10 text-[#7E8056] dark:text-[#C2B59B] text-[10px] font-semibold uppercase tracking-wider"
-              >
-                Welcome Back
-              </Badge>
               <h1 className="text-2xl font-bold font-serif text-slate-900 dark:text-white tracking-tight">
                 Sign in to your account
               </h1>

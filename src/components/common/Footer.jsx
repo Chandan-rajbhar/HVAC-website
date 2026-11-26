@@ -14,13 +14,11 @@ export default function Footer() {
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
             <Link to="/" className="inline-block group" title="No-Tech HVAC">
-              <div className="inline-flex items-center px-3 py-1.5 rounded-xl bg-white/95 shadow-sm">
-                <img
-                  src="/images/no-tech-hvac-logo.png"
-                  alt="No-Tech HVAC"
-                  className="h-8 sm:h-9 w-auto object-contain"
-                />
-              </div>
+              <img
+                src="/images/no-tech-hvac-logo.png"
+                alt="No-Tech HVAC"
+                className="h-8 sm:h-9 w-auto object-contain invert hue-rotate-180 brightness-110 transition-transform duration-200 group-hover:scale-[1.02]"
+              />
             </Link>
             <p className="text-xs text-slate-400 max-w-sm leading-relaxed">
               No-Tech HVAC is redefining climate infrastructure with hot-swappable 4-bay modular systems, zero-loss refrigerant disconnects, and continuous RFID validation.

@@ -949,7 +949,11 @@ export default function BuyersPortalPage() {
 
                 <div className="p-4 sm:p-5 rounded-2xl bg-slate-50/90 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 space-y-3 text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
                   <div className="flex items-center justify-between border-b border-slate-200/80 dark:border-white/10 pb-2.5">
-                    <NoTechLogo className="h-7" light={!isDark} />
+                    <img
+                      src="/images/no-tech-hvac-logo.png"
+                      alt="No-Tech HVAC"
+                      className={`h-7 w-auto object-contain ${isDark ? 'invert hue-rotate-180 brightness-110' : ''}`}
+                    />
                     <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-md bg-white dark:bg-black/40 border border-slate-200/80 dark:border-white/10 text-slate-600 dark:text-slate-300">
                       Order Ref: #{batchNumber}
                     </span>

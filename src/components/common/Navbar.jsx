@@ -50,7 +50,7 @@ export default function Navbar() {
             <img
               src="/images/no-tech-hvac-logo.png"
               alt="No-Tech HVAC"
-              className={`h-8 sm:h-9 w-auto object-contain transition-all duration-200 group-hover:scale-[1.02] ${isDark ? 'bg-white/95 px-2.5 py-1 rounded-xl shadow-sm' : ''}`}
+              className={`h-8 sm:h-9 w-auto object-contain transition-all duration-200 group-hover:scale-[1.02] ${isDark ? 'invert hue-rotate-180 brightness-110' : ''}`}
             />
           </Link>
 
